@@ -4,148 +4,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tacos El Primo</title>
-<meta name="description" content="Tacos de trompo, bistec y tripitas en Juárez, N.L. Arma tu pedido y mándalo por WhatsApp.">
+<meta name="description" content="Tacos El Primo en Juárez, N.L. Trompo, bistec y tripitas. Haz tu pedido por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Figtree:wght@500;700&display=swap">
 <style>
   :root{
-    --bg:#FBFAF6; --tile:#FFFFFF; --ink:#1C1A17; --muted:#6B655C; --line:#E6E1D6;
-    --red:#D2261D; --red-ink:#FFFFFF; --green:#0E5A3A; --sun:#F6B81A;
-    --display:"Bungee", Impact, "Arial Black", sans-serif;
+    color-scheme: light;
+    --white:#FFFFFF; --paper:#F7F5F0; --ink:#1E1B16; --muted:#6B655C; --line:#E8E3D8;
+    --red:#D2261D; --green:#0E7A45; --yellow:#F6B81A;
+    --sign:"Bungee", Impact, "Arial Black", sans-serif;
     --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  @media (prefers-color-scheme: dark){
-    :root{ color-scheme:dark; --bg:#17140F; --tile:#211D17; --ink:#F3EEE4; --muted:#A89F90; --line:#352F26; --red:#EF4A3C; --green:#3FAE7A; --sun:#F6C343; }
-  }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:20px;padding-block:0 110px}
+  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 110px}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
-  .wrap{max-width:1080px;margin-inline:auto;display:flex;flex-direction:column;gap:64px}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .picado{height:22px;margin-inline:-20px}
+  .picado{background:linear-gradient(90deg,var(--green) 0 33.3%,var(--white) 33.3% 66.6%,var(--red) 66.6%);
+    -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/22px 100%;
+            mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/22px 100%}
+  .wrap{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:52px}
 
-  .strip{height:10px;margin-inline:-20px;background:repeating-linear-gradient(90deg,var(--green) 0 33.3%,var(--bg) 33.3% 66.6%,var(--red) 66.6% 100%)}
-  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:16px}
-  .mark{font-family:var(--display);font-size:20px;color:var(--red)}
-  .status{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted)}
-  .status.open{border-color:var(--green);color:var(--green)}
-  .status.closed{border-color:var(--red);color:var(--red)}
+  .top{display:flex;justify-content:flex-end;padding-top:16px}
+  .status{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-radius:999px;background:var(--paper);color:var(--muted)}
+  .status.open{background:#E2F3EA;color:var(--green)}
+  .status.closed{background:#FBE4E2;color:var(--red)}
 
-  .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-  .eyebrow{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
-  h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,10vw,120px);line-height:.9;margin:12px 0 0;color:var(--red);text-wrap:balance}
-  h1 small{display:block;font-size:.36em;line-height:1.1;color:var(--ink);margin-top:14px}
-  .lede{font-size:18px;color:var(--muted);max-width:40ch;margin:20px 0 0}
-  .badge{display:inline-flex;gap:8px;align-items:center;margin-top:22px;background:var(--sun);color:#1C1A17;font-weight:700;padding:10px 16px;border-radius:4px;transform:rotate(-2deg)}
+  .sign{text-align:center}
+  .sign .kicker{font-family:var(--sign);font-size:18px;letter-spacing:.12em;color:var(--green)}
+  .sign h1{margin:6px 0 0;font-family:var(--sign);font-weight:400;font-size:clamp(56px,15vw,120px);line-height:.95;color:var(--red)}
+  .sign p{margin:16px 0 0;font-size:19px;color:var(--muted)}
+  .sign .tag{display:inline-block;margin-top:18px;background:var(--yellow);font-weight:700;padding:8px 16px;border-radius:6px;transform:rotate(-2deg)}
 
-  .plate{aspect-ratio:1/1;max-width:100%;border-radius:50%;background:
-     radial-gradient(circle at 50% 50%, transparent 58%, var(--line) 58.5% 60%, transparent 60.5%),
-     repeating-conic-gradient(from 0deg, var(--sun) 0 10deg, var(--red) 10deg 20deg);
-     display:grid;place-items:center;position:relative}
-  .plate::after{content:"";position:absolute;inset:14%;border-radius:50%;background:var(--tile);border:1.5px solid var(--line)}
-  .plate span{position:relative;z-index:1;font-family:var(--display);font-size:clamp(22px,4vw,36px);text-align:center;line-height:1.05;color:var(--green)}
-  .plate span b{display:block;font-size:.5em;font-family:var(--body);font-weight:700;letter-spacing:.12em;color:var(--muted);margin-top:8px}
+  .menu{border:3px solid var(--ink);border-radius:14px;overflow:hidden}
+  .menu h2{margin:0;background:var(--ink);color:var(--white);font-family:var(--sign);font-weight:400;font-size:26px;letter-spacing:.06em;text-align:center;padding:12px}
+  .menu .hint{margin:0;padding:10px 22px;background:var(--paper);font-size:15px;color:var(--muted);text-align:center}
+  .row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:14px 22px;border-top:1px solid var(--line)}
+  .row .n{font-weight:700;font-size:19px}
+  .row .p{font-family:var(--sign);font-size:24px;color:var(--red);font-variant-numeric:tabular-nums}
+  .step{display:inline-flex;align-items:center;border:2px solid var(--line);border-radius:999px;overflow:hidden}
+  .step button{width:36px;height:36px;border:0;background:var(--white);color:var(--ink);font-size:20px;font-weight:700;cursor:pointer}
+  .step button:hover{background:var(--paper)}
+  .step output{min-width:24px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
 
-  h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,44px);margin:0 0 6px}
-  .sub{color:var(--muted);margin:0 0 24px}
-  .menu{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px}
-  .cat{grid-column:1/-1;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);border-bottom:2px solid var(--green);padding-bottom:6px;margin-top:12px}
-  .item{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding-block:10px;border-bottom:1px dashed var(--line)}
-  .item .n{font-weight:600}
-  .item .n em{display:block;font-style:normal;font-weight:400;font-size:14px;color:var(--muted)}
-  .item .p{font-weight:700;font-variant-numeric:tabular-nums}
-  .step{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
-  .step button{width:34px;height:34px;border:0;background:transparent;color:var(--ink);font-size:18px;font-weight:700;cursor:pointer}
-  .step button:hover{background:var(--line)}
-  .step output{min-width:22px;text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+  .fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .ph{aspect-ratio:1/1;max-width:100%;border-radius:12px;background:var(--paper);border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;color:var(--muted);padding:8px}
 
-  .info{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-  .info h3{font-family:var(--display);font-weight:400;font-size:28px;margin:0 0 14px}
-  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-  td{padding:9px 0;border-bottom:1px solid var(--line)}
-  td:last-child{text-align:right;color:var(--muted)}
-  tr.today td{font-weight:700;color:var(--ink)}
-  .place p{margin:0 0 6px;font-size:18px}
-  .place .m{color:var(--muted);font-size:15px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;text-decoration:none;padding:13px 20px;border-radius:6px;border:1.5px solid var(--ink);margin-top:18px}
-  .btn:hover{background:var(--ink);color:var(--bg)}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:var(--paper);border-radius:14px;padding:22px}
+  .card h3{margin:0 0 10px;font-family:var(--sign);font-weight:400;font-size:20px;letter-spacing:.04em;color:var(--green)}
+  .card p{margin:0 0 4px;font-size:18px;font-weight:500}
+  .card .m{color:var(--muted);font-size:16px}
+  .card .gap{margin-top:10px}
+  .card a{display:inline-block;margin-top:12px;font-weight:700;color:var(--red)}
 
-  .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  .ph{aspect-ratio:1/1;max-width:100%;border-radius:6px;border:1px solid var(--line);background:repeating-linear-gradient(45deg,var(--tile) 0 12px,var(--line) 12px 13px);display:flex;align-items:flex-end;padding:10px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .note{font-size:13px;color:var(--muted);margin:10px 0 0}
+  footer{text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  .picado.end{margin-top:32px;transform:scaleY(-1)}
 
-  footer{border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .cart{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+  .cart .in{max-width:760px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .cart .sum{font-size:14px;color:var(--muted)}
+  .cart .sum b{display:block;font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .cart a{background:var(--green);color:var(--white);text-decoration:none;font-weight:700;font-size:17px;padding:14px 22px;border-radius:999px;white-space:nowrap}
+  .cart a[aria-disabled="true"]{opacity:.45;pointer-events:none}
 
-  .cart{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--bg);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
-  .cart .in{max-width:1080px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .cart .sum{font-size:14px}
-  .cart .sum b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
-  .cart a{background:var(--red);color:var(--red-ink);text-decoration:none;font-weight:700;padding:13px 20px;border-radius:6px;white-space:nowrap}
-  .cart a[aria-disabled="true"]{opacity:.5;pointer-events:none}
-
-  @media (max-width:820px){
-    .hero,.info{grid-template-columns:1fr}
-    .plate{max-width:320px;justify-self:center;width:100%}
-    .menu{grid-template-columns:1fr}
-    .gal{grid-template-columns:1fr 1fr}
-  }
+  @media (max-width:640px){ .info{grid-template-columns:1fr} .row{padding:14px 16px} }
 </style>
 </head>
 <body>
-<div class="strip" aria-hidden="true"></div>
+<div class="picado" aria-hidden="true"></div>
 <div class="wrap">
-  <header class="top">
-    <div class="mark">El Primo</div>
-    <div class="status" id="status">Horario</div>
+  <div class="top"><span class="status" id="status">Horario</span></div>
+
+  <header class="sign">
+    <div class="kicker">TAQUERÍA</div>
+    <h1>El Primo</h1>
+    <p>Trompo, bistec y tripitas en Juárez, N.L.</p>
+    <span class="tag">Domingos: barbacoa</span>
   </header>
 
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Taquería · Juárez, Nuevo León</div>
-      <h1>Tacos El Primo<small>Trompo, bistec y tripitas al carbón</small></h1>
-      <p class="lede">Arma tu pedido aquí abajo y mándalo por WhatsApp. Te avisamos cuando esté listo para pasar por él.</p>
-      <div class="badge">Domingos: barbacoa desde las 8 am</div>
-    </div>
-    <div class="plate" aria-hidden="true"><span>Orden de 5<b>DESDE $100</b></span></div>
+  <section class="menu" aria-label="Menú">
+    <h2>MENÚ</h2>
+    <p class="hint">Toca + y manda tu pedido por WhatsApp</p>
+    <div id="menu"></div>
   </section>
 
-  <section>
-    <h2>Menú</h2>
-    <p class="sub">Toca + para ir armando tu pedido. Todos los tacos llevan cebolla, cilantro y salsa de la casa.</p>
-    <div class="menu" id="menu"></div>
+  <section class="fotos" aria-label="Fotos">
+    <div class="ph">Foto del trompo</div>
+    <div class="ph">Foto de una orden</div>
+    <div class="ph">Foto del puesto</div>
   </section>
 
   <section class="info">
-    <div>
-      <h3>Horario</h3>
-      <table id="hours">
-        <tr data-d="1"><td>Lunes</td><td>Cerrado</td></tr>
-        <tr data-d="2"><td>Martes</td><td>19:00 – 1:00</td></tr>
-        <tr data-d="3"><td>Miércoles</td><td>19:00 – 1:00</td></tr>
-        <tr data-d="4"><td>Jueves</td><td>19:00 – 1:00</td></tr>
-        <tr data-d="5"><td>Viernes</td><td>19:00 – 2:00</td></tr>
-        <tr data-d="6"><td>Sábado</td><td>19:00 – 2:00</td></tr>
-        <tr data-d="0"><td>Domingo</td><td>8:00 – 14:00 · 19:00 – 0:00</td></tr>
-      </table>
+    <div class="card">
+      <h3>HORARIO</h3>
+      <p>Martes a domingo</p>
+      <p class="m">7:00 pm – 1:00 am</p>
+      <p class="gap">Domingo barbacoa</p>
+      <p class="m">8:00 am – 2:00 pm</p>
     </div>
-    <div class="place">
-      <h3>Dónde estamos</h3>
-      <p>Calle Hidalgo #45, Col. Centro</p>
-      <p class="m">Juárez, N.L. · En la esquina, frente a la tienda. Hay lugar para estacionarse.</p>
-      <p class="m">Efectivo y transferencia · WhatsApp 81 0000 0000</p>
-      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Abrir en Google Maps</a>
+    <div class="card">
+      <h3>DÓNDE ESTAMOS</h3>
+      <p>Calle Hidalgo #45, Centro</p>
+      <p class="m">Juárez, N.L.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
-  </section>
-
-  <section>
-    <h2>Fotos</h2>
-    <div class="gal">
-      <div class="ph">El trompo</div>
-      <div class="ph">Orden de bistec</div>
-      <div class="ph">Las salsas</div>
-      <div class="ph">El puesto</div>
-    </div>
-    <p class="note">Aquí van fotos reales del negocio, tomadas con el celular.</p>
   </section>
 
   <footer>
@@ -153,71 +117,58 @@
     <a href="../">Página demo hecha por Angel · ver más trabajos</a>
   </footer>
 </div>
+<div class="picado end" aria-hidden="true"></div>
 
 <div class="cart">
   <div class="in">
-    <div class="sum"><span id="count">Tu pedido está vacío</span><b id="total">$0</b></div>
+    <div class="sum"><span id="count">Tu pedido</span><b id="total">$0</b></div>
     <a id="send" href="#" target="_blank" rel="noopener" aria-disabled="true">Pedir por WhatsApp</a>
   </div>
 </div>
 
 <script>
 (function(){
-  var WHATSAPP = "8100000000";
-  var MENU = [
-    {cat:"Tacos"},
-    {id:"trompo", n:"Trompo", d:"Pieza", p:22},
-    {id:"bistec", n:"Bistec", d:"Pieza", p:25},
-    {id:"tripa", n:"Tripitas", d:"Doraditas, pieza", p:28},
-    {id:"campe", n:"Campechano", d:"Bistec con chorizo, pieza", p:27},
-    {id:"orden", n:"Orden de 5 de trompo", d:"Con papas y cebollitas", p:100},
-    {cat:"Especialidades"},
-    {id:"gringa", n:"Gringa", d:"Tortilla de harina, trompo y queso", p:60},
-    {id:"quesa", n:"Quesadilla", d:"Con bistec o trompo", p:45},
-    {id:"barb", n:"Barbacoa (domingo)", d:"1/4 kg con tortillas", p:120},
-    {cat:"Bebidas"},
-    {id:"agua", n:"Agua fresca", d:"Horchata o jamaica, 1 L", p:35},
-    {id:"refre", n:"Refresco", d:"600 ml", p:25}
+  var WHATSAPP="8100000000";
+  var MENU=[
+    {id:"trompo",n:"Taco de trompo",p:22},
+    {id:"bistec",n:"Taco de bistec",p:25},
+    {id:"tripa",n:"Taco de tripitas",p:28},
+    {id:"orden",n:"Orden de 5",p:100},
+    {id:"gringa",n:"Gringa",p:60},
+    {id:"quesa",n:"Quesadilla",p:45},
+    {id:"agua",n:"Agua fresca",p:35},
+    {id:"refre",n:"Refresco",p:25}
   ];
-  var qty = {};
-  var menu = document.getElementById("menu");
+  var qty={}, box=document.getElementById("menu");
   MENU.forEach(function(m){
-    if(m.cat){ var c=document.createElement("div"); c.className="cat"; c.textContent=m.cat; menu.appendChild(c); return; }
     qty[m.id]=0;
-    var row=document.createElement("div"); row.className="item";
-    row.innerHTML='<span class="n">'+m.n+'<em>'+m.d+'</em></span><span class="p">$'+m.p+'</span>'+
-      '<span class="step"><button type="button" aria-label="Quitar '+m.n+'" data-a="-" data-id="'+m.id+'">−</button><output id="q-'+m.id+'">0</output><button type="button" aria-label="Agregar '+m.n+'" data-a="+" data-id="'+m.id+'">+</button></span>';
-    menu.appendChild(row);
+    var r=document.createElement("div"); r.className="row";
+    r.innerHTML='<span class="n">'+m.n+'</span><span class="p">$'+m.p+'</span><span class="step"><button type="button" aria-label="Quitar '+m.n+'" data-a="-" data-id="'+m.id+'">−</button><output id="q-'+m.id+'">0</output><button type="button" aria-label="Agregar '+m.n+'" data-a="+" data-id="'+m.id+'">+</button></span>';
+    box.appendChild(r);
   });
-  menu.addEventListener("click",function(e){
+  box.addEventListener("click",function(e){
     var b=e.target.closest("button"); if(!b) return;
     var id=b.dataset.id; qty[id]=Math.max(0,qty[id]+(b.dataset.a==="+"?1:-1));
     document.getElementById("q-"+id).textContent=qty[id]; update();
   });
   function update(){
-    var total=0, n=0, lines=[];
-    MENU.forEach(function(m){ if(m.id && qty[m.id]){ total+=qty[m.id]*m.p; n+=qty[m.id]; lines.push(qty[m.id]+" x "+m.n); } });
-    document.getElementById("total").textContent="$"+total;
-    document.getElementById("count").textContent = n ? n+(n===1?" producto":" productos") : "Tu pedido está vacío";
+    var t=0,n=0,l=[];
+    MENU.forEach(function(m){ if(qty[m.id]){ t+=qty[m.id]*m.p; n+=qty[m.id]; l.push(qty[m.id]+" x "+m.n); } });
+    document.getElementById("total").textContent="$"+t;
+    document.getElementById("count").textContent=n?(n+(n===1?" producto":" productos")):"Tu pedido";
     var a=document.getElementById("send");
-    if(n){
-      var msg="Hola, quiero hacer un pedido para pasar por él:\n"+lines.join("\n")+"\nTotal: $"+total;
-      a.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent(msg); a.setAttribute("aria-disabled","false");
-    } else { a.href="#"; a.setAttribute("aria-disabled","true"); }
+    if(n){ a.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent("Hola, quiero pedir:\n"+l.join("\n")+"\nTotal: $"+t); a.setAttribute("aria-disabled","false"); }
+    else { a.href="#"; a.setAttribute("aria-disabled","true"); }
   }
-
-  // abierto / cerrado (hora de Monterrey). Rangos en horas; >24 = pasada la medianoche
-  var sched={0:[[8,14],[19,24]],1:[],2:[[19,25]],3:[[19,25]],4:[[19,25]],5:[[19,26]],6:[[19,26]]};
+  // abierto/cerrado, hora de Monterrey. Horas >24 = después de medianoche
+  var sched={0:[[8,14],[19,25]],1:[],2:[[19,25]],3:[[19,25]],4:[[19,25]],5:[[19,25]],6:[[19,25]]};
   var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
-  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}, d=0,h=0,mi=0;
+  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,mi=0;
   parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")mi=parseInt(p.value,10); });
   var t=h+mi/60, open=false;
   sched[d].forEach(function(r){ if(t>=r[0]&&t<r[1]) open=true; });
-  (sched[(d+6)%7]||[]).forEach(function(r){ if(r[1]>24 && t<r[1]-24) open=true; });
-  var el=document.getElementById("status");
-  el.textContent = open ? "Abierto ahorita" : "Cerrado ahorita";
-  el.classList.add(open?"open":"closed");
-  var row=document.querySelector('#hours tr[data-d="'+d+'"]'); if(row) row.classList.add("today");
+  sched[(d+6)%7].forEach(function(r){ if(r[1]>24&&t<r[1]-24) open=true; });
+  var el=document.getElementById("status"); el.textContent=open?"Abierto ahorita":"Cerrado ahorita"; el.classList.add(open?"open":"closed");
 })();
 </script>
 </body>

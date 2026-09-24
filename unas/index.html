@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estética Aurora</title>
-<meta name="description" content="Estética Aurora en Juárez, N.L. Corte, color, keratina, cejas y pestañas. Pide tu cita por WhatsApp.">
+<title>Nails by Karla</title>
+<meta name="description" content="Nails by Karla en Juárez, N.L. Uñas de gel, acrílico, manicure y pedicure. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Figtree:wght@500;700&display=swap">
 <style>
   :root{
     color-scheme: light;
-    --white:#FFFFFF; --paper:#F8F3F6; --ink:#2B1426; --muted:#7A6272; --line:#EBDDE4;
-    --main:#5A2350; --accent:#C24E74; --soft:#F6E3EB;
-    --name:"DM Serif Display", Georgia, serif;
+    --white:#FFFFFF; --paper:#FDF3F6; --ink:#2A1A20; --muted:#7E6670; --line:#F1DCE3;
+    --main:#D93B74; --accent:#D93B74; --soft:#FCE4EC;
+    --name:"Pacifico", "Brush Script MT", cursive;
     --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 110px}
   a{color:inherit}
   a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-  .band{height:12px;margin-inline:-20px;background:linear-gradient(90deg,#5A2350,#C24E74)}
+  .band{height:12px;margin-inline:-20px;background:repeating-linear-gradient(90deg,#D93B74 0 24px,#F7B7CC 24px 48px,#FFFFFF 48px 60px)}
   .wrap{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:52px}
   .top{display:flex;justify-content:flex-end;padding-top:16px}
   .status{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-radius:999px;background:var(--paper);color:var(--muted)}
@@ -72,9 +72,9 @@
   <div class="top"><span class="status" id="status">Horario</span></div>
 
   <header class="sign">
-    <div class="kicker">ESTÉTICA</div>
-    <h1>Aurora</h1>
-    <p>Corte, color, cejas y pestañas en Juárez, N.L.</p>
+    <div class="kicker">UÑAS</div>
+    <h1>Nails by Karla</h1>
+    <p>Gel, acrílico y pedicure en Juárez, N.L.</p>
   </header>
 
   <section class="menu" aria-label="Servicios">
@@ -84,9 +84,9 @@
   </section>
 
   <section class="fotos" aria-label="Fotos">
-    <div class="ph">Foto de un balayage</div>
-    <div class="ph">Foto de un corte</div>
-    <div class="ph">Foto del salón</div>
+    <div class="ph">Foto de uñas de gel</div>
+    <div class="ph">Foto de acrílico</div>
+    <div class="ph">Foto de un diseño</div>
   </section>
 
   <section class="info">
@@ -99,14 +99,14 @@
     </div>
     <div class="card">
       <h3>DÓNDE ESTAMOS</h3>
-      <p>Av. Las Torres #210, local 3</p>
+      <p>Calle Morelos #88, Centro</p>
       <p class="m">Juárez, N.L.</p>
       <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
   </section>
 
   <footer>
-    <span>Estética Aurora · negocio de ejemplo</span>
+    <span>Nails by Karla · negocio de ejemplo</span>
     <a href="../">Página demo hecha por Angel · ver más trabajos</a>
   </footer>
 </div>
@@ -117,7 +117,7 @@
 <script>
 (function(){
   var WHATSAPP="8100000000";
-  var SVCS=[{"n": "Corte", "p": "180"}, {"n": "Peinado", "p": "250"}, {"n": "Tinte", "p": "450", "from": true}, {"n": "Mechas / balayage", "p": "1,200", "from": true}, {"n": "Keratina", "p": "900", "from": true}, {"n": "Cejas", "p": "100"}, {"n": "Pestañas", "p": "400"}];
+  var SVCS=[{"n": "Manicure", "p": "180"}, {"n": "Gel", "p": "250"}, {"n": "Acrílico", "p": "350", "from": true}, {"n": "Retoque de acrílico", "p": "250"}, {"n": "Pedicure", "p": "280"}, {"n": "Diseño por uña", "p": "15"}];
   var box=document.getElementById("svcs"), chosen=null, send=document.getElementById("send");
   SVCS.forEach(function(s,i){
     var b=document.createElement("button"); b.type="button"; b.className="svc"; b.setAttribute("aria-pressed","false");
