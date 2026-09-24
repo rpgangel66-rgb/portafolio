@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tacos El Primo</title>
-<meta name="description" content="Tacos El Primo en Juárez, N.L. Trompo, bistec y tripitas. Haz tu pedido por WhatsApp.">
+<meta name="description" content="Tacos El Primo. Trompo, bistec y carne asada. Haz tu pedido por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Figtree:wght@500;700;800&display=swap">
@@ -93,7 +93,7 @@
     <div class="hero">
       <div>
         <h1>Tacos<span>El Primo</span></h1>
-        <p>Trompo, bistec y tripitas al carbón.</p>
+        <p>Trompo, bistec y carne asada al carbón</p>
       </div>
       <div class="sticker">Orden de 5<b>$100</b></div>
     </div>
@@ -112,7 +112,7 @@
       <div><small>Martes a domingo</small><strong>7 pm – 1 am</strong></div>
       <div><small>Domingo barbacoa</small><strong>8 am – 2 pm</strong></div>
       <div><small>Dónde</small><strong>Calle Hidalgo #45, Centro</strong></div>
-      <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </section>
 
     <footer>
@@ -131,16 +131,16 @@
 
 <script>
 (function(){
-  var WHATSAPP="8100000000";
+  var WHATSAPP="8123256381";
   var MENU=[
-    {id:"trompo",n:"Taco de trompo",p:22,f:"Foto trompo"},
-    {id:"bistec",n:"Taco de bistec",p:25,f:"Foto bistec"},
-    {id:"tripa",n:"Taco de tripitas",p:28,f:"Foto tripitas"},
-    {id:"orden",n:"Orden de 5",p:100,f:"Foto orden"},
-    {id:"gringa",n:"Gringa",p:60,f:"Foto gringa"},
-    {id:"quesa",n:"Quesadilla",p:45,f:"Foto quesadilla"},
-    {id:"agua",n:"Agua fresca",p:35,f:"Foto agua"},
-    {id:"refre",n:"Refresco",p:25,f:"Foto refresco"}
+    {id:"trompo",n:"Taco de trompo",p:22,f:"Foto 1"},
+    {id:"bistec",n:"Taco de bistec",p:25,f:"Foto 2"},
+    {id:"asada",n:"Taco de carne asada",p:28,f:"Foto 3"},
+    {id:"orden",n:"Orden de 5",p:100,f:"Foto 4"},
+    {id:"gringa",n:"Gringa",p:60,f:"Foto 5"},
+    {id:"quesa",n:"Quesadilla",p:45,f:"Foto 6"},
+    {id:"agua",n:"Agua fresca",p:35,f:"Foto 7"},
+    {id:"refre",n:"Refresco",p:25,f:"Foto 8"}
   ];
   var qty={}, grid=document.getElementById("grid");
   MENU.forEach(function(m){
@@ -172,7 +172,7 @@
   var tt=h+mi/60, open=false;
   sched[d].forEach(function(r){ if(tt>=r[0]&&tt<r[1]) open=true; });
   sched[(d+6)%7].forEach(function(r){ if(r[1]>24&&tt<r[1]-24) open=true; });
-  document.getElementById("status").textContent=open?"Abierto ahorita":"Cerrado ahorita";
+  document.getElementById("status").textContent=open?"Abierto ahora":"Cerrado ahora";
 })();
 </script>
 <!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->

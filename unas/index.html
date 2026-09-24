@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nails by Karla</title>
-<meta name="description" content="Nails by Karla en Juárez, N.L. Uñas de gel, acrílico, manicure y pedicure. Pide tu cita por WhatsApp.">
+<meta name="description" content="Nails by Karla. Uñas de gel, acrílico, manicure y pedicure. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Figtree:wght@500;700;800&display=swap">
@@ -73,7 +73,7 @@
   <div class="blob one" aria-hidden="true"></div>
   <div class="blob two" aria-hidden="true"></div>
   <div class="inner">
-    <div class="top"><span class="chip">Uñas · Juárez, N.L.</span><span class="st" id="status">Horario</span></div>
+    <div class="top"><span class="chip">Uñas</span><span class="st" id="status">Horario</span></div>
     <h1>Nails by Karla</h1>
     <p><span>Gel, acrílico y pedicure.</span></p>
   </div>
@@ -86,14 +86,14 @@
 
     <div class="sec-t"><h2>Trabajos</h2></div>
     <div class="nails" aria-label="Fotos">
-      <div class="nail" style="--c:var(--pink-2)">Foto gel</div>
-      <div class="nail" style="--c:var(--rojo)">Foto acrílico</div>
-      <div class="nail" style="--c:var(--lila)">Foto diseño</div>
+      <div class="nail" style="--c:var(--pink-2)">Foto 1</div>
+      <div class="nail" style="--c:var(--rojo)">Foto 2</div>
+      <div class="nail" style="--c:var(--lila)">Foto 3</div>
     </div>
 
     <section class="info">
       <div><small>Horario</small><b>Martes a sábado</b><span>10 am – 8 pm · Domingo 10 am – 3 pm</span></div>
-      <div><small>Dónde</small><b>Calle Morelos #88, Centro</b><a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a></div>
+      <div><small>Dónde</small><b>Calle Morelos #88, Centro</b><a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a></div>
     </section>
 
     <footer>
@@ -107,7 +107,7 @@
 
 <script>
 (function(){
-  var WHATSAPP="8100000000";
+  var WHATSAPP="8123256381";
   var S=[
     {n:"Gel",p:"$250",c:"var(--pink-2)"},
     {n:"Acrílico",p:"desde $350",c:"var(--rojo)"},
@@ -138,7 +138,7 @@
   var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
   parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
   var t=h+m/60,s=sched[d];
-  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"● Abierto ahorita":"Cerrado ahorita";
+  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"● Abierto ahora":"Cerrado ahora";
 })();
 </script>
 <!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->

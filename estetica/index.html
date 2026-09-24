@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Estética Aurora</title>
-<meta name="description" content="Estética Aurora en Juárez, N.L. Corte, color, keratina, cejas y pestañas. Pide tu cita por WhatsApp.">
+<meta name="description" content="Estética Aurora. Corte, color, keratina, cejas y pestañas. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;700&display=swap">
@@ -92,12 +92,11 @@
 
   <section class="cover">
     <div>
-      <div class="n">Juárez, Nuevo León</div>
       <h1>Tu mejor <i>versión</i> empieza aquí.</h1>
       <p>Corte, color, keratina, cejas y pestañas.</p>
       <a class="link" href="#precios">Ver precios</a>
     </div>
-    <div class="arch" aria-hidden="true">Foto del salón</div>
+    <div class="arch" aria-hidden="true">Foto 1</div>
   </section>
 
   <section class="list" id="precios" aria-label="Precios">
@@ -107,9 +106,9 @@
   </section>
 
   <section class="fotos" aria-label="Fotos">
-    <div class="ph a">Foto corte</div>
-    <div class="ph b">Foto balayage</div>
-    <div class="ph c">Foto pestañas</div>
+    <div class="ph a">Foto 2</div>
+    <div class="ph b">Foto 3</div>
+    <div class="ph c">Foto 4</div>
   </section>
 
   <section class="end">
@@ -120,8 +119,8 @@
     </div>
     <div>
       <h3>Dónde estamos</h3>
-      <p>Av. Las Torres #210, local 3, Juárez, N.L.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
+      <p>Av. Las Torres #210, local 3</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
   </section>
 
@@ -140,7 +139,7 @@
 
 <script>
 (function(){
-  var WHATSAPP="8100000000";
+  var WHATSAPP="8123256381";
   var G1=[{n:"Corte",p:"180"},{n:"Peinado",p:"250"},{n:"Tinte",p:"450",f:1},{n:"Mechas / balayage",p:"1,200",f:1},{n:"Keratina",p:"900",f:1}];
   var G2=[{n:"Diseño de ceja",p:"100"},{n:"Laminado de ceja",p:"350"},{n:"Lifting de pestañas",p:"400"},{n:"Extensiones",p:"550"}];
   var chosen=null, send=document.getElementById("send"), picked=document.getElementById("picked");
@@ -167,7 +166,7 @@
   var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
   parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
   var t=h+m/60,s=sched[d];
-  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"abierto ahorita":"cerrado ahorita";
+  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"abierto ahora":"cerrado ahora";
 })();
 </script>
 <!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->
