@@ -4,175 +4,117 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Barbería Los Compas</title>
+<meta name="description" content="Barbería Los Compas en Juárez, N.L. Cortes, fades y barba. Aparta tu lugar por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Kaushan+Script&family=Figtree:wght@500;700&display=swap">
 <style>
   :root{
-    color-scheme: dark;
-    --bg:#0F1D1A;
-    --panel:#15292A;
-    --line:#2A4441;
-    --ink:#ECEFE8;
-    --muted:#9DB0A9;
-    --brass:#D8AE55;
-    --brass-ink:#1A1408;
-    --ok:#6FD39A;
-    --closed:#E0735E;
-    --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
-    --body:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: light;
+    --white:#FFFFFF; --paper:#F4F6FA; --ink:#14213D; --muted:#5C6780; --line:#DDE3EE;
+    --blue:#1D3FA6; --red:#D7263D;
+    --block:"Anton", Impact, "Arial Narrow", sans-serif;
+    --script:"Kaushan Script", "Brush Script MT", cursive;
+    --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --pole:repeating-linear-gradient(-45deg,var(--red) 0 14px,var(--white) 14px 28px,var(--blue) 28px 42px,var(--white) 42px 56px);
   }
   *{box-sizing:border-box}
-  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;padding-inline:20px;padding-block:0 96px}
+  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 100px}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
-  .wrap{max-width:1080px;margin-inline:auto;display:flex;flex-direction:column;gap:72px}
+  a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .pole{height:14px;margin-inline:-20px;background:var(--pole)}
+  .wrap{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:56px}
 
-  /* top bar */
-  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-  .mark{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
-  .status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
-  .status.open{color:var(--ok)} .status.open .dot{background:var(--ok);box-shadow:0 0 0 4px rgba(111,211,154,.15)}
-  .status.closed{color:var(--closed)} .status.closed .dot{background:var(--closed)}
+  .top{display:flex;justify-content:flex-end;padding-top:16px}
+  .status{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-radius:999px;background:var(--paper);color:var(--muted)}
+  .status.open{background:#E3F4EA;color:#1A7A45}
+  .status.closed{background:#FBE5E8;color:var(--red)}
 
-  /* hero: asymmetric */
-  .hero{display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:end;padding-top:24px}
-  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brass)}
-  h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(64px,13vw,156px);line-height:.84;letter-spacing:-.01em;margin:14px 0 0;text-wrap:balance}
-  h1 span{color:var(--brass);display:block}
-  .lede{max-width:40ch;color:var(--muted);font-size:18px;margin:22px 0 0}
-  .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:16px;text-decoration:none;padding:14px 22px;border-radius:6px;border:1px solid var(--line)}
-  .btn.main{background:var(--brass);color:var(--brass-ink);border-color:var(--brass)}
-  .btn.main:hover{filter:brightness(1.07)}
-  .btn.ghost:hover{border-color:var(--muted)}
-  .btn svg{width:18px;height:18px;flex:none}
+  .sign{text-align:center;padding-top:8px}
+  .sign .kicker{font-family:var(--block);font-size:22px;letter-spacing:.2em;color:var(--blue)}
+  .sign h1{margin:0;line-height:.9}
+  .sign h1 .script{display:block;font-family:var(--script);font-weight:400;font-size:clamp(40px,9vw,64px);color:var(--red);transform:rotate(-4deg);margin-bottom:-6px}
+  .sign h1 .big{display:block;font-family:var(--block);font-weight:400;font-size:clamp(72px,19vw,150px);letter-spacing:.02em;color:var(--ink);text-transform:uppercase}
+  .sign p{margin:18px 0 0;font-size:19px;color:var(--muted)}
+  .wa{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--blue);color:var(--white);text-decoration:none;font-weight:700;font-size:18px;padding:16px 28px;border-radius:999px;margin-top:26px}
+  .wa:hover{background:#16328A}
+  .wa svg{width:22px;height:22px}
 
-  /* price board */
-  .board{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:26px 24px 20px;transform:rotate(-1.2deg)}
-  .board h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:28px;letter-spacing:.05em;margin:0 0 14px;display:flex;justify-content:space-between;align-items:baseline}
-  .board h2 small{font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--muted)}
-  .row{display:flex;align-items:baseline;gap:10px;padding-block:9px;border-bottom:1px dashed var(--line)}
-  .row:last-child{border-bottom:0}
-  .row .name{font-weight:500}
-  .row .name em{display:block;font-style:normal;font-size:13px;color:var(--muted)}
-  .row .fill{flex:1}
-  .row .price{font-family:var(--display);font-weight:800;font-size:26px;font-variant-numeric:tabular-nums;color:var(--brass)}
+  .precios{border:3px solid var(--ink);border-radius:14px;overflow:hidden}
+  .precios h2{margin:0;background:var(--ink);color:var(--white);font-family:var(--block);font-weight:400;font-size:30px;letter-spacing:.08em;text-align:center;padding:12px}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px;border-top:1px solid var(--line)}
+  .row:first-of-type{border-top:0}
+  .row .n{font-weight:700;font-size:19px}
+  .row .p{font-family:var(--block);font-size:32px;color:var(--red);font-variant-numeric:tabular-nums}
 
-  /* info strip */
-  .info{display:grid;grid-template-columns:1fr 1.2fr;gap:48px}
-  .info h3,.gallery h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:40px;line-height:1;letter-spacing:.02em;margin:0 0 18px}
-  .hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-  .hours td{padding:10px 0;border-bottom:1px solid var(--line)}
-  .hours td:last-child{text-align:right;color:var(--muted)}
-  .hours tr.today td{color:var(--ink);font-weight:600}
-  .hours tr.today td:first-child::after{content:"hoy";margin-left:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);font-weight:600}
-  .place p{margin:0 0 6px;font-size:18px}
-  .place .sub{color:var(--muted);font-size:15px}
-  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding:0;list-style:none}
-  .facts li{font-size:13px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
-  .place .btn{margin-top:22px}
+  .fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .ph{aspect-ratio:1/1;max-width:100%;border-radius:12px;background:var(--paper);border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;color:var(--muted);padding:8px}
 
-  /* gallery */
-  .gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:180px 180px;gap:10px}
-  .ph{border-radius:4px;position:relative;overflow:hidden;background:
-      repeating-linear-gradient(135deg, rgba(216,174,85,.10) 0 14px, transparent 14px 28px), var(--panel);
-      border:1px solid var(--line);display:flex;align-items:flex-end;padding:14px}
-  .ph:first-child{grid-row:span 2}
-  .ph span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .note{font-size:13px;color:var(--muted);margin:12px 0 0}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:var(--paper);border-radius:14px;padding:22px}
+  .card h3{margin:0 0 10px;font-family:var(--block);font-weight:400;font-size:24px;letter-spacing:.05em;color:var(--blue)}
+  .card p{margin:0 0 4px;font-size:18px;font-weight:500}
+  .card .m{color:var(--muted);font-size:16px}
+  .card .gap{margin-top:10px}
+  .card a{display:inline-block;margin-top:12px;font-weight:700;color:var(--red)}
 
-  footer{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  footer{text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  .pole.end{margin-top:32px}
 
-  /* mobile sticky whatsapp */
-  .sticky{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom, 0px));background:rgba(15,29,26,.94);border-top:1px solid var(--line);display:none;backdrop-filter:blur(8px)}
-  .sticky .btn{width:100%;justify-content:center}
+  .sticky{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom, 0px));background:var(--white);border-top:1px solid var(--line);display:none}
+  .sticky .wa{width:100%;margin:0}
 
-  @media (max-width:820px){
-    .hero,.info{grid-template-columns:1fr;gap:36px}
-    .board{transform:none}
-    .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 130px 130px}
-    .ph:first-child{grid-column:span 2;grid-row:auto}
+  @media (max-width:640px){
+    .info{grid-template-columns:1fr}
     .sticky{display:block}
-    .ctas .btn.main{display:none}
-  }
-  @media (prefers-reduced-motion:no-preference){
-    .board{transition:transform .4s ease}
-    .board:hover{transform:rotate(0deg)}
+    .sign .wa{display:none}
   }
 </style>
 </head>
 <body>
-
+<div class="pole" aria-hidden="true"></div>
 <div class="wrap">
-  <header class="top">
-    <div class="mark">Los Compas</div>
-    <div class="status" id="status"><span class="dot"></span><span id="status-text">Horario</span></div>
+  <div class="top"><span class="status" id="status">Horario</span></div>
+
+  <header class="sign">
+    <div class="kicker">BARBERÍA</div>
+    <h1><span class="script">Los</span><span class="big">Compas</span></h1>
+    <p>Cortes, fades y barba en Juárez, N.L.</p>
+    <a class="wa" href="https://wa.me/528100000000?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+      Apartar mi corte
+    </a>
   </header>
 
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Barbería · Juárez, Nuevo León</div>
-      <h1>Corte<br>fino,<span>sin cita.</span></h1>
-      <p class="lede">Fades, barba con navaja y diseños. Llegas, te sientas y en 40 minutos sales listo. Si prefieres apartar tu lugar, mándanos WhatsApp.</p>
-      <div class="ctas">
-        <a class="btn main" href="https://wa.me/528100000000?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
-          Apartar por WhatsApp
-        </a>
-        <a class="btn ghost" href="#ubicacion">Cómo llegar</a>
-      </div>
-    </div>
-
-    <aside class="board" aria-label="Precios">
-      <h2>Precios <small>MXN</small></h2>
-      <div class="row"><span class="name">Corte clásico<em>Tijera y máquina</em></span><span class="fill"></span><span class="price">$120</span></div>
-      <div class="row"><span class="name">Fade / Degradado<em>Low, mid o high</em></span><span class="fill"></span><span class="price">$150</span></div>
-      <div class="row"><span class="name">Corte + barba<em>Toalla caliente y navaja</em></span><span class="fill"></span><span class="price">$200</span></div>
-      <div class="row"><span class="name">Solo barba</span><span class="fill"></span><span class="price">$90</span></div>
-      <div class="row"><span class="name">Corte de niño<em>Hasta 12 años</em></span><span class="fill"></span><span class="price">$100</span></div>
-      <div class="row"><span class="name">Diseño / rayitas</span><span class="fill"></span><span class="price">+$30</span></div>
-    </aside>
+  <section class="precios" aria-label="Precios">
+    <h2>PRECIOS</h2>
+    <div class="row"><span class="n">Corte</span><span class="p">$120</span></div>
+    <div class="row"><span class="n">Fade</span><span class="p">$150</span></div>
+    <div class="row"><span class="n">Corte y barba</span><span class="p">$200</span></div>
+    <div class="row"><span class="n">Barba</span><span class="p">$90</span></div>
+    <div class="row"><span class="n">Niños</span><span class="p">$100</span></div>
   </section>
 
-  <section class="info" id="ubicacion">
-    <div>
-      <h3>Horario</h3>
-      <table class="hours" id="hours">
-        <tr data-d="1"><td>Lunes</td><td>10:00 – 21:00</td></tr>
-        <tr data-d="2"><td>Martes</td><td>10:00 – 21:00</td></tr>
-        <tr data-d="3"><td>Miércoles</td><td>10:00 – 21:00</td></tr>
-        <tr data-d="4"><td>Jueves</td><td>10:00 – 21:00</td></tr>
-        <tr data-d="5"><td>Viernes</td><td>10:00 – 21:00</td></tr>
-        <tr data-d="6"><td>Sábado</td><td>9:00 – 21:00</td></tr>
-        <tr data-d="0"><td>Domingo</td><td>10:00 – 15:00</td></tr>
-      </table>
-    </div>
-    <div class="place">
-      <h3>Dónde estamos</h3>
-      <p>Av. Principal #123, Col. Centro</p>
-      <p class="sub">Juárez, N.L. · A una cuadra de la plaza, junto a la farmacia.</p>
-      <ul class="facts">
-        <li>Efectivo y transferencia</li>
-        <li>Estacionamiento en la calle</li>
-        <li>Aire acondicionado</li>
-        <li>WhatsApp: 81 0000 0000</li>
-      </ul>
-      <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Abrir en Google Maps</a>
-    </div>
+  <section class="fotos" aria-label="Fotos">
+    <div class="ph">Foto de un corte</div>
+    <div class="ph">Foto de un fade</div>
+    <div class="ph">Foto del local</div>
   </section>
 
-  <section class="gallery">
-    <h3>Trabajos</h3>
-    <div class="gallery-grid">
-      <div class="ph"><span>Foto del local</span></div>
-      <div class="ph"><span>Fade</span></div>
-      <div class="ph"><span>Barba</span></div>
-      <div class="ph"><span>Diseño</span></div>
-      <div class="ph"><span>Niños</span></div>
+  <section class="info">
+    <div class="card">
+      <h3>HORARIO</h3>
+      <p>Lunes a sábado</p>
+      <p class="m">10:00 am – 9:00 pm</p>
+      <p class="gap">Domingo</p>
+      <p class="m">10:00 am – 3:00 pm</p>
     </div>
-    <p class="note">Aquí van las fotos reales del negocio. Con 5 fotos del celular basta.</p>
+    <div class="card">
+      <h3>DÓNDE ESTAMOS</h3>
+      <p>Av. Principal #123, Centro</p>
+      <p class="m">Juárez, N.L.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
+    </div>
   </section>
 
   <footer>
@@ -180,34 +122,21 @@
     <a href="../">Página demo hecha por Angel · ver más trabajos</a>
   </footer>
 </div>
+<div class="pole end" aria-hidden="true"></div>
 
 <div class="sticky">
-  <a class="btn main" href="https://wa.me/528100000000?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">Apartar por WhatsApp</a>
+  <a class="wa" href="https://wa.me/528100000000?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">Apartar mi corte por WhatsApp</a>
 </div>
 
 <script>
 (function(){
-  // horario: [abre, cierra] en horas, índice = día de la semana (0 = domingo)
-  var sched = {0:[10,15],1:[10,21],2:[10,21],3:[10,21],4:[10,21],5:[10,21],6:[9,21]};
-  var parts = new Intl.DateTimeFormat('en-US',{timeZone:'America/Monterrey',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());
-  var map = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
-  var d = 0, h = 0, m = 0;
-  parts.forEach(function(p){
-    if(p.type==='weekday') d = map[p.value];
-    if(p.type==='hour') h = parseInt(p.value,10) % 24;
-    if(p.type==='minute') m = parseInt(p.value,10);
-  });
-  var now = h + m/60, s = sched[d];
-  var el = document.getElementById('status'), txt = document.getElementById('status-text');
-  if(now >= s[0] && now < s[1]){
-    el.classList.add('open'); txt.textContent = 'Abierto · cierra ' + s[1] + ':00';
-  } else {
-    el.classList.add('closed');
-    var next = now < s[0] ? 'hoy ' + s[0] + ':00' : 'mañana ' + sched[(d+1)%7][0] + ':00';
-    txt.textContent = 'Cerrado · abre ' + next;
-  }
-  var row = document.querySelector('#hours tr[data-d="'+d+'"]');
-  if(row) row.classList.add('today');
+  var sched={0:[10,15],1:[10,21],2:[10,21],3:[10,21],4:[10,21],5:[10,21],6:[10,21]};
+  var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
+  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
+  parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
+  var t=h+m/60, s=sched[d], el=document.getElementById("status");
+  if(t>=s[0]&&t<s[1]){ el.textContent="Abierto ahorita"; el.classList.add("open"); }
+  else { el.textContent="Cerrado ahorita"; el.classList.add("closed"); }
 })();
 </script>
 </body>
