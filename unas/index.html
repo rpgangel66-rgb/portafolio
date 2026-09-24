@@ -7,130 +7,129 @@
 <meta name="description" content="Nails by Karla en Juárez, N.L. Uñas de gel, acrílico, manicure y pedicure. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Figtree:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Figtree:wght@500;700;800&display=swap">
 <style>
   :root{
     color-scheme: light;
-    --white:#FFFFFF; --paper:#FDF3F6; --ink:#2A1A20; --muted:#7E6670; --line:#F1DCE3;
-    --main:#D93B74; --accent:#D93B74; --soft:#FCE4EC;
-    --name:"Pacifico", "Brush Script MT", cursive;
+    --white:#FFFFFF; --blush:#FFF1F5; --ink:#2A1A20; --muted:#7E6670; --line:#F2DCE4;
+    --pink:#D93B74; --pink-2:#F48FB1; --nude:#E9B8A6; --lila:#B79CE0; --rojo:#C8233C; --coral:#F27A5E;
+    --script:"Pacifico", "Brush Script MT", cursive;
     --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 110px}
+  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-block:0 110px;overflow-x:hidden}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-  .band{height:12px;margin-inline:-20px;background:repeating-linear-gradient(90deg,#D93B74 0 24px,#F7B7CC 24px 48px,#FFFFFF 48px 60px)}
-  .wrap{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:52px}
-  .top{display:flex;justify-content:flex-end;padding-top:16px}
-  .status{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-radius:999px;background:var(--paper);color:var(--muted)}
-  .status.open{background:#E3F4EA;color:#1A7A45}
-  .status.closed{background:var(--soft);color:var(--main)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  .pad{padding-inline:20px}
+  .inner{max-width:900px;margin-inline:auto}
 
-  .sign{text-align:center}
-  .sign .kicker{font-size:14px;font-weight:700;letter-spacing:.24em;color:var(--accent)}
-  .sign h1{margin:6px 0 0;font-family:var(--name);font-weight:400;font-size:clamp(60px,16vw,120px);line-height:1.05;color:var(--main)}
-  .sign p{margin:14px 0 0;font-size:19px;color:var(--muted)}
+  .hero{position:relative;padding-block:36px 24px;overflow:hidden;margin-inline:0}
+  .blob{position:absolute;z-index:-1;border-radius:50%}
+  .blob.one{width:420px;height:420px;max-width:90vw;max-height:90vw;background:var(--blush);top:-120px;right:-80px}
+  .blob.two{width:180px;height:180px;background:#FDE3EC;top:210px;left:-60px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .top .chip{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:var(--white);border:2px solid var(--pink);color:var(--pink);padding:6px 12px;border-radius:999px}
+  .top .st{font-size:13px;font-weight:700;color:var(--muted)}
+  h1{margin:40px 0 0;font-family:var(--script);font-weight:400;font-size:clamp(58px,14vw,110px);line-height:1.1;color:var(--pink);transform:rotate(-3deg);transform-origin:left}
+  .hero p{margin:14px 0 0;font-size:20px;font-weight:700}
+  .hero p span{background:linear-gradient(transparent 60%, #FAD0DE 60%)}
 
-  .menu{border:2px solid var(--main);border-radius:18px;overflow:hidden}
-  .menu h2{margin:0;background:var(--main);color:var(--white);font-size:15px;font-weight:700;letter-spacing:.2em;text-align:center;padding:14px}
-  .menu .hint{margin:0;padding:10px 22px;background:var(--soft);font-size:15px;color:var(--ink);text-align:center}
-  .svc{display:flex;width:100%;justify-content:space-between;align-items:center;gap:14px;padding:16px 22px;border:0;border-top:1px solid var(--line);background:var(--white);font:inherit;color:inherit;text-align:left;cursor:pointer}
-  .svc:first-of-type{border-top:0}
-  .svc:hover{background:var(--paper)}
-  .svc .n{font-weight:700;font-size:19px;display:flex;align-items:center;gap:12px}
-  .svc .n::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none}
-  .svc[aria-pressed="true"]{background:var(--soft)}
-  .svc[aria-pressed="true"] .n::before{border-color:var(--main);background:var(--main);box-shadow:inset 0 0 0 3px var(--soft)}
-  .svc .p{font-family:var(--name);font-size:28px;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .svc .p small{font-family:var(--body);font-size:13px;color:var(--muted);margin-right:4px}
+  .sec-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:40px 0 14px}
+  .sec-t h2{margin:0;font-size:22px;font-weight:800}
+  .sec-t span{font-size:14px;color:var(--muted)}
+  .shelf{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 18px;margin-inline:-20px;scrollbar-width:none}
+  .shelf::-webkit-scrollbar{display:none}
+  .bottle{flex:0 0 150px;scroll-snap-align:start;background:var(--white);font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 10px 16px;border-radius:22px;border:2px solid var(--line);transition:transform .15s}
+  .bottle:hover{transform:translateY(-3px)}
+  .bottle[aria-pressed="true"]{border-color:var(--pink);background:var(--blush)}
+  .bottle .cap{width:26px;height:34px;border-radius:6px 6px 3px 3px;background:var(--ink)}
+  .bottle .glass{width:64px;height:62px;margin-top:-12px;border-radius:16px 16px 22px 22px;background:var(--c);box-shadow:inset -8px -6px 0 rgba(0,0,0,.08), inset 8px 6px 0 rgba(255,255,255,.35)}
+  .bottle .n{font-weight:800;font-size:16px;text-align:center;line-height:1.2}
+  .bottle .p{font-size:15px;font-weight:700;color:var(--pink)}
 
-  .fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .ph{aspect-ratio:1/1;max-width:100%;border-radius:16px;background:var(--paper);border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;color:var(--muted);padding:8px}
+  .nails{display:flex;gap:14px;justify-content:center;align-items:flex-end;padding-top:20px}
+  .nail{width:30%;max-width:170px;aspect-ratio:3/4.4;border-radius:50% 50% 18px 18px / 40% 40% 18px 18px;background:var(--c);display:flex;align-items:flex-end;justify-content:center;padding:14px 8px;font-size:12px;font-weight:800;text-align:center;color:var(--white);text-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .nail:nth-child(2){transform:translateY(-18px)}
 
-  .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .card{background:var(--paper);border-radius:16px;padding:22px}
-  .card h3{margin:0 0 10px;font-size:14px;font-weight:700;letter-spacing:.2em;color:var(--main)}
-  .card p{margin:0 0 4px;font-size:18px;font-weight:500}
-  .card .m{color:var(--muted);font-size:16px}
-  .card .gap{margin-top:10px}
-  .card a{display:inline-block;margin-top:12px;font-weight:700;color:var(--accent)}
+  .info{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .info div{background:var(--blush);border-radius:22px;padding:20px}
+  .info small{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
+  .info b{display:block;font-size:18px}
+  .info span{color:var(--muted);font-size:15px}
+  .info a{display:inline-block;margin-top:8px;font-weight:800;color:var(--pink)}
 
-  footer{text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
-  .band.end{margin-top:32px}
+  footer{margin-top:36px;text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 
-  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
-  .bar a{display:flex;max-width:760px;margin-inline:auto;justify-content:center;background:var(--main);color:var(--white);text-decoration:none;font-weight:700;font-size:17px;padding:15px 22px;border-radius:999px;text-align:center}
-  .bar a:hover{filter:brightness(1.1)}
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.95);border-top:1px solid var(--line)}
+  .bar a{display:flex;max-width:900px;margin-inline:auto;justify-content:center;align-items:center;gap:10px;background:var(--pink);color:var(--white);text-decoration:none;font-weight:800;font-size:17px;padding:15px 22px;border-radius:999px}
+  .bar a .dot{width:14px;height:14px;border-radius:50%;background:var(--c,#fff);border:2px solid #fff}
 
-  @media (max-width:640px){ .info{grid-template-columns:1fr} .svc{padding:15px 16px} }
+  @media (max-width:560px){ .info{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){ .bottle{transition:none} }
 </style>
 </head>
 <body>
-<div class="band" aria-hidden="true"></div>
-<div class="wrap">
-  <div class="top"><span class="status" id="status">Horario</span></div>
-
-  <header class="sign">
-    <div class="kicker">UÑAS</div>
+<header class="hero pad">
+  <div class="blob one" aria-hidden="true"></div>
+  <div class="blob two" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="top"><span class="chip">Uñas · Juárez, N.L.</span><span class="st" id="status">Horario</span></div>
     <h1>Nails by Karla</h1>
-    <p>Gel, acrílico y pedicure en Juárez, N.L.</p>
-  </header>
+    <p><span>Gel, acrílico y pedicure.</span></p>
+  </div>
+</header>
 
-  <section class="menu" aria-label="Servicios">
-    <h2>SERVICIOS</h2>
-    <p class="hint">Elige tu servicio y pide tu cita por WhatsApp</p>
-    <div id="svcs"></div>
-  </section>
+<main class="pad">
+  <div class="inner">
+    <div class="sec-t"><h2>Elige tu servicio</h2><span>Desliza →</span></div>
+    <div class="shelf" id="shelf"></div>
 
-  <section class="fotos" aria-label="Fotos">
-    <div class="ph">Foto de uñas de gel</div>
-    <div class="ph">Foto de acrílico</div>
-    <div class="ph">Foto de un diseño</div>
-  </section>
-
-  <section class="info">
-    <div class="card">
-      <h3>HORARIO</h3>
-      <p>Martes a sábado</p>
-      <p class="m">10:00 am – 8:00 pm</p>
-      <p class="gap">Domingo</p>
-      <p class="m">10:00 am – 3:00 pm</p>
+    <div class="sec-t"><h2>Trabajos</h2></div>
+    <div class="nails" aria-label="Fotos">
+      <div class="nail" style="--c:var(--pink-2)">Foto gel</div>
+      <div class="nail" style="--c:var(--rojo)">Foto acrílico</div>
+      <div class="nail" style="--c:var(--lila)">Foto diseño</div>
     </div>
-    <div class="card">
-      <h3>DÓNDE ESTAMOS</h3>
-      <p>Calle Morelos #88, Centro</p>
-      <p class="m">Juárez, N.L.</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
-    </div>
-  </section>
 
-  <footer>
-    <span>Nails by Karla · negocio de ejemplo</span>
-    <a href="../">Página demo hecha por Angel · ver más trabajos</a>
-  </footer>
-</div>
-<div class="band end" aria-hidden="true"></div>
+    <section class="info">
+      <div><small>Horario</small><b>Martes a sábado</b><span>10 am – 8 pm · Domingo 10 am – 3 pm</span></div>
+      <div><small>Dónde</small><b>Calle Morelos #88, Centro</b><a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a></div>
+    </section>
 
-<div class="bar"><a id="send" href="#" target="_blank" rel="noopener">Pedir cita por WhatsApp</a></div>
+    <footer>
+      <span>Nails by Karla · negocio de ejemplo</span>
+      <a href="../">Página demo hecha por Angel · ver más trabajos</a>
+    </footer>
+  </div>
+</main>
+
+<div class="bar"><a id="send" href="#" target="_blank" rel="noopener"><span class="dot"></span><span id="label">Pedir cita por WhatsApp</span></a></div>
 
 <script>
 (function(){
   var WHATSAPP="8100000000";
-  var SVCS=[{"n": "Manicure", "p": "180"}, {"n": "Gel", "p": "250"}, {"n": "Acrílico", "p": "350", "from": true}, {"n": "Retoque de acrílico", "p": "250"}, {"n": "Pedicure", "p": "280"}, {"n": "Diseño por uña", "p": "15"}];
-  var box=document.getElementById("svcs"), chosen=null, send=document.getElementById("send");
-  SVCS.forEach(function(s,i){
-    var b=document.createElement("button"); b.type="button"; b.className="svc"; b.setAttribute("aria-pressed","false");
-    b.innerHTML='<span class="n">'+s.n+'</span><span class="p">'+(s.from?'<small>desde</small>':'')+'$'+s.p+'</span>';
+  var S=[
+    {n:"Gel",p:"$250",c:"var(--pink-2)"},
+    {n:"Acrílico",p:"desde $350",c:"var(--rojo)"},
+    {n:"Manicure",p:"$180",c:"var(--nude)"},
+    {n:"Retoque de acrílico",p:"$250",c:"var(--coral)"},
+    {n:"Pedicure",p:"$280",c:"var(--lila)"},
+    {n:"Diseño por uña",p:"+$15",c:"var(--pink)"}
+  ];
+  var shelf=document.getElementById("shelf"), send=document.getElementById("send"), label=document.getElementById("label"), chosen=null;
+  S.forEach(function(s){
+    var b=document.createElement("button"); b.type="button"; b.className="bottle"; b.setAttribute("aria-pressed","false"); b.style.setProperty("--c",s.c);
+    b.innerHTML='<span class="cap"></span><span class="glass"></span><span class="n">'+s.n+'</span><span class="p">'+s.p+'</span>';
     b.addEventListener("click",function(){
-      box.querySelectorAll(".svc").forEach(function(x){x.setAttribute("aria-pressed","false");});
-      b.setAttribute("aria-pressed","true"); chosen=s.n; update();
+      shelf.querySelectorAll(".bottle").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true"); chosen=s; update();
     });
-    box.appendChild(b);
+    shelf.appendChild(b);
   });
   function update(){
-    var msg = chosen ? "Hola, quiero una cita de "+chosen+". ¿Qué horarios tienen?" : "Hola, quiero hacer una cita. ¿Qué horarios tienen?";
-    send.textContent = chosen ? "Pedir cita: "+chosen : "Pedir cita por WhatsApp";
+    label.textContent = chosen ? "Pedir cita: "+chosen.n : "Pedir cita por WhatsApp";
+    send.style.setProperty("--c", chosen ? chosen.c : "#fff");
+    var msg = chosen ? "Hola Karla, quiero cita para "+chosen.n+". ¿Qué horarios tienes?" : "Hola Karla, quiero hacer una cita. ¿Qué horarios tienes?";
     send.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent(msg);
   }
   update();
@@ -138,8 +137,8 @@
   var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
   var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
   parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
-  var t=h+m/60,s=sched[d],open=!!(s&&t>=s[0]&&t<s[1]),el=document.getElementById("status");
-  el.textContent=open?"Abierto ahorita":"Cerrado ahorita"; el.classList.add(open?"open":"closed");
+  var t=h+m/60,s=sched[d];
+  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"● Abierto ahorita":"Cerrado ahorita";
 })();
 </script>
 </body>

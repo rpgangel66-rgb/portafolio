@@ -7,100 +7,120 @@
 <meta name="description" content="Estética Aurora en Juárez, N.L. Corte, color, keratina, cejas y pestañas. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;700&display=swap">
 <style>
   :root{
     color-scheme: light;
-    --white:#FFFFFF; --paper:#F8F3F6; --ink:#2B1426; --muted:#7A6272; --line:#EBDDE4;
-    --main:#5A2350; --accent:#C24E74; --soft:#F6E3EB;
-    --name:"DM Serif Display", Georgia, serif;
+    --white:#FFFFFF; --paper:#FAF6F8; --ink:#2B1426; --muted:#7A6272; --line:#E9DCE3;
+    --plum:#5A2350; --rose:#C24E74; --soft:#F6E3EB;
+    --serif:"DM Serif Display", Georgia, "Times New Roman", serif;
     --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 110px}
+  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-inline:24px;padding-block:0 110px}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-  .band{height:12px;margin-inline:-20px;background:linear-gradient(90deg,#5A2350,#C24E74)}
-  .wrap{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:52px}
-  .top{display:flex;justify-content:flex-end;padding-top:16px}
-  .status{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:6px 12px;border-radius:999px;background:var(--paper);color:var(--muted)}
-  .status.open{background:#E3F4EA;color:#1A7A45}
-  .status.closed{background:var(--soft);color:var(--main)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+  .wrap{max-width:1040px;margin-inline:auto}
 
-  .sign{text-align:center}
-  .sign .kicker{font-size:14px;font-weight:700;letter-spacing:.24em;color:var(--accent)}
-  .sign h1{margin:6px 0 0;font-family:var(--name);font-weight:400;font-size:clamp(60px,16vw,120px);line-height:1.05;color:var(--main)}
-  .sign p{margin:14px 0 0;font-size:19px;color:var(--muted)}
+  nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;border-bottom:1px solid var(--line)}
+  nav .logo{font-family:var(--serif);font-size:24px;color:var(--plum)}
+  nav .logo i{color:var(--rose)}
+  nav .open{font-size:13px;color:var(--muted)}
+  nav .open b{color:var(--plum)}
 
-  .menu{border:2px solid var(--main);border-radius:18px;overflow:hidden}
-  .menu h2{margin:0;background:var(--main);color:var(--white);font-size:15px;font-weight:700;letter-spacing:.2em;text-align:center;padding:14px}
-  .menu .hint{margin:0;padding:10px 22px;background:var(--soft);font-size:15px;color:var(--ink);text-align:center}
-  .svc{display:flex;width:100%;justify-content:space-between;align-items:center;gap:14px;padding:16px 22px;border:0;border-top:1px solid var(--line);background:var(--white);font:inherit;color:inherit;text-align:left;cursor:pointer}
-  .svc:first-of-type{border-top:0}
-  .svc:hover{background:var(--paper)}
-  .svc .n{font-weight:700;font-size:19px;display:flex;align-items:center;gap:12px}
-  .svc .n::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none}
-  .svc[aria-pressed="true"]{background:var(--soft)}
-  .svc[aria-pressed="true"] .n::before{border-color:var(--main);background:var(--main);box-shadow:inset 0 0 0 3px var(--soft)}
-  .svc .p{font-family:var(--name);font-size:28px;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .svc .p small{font-family:var(--body);font-size:13px;color:var(--muted);margin-right:4px}
+  /* portada tipo revista */
+  .cover{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:56px}
+  .cover .n{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
+  .cover h1{font-family:var(--serif);font-weight:400;font-size:clamp(58px,10vw,112px);line-height:.95;margin:16px 0 0;letter-spacing:-.01em}
+  .cover h1 i{color:var(--rose)}
+  .cover p{margin:22px 0 0;font-size:19px;color:var(--muted);max-width:30ch}
+  .cover .link{display:inline-block;margin-top:26px;font-weight:700;color:var(--plum);text-decoration:none;border-bottom:2px solid var(--rose);padding-bottom:2px}
+  .arch{aspect-ratio:4/5;max-width:100%;border-radius:999px 999px 0 0;background:linear-gradient(180deg,var(--soft),#EFD2DE);display:flex;align-items:flex-end;justify-content:center;padding:22px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);position:relative}
+  .arch::before{content:"";position:absolute;inset:14px;border:1px solid rgba(90,35,80,.25);border-radius:999px 999px 0 0}
 
-  .fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .ph{aspect-ratio:1/1;max-width:100%;border-radius:16px;background:var(--paper);border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;color:var(--muted);padding:8px}
+  /* precios sin cajas, dos columnas */
+  .list{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;padding-block:24px 56px;border-top:1px solid var(--line)}
+  .list h2{grid-column:1/-1;font-family:var(--serif);font-weight:400;font-size:40px;margin:32px 0 18px}
+  .group h3{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin:0 0 6px}
+  .svc{display:flex;width:100%;align-items:baseline;gap:10px;padding:14px 0;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer}
+  .svc .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+  .svc .nm{font-size:19px}
+  .svc .pr{font-family:var(--serif);font-size:22px;color:var(--plum);white-space:nowrap}
+  .svc .pr small{font-family:var(--body);font-size:12px;color:var(--muted);margin-right:4px}
+  .svc:hover .nm{color:var(--rose)}
+  .svc[aria-pressed="true"] .nm{color:var(--rose);font-style:italic;font-family:var(--serif);font-size:21px}
+  .svc[aria-pressed="true"] .dots{border-bottom-color:var(--rose)}
 
-  .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .card{background:var(--paper);border-radius:16px;padding:22px}
-  .card h3{margin:0 0 10px;font-size:14px;font-weight:700;letter-spacing:.2em;color:var(--main)}
-  .card p{margin:0 0 4px;font-size:18px;font-weight:500}
-  .card .m{color:var(--muted);font-size:16px}
-  .card .gap{margin-top:10px}
-  .card a{display:inline-block;margin-top:12px;font-weight:700;color:var(--accent)}
+  /* fotos en tira */
+  .fotos{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:14px;align-items:end}
+  .ph{max-width:100%;background:var(--paper);display:flex;align-items:flex-end;padding:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .ph.a{aspect-ratio:3/4}
+  .ph.b{aspect-ratio:4/5}
+  .ph.c{aspect-ratio:1/1}
 
-  footer{text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
-  .band.end{margin-top:32px}
+  .end{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-block:56px;margin-top:56px;border-top:1px solid var(--line)}
+  .end h3{font-family:var(--serif);font-weight:400;font-size:28px;margin:0 0 10px}
+  .end p{margin:0;color:var(--muted)}
+  .end a{display:inline-block;margin-top:10px;font-weight:700;color:var(--plum)}
 
-  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
-  .bar a{display:flex;max-width:760px;margin-inline:auto;justify-content:center;background:var(--main);color:var(--white);text-decoration:none;font-weight:700;font-size:17px;padding:15px 22px;border-radius:999px;text-align:center}
-  .bar a:hover{filter:brightness(1.1)}
+  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
 
-  @media (max-width:640px){ .info{grid-template-columns:1fr} .svc{padding:15px 16px} }
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
+  .bar .in{max-width:1040px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .bar .pick{font-size:14px;color:var(--muted)}
+  .bar .pick b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:var(--ink)}
+  .bar a{background:var(--plum);color:var(--white);text-decoration:none;font-weight:700;padding:14px 24px;border-radius:999px;white-space:nowrap}
+  .bar a:hover{background:var(--rose)}
+
+  @media (max-width:760px){
+    .cover{grid-template-columns:1fr;gap:32px;padding-block:36px}
+    .arch{max-width:260px;width:100%;justify-self:center}
+    .list{grid-template-columns:1fr}
+    .fotos{grid-template-columns:1fr 1fr}
+    .ph.b{grid-column:span 2;order:-1}
+    .end{grid-template-columns:1fr;gap:28px}
+    nav .open{display:none}
+  }
 </style>
 </head>
 <body>
-<div class="band" aria-hidden="true"></div>
 <div class="wrap">
-  <div class="top"><span class="status" id="status">Horario</span></div>
+  <nav>
+    <span class="logo">Aurora <i>estética</i></span>
+    <span class="open">Martes a domingo · <b id="status">horario</b></span>
+  </nav>
 
-  <header class="sign">
-    <div class="kicker">ESTÉTICA</div>
-    <h1>Aurora</h1>
-    <p>Corte, color, cejas y pestañas en Juárez, N.L.</p>
-  </header>
+  <section class="cover">
+    <div>
+      <div class="n">Juárez, Nuevo León</div>
+      <h1>Tu mejor <i>versión</i> empieza aquí.</h1>
+      <p>Corte, color, keratina, cejas y pestañas.</p>
+      <a class="link" href="#precios">Ver precios</a>
+    </div>
+    <div class="arch" aria-hidden="true">Foto del salón</div>
+  </section>
 
-  <section class="menu" aria-label="Servicios">
-    <h2>SERVICIOS</h2>
-    <p class="hint">Elige tu servicio y pide tu cita por WhatsApp</p>
-    <div id="svcs"></div>
+  <section class="list" id="precios" aria-label="Precios">
+    <h2>Precios</h2>
+    <div class="group" id="g1"><h3>Cabello</h3></div>
+    <div class="group" id="g2"><h3>Cejas y pestañas</h3></div>
   </section>
 
   <section class="fotos" aria-label="Fotos">
-    <div class="ph">Foto de un balayage</div>
-    <div class="ph">Foto de un corte</div>
-    <div class="ph">Foto del salón</div>
+    <div class="ph a">Foto corte</div>
+    <div class="ph b">Foto balayage</div>
+    <div class="ph c">Foto pestañas</div>
   </section>
 
-  <section class="info">
-    <div class="card">
-      <h3>HORARIO</h3>
-      <p>Martes a sábado</p>
-      <p class="m">10:00 am – 8:00 pm</p>
-      <p class="gap">Domingo</p>
-      <p class="m">10:00 am – 3:00 pm</p>
+  <section class="end">
+    <div>
+      <h3>Horario</h3>
+      <p>Martes a sábado, 10 am a 8 pm</p>
+      <p>Domingo, 10 am a 3 pm</p>
     </div>
-    <div class="card">
-      <h3>DÓNDE ESTAMOS</h3>
-      <p>Av. Las Torres #210, local 3</p>
-      <p class="m">Juárez, N.L.</p>
+    <div>
+      <h3>Dónde estamos</h3>
+      <p>Av. Las Torres #210, local 3, Juárez, N.L.</p>
       <a href="https://www.google.com/maps/search/?api=1&query=Ju%C3%A1rez%2C%20Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
   </section>
@@ -110,27 +130,35 @@
     <a href="../">Página demo hecha por Angel · ver más trabajos</a>
   </footer>
 </div>
-<div class="band end" aria-hidden="true"></div>
 
-<div class="bar"><a id="send" href="#" target="_blank" rel="noopener">Pedir cita por WhatsApp</a></div>
+<div class="bar">
+  <div class="in">
+    <div class="pick"><span>Tu servicio</span><b id="picked">Elige uno arriba</b></div>
+    <a id="send" href="#" target="_blank" rel="noopener">Pedir cita</a>
+  </div>
+</div>
 
 <script>
 (function(){
   var WHATSAPP="8100000000";
-  var SVCS=[{"n": "Corte", "p": "180"}, {"n": "Peinado", "p": "250"}, {"n": "Tinte", "p": "450", "from": true}, {"n": "Mechas / balayage", "p": "1,200", "from": true}, {"n": "Keratina", "p": "900", "from": true}, {"n": "Cejas", "p": "100"}, {"n": "Pestañas", "p": "400"}];
-  var box=document.getElementById("svcs"), chosen=null, send=document.getElementById("send");
-  SVCS.forEach(function(s,i){
-    var b=document.createElement("button"); b.type="button"; b.className="svc"; b.setAttribute("aria-pressed","false");
-    b.innerHTML='<span class="n">'+s.n+'</span><span class="p">'+(s.from?'<small>desde</small>':'')+'$'+s.p+'</span>';
-    b.addEventListener("click",function(){
-      box.querySelectorAll(".svc").forEach(function(x){x.setAttribute("aria-pressed","false");});
-      b.setAttribute("aria-pressed","true"); chosen=s.n; update();
+  var G1=[{n:"Corte",p:"180"},{n:"Peinado",p:"250"},{n:"Tinte",p:"450",f:1},{n:"Mechas / balayage",p:"1,200",f:1},{n:"Keratina",p:"900",f:1}];
+  var G2=[{n:"Diseño de ceja",p:"100"},{n:"Laminado de ceja",p:"350"},{n:"Lifting de pestañas",p:"400"},{n:"Extensiones",p:"550"}];
+  var chosen=null, send=document.getElementById("send"), picked=document.getElementById("picked");
+  function add(box,list){
+    list.forEach(function(s){
+      var b=document.createElement("button"); b.type="button"; b.className="svc"; b.setAttribute("aria-pressed","false");
+      b.innerHTML='<span class="nm">'+s.n+'</span><span class="dots"></span><span class="pr">'+(s.f?'<small>desde</small>':'')+'$'+s.p+'</span>';
+      b.addEventListener("click",function(){
+        document.querySelectorAll(".svc").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true"); chosen=s.n; update();
+      });
+      box.appendChild(b);
     });
-    box.appendChild(b);
-  });
+  }
+  add(document.getElementById("g1"),G1); add(document.getElementById("g2"),G2);
   function update(){
+    picked.textContent = chosen || "Elige uno arriba";
     var msg = chosen ? "Hola, quiero una cita de "+chosen+". ¿Qué horarios tienen?" : "Hola, quiero hacer una cita. ¿Qué horarios tienen?";
-    send.textContent = chosen ? "Pedir cita: "+chosen : "Pedir cita por WhatsApp";
     send.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent(msg);
   }
   update();
@@ -138,8 +166,8 @@
   var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
   var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
   parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
-  var t=h+m/60,s=sched[d],open=!!(s&&t>=s[0]&&t<s[1]),el=document.getElementById("status");
-  el.textContent=open?"Abierto ahorita":"Cerrado ahorita"; el.classList.add(open?"open":"closed");
+  var t=h+m/60,s=sched[d];
+  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"abierto ahorita":"cerrado ahorita";
 })();
 </script>
 </body>
