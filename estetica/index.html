@@ -7,39 +7,40 @@
 <meta name="description" content="Estética Aurora. Corte, color, keratina, cejas y pestañas. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
   :root{
     color-scheme: light;
-    --white:#FFFFFF; --paper:#FAF6F8; --ink:#2B1426; --muted:#7A6272; --line:#E9DCE3;
-    --plum:#5A2350; --rose:#C24E74; --soft:#F6E3EB;
+    --white:#FFFFFF; --bg:#F8F4F3; --paper:#F1E8E6; --ink:#2E2229; --muted:#7C6D74; --line:#E7DCDD;
+    --plum:#5E3A55; --rose:#B7788C; --soft:#F3E6E8;
+    --shadow:0 1px 2px rgba(46,34,41,.05), 0 12px 32px rgba(46,34,41,.07);
     --serif:"DM Serif Display", Georgia, "Times New Roman", serif;
-    --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --body:"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-inline:24px;padding-block:0 110px}
+  body{margin:0;-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-inline:24px;padding-block:0 110px}
   a{color:inherit}
   a:focus-visible,button:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
   .wrap{max-width:1040px;margin-inline:auto}
 
-  nav{display:flex;justify-content:space-between;align-items:center;padding-block:22px;border-bottom:1px solid var(--line)}
+  nav{display:flex;justify-content:space-between;align-items:center;padding-block:20px}
   nav .logo{font-family:var(--serif);font-size:24px;color:var(--plum)}
   nav .logo i{color:var(--rose)}
-  nav .open{font-size:13px;color:var(--muted)}
+  nav .open{font-size:13px;font-weight:600;color:var(--muted);background:var(--white);padding:6px 12px;border-radius:999px;box-shadow:var(--shadow)}
   nav .open b{color:var(--plum)}
 
   /* portada tipo revista */
-  .cover{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:56px}
+  .cover{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:48px;margin-top:8px;background:var(--white);border-radius:32px;box-shadow:var(--shadow)}
   .cover .n{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
   .cover h1{font-family:var(--serif);font-weight:400;font-size:clamp(58px,10vw,112px);line-height:.95;margin:16px 0 0;letter-spacing:-.01em}
   .cover h1 i{color:var(--rose)}
   .cover p{margin:22px 0 0;font-size:19px;color:var(--muted);max-width:30ch}
-  .cover .link{display:inline-block;margin-top:26px;font-weight:700;color:var(--plum);text-decoration:none;border-bottom:2px solid var(--rose);padding-bottom:2px}
-  .arch{aspect-ratio:4/5;max-width:100%;border-radius:999px 999px 0 0;background:linear-gradient(180deg,var(--soft),#EFD2DE);display:flex;align-items:flex-end;justify-content:center;padding:22px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);position:relative}
+  .cover .link{display:inline-block;margin-top:26px;font-weight:600;color:var(--white);background:var(--plum);text-decoration:none;padding:13px 24px;border-radius:999px}
+  .arch{aspect-ratio:4/5;max-width:100%;border-radius:999px 999px 0 0;background:linear-gradient(180deg,#F5EAEC,#E7D3D8);display:flex;align-items:flex-end;justify-content:center;padding:22px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);position:relative}
   .arch::before{content:"";position:absolute;inset:14px;border:1px solid rgba(90,35,80,.25);border-radius:999px 999px 0 0}
 
   /* precios sin cajas, dos columnas */
-  .list{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;padding-block:24px 56px;border-top:1px solid var(--line)}
+  .list{display:grid;grid-template-columns:1fr 1fr;gap:0 56px;padding:12px 40px 40px;margin-top:28px;background:var(--white);border-radius:32px;box-shadow:var(--shadow)}
   .list h2{grid-column:1/-1;font-family:var(--serif);font-weight:400;font-size:40px;margin:32px 0 18px}
   .group h3{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin:0 0 6px}
   .svc{display:flex;width:100%;align-items:baseline;gap:10px;padding:14px 0;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer}
@@ -47,33 +48,35 @@
   .svc .nm{font-size:19px}
   .svc .pr{font-family:var(--serif);font-size:22px;color:var(--plum);white-space:nowrap}
   .svc .pr small{font-family:var(--body);font-size:12px;color:var(--muted);margin-right:4px}
-  .svc:hover .nm{color:var(--rose)}
+  .svc{border-radius:0}.svc:hover .nm{color:var(--plum)}
   .svc[aria-pressed="true"] .nm{color:var(--rose);font-style:italic;font-family:var(--serif);font-size:21px}
   .svc[aria-pressed="true"] .dots{border-bottom-color:var(--rose)}
 
   /* fotos en tira */
-  .fotos{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:14px;align-items:end}
-  .ph{max-width:100%;background:var(--paper);display:flex;align-items:flex-end;padding:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .fotos{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:14px;align-items:end;margin-top:28px}
+  .ph{max-width:100%;border-radius:24px;background:linear-gradient(160deg,#EFE3E4,#E3D2D5);display:flex;align-items:flex-end;padding:14px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .ph.a{aspect-ratio:3/4}
   .ph.b{aspect-ratio:4/5}
   .ph.c{aspect-ratio:1/1}
 
-  .end{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-block:56px;margin-top:56px;border-top:1px solid var(--line)}
+  .end{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:36px 40px;margin-top:28px;margin-bottom:28px;background:var(--white);border-radius:32px;box-shadow:var(--shadow)}
   .end h3{font-family:var(--serif);font-weight:400;font-size:28px;margin:0 0 10px}
   .end p{margin:0;color:var(--muted)}
-  .end a{display:inline-block;margin-top:10px;font-weight:700;color:var(--plum)}
+  .end a{display:inline-block;margin-top:10px;font-weight:600;color:var(--plum);text-decoration:none}
 
-  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:var(--muted);padding-top:4px}
 
-  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(248,244,243,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid rgba(0,0,0,.06);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
   .bar .in{max-width:1040px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .bar .pick{font-size:14px;color:var(--muted)}
   .bar .pick b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;color:var(--ink)}
-  .bar a{background:var(--plum);color:var(--white);text-decoration:none;font-weight:700;padding:14px 24px;border-radius:999px;white-space:nowrap}
-  .bar a:hover{background:var(--rose)}
+  .bar a{background:var(--plum);color:var(--white);text-decoration:none;font-weight:600;padding:14px 24px;border-radius:999px;white-space:nowrap}
+  .bar a:hover{background:#4C2E45}
 
   @media (max-width:760px){
-    .cover{grid-template-columns:1fr;gap:32px;padding-block:36px}
+    .cover{grid-template-columns:1fr;gap:28px;padding:32px 24px}
+    .list{padding:8px 22px 28px}
+    .end{padding:28px 24px}
     .arch{max-width:260px;width:100%;justify-self:center}
     .list{grid-template-columns:1fr}
     .fotos{grid-template-columns:1fr 1fr}
