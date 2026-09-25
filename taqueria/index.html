@@ -4,152 +4,252 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tacos El Primo</title>
-<meta name="description" content="Tacos El Primo. Trompo, bistec y carne asada. Haz tu pedido por WhatsApp.">
+<meta name="description" content="Tacos El Primo. Trompo, bistec y carne asada al carbón. Arma tu pedido y mándalo por WhatsApp.">
+<meta name="theme-color" content="#111210">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Caveat:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    color-scheme: light;
-    --bg:#F7F3EE; --card:#FFFFFF; --ink:#231C17; --muted:#766B62; --line:#EAE3DA;
-    --chile:#A63A2B; --chile-2:#8E2F22; --green:#3F6B4E; --gold:#E3B45A;
-    --shadow:0 1px 2px rgba(35,28,23,.05), 0 10px 30px rgba(35,28,23,.07);
-    --body:"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 120px;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-  .wrap{max-width:980px;margin-inline:auto;display:flex;flex-direction:column;gap:32px;padding-top:18px}
+:root{
+  color-scheme: dark;
+  --bg:#111210; --board:#1C2320; --board-2:#232B27; --chalk:#F3EFE4; --muted:#A7A597; --line:rgba(243,239,228,.14);
+  --neon:#FF4D3A; --gold:#F6B53D; --lime:#9BD46B;
+  --sign:"Bungee", Impact, sans-serif;
+  --hand:"Caveat", "Comic Sans MS", cursive;
+  --body:"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--chalk);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:104px;overflow-x:hidden}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+img{display:block;max-width:100%}
 
-  .hero{position:relative;overflow:hidden;background:linear-gradient(150deg,var(--chile) 0%,var(--chile-2) 100%);color:#fff;border-radius:30px;padding:26px 26px 34px;box-shadow:var(--shadow)}
-  .hero::after{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.07)}
-  .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:1}
-  .bar .mini{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#F4D9A4}
-  .status{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.16)}
-  .hero h1{position:relative;z-index:1;margin:44px 0 0;font-weight:800;font-size:clamp(50px,12vw,96px);line-height:.95;letter-spacing:-.04em}
-  .hero p{position:relative;z-index:1;margin:14px 0 0;font-size:19px;color:rgba(255,255,255,.82);max-width:30ch}
-  .chip{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;margin-top:22px;background:#fff;color:var(--ink);font-weight:700;font-size:15px;padding:9px 16px;border-radius:999px}
-  .chip b{color:var(--chile)}
+/* portada */
+.hero{position:relative;min-height:92svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;z-index:-2;background:#2a1712}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 70% at 50% 110%,rgba(17,18,16,1) 20%,rgba(17,18,16,.2) 70%),linear-gradient(180deg,rgba(17,18,16,.6),rgba(17,18,16,0) 30%)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 0;max-width:1100px;width:100%;margin-inline:auto}
+.mini{font-family:var(--hand);font-size:26px;color:var(--gold);line-height:1}
+.status{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;background:rgba(17,18,16,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line)}
+.status::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px}
+.status.open{color:var(--lime)}.status.closed{color:#FF8A7E}
+.hero .txt{margin-top:auto;padding:0 20px 44px;max-width:1100px;width:100%;margin-inline:auto;text-align:center}
+.neon{font-family:var(--sign);font-weight:400;font-size:clamp(60px,18vw,168px);line-height:.9;margin:0;color:#FFE9E4;text-shadow:0 0 6px rgba(255,77,58,.9),0 0 22px rgba(255,77,58,.7),0 0 60px rgba(255,77,58,.45);animation:flick 5s infinite}
+.neon small{display:block;font-size:.42em;color:#FFF4D6;text-shadow:0 0 6px rgba(246,181,61,.9),0 0 24px rgba(246,181,61,.6)}
+@keyframes flick{0%,18%,22%,25%,53%,57%,100%{opacity:1}20%,24%,55%{opacity:.55}}
+.hero p{margin:16px auto 0;font-size:19px;max-width:30ch;color:#E6E1D4}
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:var(--gold);color:#1B1408;font-weight:700;padding:9px 16px;border-radius:999px;transform:rotate(-3deg)}
+.credit{position:absolute;right:12px;top:62px;font-size:11px;color:rgba(243,239,228,.55);text-decoration:none;writing-mode:vertical-rl}
 
-  .menu-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-  .menu-head h2{margin:0;font-weight:800;font-size:30px;letter-spacing:-.02em}
-  .menu-head span{color:var(--muted);font-size:15px}
-  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-  .tile{background:var(--card);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);outline:2px solid transparent;transition:outline-color .15s}
-  .tile.on{outline-color:var(--green)}
-  .tile .img{aspect-ratio:4/3;max-width:100%;background:linear-gradient(160deg,#F2E7DA,#E8D8C6);display:flex;align-items:flex-end;padding:10px 12px;font-size:12px;font-weight:600;color:#8C7B6C}
-  .tile .txt{padding:12px 14px 14px;display:flex;flex-direction:column;gap:10px;flex:1}
-  .tile .n{font-weight:700;font-size:16px;line-height:1.25}
-  .tile .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
-  .tile .p{font-weight:700;font-size:18px;color:var(--chile);font-variant-numeric:tabular-nums}
-  .ctl{display:inline-flex;align-items:center;gap:2px;border-radius:999px;background:var(--ink);color:#fff;height:36px;padding:0 3px}
-  .ctl button{border:0;background:transparent;color:inherit;font:inherit;font-size:19px;font-weight:600;width:30px;height:30px;border-radius:50%;cursor:pointer}
-  .ctl .q,.ctl .minus{display:none}
-  .tile.on .ctl{background:#EEF3EF;color:var(--green)}
-  .tile.on .ctl .q,.tile.on .ctl .minus{display:inline-block}
-  .ctl .q{min-width:18px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+/* pizarrón */
+.board{max-width:1100px;margin:0 auto;padding:0 14px}
+.slate{position:relative;background:
+  radial-gradient(circle at 20% 10%,rgba(255,255,255,.05),transparent 40%),
+  radial-gradient(circle at 80% 70%,rgba(255,255,255,.04),transparent 45%),
+  linear-gradient(160deg,var(--board-2),var(--board));
+  border-radius:24px;padding:28px 14px 14px;border:8px solid #3A2A1C;box-shadow:inset 0 0 60px rgba(0,0,0,.45),0 30px 60px rgba(0,0,0,.4)}
+.slate h2{font-family:var(--hand);font-weight:700;font-size:62px;line-height:1;margin:0;text-align:center;transform:rotate(-2deg)}
+.slate .sub{font-family:var(--hand);font-size:24px;color:var(--gold);text-align:center;margin:6px 0 18px}
+.item{display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:12px;padding:12px 2px;border-top:1px dashed var(--line)}
+.item .th{width:58px;height:58px;border-radius:50%;overflow:hidden;background:#2E3833;box-shadow:0 0 0 2px rgba(243,239,228,.35);display:grid;place-items:center}
+.item .th img{width:100%;height:100%;object-fit:cover}
+.item .th svg{width:30px;height:30px;color:var(--chalk);opacity:.8}
+.item .n{font-family:var(--hand);font-size:28px;line-height:1.05}
+.item .p{font-weight:700;color:var(--gold);font-size:16px}
+.ctl{display:flex;align-items:center;gap:6px}
+.ctl button{width:38px;height:38px;border-radius:50%;border:2px solid var(--chalk);background:transparent;color:var(--chalk);font-size:22px;font-weight:600;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s,transform .15s}
+.ctl button:active{transform:scale(.9)}
+.ctl button.plus{background:var(--chalk);color:var(--board)}
+.ctl .q{min-width:22px;text-align:center;font-weight:700;font-size:18px}
+.item:not(.on) .minus,.item:not(.on) .q{display:none}
+.item.on .n{color:#fff}
+.item.on .th{box-shadow:0 0 0 3px var(--gold)}
 
-  .strip{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px 22px;display:flex;flex-wrap:wrap;gap:16px 36px;align-items:center}
-  .strip div{display:flex;flex-direction:column}
-  .strip small{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
-  .strip strong{font-size:17px;font-weight:600}
-  .strip a{margin-left:auto;font-weight:600;color:var(--chile);text-decoration:none}
+/* horario */
+.night{position:relative;margin-top:70px;min-height:520px;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:#241612}
+.night>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.night::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(17,18,16,.15),rgba(17,18,16,.85))}
+.night .box{max-width:1100px;width:100%;margin-inline:auto;padding:0 20px 36px;display:grid;gap:14px}
+.card{background:rgba(17,18,16,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:22px;max-width:440px}
+.card h3{font-family:var(--sign);font-weight:400;font-size:24px;margin:0 0 8px;color:var(--gold)}
+.hrow{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--line)}
+.hrow span:last-child{font-weight:600;text-align:right}
+.card a{display:inline-block;margin-top:10px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--neon)}
 
-  footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer{max-width:1100px;margin-inline:auto;padding:48px 20px 20px;font-size:13px;color:var(--muted)}
+footer p{margin:6px 0}
+footer .by a{color:var(--chalk)}
 
-  .cart{position:fixed;left:0;right:0;bottom:0;background:rgba(247,243,238,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid rgba(0,0,0,.06);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
-  .cart .in{max-width:980px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
-  .cart .sum{font-size:13px;color:var(--muted)}
-  .cart .sum b{display:block;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums}
-  .cart a{background:var(--green);color:#fff;text-decoration:none;font-weight:600;font-size:17px;padding:14px 22px;border-radius:999px;white-space:nowrap}
-  .cart a[aria-disabled="true"]{opacity:.4;pointer-events:none}
+/* barra con bolsa */
+.cart{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;max-width:620px;margin-inline:auto;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:22px;background:rgba(28,35,32,.86);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--line)}
+.bag{position:relative;width:48px;height:48px;border-radius:14px;background:var(--gold);color:#1B1408;display:grid;place-items:center;flex:none}
+.bag svg{width:26px;height:26px}
+.bag b{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--neon);color:#fff;font-size:12px;display:grid;place-items:center;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.bag b.has{transform:scale(1)}
+.bag.hop{animation:hop .45s}
+@keyframes hop{30%{transform:translateY(-6px) rotate(-6deg)}60%{transform:translateY(0) rotate(4deg)}}
+.cart .sum{flex:1;min-width:0;line-height:1.2}
+.cart small{display:block;font-size:12px;color:var(--muted)}
+.cart .tot{font-weight:700;font-size:20px}
+.cart a{flex:none;display:inline-flex;align-items:center;gap:8px;background:var(--neon);color:#fff;text-decoration:none;font-weight:700;padding:13px 16px;border-radius:14px}
+.cart a svg{width:18px;height:18px}
+.cart a[aria-disabled="true"]{background:#3A423E;color:var(--muted);pointer-events:none}
+.fly{position:fixed;z-index:40;border-radius:50%;object-fit:cover;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 
-  @media (max-width:820px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
-  @media (max-width:560px){ .grid{gap:10px} .tile .txt{padding:10px 12px 12px} .strip a{margin-left:0} .hero{padding:22px 22px 30px} }
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+@media (min-width:820px){
+  .slate{padding:44px 40px 30px}
+  .list{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+  .night .box{grid-template-columns:1fr 1fr;align-items:end}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="hero">
-    <div class="bar"><span class="mini">Taquería</span><span class="status" id="status">Horario</span></div>
-    <h1>Tacos<br>El Primo</h1>
+
+<header class="hero">
+  <img src="https://images.unsplash.com/photo-1600473763749-5e4212ea0e69?auto=format&fit=crop&w=1400&q=75" alt="Taquero preparando un trompo de pastor" fetchpriority="high">
+  <div class="top">
+    <span class="mini">taquería</span>
+    <span class="status" id="status">Horario</span>
+  </div>
+  <div class="txt">
+    <h1 class="neon"><small>Tacos</small>El Primo</h1>
     <p>Trompo, bistec y carne asada al carbón</p>
-    <span class="chip">Orden de 5 · <b>$100</b></span>
-  </header>
+    <span class="chip">Orden de 5 · $100</span>
+  </div>
+  <a class="credit" href="https://unsplash.com/@blunkorama?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Foto: Daniel Lloyd Blunk-Fernández / Unsplash</a>
+</header>
 
-  <section aria-label="Menú">
-    <div class="menu-head"><h2>Menú</h2><span>Toca + y manda tu pedido por WhatsApp</span></div>
-    <div class="grid" id="grid"></div>
-  </section>
+<main class="board">
+  <div class="slate rv">
+    <h2>Menú</h2>
+    <p class="sub">Toca + y manda tu pedido por WhatsApp</p>
+    <div class="list" id="list"></div>
+  </div>
+</main>
 
-  <section class="strip">
-    <div><small>Martes a domingo</small><strong>7 pm – 1 am</strong></div>
-    <div><small>Domingo barbacoa</small><strong>8 am – 2 pm</strong></div>
-    <div><small>Dónde</small><strong>Calle Hidalgo #45, Centro</strong></div>
-    <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
-  </section>
-
-  <footer>
-    <span>Tacos El Primo · negocio de ejemplo</span>
-    <a href="../">Página demo hecha por crusol · ver más trabajos</a>
-  </footer>
+<div class="night">
+  <img src="https://images.unsplash.com/photo-1546853846-53490ede35b4?auto=format&fit=crop&w=1600&q=70" alt="Taquero junto al trompo de pastor" loading="lazy">
+  <div class="box">
+    <div class="card rv">
+      <h3>Horario</h3>
+      <div class="hrow"><span>Martes a domingo</span><span>7 pm – 1 am</span></div>
+      <div class="hrow"><span>Domingo barbacoa</span><span>8 am – 2 pm</span></div>
+    </div>
+    <div class="card rv">
+      <h3>Dónde</h3>
+      <div>Calle Hidalgo #45, Centro</div>
+      <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
+    </div>
+  </div>
 </div>
 
+<footer>
+  <p>Tacos El Primo · negocio de ejemplo</p>
+  <p id="credits"></p>
+  <p class="by">Página demo hecha por <a href="../">crusol · ver más trabajos</a></p>
+</footer>
+
 <div class="cart">
-  <div class="in">
-    <div class="sum"><span id="count">Tu pedido</span><b id="total">$0</b></div>
-    <a id="send" data-goatcounter-click="taqueria-pedido-whatsapp" href="#" target="_blank" rel="noopener" aria-disabled="true">Pedir por WhatsApp</a>
+  <div class="bag" id="bag" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <b id="badge">0</b>
   </div>
+  <div class="sum"><small id="count">Tu pedido</small><span class="tot" id="total">$0</span></div>
+  <a id="send" data-goatcounter-click="taqueria-pedido-whatsapp" href="#" target="_blank" rel="noopener" aria-disabled="true">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+    Pedir</a>
 </div>
 
 <script>
 (function(){
   var WHATSAPP="8123256381";
+  function img(id,w){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&h="+w+"&q=72";}
   var MENU=[
-    {id:"trompo",n:"Taco de trompo",p:22,f:"Foto 1"},
-    {id:"bistec",n:"Taco de bistec",p:25,f:"Foto 2"},
-    {id:"asada",n:"Taco de carne asada",p:28,f:"Foto 3"},
-    {id:"orden",n:"Orden de 5",p:100,f:"Foto 4"},
-    {id:"gringa",n:"Gringa",p:60,f:"Foto 5"},
-    {id:"quesa",n:"Quesadilla",p:45,f:"Foto 6"},
-    {id:"agua",n:"Agua fresca",p:35,f:"Foto 7"},
-    {id:"refre",n:"Refresco",p:25,f:"Foto 8"}
+    {id:"trompo",n:"Taco de trompo",p:22,img:"1657770651689-c948d7eed8f1",by:"Braulio Gómez",u:"braulionte"},
+    {id:"bistec",n:"Taco de bistec",p:25,img:"1613409385222-3d0decb6742a",by:"Tai's Captures",u:"taiscaptures"},
+    {id:"asada",n:"Taco de carne asada",p:28,img:"1644085128237-9ba593123ac3",by:"Alma Agencia D",u:"almaagenciad"},
+    {id:"orden",n:"Orden de 5",p:100,img:"1687881063470-a78e6ea2590e",by:"Robby McCullough",u:"mybbor"},
+    {id:"gringa",n:"Gringa",p:60,img:"1628838233717-be047a0b54fb",by:"Fernando Andrade",u:"thisisnando"},
+    {id:"quesa",n:"Quesadilla",p:45,img:"1719957770167-bb66133ba808",by:"Abdullah Guc",u:"abdullahguch"},
+    {id:"agua",n:"Agua fresca",p:35,img:"1622268348720-507f204d29b4",by:"Doris Morgan",u:"d_morgan"},
+    {id:"refre",n:"Refresco",p:25,img:null}
   ];
-  var qty={}, grid=document.getElementById("grid");
+  var bottle='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v3l2 3v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V8l2-3V2z"/><path d="M8 12h8"/></svg>';
+  var qty={},list=document.getElementById("list"),bag=document.getElementById("bag"),badge=document.getElementById("badge");
   MENU.forEach(function(m){
     qty[m.id]=0;
-    var t=document.createElement("div"); t.className="tile"; t.id="t-"+m.id;
-    t.innerHTML='<div class="img">'+m.f+'</div><div class="txt"><span class="n">'+m.n+'</span><div class="row"><span class="p">$'+m.p+'</span>'+
-      '<span class="ctl"><button type="button" class="minus" data-a="-" data-id="'+m.id+'" aria-label="Quitar '+m.n+'">−</button><span class="q" id="q-'+m.id+'">0</span><button type="button" data-a="+" data-id="'+m.id+'" aria-label="Agregar '+m.n+'">+</button></span></div></div>';
-    grid.appendChild(t);
+    var r=document.createElement("div");r.className="item";r.id="t-"+m.id;
+    r.innerHTML='<span class="th">'+(m.img?'<img src="'+img(m.img,200)+'" alt="'+m.n+'" loading="lazy">':bottle)+'</span>'+
+      '<span><span class="n">'+m.n+'</span><br><span class="p">$'+m.p+'</span></span>'+
+      '<span class="ctl"><button type="button" class="minus" data-a="-" data-id="'+m.id+'" aria-label="Quitar '+m.n+'">−</button><span class="q" id="q-'+m.id+'">0</span><button type="button" class="plus" data-a="+" data-id="'+m.id+'" aria-label="Agregar '+m.n+'">+</button></span>';
+    list.appendChild(r);
   });
-  grid.addEventListener("click",function(e){
-    var b=e.target.closest("button[data-id]"); if(!b) return;
-    var id=b.dataset.id; qty[id]=Math.max(0,qty[id]+(b.dataset.a==="+"?1:-1));
-    var t=document.getElementById("t-"+id); t.classList.toggle("on",qty[id]>0);
-    document.getElementById("q-"+id).textContent=qty[id]; update();
+  var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function fly(row){
+    var th=row.querySelector(".th img");
+    hop();
+    if(!th||still||!th.animate)return;
+    var a=th.getBoundingClientRect(),b=bag.getBoundingClientRect();
+    var c=document.createElement("img");c.src=th.src;c.className="fly";c.alt="";
+    c.style.left=a.left+"px";c.style.top=a.top+"px";c.style.width=a.width+"px";c.style.height=a.height+"px";
+    document.body.appendChild(c);
+    var dx=b.left+b.width/2-(a.left+a.width/2),dy=b.top+b.height/2-(a.top+a.height/2);
+    c.animate([
+      {transform:"translate(0,0) scale(1)",opacity:1},
+      {transform:"translate("+dx*.45+"px,"+(dy*.45-120)+"px) scale(.8) rotate(-20deg)",opacity:1,offset:.45},
+      {transform:"translate("+dx+"px,"+dy+"px) scale(.25) rotate(20deg)",opacity:.6}
+    ],{duration:720,easing:"cubic-bezier(.5,0,.6,1)"}).onfinish=function(){c.remove()};
+  }
+  function hop(){setTimeout(function(){bag.classList.remove("hop");void bag.offsetWidth;bag.classList.add("hop")},still?0:640)}
+  list.addEventListener("click",function(e){
+    var btn=e.target.closest("button[data-id]");if(!btn)return;
+    var id=btn.dataset.id,plus=btn.dataset.a==="+";
+    qty[id]=Math.max(0,qty[id]+(plus?1:-1));
+    var row=document.getElementById("t-"+id);row.classList.toggle("on",qty[id]>0);
+    document.getElementById("q-"+id).textContent=qty[id];
+    if(plus)fly(row);
+    update();
   });
   function update(){
     var t=0,n=0,l=[];
-    MENU.forEach(function(m){ if(qty[m.id]){ t+=qty[m.id]*m.p; n+=qty[m.id]; l.push(qty[m.id]+" x "+m.n); } });
+    MENU.forEach(function(m){if(qty[m.id]){t+=qty[m.id]*m.p;n+=qty[m.id];l.push(qty[m.id]+" x "+m.n);}});
     document.getElementById("total").textContent="$"+t;
     document.getElementById("count").textContent=n?(n+(n===1?" producto":" productos")):"Tu pedido";
+    badge.textContent=n;badge.classList.toggle("has",n>0);
     var a=document.getElementById("send");
-    if(n){ a.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent("Hola, quiero pedir:\n"+l.join("\n")+"\nTotal: $"+t); a.setAttribute("aria-disabled","false"); }
-    else { a.href="#"; a.setAttribute("aria-disabled","true"); }
+    if(n){a.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent("Hola, quiero pedir:\n"+l.join("\n")+"\nTotal: $"+t);a.setAttribute("aria-disabled","false");}
+    else{a.href="#";a.setAttribute("aria-disabled","true");}
   }
+
+  var seen={},cr=[];
+  [{by:"Daniel Lloyd Blunk-Fernández",u:"blunkorama"},{by:"Dennis Schrader",u:"dennisschrader"}].concat(MENU).forEach(function(c){
+    if(!c.u||seen[c.u])return;seen[c.u]=1;
+    cr.push('<a href="https://unsplash.com/@'+c.u+'?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">'+c.by+'</a>');
+  });
+  document.getElementById("credits").innerHTML="Fotos: "+cr.join(", ")+' en <a href="https://unsplash.com/?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a>';
+
   var sched={0:[[8,14],[19,25]],1:[],2:[[19,25]],3:[[19,25]],4:[[19,25]],5:[[19,25]],6:[[19,25]]};
   var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
   var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,mi=0;
-  parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")mi=parseInt(p.value,10); });
-  var tt=h+mi/60, open=false;
-  sched[d].forEach(function(r){ if(tt>=r[0]&&tt<r[1]) open=true; });
-  sched[(d+6)%7].forEach(function(r){ if(r[1]>24&&tt<r[1]-24) open=true; });
-  document.getElementById("status").textContent=open?"Abierto ahora":"Cerrado ahora";
+  parts.forEach(function(p){if(p.type==="weekday")d=map[p.value];if(p.type==="hour")h=parseInt(p.value,10)%24;if(p.type==="minute")mi=parseInt(p.value,10);});
+  var tt=h+mi/60,open=false;
+  sched[d].forEach(function(r){if(tt>=r[0]&&tt<r[1])open=true;});
+  sched[(d+6)%7].forEach(function(r){if(r[1]>24&&tt<r[1]-24)open=true;});
+  var st=document.getElementById("status");st.textContent=open?"Abierto ahora":"Cerrado ahora";st.classList.add(open?"open":"closed");
+
+  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}})},{threshold:.1}):null;
+  [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
 })();
 </script>
-<!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->
+<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

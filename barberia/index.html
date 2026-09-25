@@ -4,141 +4,234 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Barbería Los Compas</title>
-<meta name="description" content="Barbería Los Compas. Cortes, fades y barba. Aparta tu lugar por WhatsApp.">
+<meta name="description" content="Barbería Los Compas. Cortes, fades y barba. Aparta tu corte por WhatsApp.">
+<meta name="theme-color" content="#0E0F12">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    color-scheme: light;
-    --bg:#F4F3F0; --card:#FFFFFF; --ink:#1B2130; --muted:#6B7180; --line:#E6E4DF;
-    --navy:#243559; --red:#A9443C; --soft:#E9ECF3;
-    --shadow:0 1px 2px rgba(27,33,48,.05), 0 10px 30px rgba(27,33,48,.07);
-    --body:"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 110px;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  a:focus-visible{outline:3px solid var(--navy);outline-offset:3px}
-  .wrap{max-width:720px;margin-inline:auto;display:flex;flex-direction:column;gap:28px}
+:root{
+  color-scheme: dark;
+  --bg:#0E0F12; --bg-2:#16181D; --ink:#F2EEE6; --muted:#A09B92; --line:rgba(242,238,230,.12);
+  --red:#C8372D; --navy:#1F3C74; --paper:#F2EEE6;
+  --display:"Anton", Impact, "Arial Narrow", sans-serif;
+  --body:"Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:96px;overflow-x:hidden}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+img{display:block;max-width:100%}
 
-  .nav{display:flex;justify-content:space-between;align-items:center;padding-block:18px 0}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
-  .pole{width:26px;height:26px;border-radius:8px;background:repeating-linear-gradient(-45deg,var(--red) 0 5px,#fff 5px 10px,var(--navy) 10px 15px,#fff 15px 20px);box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
-  .status{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--card);color:var(--muted);box-shadow:var(--shadow)}
-  .status::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px}
-  .status.open{color:#2E7D55}
-  .status.closed{color:var(--red)}
+/* poste de barbero animado */
+.pole{background:repeating-linear-gradient(-45deg,var(--red) 0 10px,var(--paper) 10px 20px,var(--navy) 20px 30px,var(--paper) 30px 40px);background-size:56.57px 56.57px;animation:spin 1.6s linear infinite}
+@keyframes spin{to{background-position:0 56.57px}}
 
-  .hero{background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:48px 28px 36px;text-align:center}
-  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
-  h1{margin:10px 0 0;font-weight:800;font-size:clamp(46px,12vw,76px);line-height:1;letter-spacing:-.035em;color:var(--navy)}
-  .hero p{margin:14px 0 0;font-size:19px;color:var(--muted)}
-  .wa{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:17px;padding:15px 26px;border-radius:999px;margin-top:26px}
-  .wa:hover{background:#1B2A48}
-  .wa svg{width:20px;height:20px}
+/* portada */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+.hero .ph{position:absolute;inset:0;z-index:-2;background:#1a1b20}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transform:scale(1.08);animation:zoom 14s ease-out forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,18,.55) 0%,rgba(14,15,18,.15) 35%,rgba(14,15,18,.85) 78%,var(--bg) 100%)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 20px 0;max-width:1180px;width:100%;margin-inline:auto}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+.brand .pole{width:12px;height:30px;border-radius:6px;box-shadow:0 0 0 2px rgba(242,238,230,.9)}
+.status{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;background:rgba(14,15,18,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line)}
+.status::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px}
+.status.open{color:#6FD39A}.status.closed{color:#FF8A7E}
+.hero .txt{margin-top:auto;padding:0 20px 56px;max-width:1180px;width:100%;margin-inline:auto}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--paper);opacity:.8}
+.hero h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(80px,24vw,260px);line-height:.84;letter-spacing:-.005em;margin:10px 0 0}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span b{display:block;font-weight:400;transform:translateY(105%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 span:nth-child(2) b{animation-delay:.12s;color:var(--red)}
+@keyframes up{to{transform:none}}
+.hero p{margin:18px 0 0;font-size:19px;max-width:28ch;color:#DAD5CC}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;background:var(--paper);color:var(--bg);text-decoration:none;font-weight:700;font-size:16px;padding:15px 24px;border-radius:999px}
+.cta svg{width:20px;height:20px}
+.credit{position:absolute;right:14px;bottom:12px;font-size:11px;color:rgba(242,238,230,.55);text-decoration:none}
 
-  .label{font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 8px 16px}
-  .list{background:var(--card);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
-  .row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:17px 20px;border-top:1px solid var(--line)}
-  .row:first-child{border-top:0}
-  .row .n{font-weight:600;font-size:17px}
-  .row .p{font-weight:700;font-size:18px;color:var(--navy);font-variant-numeric:tabular-nums}
+/* cinta */
+.tapewrap{overflow:hidden;padding:12px 0;margin-top:-2px}
+.tape{background:var(--red);color:var(--paper);overflow:hidden;white-space:nowrap;border-block:2px solid var(--paper);transform:rotate(-2deg);margin:0 -14px;position:relative;z-index:2}
+.tape div{display:inline-block;font-family:var(--display);font-size:30px;letter-spacing:.04em;text-transform:uppercase;padding:10px 0;animation:tape 18s linear infinite}
+.tape i{font-style:normal;opacity:.55;margin:0 18px}
+@keyframes tape{to{transform:translateX(-50%)}}
 
-  .fotos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-  .ph{aspect-ratio:1/1;max-width:100%;border-radius:18px;background:linear-gradient(160deg,#E9ECF3,#DADFEA);display:flex;align-items:flex-end;padding:12px;font-size:13px;font-weight:600;color:#6B7180}
+section{max-width:1180px;margin-inline:auto;padding:84px 20px 0}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
+h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(52px,13vw,120px);line-height:.9;margin:8px 0 0}
+.sub{color:var(--muted);margin:12px 0 0;max-width:40ch}
 
-  .info{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .card{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:20px}
-  .card h3{margin:0 0 10px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
-  .card p{margin:0;font-size:17px;font-weight:600}
-  .card .m{color:var(--muted);font-weight:500;font-size:15px;margin-bottom:8px}
-  .card a{display:inline-block;margin-top:8px;font-weight:600;color:var(--navy);text-decoration:none}
+/* carrusel de cortes */
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px 20px 8px;margin:0 -20px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.cut{flex:0 0 78%;max-width:360px;scroll-snap-align:center;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:3/4;background:var(--bg-2);border:0;padding:0;color:inherit;font:inherit;text-align:left;cursor:pointer;isolation:isolate}
+.cut img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s}
+.cut::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,18,0) 40%,rgba(14,15,18,.92) 100%)}
+.cut .in{position:absolute;left:18px;right:18px;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.cut .n{font-family:var(--display);font-size:40px;line-height:.95;text-transform:uppercase}
+.cut .p{font-weight:700;font-size:18px;background:var(--paper);color:var(--bg);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.cut .tick{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(14,15,18,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:2px solid var(--paper);display:grid;place-items:center;transition:background .25s}
+.cut .tick svg{width:16px;height:16px;opacity:0;transition:opacity .25s}
+.cut[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--red)}
+.cut[aria-pressed="true"] .tick{background:var(--red)}
+.cut[aria-pressed="true"] .tick svg{opacity:1}
+.cut:hover img{transform:scale(1.04)}
+.hint{font-size:14px;color:var(--muted);margin-top:10px}
 
-  footer{text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px;padding-top:8px}
+/* horario sobre foto */
+.shop{position:relative;margin-top:84px;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:#1a1b20}
+.shop>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.shop::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,18,.1),rgba(14,15,18,.75))}
+.shop .box{max-width:1180px;width:100%;margin-inline:auto;padding:0 20px 40px;display:grid;gap:14px}
+.card{background:rgba(14,15,18,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:22px;max-width:460px}
+.card h3{font-family:var(--display);font-weight:400;font-size:34px;text-transform:uppercase;margin:0 0 10px}
+.hrow{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)}
+.hrow span:last-child{font-weight:600;text-align:right}
+.card a{display:inline-block;margin-top:12px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--red)}
 
-  .sticky{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom, 0px));background:rgba(244,243,240,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid rgba(0,0,0,.06);display:none}
-  .sticky .wa{width:100%;margin:0;max-width:720px;display:flex;margin-inline:auto}
+footer{max-width:1180px;margin-inline:auto;padding:56px 20px 20px;font-size:13px;color:var(--muted)}
+footer p{margin:6px 0}
+footer .by a{color:var(--ink)}
 
-  @media (max-width:640px){
-    .info{grid-template-columns:1fr}
-    .sticky{display:block}
-    .hero .wa{display:none}
-    .hero{padding:40px 22px 32px}
-  }
+/* barra fija */
+.dock{position:fixed;left:12px;right:12px;bottom:12px;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 14px;border-radius:20px;background:rgba(22,24,29,.82);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--line);max-width:620px;margin-inline:auto}
+.dock .pole{width:10px;height:36px;border-radius:5px;flex:none}
+.dock .what{flex:1;min-width:0;line-height:1.2}
+.dock small{display:block;font-size:12px;color:var(--muted)}
+.dock b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock a{flex:none;display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:13px 18px;border-radius:14px}
+.dock a svg{width:18px;height:18px}
+.bump{animation:bump .4s}
+@keyframes bump{40%{transform:scale(1.04)}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+@media (min-width:860px){
+  .cut{flex-basis:31%}
+  .shop .box{grid-template-columns:1fr 1fr;align-items:end}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .hero h1 span b{transform:none}
+  .rv{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav class="nav">
-    <span class="brand"><span class="pole" aria-hidden="true"></span>Los Compas</span>
+
+<header class="hero">
+  <div class="ph"><img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1400&q=75" alt="Barbero cortando el cabello con navaja" fetchpriority="high"></div>
+  <div class="top">
+    <div class="brand"><span class="pole" aria-hidden="true"></span>Los Compas</div>
     <span class="status" id="status">Horario</span>
-  </nav>
-
-  <header class="hero">
+  </div>
+  <div class="txt">
     <div class="eyebrow">Barbería</div>
-    <h1>Los Compas</h1>
-    <p>Cortes, fades y barba.</p>
-    <a class="wa" data-goatcounter-click="barberia-whatsapp" href="https://wa.me/528123256381?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
-      Apartar mi corte
-    </a>
-  </header>
+    <h1><span><b>Los</b></span><span><b>Compas</b></span></h1>
+    <p>Cortes, fades y barba. Escoge tu corte y apártalo por WhatsApp.</p>
+    <a class="cta" href="#cortes">Ver cortes
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+  </div>
+  <a class="credit" href="https://unsplash.com/@agustinfernandez?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Foto: Agustin Fernandez / Unsplash</a>
+</header>
 
-  <section aria-label="Precios">
-    <p class="label">Precios</p>
-    <div class="list">
-      <div class="row"><span class="n">Corte</span><span class="p">$120</span></div>
-      <div class="row"><span class="n">Fade</span><span class="p">$150</span></div>
-      <div class="row"><span class="n">Corte y barba</span><span class="p">$200</span></div>
-      <div class="row"><span class="n">Barba</span><span class="p">$90</span></div>
-      <div class="row"><span class="n">Niños</span><span class="p">$100</span></div>
-    </div>
-  </section>
+<div class="tapewrap" aria-hidden="true"><div class="tape"><div id="tape"></div></div></div>
 
-  <section class="fotos" aria-label="Fotos">
-    <div class="ph">Foto 1</div>
-    <div class="ph">Foto 2</div>
-    <div class="ph">Foto 3</div>
-  </section>
+<section id="cortes">
+  <div class="kicker rv">Precios</div>
+  <h2 class="rv">Elige tu corte</h2>
+  <p class="sub rv">Toca el que quieras y abajo te aparece listo para apartar.</p>
+  <div class="rail" id="rail" role="group" aria-label="Cortes"></div>
+  <div class="hint">Desliza para ver más →</div>
+</section>
 
-  <section class="info">
-    <div class="card">
+<div class="shop">
+  <img src="https://images.unsplash.com/photo-1781455793310-8427c96454c7?auto=format&fit=crop&w=1600&q=70" alt="Interior de barbería con sillones" loading="lazy">
+  <div class="box">
+    <div class="card rv">
       <h3>Horario</h3>
-      <p>Lunes a sábado</p>
-      <p class="m">10:00 am – 9:00 pm</p>
-      <p>Domingo</p>
-      <p class="m">10:00 am – 3:00 pm</p>
+      <div class="hrow"><span>Lunes a sábado</span><span>10:00 am – 9:00 pm</span></div>
+      <div class="hrow"><span>Domingo</span><span>10:00 am – 3:00 pm</span></div>
     </div>
-    <div class="card">
+    <div class="card rv">
       <h3>Dónde estamos</h3>
-      <p>Av. Principal #123, Centro</p>
+      <div>Av. Principal #123, Centro</div>
       <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
-  </section>
-
-  <footer>
-    <span>Barbería Los Compas · negocio de ejemplo</span>
-    <a href="../">Página demo hecha por crusol · ver más trabajos</a>
-  </footer>
+  </div>
 </div>
 
-<div class="sticky">
-  <a class="wa" data-goatcounter-click="barberia-whatsapp" href="https://wa.me/528123256381?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">Apartar por WhatsApp</a>
+<footer>
+  <p>Barbería Los Compas · negocio de ejemplo</p>
+  <p id="credits"></p>
+  <p class="by">Página demo hecha por <a href="../">crusol · ver más trabajos</a></p>
+</footer>
+
+<div class="dock" id="dock">
+  <span class="pole" aria-hidden="true"></span>
+  <div class="what"><small>Tu corte</small><b id="pick">Fade · $150</b></div>
+  <a id="wa" data-goatcounter-click="barberia-whatsapp" href="https://wa.me/528123256381?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+    Apartar</a>
 </div>
 
 <script>
 (function(){
+  var TEL="528123256381";
+  function img(id,w){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&q=72";}
+  var CUTS=[
+    {n:"Fade",p:150,img:"1647140655214-e4a2d914971f",by:"Nate Johnston",u:"natejohnston"},
+    {n:"Corte",p:120,img:"1635273051937-a0ddef9573b6",by:"Salah Regouane",u:"salaheregouane"},
+    {n:"Corte y barba",p:200,img:"1657105052497-f996284ffff8",by:"Gulom Nazarov",u:"modelyano"},
+    {n:"Barba",p:90,img:"1599011176306-4a96f1516d4d",by:"Mr Shave",u:"mrshave"},
+    {n:"Niños",p:100,img:"1788930045572-5be1e03c1433",by:"John Rodriguez",u:"firephotos"}
+  ];
+  var rail=document.getElementById("rail"),pick=document.getElementById("pick"),wa=document.getElementById("wa"),dock=document.getElementById("dock");
+  var chk='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
+  CUTS.forEach(function(c,i){
+    var b=document.createElement("button");
+    b.className="cut";b.type="button";b.setAttribute("aria-pressed","false");
+    b.innerHTML='<img src="'+img(c.img,700)+'" alt="'+c.n+'" loading="lazy"><span class="tick">'+chk+'</span><span class="in"><span class="n">'+c.n+'</span><span class="p">$'+c.p+'</span></span>';
+    b.addEventListener("click",function(){select(i,true)});
+    rail.appendChild(b);
+  });
+  function select(i,anim){
+    [].forEach.call(rail.children,function(el,j){el.setAttribute("aria-pressed",j===i?"true":"false")});
+    var c=CUTS[i];
+    pick.textContent=c.n+" · $"+c.p;
+    if(anim){dock.classList.remove("bump");void dock.offsetWidth;dock.classList.add("bump");}
+    wa.href="https://wa.me/"+TEL+"?text="+encodeURIComponent("Hola, quiero apartar un corte: "+c.n+" ($"+c.p+"). ¿Qué horarios tienen?");
+  }
+  select(0,false);
+
+  var seen={},cr=[];
+  CUTS.concat([{by:"Agustin Fernandez",u:"agustinfernandez"},{by:"Barney Goodman",u:"bgoodpic"}]).forEach(function(c){
+    if(seen[c.u])return;seen[c.u]=1;
+    cr.push('<a href="https://unsplash.com/@'+c.u+'?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">'+c.by+'</a>');
+  });
+  document.getElementById("credits").innerHTML="Fotos: "+cr.join(", ")+' en <a href="https://unsplash.com/?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a>';
+
+  var words=["Corte","Fade","Barba","Niños","Corte y barba"],t="";
+  for(var k=0;k<2;k++)words.forEach(function(w){t+=w+"<i>✦</i>"});
+  document.getElementById("tape").innerHTML=t+t;
+
   var sched={0:[10,15],1:[10,21],2:[10,21],3:[10,21],4:[10,21],5:[10,21],6:[10,21]};
   var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
   var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
-  parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
-  var t=h+m/60, s=sched[d], el=document.getElementById("status");
-  if(t>=s[0]&&t<s[1]){ el.textContent="Abierto ahora"; el.classList.add("open"); }
-  else { el.textContent="Cerrado ahora"; el.classList.add("closed"); }
+  parts.forEach(function(p){if(p.type==="weekday")d=map[p.value];if(p.type==="hour")h=parseInt(p.value,10)%24;if(p.type==="minute")m=parseInt(p.value,10);});
+  var tt=h+m/60,s=sched[d],el=document.getElementById("status");
+  if(tt>=s[0]&&tt<s[1]){el.textContent="Abierto ahora";el.classList.add("open");}else{el.textContent="Cerrado ahora";el.classList.add("closed");}
+
+  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}})},{threshold:.15}):null;
+  [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
 })();
 </script>
-<!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->
+<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
