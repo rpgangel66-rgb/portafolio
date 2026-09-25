@@ -3,143 +3,295 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Nails by Karla. Diseña tus uñas y pide tu cita por WhatsApp.">
 <title>Nails by Karla</title>
-<meta name="description" content="Nails by Karla. Uñas de gel, acrílico, manicure y pedicure. Pide tu cita por WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Figtree:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
 <style>
   :root{
-    color-scheme: light;
-    --white:#FFFFFF; --bg:#FBF6F6; --blush:#F7EBEC; --ink:#2C2226; --muted:#80707A; --line:#EFE2E4;
-    --pink:#C45C7E; --pink-2:#E8A9BC; --nude:#DDBBAA; --lila:#B8A4D4; --rojo:#A8384B; --coral:#E3957F;
-    --shadow:0 1px 2px rgba(44,34,38,.05), 0 12px 30px rgba(44,34,38,.07);
-    --script:"Pacifico", "Brush Script MT", cursive;
-    --body:"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color-scheme: dark;
+    --bg:#1A1117; --bg-2:#24181F; --ink:#F7ECE8; --muted:#BFA9B0; --line:rgba(247,236,232,.12);
+    --skin:#E7BFA7; --skin-2:#D9A98E; --accent:#FF7AA8;
+    --nail:#E0245E;
+    --display:"Unbounded", "Arial Black", system-ui, sans-serif;
+    --body:"DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-block:0 110px;overflow-x:hidden}
+  html,body{background:var(--bg)}
+  body{color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-inline:20px;padding-block:0 120px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin-inline:auto}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
-  .pad{padding-inline:20px}
-  .inner{max-width:900px;margin-inline:auto}
+  button{font:inherit;color:inherit;cursor:pointer}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-  .hero{position:relative;padding-block:36px 24px;overflow:hidden;margin-inline:0}
-  .blob{position:absolute;z-index:-1;border-radius:50%}
-  .blob.one{width:420px;height:420px;max-width:90vw;max-height:90vw;background:#F4E4E7;top:-120px;right:-80px}
-  .blob.two{width:180px;height:180px;background:#F6E8EA;top:210px;left:-60px}
-  .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-  .top .chip{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--white);color:var(--pink);padding:7px 14px;border-radius:999px;box-shadow:var(--shadow)}
-  .top .st{font-size:13px;font-weight:700;color:var(--muted)}
-  h1{margin:40px 0 0;font-family:var(--script);font-weight:400;font-size:clamp(58px,14vw,110px);line-height:1.1;color:var(--pink);transform:rotate(-3deg);transform-origin:left}
-  .hero p{margin:14px 0 0;font-size:20px;font-weight:700}
-  .hero p span{background:linear-gradient(transparent 62%, #F1D3DC 62%)}
+  .top{display:flex;justify-content:space-between;align-items:center;padding-block:20px}
+  .logo{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.02em}
+  .logo span{color:var(--accent)}
+  .open{font-size:13px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .open i{width:8px;height:8px;border-radius:50%;background:#7BE0A6;box-shadow:0 0 0 0 rgba(123,224,166,.6);animation:pulse 2s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(123,224,166,0)}100%{box-shadow:0 0 0 0 rgba(123,224,166,0)}}
 
-  .sec-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:40px 0 14px}
-  .sec-t h2{margin:0;font-size:22px;font-weight:800}
-  .sec-t span{font-size:14px;color:var(--muted)}
-  .shelf{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 18px;margin-inline:-20px;scrollbar-width:none}
-  .shelf::-webkit-scrollbar{display:none}
-  .bottle{flex:0 0 150px;scroll-snap-align:start;background:var(--white);font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 10px 16px;border-radius:24px;border:2px solid transparent;box-shadow:var(--shadow);transition:transform .15s}
-  .bottle:hover{transform:translateY(-3px)}
-  .bottle[aria-pressed="true"]{border-color:var(--pink);background:var(--blush)}
-  .bottle .cap{width:26px;height:34px;border-radius:6px 6px 3px 3px;background:var(--ink)}
-  .bottle .glass{width:64px;height:62px;margin-top:-12px;border-radius:16px 16px 22px 22px;background:var(--c);box-shadow:inset -8px -6px 0 rgba(0,0,0,.08), inset 8px 6px 0 rgba(255,255,255,.35)}
-  .bottle .n{font-weight:800;font-size:16px;text-align:center;line-height:1.2}
-  .bottle .p{font-size:15px;font-weight:700;color:var(--pink)}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding-block:24px 10px}
+  h1{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:.95;letter-spacing:-.03em}
+  h1 em{font-style:normal;color:var(--nail);transition:color .6s}
+  .lede{margin:18px 0 0;color:var(--muted);font-size:18px;max-width:30ch}
 
-  .nails{display:flex;gap:14px;justify-content:center;align-items:flex-end;padding-top:20px}
-  .nail{width:30%;max-width:170px;aspect-ratio:3/4.4;border-radius:50% 50% 18px 18px / 40% 40% 18px 18px;background:var(--c);display:flex;align-items:flex-end;justify-content:center;padding:14px 8px;font-size:12px;font-weight:800;text-align:center;color:var(--white);text-shadow:0 1px 2px rgba(0,0,0,.25)}
-  .nail:nth-child(2){transform:translateY(-18px)}
+  /* la mano */
+  .stage{position:relative;aspect-ratio:1/1.08;max-width:100%;border-radius:36px;background:radial-gradient(90% 70% at 50% 100%,#3A2430 0%,var(--bg-2) 70%);overflow:hidden}
+  .stage::before{content:"";position:absolute;inset:auto -20% -30% -20%;height:60%;background:radial-gradient(closest-side,color-mix(in srgb,var(--nail) 40%,transparent),transparent);transition:background .6s;filter:blur(10px)}
+  .tips{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:2%;padding:0 6%}
+  .tip{width:17%;filter:drop-shadow(0 18px 18px rgba(0,0,0,.45));opacity:0;transform:translateY(30px);animation:tipin .9s cubic-bezier(.2,.8,.2,1) forwards, float 4.5s ease-in-out infinite}
+  .tip svg{display:block;width:100%;height:auto;overflow:visible}
+  .tip:nth-child(1){--r:-14deg;--y:34px;animation-delay:.05s,1s}
+  .tip:nth-child(2){--r:-6deg;--y:6px;animation-delay:.12s,1.3s}
+  .tip:nth-child(3){--r:0deg;--y:-6px;animation-delay:.19s,1.6s}
+  .tip:nth-child(4){--r:6deg;--y:6px;animation-delay:.26s,1.9s}
+  .tip:nth-child(5){--r:14deg;--y:34px;animation-delay:.33s,2.2s}
+  @keyframes tipin{to{opacity:1;transform:translateY(var(--y)) rotate(var(--r))}}
+  @keyframes float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+  .nail-fill{fill:var(--nail);transition:fill .5s, d .45s cubic-bezier(.3,.7,.2,1)}
+  .nail-curve,.nail-glit,.nail-rim{transition:opacity .4s, d .45s cubic-bezier(.3,.7,.2,1)}
+  .nail-glit{opacity:0}
+  .nail-shine{transition:opacity .4s}
+  .tip:nth-child(2) .nail-fill{transition-delay:.06s}.tip:nth-child(3) .nail-fill{transition-delay:.12s}.tip:nth-child(4) .nail-fill{transition-delay:.18s}.tip:nth-child(5) .nail-fill{transition-delay:.24s}
+  .finish-mate .nail-shine{opacity:0}
+  .finish-mate .nail-curve{opacity:.55}
+  .finish-glitter .nail-glit{opacity:1;animation:twinkle 1.4s ease-in-out infinite alternate}
+  @keyframes twinkle{from{filter:brightness(.9)}to{filter:brightness(1.4)}}
 
-  .info{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .info div{background:var(--white);border-radius:24px;padding:20px;box-shadow:var(--shadow)}
-  .info small{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin-bottom:6px}
-  .info b{display:block;font-size:18px}
-  .info span{color:var(--muted);font-size:15px}
-  .info a{display:inline-block;margin-top:8px;font-weight:700;color:var(--pink);text-decoration:none}
+  .gallery{margin-top:56px;display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:220px 220px;gap:12px}
+  .gallery figure{margin:0;position:relative;border-radius:24px;overflow:hidden;background:var(--bg-2)}
+  .gallery figure:first-child{grid-row:span 2}
+  .gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  .gallery figure:hover img{transform:scale(1.05)}
+  .gallery figcaption{position:absolute;left:10px;bottom:8px;font-size:10px;color:rgba(255,255,255,.75)}
+  .gallery figcaption a{color:inherit}
+  .hero-photo{margin-top:24px;border-radius:28px;overflow:hidden;height:220px;position:relative}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
 
-  footer{margin-top:36px;text-align:center;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  /* controles */
+  .studio{margin-top:28px;background:var(--bg-2);border:1px solid var(--line);border-radius:30px;padding:24px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:26px}
+  .ctrl h3{margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .swatches{display:flex;flex-wrap:wrap;gap:10px}
+  .sw{width:40px;height:40px;border-radius:50%;border:0;background:var(--c);box-shadow:inset 0 -6px 10px rgba(0,0,0,.25), inset 0 4px 6px rgba(255,255,255,.3);transition:transform .2s}
+  .sw:hover{transform:scale(1.1)}
+  .sw[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:3px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:9px 14px;font-size:14px;font-weight:500;transition:background .2s,color .2s}
+  .pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .readout{margin:10px 0 0;font-size:14px;color:var(--muted)}
+  .readout b{color:var(--ink)}
 
-  .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(251,246,246,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-top:1px solid rgba(0,0,0,.06)}
-  .bar a{display:flex;max-width:900px;margin-inline:auto;justify-content:center;align-items:center;gap:10px;background:var(--pink);color:var(--white);text-decoration:none;font-weight:700;font-size:17px;padding:15px 22px;border-radius:999px}
-  .bar a .dot{width:14px;height:14px;border-radius:50%;background:var(--c,#fff);border:2px solid #fff}
+  /* marquesina */
+  .marquee{margin-top:56px;margin-inline:-20px;border-block:1px solid var(--line);overflow:hidden;padding-block:16px}
+  .track{display:flex;gap:40px;width:max-content;animation:scroll 22s linear infinite;font-family:var(--display);font-weight:700;font-size:26px;white-space:nowrap}
+  .track span{display:flex;align-items:center;gap:40px}
+  .track span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--nail);transition:background .6s}
+  @keyframes scroll{to{transform:translateX(-50%)}}
 
-  @media (max-width:560px){ .info{grid-template-columns:1fr} }
-  @media (prefers-reduced-motion:reduce){ .bottle{transition:none} }
+  .menu{margin-top:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .item{border:1px solid var(--line);border-radius:24px;padding:20px;display:flex;flex-direction:column;gap:4px;transition:transform .25s,border-color .25s}
+  .item:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--nail) 60%,transparent)}
+  .item b{font-family:var(--display);font-weight:700;font-size:18px}
+  .item span{color:var(--muted);font-size:14px}
+  .item strong{margin-top:10px;font-size:22px}
+
+  .info{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px 40px;color:var(--muted);font-size:15px}
+  .info b{display:block;color:var(--ink);font-size:16px}
+  footer{margin-top:40px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(26,17,23,.78);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+  .bar .in{max-width:980px;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .sum{font-size:13px;color:var(--muted);line-height:1.3}
+  .sum b{display:block;color:var(--ink);font-size:15px}
+  .cta{display:inline-flex;align-items:center;gap:10px;text-decoration:none;background:var(--nail);color:#fff;font-weight:700;padding:14px 20px;border-radius:999px;white-space:nowrap;transition:background .5s}
+  .cta i{width:10px;height:10px;border-radius:50%;background:#fff}
+
+  .reveal{opacity:1;transform:none}
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{animation:up .8s cubic-bezier(.2,.8,.2,1) both}
+    .reveal.d1{animation-delay:.1s}.reveal.d2{animation-delay:.2s}
+    @keyframes up{from{opacity:0;transform:translateY(18px)}}
+  }
+  @media (prefers-reduced-motion:reduce){ .tip{animation:none;opacity:1;transform:translateY(var(--y)) rotate(var(--r))} .track,.open i,.finish-glitter .nail-glit{animation:none} }
+
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;gap:26px}
+    .studio{grid-template-columns:1fr;gap:20px;padding:20px}
+    .menu{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){ .gallery{grid-template-columns:1fr 1fr;grid-template-rows:260px 160px 160px} .gallery figure:first-child{grid-column:span 2;grid-row:auto} }
+  @media (max-width:480px){ .menu{grid-template-columns:1fr} .cta{padding:13px 16px} }
 </style>
 </head>
 <body>
-<header class="hero pad">
-  <div class="blob one" aria-hidden="true"></div>
-  <div class="blob two" aria-hidden="true"></div>
-  <div class="inner">
-    <div class="top"><span class="chip">Uñas</span><span class="st" id="status">Horario</span></div>
-    <h1>Nails by Karla</h1>
-    <p><span>Gel, acrílico y pedicure.</span></p>
-  </div>
-</header>
 
-<main class="pad">
-  <div class="inner">
-    <div class="sec-t"><h2>Elige tu servicio</h2><span>Desliza →</span></div>
-    <div class="shelf" id="shelf"></div>
+<div class="wrap">
+  <header class="top">
+    <span class="logo">nails<span>·</span>karla</span>
+    <span class="open"><i></i>Abierto ahora</span>
+  </header>
 
-    <div class="sec-t"><h2>Trabajos</h2></div>
-    <div class="nails" aria-label="Fotos">
-      <div class="nail" style="--c:var(--pink-2)">Foto 1</div>
-      <div class="nail" style="--c:var(--rojo)">Foto 2</div>
-      <div class="nail" style="--c:var(--lila)">Foto 3</div>
+  <section class="hero">
+    <div class="reveal">
+      <h1>Diseña tus uñas <em id="word">antes</em> de venir.</h1>
+      <p class="lede">Elige color, forma y acabado. Te mandamos tu diseño por WhatsApp y apartamos tu cita.</p>
     </div>
+    <div class="stage reveal d1" id="stage" aria-label="Vista previa de tus uñas">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+        <linearGradient id="curve" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".22" stop-color="#000" stop-opacity=".05"/><stop offset=".6" stop-color="#fff" stop-opacity=".08"/><stop offset=".85" stop-color="#000" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".5"/>
+        </linearGradient>
+        <pattern id="glitter" width="8" height="8" patternUnits="userSpaceOnUse">
+          <rect width="8" height="8" fill="var(--nail)"/>
+          <circle cx="2" cy="2" r="1" fill="#fff" fill-opacity=".95"/><circle cx="6" cy="5" r=".7" fill="#fff" fill-opacity=".7"/><circle cx="4" cy="7" r=".5" fill="#fff" fill-opacity=".85"/>
+        </pattern>
+      </defs></svg>
+      <div class="tips">
+        <div class="tip"><svg viewBox="-40 -60 80 170" aria-hidden="true">
+          <path class="nail-fill" d=""/>
+          <path class="nail-glit" d="" fill="url(#glitter)"/>
+          <path class="nail-curve" d="" fill="url(#curve)"/>
+          <path class="nail-rim" d="" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <path class="nail-shine" d="M-14,70 C-17,40 -14,6 -6,-18" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+          <path class="nail-shine" d="M10,76 C12,62 12,50 11,40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </svg></div>
+        <div class="tip"><svg viewBox="-40 -60 80 170" aria-hidden="true">
+          <path class="nail-fill" d=""/>
+          <path class="nail-glit" d="" fill="url(#glitter)"/>
+          <path class="nail-curve" d="" fill="url(#curve)"/>
+          <path class="nail-rim" d="" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <path class="nail-shine" d="M-14,70 C-17,40 -14,6 -6,-18" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+          <path class="nail-shine" d="M10,76 C12,62 12,50 11,40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </svg></div>
+        <div class="tip"><svg viewBox="-40 -60 80 170" aria-hidden="true">
+          <path class="nail-fill" d=""/>
+          <path class="nail-glit" d="" fill="url(#glitter)"/>
+          <path class="nail-curve" d="" fill="url(#curve)"/>
+          <path class="nail-rim" d="" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <path class="nail-shine" d="M-14,70 C-17,40 -14,6 -6,-18" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+          <path class="nail-shine" d="M10,76 C12,62 12,50 11,40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </svg></div>
+        <div class="tip"><svg viewBox="-40 -60 80 170" aria-hidden="true">
+          <path class="nail-fill" d=""/>
+          <path class="nail-glit" d="" fill="url(#glitter)"/>
+          <path class="nail-curve" d="" fill="url(#curve)"/>
+          <path class="nail-rim" d="" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <path class="nail-shine" d="M-14,70 C-17,40 -14,6 -6,-18" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+          <path class="nail-shine" d="M10,76 C12,62 12,50 11,40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </svg></div>
+        <div class="tip"><svg viewBox="-40 -60 80 170" aria-hidden="true">
+          <path class="nail-fill" d=""/>
+          <path class="nail-glit" d="" fill="url(#glitter)"/>
+          <path class="nail-curve" d="" fill="url(#curve)"/>
+          <path class="nail-rim" d="" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <path class="nail-shine" d="M-14,70 C-17,40 -14,6 -6,-18" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+          <path class="nail-shine" d="M10,76 C12,62 12,50 11,40" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+        </svg></div>
+      </div>
+    </div>
+  </section>
 
-    <section class="info">
-      <div><small>Horario</small><b>Martes a sábado</b><span>10 am – 8 pm · Domingo 10 am – 3 pm</span></div>
-      <div><small>Dónde</small><b>Calle Morelos #88, Centro</b><a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a></div>
-    </section>
+  <section class="studio reveal d2" aria-label="Arma tu diseño">
+    <div class="ctrl">
+      <h3>Color</h3>
+      <div class="swatches" id="colors"></div>
+      <p class="readout">Color: <b id="colorName">Cereza</b></p>
+    </div>
+    <div class="ctrl">
+      <h3>Forma</h3>
+      <div class="pills" id="shapes"></div>
+    </div>
+    <div class="ctrl">
+      <h3>Acabado</h3>
+      <div class="pills" id="finishes"></div>
+    </div>
+  </section>
 
-    <footer>
-      <span>Nails by Karla · negocio de ejemplo</span>
-      <a href="../">Página demo hecha por crusol · ver más trabajos</a>
-    </footer>
+  <div class="marquee" aria-hidden="true"><div class="track"><span>Gel</span><span>Acrílico</span><span>Manicure</span><span>Pedicure</span><span>Diseños</span><span>Retoques</span><span>Gel</span><span>Acrílico</span><span>Manicure</span><span>Pedicure</span><span>Diseños</span><span>Retoques</span></div></div>
+
+  <section class="menu" aria-label="Servicios y precios">
+    <div class="item"><b>Gel</b><span>En uña natural, dura 2–3 semanas</span><strong>$250</strong></div>
+    <div class="item"><b>Acrílico</b><span>Largo 1 a 3</span><strong>desde $350</strong></div>
+    <div class="item"><b>Manicure</b><span>Limpieza, forma y esmalte</span><strong>$180</strong></div>
+    <div class="item"><b>Pedicure spa</b><span>Exfoliación y masaje</span><strong>$280</strong></div>
+    <div class="item"><b>Retoque</b><span>De acrílico o gel</span><strong>$250</strong></div>
+    <div class="item"><b>Diseño</b><span>Por uña</span><strong>+$15</strong></div>
+  </section>
+
+  <section class="gallery" aria-label="Trabajos">
+    <figure><img src="https://images.unsplash.com/photo-1610992015762-45dca7fa3a85?auto=format&fit=crop&w=900&q=80" alt="Mano con uñas rosa claro" loading="lazy"><figcaption>Foto: <a href="https://unsplash.com/@jd_chon?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Chelson Tamares</a> / <a href="https://unsplash.com/?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1645566372784-7d017ad7643b?auto=format&fit=crop&w=600&q=80" alt="Uñas rojas" loading="lazy"><figcaption>Foto: <a href="https://unsplash.com/@feliciamontenegro?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Felicia Montenegro</a> / Unsplash</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1587393794661-ef05657e10b9?auto=format&fit=crop&w=600&q=80" alt="Uñas azul marino" loading="lazy"><figcaption>Foto: <a href="https://unsplash.com/@happpyal?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">allison christine</a> / Unsplash</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1648844421753-351afd50486a?auto=format&fit=crop&w=600&q=80" alt="Manicure natural" loading="lazy"><figcaption>Foto: <a href="https://unsplash.com/@ydlh?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Yukon Haughton</a> / Unsplash</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1643648854897-7b5845b4c04c?auto=format&fit=crop&w=600&q=80" alt="Uñas rosas" loading="lazy"><figcaption>Foto: <a href="https://unsplash.com/@estherolayiwo19_8853927_sink?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Esther Olayiwola</a> / Unsplash</figcaption></figure>
+  </section>
+
+  <section class="info">
+    <div><b>Horario</b>Martes a sábado 10 am – 8 pm · Domingo 10 am – 3 pm</div>
+    <div><b>Dónde</b>Calle Morelos #88, Centro</div>
+  </section>
+
+  <footer>
+    <span>Nails by Karla · negocio de ejemplo</span>
+    <a href="../">Página demo hecha por crusol · ver más trabajos</a>
+  </footer>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div class="sum">Tu diseño<b id="summary">Cereza · Almendra · Brillo</b></div>
+    <a class="cta" id="send" data-goatcounter-click="unas-cita-whatsapp" href="#" target="_blank" rel="noopener"><i></i>Pedir cita</a>
   </div>
-</main>
-
-<div class="bar"><a id="send" data-goatcounter-click="unas-cita-whatsapp" href="#" target="_blank" rel="noopener"><span class="dot"></span><span id="label">Pedir cita por WhatsApp</span></a></div>
+</div>
 
 <script>
 (function(){
   var WHATSAPP="8123256381";
-  var S=[
-    {n:"Gel",p:"$250",c:"var(--pink-2)"},
-    {n:"Acrílico",p:"desde $350",c:"var(--rojo)"},
-    {n:"Manicure",p:"$180",c:"var(--nude)"},
-    {n:"Retoque de acrílico",p:"$250",c:"var(--coral)"},
-    {n:"Pedicure",p:"$280",c:"var(--lila)"},
-    {n:"Diseño por uña",p:"+$15",c:"var(--pink)"}
-  ];
-  var shelf=document.getElementById("shelf"), send=document.getElementById("send"), label=document.getElementById("label"), chosen=null;
-  S.forEach(function(s){
-    var b=document.createElement("button"); b.type="button"; b.className="bottle"; b.setAttribute("aria-pressed","false"); b.style.setProperty("--c",s.c);
-    b.innerHTML='<span class="cap"></span><span class="glass"></span><span class="n">'+s.n+'</span><span class="p">'+s.p+'</span>';
-    b.addEventListener("click",function(){
-      shelf.querySelectorAll(".bottle").forEach(function(x){x.setAttribute("aria-pressed","false");});
-      b.setAttribute("aria-pressed","true"); chosen=s; update();
-    });
-    shelf.appendChild(b);
-  });
-  function update(){
-    label.textContent = chosen ? "Pedir cita: "+chosen.n : "Pedir cita por WhatsApp";
-    send.style.setProperty("--c", chosen ? chosen.c : "#fff");
-    var msg = chosen ? "Hola Karla, quiero cita para "+chosen.n+". ¿Qué horarios tienes?" : "Hola Karla, quiero hacer una cita. ¿Qué horarios tienes?";
-    send.href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent(msg);
+  var COLORS=[["Cereza","#E0245E"],["Nude","#D8A48F"],["Rosa bebé","#F4B6C8"],["Lila","#B79CE0"],["Vino","#6E1E33"],["Negro","#1B1B1F"],["Coral","#FF7A59"],["Cielo","#8EC9F2"]];
+  var SHAPES=[["almendra","Almendra"],["cuadrada","Cuadrada"],["coffin","Coffin"],["redonda","Redonda"]];
+  var FINISHES=[["brillo","Brillo"],["mate","Mate"],["glitter","Glitter"]];
+  var WORDS=["antes","hoy","a tu gusto"];
+  var NAILS={
+    almendra:"M-24,96 C-27,56 -22,6 0,-50 C22,6 27,56 24,96 C12,103 -12,103 -24,96 Z",
+    cuadrada:"M-24,96 C-26,66 -26,26 -26,-18 Q-26,-30 -14,-30 L14,-30 Q26,-30 26,-18 C26,26 26,66 24,96 C12,103 -12,103 -24,96 Z",
+    coffin:"M-24,96 C-26,60 -22,10 -12,-50 Q0,-53 12,-50 C22,10 26,60 24,96 C12,103 -12,103 -24,96 Z",
+    redonda:"M-24,96 C-26,66 -26,34 -26,6 C-26,-18 -14,-28 0,-28 C14,-28 26,-18 26,6 C26,34 26,66 24,96 C12,103 -12,103 -24,96 Z"
+  };
+  var state={color:0,shape:"almendra",finish:"brillo"};
+  var root=document.documentElement, stage=document.getElementById("stage");
+
+  function btn(parent,label,cls,onClick){var b=document.createElement("button");b.type="button";b.className=cls;b.textContent=label;b.setAttribute("aria-pressed","false");b.addEventListener("click",onClick);parent.appendChild(b);return b;}
+  var cBox=document.getElementById("colors");
+  COLORS.forEach(function(c,i){var b=btn(cBox,"","sw",function(){state.color=i;render();});b.style.setProperty("--c",c[1]);b.setAttribute("aria-label",c[0]);b.dataset.i=i;});
+  var sBox=document.getElementById("shapes");
+  SHAPES.forEach(function(s){var b=btn(sBox,s[1],"pill",function(){state.shape=s[0];render();});b.dataset.v=s[0];});
+  var fBox=document.getElementById("finishes");
+  FINISHES.forEach(function(f){var b=btn(fBox,f[1],"pill",function(){state.finish=f[0];render();});b.dataset.v=f[0];});
+
+  function render(){
+    var c=COLORS[state.color];
+    root.style.setProperty("--nail",c[1]);
+    stage.className="stage reveal d1 finish-"+state.finish;
+    stage.querySelectorAll(".nail-fill,.nail-glit,.nail-curve,.nail-rim").forEach(function(n){n.setAttribute("d",NAILS[state.shape]);});
+    cBox.querySelectorAll(".sw").forEach(function(b){b.setAttribute("aria-pressed",String(+b.dataset.i===state.color));});
+    sBox.querySelectorAll(".pill").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.v===state.shape));});
+    fBox.querySelectorAll(".pill").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.v===state.finish));});
+    var shape=SHAPES.filter(function(s){return s[0]===state.shape;})[0][1], fin=FINISHES.filter(function(f){return f[0]===state.finish;})[0][1];
+    document.getElementById("colorName").textContent=c[0];
+    document.getElementById("summary").textContent=c[0]+" · "+shape+" · "+fin;
+    var msg="Hola, quiero una cita. Mi diseño: color "+c[0]+", forma "+shape+", acabado "+fin+". ¿Qué horarios tienen?";
+    document.getElementById("send").href="https://wa.me/52"+WHATSAPP+"?text="+encodeURIComponent(msg);
   }
-  update();
-  var sched={0:[10,15],1:null,2:[10,20],3:[10,20],4:[10,20],5:[10,20],6:[10,20]};
-  var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
-  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
-  parts.forEach(function(p){ if(p.type==="weekday")d=map[p.value]; if(p.type==="hour")h=parseInt(p.value,10)%24; if(p.type==="minute")m=parseInt(p.value,10); });
-  var t=h+m/60,s=sched[d];
-  document.getElementById("status").textContent=(s&&t>=s[0]&&t<s[1])?"● Abierto ahora":"Cerrado ahora";
+  render();
+
+  // palabra que cambia en el título
+  var w=0, word=document.getElementById("word");
+  if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    setInterval(function(){w=(w+1)%WORDS.length;word.style.opacity=0;setTimeout(function(){word.textContent=WORDS[w];word.style.opacity=1;},250);},2600);
+    word.style.transition="opacity .25s, color .6s";
+  }
 })();
 </script>
 <!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->
