@@ -153,14 +153,14 @@ footer .by a{color:var(--ink)}
 <div class="shop">
   <img src="https://images.unsplash.com/photo-1781455793310-8427c96454c7?auto=format&fit=crop&w=1600&q=70" alt="Interior de barbería con sillones" loading="lazy">
   <div class="box">
-    <div class="card rv">
+    <div class="card rv" id="hcard">
       <h3>Horario</h3>
       <div class="hrow"><span>Lunes a sábado</span><span>10:00 am – 9:00 pm</span></div>
       <div class="hrow"><span>Domingo</span><span>10:00 am – 3:00 pm</span></div>
     </div>
     <div class="card rv">
       <h3>Dónde estamos</h3>
-      <div>Av. Principal #123, Centro</div>
+      <div id="dir">Av. Principal #123, Centro</div>
       <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
   </div>
@@ -229,6 +229,31 @@ footer .by a{color:var(--ink)}
 
   var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}})},{threshold:.15}):null;
   [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
+})();
+</script>
+<script>
+/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
+(function(){
+var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
+if(!N&&!D&&!H)return;
+function $(s){return document.querySelector(s)}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function rows(){return H.split("·").map(function(x){x=x.trim();var m=x.match(/^(.*?)\s*((\d|cerrad).*)$/i);return m?[m[1],m[2].charAt(0).toUpperCase()+m[2].slice(1)]:[x,""]}).filter(function(r){return r[0]||r[1]})}
+function slug(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().split(/\s+/).join(".")}
+if(N)document.title=N;
+
+if(N){var b=$(".brand");b.lastChild.nodeValue=N;
+ var w=N.split(/\s+/),h1=$(".hero h1");h1.textContent="";
+ var l1=w.length>1?w.slice(0,-1).join(" "):"",l2=w[w.length-1];
+ [l1,l2].forEach(function(t){if(!t)return;var s=el("span"),bb=el("b",null,t);s.appendChild(bb);h1.appendChild(s)});
+ if(!l1)h1.firstChild.firstChild.style.color="var(--red)";
+ var fit=function(){h1.style.fontSize="";for(var i=0;i<40;i++){var over=[].some.call(h1.querySelectorAll("b"),function(x){return x.scrollWidth>x.clientWidth+1});if(!over)break;h1.style.fontSize=(parseFloat(getComputedStyle(h1).fontSize)*0.95)+"px";}};
+ fit();if(document.fonts)document.fonts.ready.then(fit);addEventListener("resize",fit);
+ $("footer p").textContent="Muestra para "+N;}
+if(D)$("#dir").textContent=D;
+if(H){var c=$("#hcard");[].forEach.call(c.querySelectorAll(".hrow"),function(r){r.remove()});
+ rows().forEach(function(r){var d=el("div","hrow");d.appendChild(el("span",null,r[0]));d.appendChild(el("span",null,r[1]));c.appendChild(d)});
+ $("#status").style.display="none";}
 })();
 </script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>

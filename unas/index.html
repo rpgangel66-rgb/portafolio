@@ -295,6 +295,25 @@
 })();
 </script>
 <!-- Contador de visitas y clics (GoatCounter). Cambia "angelweb" si usas otro código. -->
+<script>
+/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
+(function(){
+var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
+if(!N&&!D&&!H)return;
+function $(s){return document.querySelector(s)}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function rows(){return H.split("·").map(function(x){x=x.trim();var m=x.match(/^(.*?)\s*((\d|cerrad).*)$/i);return m?[m[1],m[2].charAt(0).toUpperCase()+m[2].slice(1)]:[x,""]}).filter(function(r){return r[0]||r[1]})}
+function slug(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().split(/\s+/).join(".")}
+if(N)document.title=N;
+
+if(N){var lg=$(".logo"),w=N.toLowerCase().split(/\s+/);lg.textContent="";
+ w.forEach(function(x,i){if(i)lg.appendChild(el("span",null,"·"));lg.appendChild(document.createTextNode(x))});
+ $("footer span").textContent="Muestra para "+N;}
+var inf=document.querySelectorAll(".info div");
+if(H&&inf[0]){inf[0].lastChild.nodeValue=H;var op=$(".open");if(op)op.style.display="none";}
+if(D&&inf[1])inf[1].lastChild.nodeValue=D;
+})();
+</script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

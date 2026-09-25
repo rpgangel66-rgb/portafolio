@@ -138,14 +138,14 @@ footer .by a{color:var(--chalk)}
 <div class="night">
   <img src="https://images.unsplash.com/photo-1546853846-53490ede35b4?auto=format&fit=crop&w=1600&q=70" alt="Taquero junto al trompo de pastor" loading="lazy">
   <div class="box">
-    <div class="card rv">
+    <div class="card rv" id="hcard">
       <h3>Horario</h3>
       <div class="hrow"><span>Martes a domingo</span><span>7 pm – 1 am</span></div>
       <div class="hrow"><span>Domingo barbacoa</span><span>8 am – 2 pm</span></div>
     </div>
     <div class="card rv">
       <h3>Dónde</h3>
-      <div>Calle Hidalgo #45, Centro</div>
+      <div id="dir">Calle Hidalgo #45, Centro</div>
       <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
     </div>
   </div>
@@ -247,6 +247,26 @@ footer .by a{color:var(--chalk)}
 
   var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}})},{threshold:.1}):null;
   [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
+})();
+</script>
+<script>
+/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
+(function(){
+var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
+if(!N&&!D&&!H)return;
+function $(s){return document.querySelector(s)}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function rows(){return H.split("·").map(function(x){x=x.trim();var m=x.match(/^(.*?)\s*((\d|cerrad).*)$/i);return m?[m[1],m[2].charAt(0).toUpperCase()+m[2].slice(1)]:[x,""]}).filter(function(r){return r[0]||r[1]})}
+function slug(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().split(/\s+/).join(".")}
+if(N)document.title=N;
+
+if(N){var w=N.split(/\s+/),h=$(".neon");h.textContent="";
+ if(w.length>1)h.appendChild(el("small",null,w[0]));h.appendChild(document.createTextNode(w.length>1?w.slice(1).join(" "):N));
+ $("footer p").textContent="Muestra para "+N;}
+if(D)$("#dir").textContent=D;
+if(H){var c=$("#hcard");[].forEach.call(c.querySelectorAll(".hrow"),function(r){r.remove()});
+ rows().forEach(function(r){var d=el("div","hrow");d.appendChild(el("span",null,r[0]));d.appendChild(el("span",null,r[1]));c.appendChild(d)});
+ $("#status").style.display="none";}
 })();
 </script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>

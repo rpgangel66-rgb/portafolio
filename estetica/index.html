@@ -148,14 +148,14 @@ footer .by a{color:var(--ink)}
     <div class="group" id="g2"><h4>Cejas y pestañas</h4></div>
   </div>
   <div class="info">
-    <div class="group">
+    <div class="group" id="hgroup">
       <h4>Horario</h4>
       <p>Martes a sábado, 10 am a 8 pm</p>
       <p>Domingo, 10 am a 3 pm</p>
     </div>
     <div class="group">
       <h4>Dónde estamos</h4>
-      <p>Av. Las Torres #210, local 3</p>
+      <p id="dir">Av. Las Torres #210, local 3</p>
       <p><a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a></p>
     </div>
   </div>
@@ -251,6 +251,29 @@ footer .by a{color:var(--ink)}
   parts.forEach(function(p){if(p.type==="weekday")d=map[p.value];if(p.type==="hour")h=parseInt(p.value,10)%24;if(p.type==="minute")m=parseInt(p.value,10);});
   var t=h+m/60,s=sched[d],open=!!(s&&t>=s[0]&&t<s[1]);
   document.getElementById("status").textContent=open?"Abierto ahora":"Cerrado ahora";
+})();
+</script>
+<script>
+/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
+(function(){
+var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
+if(!N&&!D&&!H)return;
+function $(s){return document.querySelector(s)}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function rows(){return H.split("·").map(function(x){x=x.trim();var m=x.match(/^(.*?)\s*((\d|cerrad).*)$/i);return m?[m[1],m[2].charAt(0).toUpperCase()+m[2].slice(1)]:[x,""]}).filter(function(r){return r[0]||r[1]})}
+function slug(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().split(/\s+/).join(".")}
+if(N)document.title=N;
+
+if(N){$(".who b").textContent=slug(N);var ws=N.split(/\s+/);$(".av span").textContent=ws[ws.length-1].charAt(0).toUpperCase();var t=$(".slide .tag");if(t)t.textContent=N;
+ $("#stories").setAttribute("aria-label",N);$("footer p").textContent="Muestra para "+N;}
+var last=document.querySelectorAll(".slide")[5],box=last&&last.querySelector(".rows");
+if(D){$("#dir").textContent=D;}
+if(box&&(D||H)){var keep=[].slice.call(box.children).map(function(d){return [d.children[0].textContent,d.children[1].textContent]});
+ var hr=H?rows():keep.slice(0,2),ad=D?[D,""]:keep[2];box.textContent="";
+ hr.concat([ad]).forEach(function(r){var d=el("div");d.appendChild(el("span",null,r[0]));d.appendChild(el("b",null,r[1]));box.appendChild(d)});
+ if(H){last.querySelector("h2").innerHTML="Aquí te <i>esperamos</i>";last.querySelector(".tag").textContent="Horario";}}
+if(H){var g=$("#hgroup");[].forEach.call(g.querySelectorAll("p"),function(p){p.remove()});
+ H.split("·").forEach(function(x){x=x.trim();if(x)g.appendChild(el("p",null,x))});$("#status").style.display="none";}
 })();
 </script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
