@@ -205,30 +205,35 @@ footer a{color:var(--muted)}
 
 <section class="sec" id="trabajos">
   <div class="head">
-    <div class="top"><span class="lbl"><b>(02)</b> Trabajos</span><span class="lbl" id="count">01 / 04</span></div>
+    <div class="top"><span class="lbl"><b>(02)</b> Trabajos</span><span class="lbl" id="count">01 / 05</span></div>
     <h2 class="rv">Cada negocio, <em>su propia idea.</em></h2>
   </div>
   <div class="works">
     <div class="rail" id="rail">
+      <a class="work" href="ropa/">
+        <img src="https://images.unsplash.com/photo-1624192647570-1131acc12ccf?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy">
+        <div class="phone"><div class="screen"><iframe src="ropa/" title="Página de La Percha, tienda de ropa" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="cap"><span class="no">01</span><span><span class="nm">La Percha</span><span class="ds">Tienda de ropa · Aparta por WhatsApp</span></span><span class="vr">Ver página ↗</span></div>
+      </a>
       <a class="work" href="barberia/">
         <img src="https://images.unsplash.com/photo-1781455793310-8427c96454c7?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy">
         <div class="phone"><div class="screen"><iframe src="barberia/" title="Página de la barbería Los Compas" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="cap"><span class="no">01</span><span><span class="nm">Los Compas</span><span class="ds">Barbería · Escoge tu corte</span></span><span class="vr">Ver página ↗</span></div>
+        <div class="cap"><span class="no">02</span><span><span class="nm">Los Compas</span><span class="ds">Barbería · Escoge tu corte</span></span><span class="vr">Ver página ↗</span></div>
       </a>
       <a class="work" href="taqueria/">
         <img src="https://images.unsplash.com/photo-1546853846-53490ede35b4?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy">
         <div class="phone"><div class="screen"><iframe src="taqueria/" title="Página de Tacos El Primo" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="cap"><span class="no">02</span><span><span class="nm">El Primo</span><span class="ds">Taquería · Pedido por WhatsApp</span></span><span class="vr">Ver página ↗</span></div>
+        <div class="cap"><span class="no">03</span><span><span class="nm">El Primo</span><span class="ds">Taquería · Pedido por WhatsApp</span></span><span class="vr">Ver página ↗</span></div>
       </a>
       <a class="work" href="estetica/">
         <img src="https://images.unsplash.com/photo-1695527081728-e3a42f0ce261?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy">
         <div class="phone"><div class="screen"><iframe src="estetica/" title="Página de la estética Aurora" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="cap"><span class="no">03</span><span><span class="nm">Aurora</span><span class="ds">Estética · Formato historias</span></span><span class="vr">Ver página ↗</span></div>
+        <div class="cap"><span class="no">04</span><span><span class="nm">Aurora</span><span class="ds">Estética · Formato historias</span></span><span class="vr">Ver página ↗</span></div>
       </a>
       <a class="work" href="unas/">
         <img src="https://images.unsplash.com/photo-1645566372784-7d017ad7643b?auto=format&fit=crop&w=1600&q=70" alt="" loading="lazy">
         <div class="phone"><div class="screen"><iframe src="unas/" title="Página de Nails by Karla" loading="lazy" tabindex="-1"></iframe></div></div>
-        <div class="cap"><span class="no">04</span><span><span class="nm">Nails by Karla</span><span class="ds">Uñas · Diseña antes de venir</span></span><span class="vr">Ver página ↗</span></div>
+        <div class="cap"><span class="no">05</span><span><span class="nm">Nails by Karla</span><span class="ds">Uñas · Catálogo de diseños</span></span><span class="vr">Ver página ↗</span></div>
       </a>
     </div>
     <div class="ctrl">
@@ -346,7 +351,7 @@ footer a{color:var(--muted)}
     var t="";P.forEach(function(p){t+='<figure><img src="https://images.unsplash.com/photo-'+p[0]+'?auto=format&fit=crop&w=540&h=720&q=70" alt="" loading="lazy"></figure>'});
     document.getElementById("track").innerHTML=t+t;
     var U="?utm_source=crusol&utm_medium=referral";
-    document.getElementById("credits").innerHTML='Fotos de <a href="https://unsplash.com/'+U+'" target="_blank" rel="noopener">Unsplash</a>: '+P.map(function(p){return '<a href="https://unsplash.com/@'+p[2]+U+'" target="_blank" rel="noopener">'+p[1]+'</a>'}).join(", ");
+    document.getElementById("credits").innerHTML='Fotos de <a href="https://unsplash.com/'+U+'" target="_blank" rel="noopener">Unsplash</a>: '+P.concat([['','Megan Lee','meganlee007'],['','Barney Goodman','bgoodpic'],['','Dennis Schrader','dennisschrader'],['','Daniel','unsplashbydan'],['','Felicia Montenegro','feliciamontenegro']]).map(function(p){return '<a href="https://unsplash.com/@'+p[2]+U+'" target="_blank" rel="noopener">'+p[1]+'</a>'}).join(", ");
 
     // nav
     var nav=document.getElementById("nav");
