@@ -184,6 +184,28 @@ svg.mk .b{fill:var(--sage)}
 .list li b{font-weight:500;font-size:19px;letter-spacing:-.02em}
 .list li span{color:var(--muted);font-size:15px}
 
+/* selector de sistemas */
+.picker{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.picker button{position:relative;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:14px 16px 16px;cursor:pointer;overflow:hidden;transition:border-color .25s,background .25s}
+.picker button:hover{border-color:#C9C9C2}
+.picker button .mono{display:block}
+.picker button b{display:block;font-weight:500;font-size:17px;letter-spacing:-.02em;margin-top:4px}
+.picker button::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--green);transform:scaleX(0);transform-origin:0 50%}
+.picker button[aria-selected="true"]{border-color:var(--ink);background:var(--paper)}
+.picker button[aria-selected="true"]::after{transform:scaleX(1)}
+.picker.auto button[aria-selected="true"]::after{animation:pk 8s linear forwards}
+@keyframes pk{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.win .vp iframe{opacity:0;visibility:hidden;transition:opacity .45s}
+.win .vp iframe.on{opacity:1;visibility:visible}
+.sysinfo{border-top:1px solid var(--line);padding-top:22px;transition:opacity .3s}
+.sysinfo.rv.sw{opacity:0}
+.sysinfo h3{margin:10px 0 0;font-weight:500;font-size:clamp(24px,2.4vw,30px);line-height:1.12;letter-spacing:-.03em}
+.sysinfo p{margin:12px 0 0;color:var(--muted);font-size:15.5px}
+.feats{list-style:none;margin:18px 0 22px;padding:0;border-top:1px solid var(--line)}
+.feats li{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.feats li::before{content:"";width:7px;height:7px;background:var(--green);border-radius:1px;flex:none}
+.more{margin:22px 0 0;line-height:1.7}
+
 /* automatización */
 .auto{display:grid;gap:28px;align-items:start}
 .demo{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 70px rgba(17,17,16,.10);overflow:hidden}
@@ -307,6 +329,10 @@ html.cc .cdot,html.cc .cring{opacity:1}
   .pimg{position:sticky;top:96px}
 }
 @media (max-width:600px){
+  .picker{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad)*-1);padding-inline:var(--pad)}
+  .picker::-webkit-scrollbar{display:none}
+  .picker button{flex:0 0 auto;padding:10px 14px 12px}
+  .picker button b{font-size:15px;white-space:nowrap}
   .stage{height:450px}
   .ph{width:82%;height:80%}
   .dash{width:70%;top:6%}
@@ -387,20 +413,26 @@ html.cc .cdot,html.cc .cring{opacity:1}
       </div>
       <p class="rv">Plataformas web construidas sobre tus procesos actuales. Funcionan desde cualquier computadora o celular, sin instalar nada.</p>
     </div>
-    <div class="sys">
-      <a class="win rv" href="sistemas/cotizador/" data-cursor="Probar" aria-label="Abrir demo del cotizador">
-        <div class="bar"><i></i><i></i><i></i><span class="mono">cotizador · demo en vivo</span></div>
-        <div class="vp" id="sysvp"><iframe src="sistemas/cotizador/?v=0928" title="Demo del cotizador" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="cap"><b>Cotizador con historial</b><span class="mono">Empresa ficticia · Probar demo</span></div>
-      </a>
-      <ul class="list rv">
-        <li><span class="mono">01</span><b>Cotizaciones</b><span>Con tu imagen corporativa, historial y seguimiento de cada propuesta.</span></li>
-        <li><span class="mono">02</span><b>Inventario</b><span>Entradas, salidas, existencias por almacén y alertas de mínimo.</span></li>
-        <li><span class="mono">03</span><b>Órdenes y clientes</b><span>Seguimiento de pedidos, saldos y entregas por cliente.</span></li>
-        <li><span class="mono">04</span><b>Cuentas por cobrar</b><span>Vencimientos, recordatorios de pago y estado de cartera.</span></li>
-        <li><span class="mono">05</span><b>Tableros e indicadores</b><span>Reportes que se generan solos con los datos de tu operación.</span></li>
-      </ul>
+    <div class="picker rv" id="picker" role="tablist" aria-label="Sistemas de ejemplo">
+      <button type="button" role="tab" aria-selected="true" data-i="0"><span class="mono">01 · Ventas</span><b>Cotizador</b></button>
+      <button type="button" role="tab" aria-selected="false" data-i="1"><span class="mono">02 · Dirección</span><b>Tablero de dirección</b></button>
+      <button type="button" role="tab" aria-selected="false" data-i="2"><span class="mono">03 · Compras</span><b>Requisiciones</b></button>
     </div>
+    <div class="sys">
+      <a class="win rv" id="syswin" href="sistemas/cotizador/" data-cursor="Probar" aria-label="Abrir demo del cotizador">
+        <div class="bar"><i></i><i></i><i></i><span class="mono" id="sysurl">cotizador · demo en vivo</span></div>
+        <div class="vp" id="sysvp"><iframe data-k="0" class="on" src="sistemas/cotizador/?v=0928" title="Demo del cotizador" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="cap"><b id="syscap">Cotizador con historial</b><span class="mono">Empresa ficticia · Probar demo</span></div>
+      </a>
+      <div class="sysinfo rv" id="sysinfo">
+        <span class="mono" id="sysarea">Para el área de ventas</span>
+        <h3 id="systit">Cotizaciones en menos de un minuto.</h3>
+        <p id="sysdesc">Tu equipo arma cotizaciones con precios de catálogo, descuentos e IVA, y las envía en PDF con tu imagen y folio consecutivo.</p>
+        <ul class="feats" id="sysfeat"><li>Catálogo con búsqueda por código</li><li>PDF con tu logo y folio consecutivo</li><li>Historial con estado y tasa de cierre</li></ul>
+        <a class="btn ghost mag" id="sysopen" href="sistemas/cotizador/"><span class="lb"><span class="rl"><span data-t="Probar demo" id="sysopenl">Probar demo</span></span></span></a>
+      </div>
+    </div>
+    <p class="more mono rv">También desarrollo: inventario multialmacén · portales de proveedores · control de gastos y viáticos · cuentas por cobrar · mesa de ayuda interna</p>
   </section>
 
   <!-- 002 AUTOMATIZACIÓN -->
@@ -594,9 +626,28 @@ html.cc .cdot,html.cc .cring{opacity:1}
   bigmk.style.transition="transform .9s cubic-bezier(.7,0,.2,1)";
   onScroll();addEventListener("scroll",onScroll,{passive:true});addEventListener("resize",onScroll);
 
+  /* selector de sistemas */
+  var SYS=[
+    {u:"sistemas/cotizador/",url:"cotizador · demo en vivo",cap:"Cotizador con historial",al:"Abrir demo del cotizador",area:"Para el área de ventas",t:"Cotizaciones en menos de un minuto.",d:"Tu equipo arma cotizaciones con precios de catálogo, descuentos e IVA, y las envía en PDF con tu imagen y folio consecutivo.",f:["Catálogo con búsqueda por código","PDF con tu logo y folio consecutivo","Historial con estado y tasa de cierre"]},
+    {u:"sistemas/tablero/",url:"tablero · demo en vivo",cap:"Tablero de dirección",al:"Abrir demo del tablero",area:"Para dirección general",t:"Toda la empresa en una sola pantalla.",d:"Ventas, margen, cartera e inventario con los datos de tu operación, filtrados por periodo y sucursal.",f:["Indicadores comparados contra el periodo anterior","Alertas de inventario con orden de compra en un clic","Reporte en PDF que llega solo cada lunes"]},
+    {u:"sistemas/requisiciones/",url:"requisiciones · demo en vivo",cap:"Requisiciones y aprobaciones",al:"Abrir demo de requisiciones",area:"Para compras y finanzas",t:"Compras aprobadas, con orden y con presupuesto.",d:"Cada solicitud sigue una ruta de aprobación según su monto y se revisa contra el presupuesto del área antes de volverse orden de compra.",f:["Ruta por monto: gerente, finanzas y dirección","Control de presupuesto por centro de costo","Historial de quién aprobó, cuándo y por qué"]}
+  ];
+  var pk=document.getElementById("picker"),pbs=[].slice.call(pk.querySelectorAll("button")),svp=document.getElementById("sysvp"),swin=document.getElementById("syswin"),sinfo=document.getElementById("sysinfo"),cur=0,auto=!still,ptimer=null;
+  function pick(i,user){if(i===cur&&!user)return;cur=i;var S=SYS[i];
+    pbs.forEach(function(b,j){b.setAttribute("aria-selected",j===i)});
+    var fr=svp.querySelector('iframe[data-k="'+i+'"]');
+    if(!fr){fr=document.createElement("iframe");fr.dataset.k=i;fr.src=S.u+"?v=0928";fr.title="Demo: "+S.cap;fr.tabIndex=-1;svp.appendChild(fr);sc()}
+    [].forEach.call(svp.querySelectorAll("iframe"),function(f){f.classList.toggle("on",f===fr)});
+    swin.href=S.u;swin.setAttribute("aria-label",S.al);document.getElementById("sysurl").textContent=S.url;document.getElementById("syscap").textContent=S.cap;
+    sinfo.classList.add("sw");setTimeout(function(){document.getElementById("sysarea").textContent=S.area;document.getElementById("systit").textContent=S.t;document.getElementById("sysdesc").textContent=S.d;
+      var ul=document.getElementById("sysfeat");ul.textContent="";S.f.forEach(function(x){var li=document.createElement("li");li.textContent=x;ul.appendChild(li)});document.getElementById("sysopen").href=S.u;sinfo.classList.remove("sw")},still?0:220);
+    if(auto){pk.classList.remove("auto");void pk.offsetWidth;pk.classList.add("auto")}
+  }
+  pbs.forEach(function(b,j){b.addEventListener("click",function(){auto=false;pk.classList.remove("auto");clearInterval(ptimer);pick(j,true)})});
+  if(auto&&"IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){clearInterval(ptimer);if(e.isIntersecting&&auto){pk.classList.add("auto");ptimer=setInterval(function(){pick((cur+1)%SYS.length)},8000)}else pk.classList.remove("auto")})},{threshold:.4}).observe(pk.parentNode)}
+
   /* ventana del sistema a escala */
-  var vps=[].slice.call(document.querySelectorAll(".win .vp"));
-  function sc(){vps.forEach(function(vp){vp.querySelector("iframe").style.transform="scale("+(vp.clientWidth/1280)+")"})}sc();addEventListener("resize",sc);
+  function sc(){[].forEach.call(document.querySelectorAll(".win .vp"),function(vp){var k=vp.clientWidth/1280;[].forEach.call(vp.querySelectorAll("iframe"),function(f){f.style.transform="scale("+k+")"})})}sc();addEventListener("resize",sc);
 
   /* cursor y botones magnéticos */
   if(fine&&!still){
