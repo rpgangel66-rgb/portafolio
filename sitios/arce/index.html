@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suministros Arce · Suministro industrial y de seguridad</title>
+<meta name="description" content="Sitio de demostración de una empresa ficticia, hecho por crusol.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#0E1B2B; --text:#344054; --muted:#667085; --line:#E4E7EC; --soft:#F5F7FA; --paper:#fff;
+  --brand:#1F4E79; --brand-2:#143756; --brand-soft:#E8F0F8; --accent:#F2B705;
+  --head:"Archivo", "Inter", system-ui, sans-serif; --body:"Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --pad:clamp(18px,4vw,56px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--text);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
+h1,h2,h3{font-family:var(--head);color:var(--ink);margin:0;letter-spacing:-.02em}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 12px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.eyebrow::before{content:"";width:18px;height:2px;background:var(--accent)}
+
+/* demo */
+.demo{background:var(--ink);color:#C9D3E0;font-size:12.5px;text-align:center;padding:7px 12px}
+.demo b{color:#fff;font-weight:600}
+
+/* barra superior */
+.top{border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.top .in{display:flex;justify-content:space-between;gap:16px;padding-block:9px}
+.top span+span{margin-left:22px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+.nav.sh{box-shadow:0 8px 24px rgba(14,27,43,.06)}
+.nav .in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:74px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo i{width:40px;height:40px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font:800 15px var(--head);font-style:normal;letter-spacing:.02em;position:relative}
+.logo i::after{content:"";position:absolute;right:-3px;bottom:-3px;width:10px;height:10px;background:var(--accent);border-radius:2px}
+.logo b{display:block;font:700 18px/1.1 var(--head);color:var(--ink)}
+.logo small{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+.menu{display:flex;gap:30px;font-size:15px;font-weight:500}
+.menu a{text-decoration:none;color:var(--text);transition:color .2s}
+.menu a:hover{color:var(--brand)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:6px;background:var(--brand);color:#fff;border:0;font:600 15px var(--body);text-decoration:none;cursor:pointer;transition:background .25s,transform .25s}
+.btn:hover{background:var(--brand-2)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.line:hover{box-shadow:inset 0 0 0 1.5px var(--ink);background:transparent}
+.btn.sm{height:42px;padding:0 18px;font-size:14px}
+.btn svg{width:16px;height:16px}
+
+/* hero */
+.hero{display:grid;gap:40px;padding-block:56px 64px;align-items:center}
+.hero h1{font-size:clamp(38px,4.6vw,62px);line-height:1.04;font-weight:800;margin-top:18px;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p{font-size:18px;color:var(--muted);max-width:48ch;margin:22px 0 0}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:1px solid var(--line)}
+.stats div{padding:18px 16px 0 0}
+.stats div+div{padding-left:18px;border-left:1px solid var(--line)}
+.stats b{display:block;font:800 30px/1 var(--head);color:var(--ink);letter-spacing:-.02em}
+.stats span{display:block;font-size:13.5px;color:var(--muted);margin-top:6px}
+.hv{position:relative}
+.hv .ph{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:5/4.4;background:var(--soft)}
+.hv .ph img{width:100%;height:100%;object-fit:cover}
+.hv .tag{position:absolute;left:-22px;bottom:34px;background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 24px 50px rgba(14,27,43,.16);display:flex;gap:12px;align-items:center;min-width:250px}
+.hv .tag .ic{width:38px;height:38px;border-radius:8px;background:var(--brand-soft);display:grid;place-items:center;color:var(--brand)}
+.hv .tag b{display:block;font:600 14px var(--body);color:var(--ink)}
+.hv .tag small{font-size:12.5px;color:var(--muted)}
+.hv .tag em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:600;color:#1E7B4F;background:#E6F4EC;padding:4px 8px;border-radius:4px;white-space:nowrap}
+.hv .badge{position:absolute;right:18px;top:18px;background:var(--accent);color:var(--ink);font:700 12.5px var(--body);padding:8px 12px;border-radius:6px}
+
+/* clientes */
+.clients{border-block:1px solid var(--line);background:var(--soft)}
+.clients .in{display:flex;align-items:center;gap:40px;padding-block:22px;overflow:hidden}
+.clients span{font-size:13px;color:var(--muted);white-space:nowrap}
+.clients ul{list-style:none;margin:0;padding:0;display:flex;flex:1;justify-content:space-between;gap:24px 32px;flex-wrap:wrap}
+.clients li{font:700 16px var(--head);color:#98A2B3;letter-spacing:-.01em;white-space:nowrap}
+
+/* secciones */
+.sec{padding-block:clamp(64px,8vw,104px)}
+.head{display:grid;gap:14px;margin-bottom:40px}
+.head h2{font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800;max-width:20ch}
+.head p{margin:0;color:var(--muted);max-width:52ch}
+
+/* lineas */
+.lines{display:grid;gap:18px}
+.line-c{border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;background:#fff;transition:box-shadow .35s,transform .35s;display:flex;flex-direction:column}
+.line-c:hover{box-shadow:0 22px 44px rgba(14,27,43,.10);transform:translateY(-4px)}
+.line-c .im{aspect-ratio:4/3;overflow:hidden;background:var(--soft)}
+.line-c .im img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.line-c:hover .im img{transform:scale(1.05)}
+.line-c .tx{padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.line-c h3{font-size:19px;font-weight:700}
+.line-c p{margin:0;font-size:14.5px;color:var(--muted)}
+.line-c .mt{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;font-size:13px;color:var(--brand);font-weight:600}
+.line-c .mt span:last-child{color:var(--muted);font-weight:500}
+
+/* industrias */
+.ind{background:var(--ink);color:#C9D3E0}
+.ind .head h2{color:#fff}
+.ind .head p{color:#98A2B3}
+.ind .eyebrow{color:var(--accent)}
+.grid-i{display:grid;gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
+.grid-i div{background:var(--ink);padding:26px 24px;transition:background .3s}
+.grid-i div:hover{background:#13253A}
+.grid-i b{display:block;font:700 19px var(--head);color:#fff}
+.grid-i span{display:block;font-size:14px;color:#98A2B3;margin-top:6px}
+.grid-i i{display:block;font:600 12px var(--body);font-style:normal;color:var(--accent);letter-spacing:.1em;margin-bottom:14px}
+
+/* servicios */
+.split{display:grid;gap:40px;align-items:center}
+.split .ph{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3.4}
+.split .ph img{width:100%;height:100%;object-fit:cover}
+.feat{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.feat li{display:grid;grid-template-columns:44px 1fr;gap:4px 14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.feat .n{grid-row:span 2;width:36px;height:36px;border-radius:8px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font:700 13px var(--head)}
+.feat b{font:600 16.5px var(--body);color:var(--ink)}
+.feat span{font-size:14.5px;color:var(--muted)}
+
+/* portal */
+.portal{background:var(--soft);border-block:1px solid var(--line)}
+.pgrid{display:grid;gap:36px;align-items:center}
+.app{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 30px 60px rgba(14,27,43,.10);overflow:hidden}
+.app .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
+.app .bar b{font:600 14.5px var(--body);color:var(--ink)}
+.app .bar small{color:var(--muted);font-size:12.5px}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.kp div{padding:14px 18px}
+.kp div+div{border-left:1px solid var(--line)}
+.kp small{display:block;font-size:12px;color:var(--muted)}
+.kp b{font:700 20px var(--head);color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:10px 18px;background:var(--soft)}
+td{padding:12px 18px;border-top:1px solid var(--line);color:var(--ink)}
+td:last-child,th:last-child{text-align:right}
+.st{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:4px}
+.st.ok{background:#E6F4EC;color:#1E7B4F}.st.go{background:var(--brand-soft);color:var(--brand)}.st.wt{background:#FDF1E3;color:#B25E09}
+
+/* flota */
+.fleet{position:relative;min-height:440px;display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden}
+.fleet img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.fleet::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,27,43,.88) 0%,rgba(14,27,43,.55) 55%,rgba(14,27,43,.15) 100%)}
+.fleet .in{width:100%;padding-block:56px}
+.fleet h2{color:#fff;font-size:clamp(28px,3.4vw,44px);font-weight:800;max-width:18ch;line-height:1.1}
+.fleet p{max-width:46ch;color:#D0D8E3;margin:14px 0 0}
+.fleet .row{display:flex;flex-wrap:wrap;gap:34px;margin-top:28px}
+.fleet .row b{display:block;font:800 28px var(--head);color:#fff}
+.fleet .row span{font-size:13.5px;color:#C9D3E0}
+
+/* cotizacion */
+.quote{display:grid;gap:36px}
+.form{border:1px solid var(--line);border-radius:14px;padding:26px;background:#fff;box-shadow:0 20px 44px rgba(14,27,43,.06)}
+.fg{display:grid;gap:14px}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+input,textarea,select{width:100%;font:15px var(--body);color:var(--ink);border:1.5px solid var(--line);border-radius:6px;padding:11px 12px;background:#fff;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.err input,.err textarea{border-color:#B42318}
+.form .note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+.ok-msg{display:none;border-radius:10px;background:#E6F4EC;color:#1E7B4F;padding:14px 16px;font-size:14.5px;margin-top:14px}
+.ok-msg.on{display:block}
+.contact{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:16px}
+.contact li{display:flex;gap:14px;align-items:flex-start}
+.contact .ic{width:40px;height:40px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;color:var(--brand);flex:none}
+.contact b{display:block;color:var(--ink);font-weight:600;font-size:15px}
+.contact span{font-size:14px;color:var(--muted)}
+
+footer{background:var(--ink);color:#98A2B3;font-size:13.5px}
+footer .in{display:grid;gap:26px;padding-block:44px 26px}
+footer .logo b{color:#fff}
+footer .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+footer h4{margin:0 0 10px;color:#fff;font:600 14px var(--body)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+footer .legal{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:12.5px}
+footer .legal a{text-decoration:underline}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.on{opacity:1;transform:none}
+
+@media (min-width:720px){
+  .lines{grid-template-columns:repeat(2,1fr)}
+  .grid-i{grid-template-columns:repeat(3,1fr)}
+  .fg.two{grid-template-columns:1fr 1fr}
+  footer .cols{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1000px){
+  .hero{grid-template-columns:1.02fr .98fr;gap:56px}
+  .lines{grid-template-columns:repeat(4,1fr)}
+  .head{grid-template-columns:1.1fr .9fr;align-items:end}
+  .split{grid-template-columns:1fr 1fr;gap:64px}
+  .pgrid{grid-template-columns:.85fr 1.15fr;gap:56px}
+  .quote{grid-template-columns:.9fr 1.1fr;gap:64px}
+  footer .in{grid-template-columns:1fr 1.6fr}
+}
+@media (max-width:999px){ .menu{display:none} }
+@media (max-width:640px){
+  .top{display:none}
+  .nav .in{height:64px}
+  .nav .btn{display:none}
+  .hv .tag{left:12px;right:12px;bottom:12px;min-width:0}
+  .stats b{font-size:24px}
+  .clients .in{flex-direction:column;align-items:flex-start;gap:12px}
+  .clients ul{gap:14px 26px;justify-content:flex-start}
+  .kp b{font-size:16px}
+  td,th{padding:10px 12px}
+  .hide-s{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="demo">Sitio de demostración con una empresa ficticia · <b>Hecho por crusol</b></div>
+<div class="top"><div class="wrap in"><div><span>Atención a empresas · Lunes a viernes de 8:00 a 18:00</span></div><div><span>ventas@suministrosarce.mx</span><span>81 0000 0000</span></div></div></div>
+
+<header class="nav" id="nav">
+  <div class="wrap in">
+    <a class="logo" href="#"><i>SA</i><span><b>Suministros Arce</b><small>Industrial y seguridad</small></span></a>
+    <nav class="menu"><a href="#lineas">Productos</a><a href="#industrias">Industrias</a><a href="#servicios">Servicios</a><a href="#portal">Portal de clientes</a><a href="#contacto">Contacto</a></nav>
+    <a class="btn sm" href="#contacto">Solicitar cotización</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <span class="eyebrow">Distribuidor B2B desde 2008</span>
+      <h1>Suministro industrial y de seguridad para <em>operaciones que no se detienen.</em></h1>
+      <p>Equipo de protección, empaque y almacenaje con entrega programada, crédito empresarial y un asesor asignado a tu cuenta.</p>
+      <div class="cta">
+        <a class="btn" href="#contacto">Solicitar cotización</a>
+        <a class="btn line" href="#lineas">Ver catálogo</a>
+      </div>
+      <div class="stats">
+        <div><b data-n="2400" data-s="+">0</b><span>productos en catálogo</span></div>
+        <div><b data-n="24" data-s=" h">0</b><span>entrega en zona metropolitana</span></div>
+        <div><b data-n="600" data-s="+">0</b><span>empresas atendidas</span></div>
+      </div>
+    </div>
+    <div class="hv">
+      <figure class="ph"><img src="https://images.unsplash.com/photo-1664382953403-fc1ac77073a0?auto=format&fit=crop&w=1100&h=968&q=70" alt="Personal revisando inventario en un almacén"></figure>
+      <span class="badge">Crédito hasta 30 días</span>
+      <div class="tag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span><div><b>Pedido PED-1184</b><small>En ruta · llega hoy 14:00</small></div><em>A tiempo</em></div>
+    </div>
+  </section>
+
+  <div class="clients"><div class="wrap in"><span>Confían en nosotros</span><ul><li>Plásticos del Valle</li><li>Grupo Norteño Metal</li><li>Logística Cumbres</li><li>Alimentos Sierra</li><li>Constructora Roble</li></ul></div></div>
+
+  <section class="wrap sec" id="lineas">
+    <div class="head">
+      <div><span class="eyebrow">Líneas de producto</span><h2 style="margin-top:14px">Todo lo que tu planta necesita, con un solo proveedor.</h2></div>
+      <p>Marcas certificadas, existencias en almacén propio y fichas técnicas disponibles para tu área de compras.</p>
+    </div>
+    <div class="lines">
+      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1552879890-3a06dd3a06c2?auto=format&fit=crop&w=700&h=525&q=70" alt="Cascos de seguridad"></div><div class="tx"><h3>Protección personal</h3><p>Cascos, lentes, chalecos y protección auditiva con certificación.</p><div class="mt"><span>Ver línea</span><span>480 productos</span></div></div></a>
+      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1634852836003-c0aa5b67d243?auto=format&fit=crop&w=700&h=525&q=70" alt="Guantes de trabajo"></div><div class="tx"><h3>Protección de manos</h3><p>Nitrilo, carnaza, anticorte y guantes para industria alimentaria.</p><div class="mt"><span>Ver línea</span><span>320 productos</span></div></div></a>
+      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1644308977849-45a83bf3b067?auto=format&fit=crop&w=700&h=525&q=70" alt="Empaque de mercancía"></div><div class="tx"><h3>Empaque y embalaje</h3><p>Cajas, cintas, emplaye y esquineros para envío y almacén.</p><div class="mt"><span>Ver línea</span><span>650 productos</span></div></div></a>
+      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700&h=525&q=70" alt="Contenedores en almacén"></div><div class="tx"><h3>Almacenaje</h3><p>Contenedores, tarimas, racks y señalización para piso.</p><div class="mt"><span>Ver línea</span><span>290 productos</span></div></div></a>
+    </div>
+  </section>
+
+  <section class="sec ind" id="industrias">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="eyebrow">Industrias</span><h2 style="margin-top:14px">Experiencia en los sectores que mueven la región.</h2></div>
+        <p>Armamos paquetes por tipo de operación para que tu equipo tenga lo necesario desde el primer turno.</p>
+      </div>
+      <div class="grid-i">
+        <div class="rv"><i>01</i><b>Manufactura</b><span>Protección para líneas de producción y mantenimiento.</span></div>
+        <div class="rv"><i>02</i><b>Construcción</b><span>Equipo para obra, alturas y señalización.</span></div>
+        <div class="rv"><i>03</i><b>Alimentos</b><span>Insumos grado alimenticio e higiene.</span></div>
+        <div class="rv"><i>04</i><b>Logística</b><span>Empaque, emplaye y almacenaje para centros de distribución.</span></div>
+        <div class="rv"><i>05</i><b>Automotriz</b><span>Guantes anticorte y protección visual especializada.</span></div>
+        <div class="rv"><i>06</i><b>Servicios</b><span>Limpieza, mantenimiento y consumibles de oficina.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="servicios">
+    <div class="split">
+      <figure class="ph rv"><img loading="lazy" src="https://images.unsplash.com/photo-1644079446600-219068676743?auto=format&fit=crop&w=1000&h=850&q=70" alt="Pasillo de almacén con estantería"></figure>
+      <div>
+        <span class="eyebrow">Por qué Arce</span>
+        <h2 style="margin-top:14px;font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800">Un proveedor que trabaja al ritmo de tu operación.</h2>
+        <ul class="feat">
+          <li class="rv"><span class="n">01</span><b>Crédito empresarial</b><span>Hasta 30 días para cuentas con historial de compra.</span></li>
+          <li class="rv"><span class="n">02</span><b>Entregas programadas</b><span>Surtido semanal o quincenal en la fecha que tu almacén necesita.</span></li>
+          <li class="rv"><span class="n">03</span><b>Asesor asignado</b><span>Una persona que conoce tu cuenta, tus consumos y tus precios.</span></li>
+          <li class="rv"><span class="n">04</span><b>Facturación inmediata</b><span>CFDI al momento de la entrega y estados de cuenta en línea.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec portal" id="portal">
+    <div class="wrap pgrid">
+      <div>
+        <span class="eyebrow">Portal de clientes</span>
+        <h2 style="margin-top:14px;font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800">Tus pedidos, facturas y saldos en un solo lugar.</h2>
+        <p style="color:var(--muted);margin:16px 0 0;max-width:46ch">Consulta el estado de cada entrega, descarga facturas y repite pedidos frecuentes sin llamar a nadie.</p>
+        <div class="cta" style="display:flex;gap:12px;margin-top:26px;flex-wrap:wrap"><a class="btn" href="#contacto">Solicitar acceso</a></div>
+      </div>
+      <div class="app rv">
+        <div class="bar"><b>Plásticos del Valle</b><small>Cuenta 10482 · Asesora: Laura Méndez</small></div>
+        <div class="kp"><div><small>Compras del mes</small><b>$184,320</b></div><div><small>Saldo al día</small><b>$42,150</b></div><div><small>Pedidos activos</small><b>3</b></div></div>
+        <table>
+          <thead><tr><th>Pedido</th><th class="hide-s">Fecha</th><th>Estado</th><th>Importe</th></tr></thead>
+          <tbody>
+            <tr><td>PED-1184</td><td class="hide-s">27 sep</td><td><span class="st go">En ruta</span></td><td>$18,560.00</td></tr>
+            <tr><td>PED-1179</td><td class="hide-s">24 sep</td><td><span class="st ok">Entregado</span></td><td>$9,742.40</td></tr>
+            <tr><td>PED-1171</td><td class="hide-s">20 sep</td><td><span class="st wt">Por facturar</span></td><td>$23,118.00</td></tr>
+            <tr><td>PED-1165</td><td class="hide-s">17 sep</td><td><span class="st ok">Entregado</span></td><td>$6,480.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="fleet">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1778015862504-b877b548266e?auto=format&fit=crop&w=2000&q=70" alt="Camión de reparto frente a un almacén">
+    <div class="wrap in">
+      <span class="eyebrow" style="color:var(--accent)">Logística propia</span>
+      <h2 style="margin-top:14px">Flota propia y rutas diarias.</h2>
+      <p>Controlamos la entrega de principio a fin, con aviso de salida, rastreo del pedido y evidencia de recepción.</p>
+      <div class="row"><div><b>3</b><span>rutas diarias</span></div><div><b>98%</b><span>entregas a tiempo</span></div><div><b>2</b><span>almacenes propios</span></div></div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="contacto">
+    <div class="quote">
+      <div>
+        <span class="eyebrow">Cotización</span>
+        <h2 style="margin-top:14px;font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800">Recibe tu cotización en menos de 24 horas.</h2>
+        <p style="color:var(--muted);margin:16px 0 0;max-width:44ch">Envíanos la lista de productos o el requerimiento de tu área de compras y un asesor te responde con precios y tiempos de entrega.</p>
+        <ul class="contact">
+          <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><b>ventas@suministrosarce.mx</b><span>Respuesta el mismo día hábil</span></div></li>
+          <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><b>81 0000 0000</b><span>Lunes a viernes de 8:00 a 18:00</span></div></li>
+        </ul>
+      </div>
+      <form class="form" id="form" novalidate>
+        <div class="fg two">
+          <div><label for="f1">Empresa</label><input id="f1" required placeholder="Razón social o nombre comercial"></div>
+          <div><label for="f2">Nombre</label><input id="f2" required placeholder="Nombre y apellido"></div>
+        </div>
+        <div class="fg two" style="margin-top:14px">
+          <div><label for="f3">Correo</label><input id="f3" type="email" required placeholder="compras@empresa.com"></div>
+          <div><label for="f4">Industria</label><select id="f4"><option>Manufactura</option><option>Construcción</option><option>Alimentos</option><option>Logística</option><option>Automotriz</option><option>Otra</option></select></div>
+        </div>
+        <div style="margin-top:14px"><label for="f5">Productos o requerimiento</label><textarea id="f5" required placeholder="Ejemplo: 20 cajas de guantes de nitrilo talla M, 50 cascos clase E"></textarea></div>
+        <button class="btn" type="submit" style="margin-top:18px;width:100%">Enviar solicitud</button>
+        <p class="note">Demo: el formulario no envía información.</p>
+        <div class="ok-msg" id="okmsg" role="status"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap in">
+    <div>
+      <a class="logo" href="#"><i>SA</i><span><b>Suministros Arce</b><small style="color:#98A2B3">Industrial y seguridad</small></span></a>
+      <p style="max-width:34ch;margin:14px 0 0">Empresa ficticia creada para demostrar un sitio corporativo.</p>
+    </div>
+    <div class="cols">
+      <div><h4>Productos</h4><ul><li><a href="#lineas">Protección personal</a></li><li><a href="#lineas">Protección de manos</a></li><li><a href="#lineas">Empaque y embalaje</a></li><li><a href="#lineas">Almacenaje</a></li></ul></div>
+      <div><h4>Empresa</h4><ul><li><a href="#servicios">Servicios</a></li><li><a href="#industrias">Industrias</a></li><li><a href="#portal">Portal de clientes</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li>ventas@suministrosarce.mx</li><li>81 0000 0000</li></ul></div>
+    </div>
+    <div class="legal" style="grid-column:1/-1"><span>Diseño y desarrollo: <a href="../../" target="_top">crusol</a></span><span id="credits"></span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var nav=document.getElementById("nav");
+  addEventListener("scroll",function(){nav.classList.toggle("sh",scrollY>10)},{passive:true});
+
+  /* contadores */
+  [].forEach.call(document.querySelectorAll("[data-n]"),function(el){
+    var goal=+el.dataset.n,suf=el.dataset.s||"",t0=null;
+    function f(v){return Math.round(v).toLocaleString("es-MX")+suf}
+    if(still){el.textContent=f(goal);return}
+    function run(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1600),e=1-Math.pow(1-p,3);el.textContent=f(goal*e);if(p<1)requestAnimationFrame(run)}
+    setTimeout(function(){requestAnimationFrame(run)},300);
+  });
+
+  /* aparecer */
+  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}})},{threshold:.12}):null;
+  [].forEach.call(document.querySelectorAll(".rv"),function(el,i){el.style.transitionDelay=(i%4*0.07)+"s";io?io.observe(el):el.classList.add("on")});
+
+  /* formulario de demo */
+  var form=document.getElementById("form"),ok=document.getElementById("okmsg");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();var bad=false;
+    [].forEach.call(form.querySelectorAll("[required]"),function(i){var v=i.value.trim(),w=!v||(i.type==="email"&&!/^\S+@\S+\.\S+$/.test(v));i.parentNode.classList.toggle("err",w);if(w)bad=true});
+    if(bad){ok.classList.remove("on");return}
+    ok.textContent="Gracias, "+document.getElementById("f2").value.trim().split(" ")[0]+". Recibimos la solicitud de "+document.getElementById("f1").value.trim()+". Folio SOL-"+(2300+Math.floor(Math.random()*600))+". Un asesor te contactará hoy.";
+    ok.classList.add("on");form.reset();
+  });
+
+  /* créditos de fotos */
+  var U="?utm_source=crusol&utm_medium=referral",P=[["Centre for Ageing Better","ageing_better"],["Pop & Zebra","popandzebra"],["Hybrid Storytellers","hybridstorytellers"],["Jimmy Nilsson Masth","jimmynilssonmasth"],["Adrian Sulyok","sulyok_imaging"],["Lance Chang","carmendis"],["Troy Mortier","troyscanon"]];
+  var c=document.getElementById("credits");c.appendChild(document.createTextNode("Fotos de "));
+  P.forEach(function(p,i){var a=document.createElement("a");a.href="https://unsplash.com/@"+p[1]+U;a.target="_blank";a.rel="noopener";a.textContent=p[0];c.appendChild(a);c.appendChild(document.createTextNode(i<P.length-1?", ":" en "))});
+  var u=document.createElement("a");u.href="https://unsplash.com/"+U;u.target="_blank";u.rel="noopener";u.textContent="Unsplash";c.appendChild(u);
+})();
+</script>
+<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
+<script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
