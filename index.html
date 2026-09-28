@@ -100,6 +100,22 @@ h2 em{color:var(--sage-2)}
 .arrows button:hover{border-color:var(--ink)}
 .arrows svg{width:18px;height:18px}
 
+/* sistemas */
+.sys{display:grid;gap:28px;align-items:center;border-top:1px solid var(--line);padding-top:34px}
+.sys ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:0}
+.sys li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:clamp(18px,2vw,22px);font-weight:500;letter-spacing:-.02em}
+.sys li span{color:var(--muted);font-size:14px;font-weight:400;letter-spacing:0;text-align:right}
+.sys p{color:#C9C6BE;max-width:40ch;margin:18px 0 0}
+.sys .btns{margin-top:22px}
+.win{display:block;text-decoration:none;border-radius:12px;overflow:hidden;background:#0B0B0A;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 40px 80px rgba(0,0,0,.5);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.win:hover{transform:translateY(-6px)}
+.win .bar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:#1C1D1A;border-bottom:1px solid var(--line)}
+.win .bar i{width:10px;height:10px;border-radius:50%;background:#3A3B37}
+.win .bar span{margin-left:10px;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.win .vp{position:relative;aspect-ratio:1280/820;overflow:hidden;background:#F4F5F7}
+.win iframe{position:absolute;top:0;left:0;width:1280px;height:820px;border:0;transform-origin:0 0;pointer-events:none}
+.win .cap{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.win .cap b{color:var(--sage-2);font-weight:600}
 /* planes */
 .plans{display:grid;border-top:1px solid var(--line)}
 .plan{padding:34px 0;border-bottom:1px solid var(--line);display:grid;gap:18px;position:relative}
@@ -148,6 +164,7 @@ footer a{color:var(--muted)}
   .step p{grid-column:2}
 }
 @media (min-width:761px){
+  .sys{grid-template-columns:.9fr 1.1fr}
   .work{aspect-ratio:16/10}
   .phone{--w:240;margin-bottom:0}
 }
@@ -175,7 +192,7 @@ footer a{color:var(--muted)}
 <header class="nav" id="nav">
   <div class="in">
     <a class="logo" href="#" aria-label="crusol">crusol</a>
-    <nav class="links"><a href="#trabajos">Trabajos</a><a href="#planes">Planes</a><a href="#como">Cómo funciona</a></nav>
+    <nav class="links"><a href="#trabajos">Trabajos</a><a href="#sistemas">Sistemas</a><a href="#planes">Planes</a><a href="#como">Cómo funciona</a></nav>
     <a class="go" id="wa-nav" data-goatcounter-click="portafolio-whatsapp" href="#" target="_blank" rel="noopener">Hagamos la tuya</a>
   </div>
 </header>
@@ -246,9 +263,38 @@ footer a{color:var(--muted)}
   </div>
 </section>
 
+<section class="sec" id="sistemas">
+  <div class="head">
+    <div class="top"><span class="lbl"><b>(03)</b> Sistemas</span><span class="lbl">A la medida</span></div>
+    <h2 class="rv">Menos Excel, <em>más orden.</em></h2>
+  </div>
+  <div class="sys">
+    <div class="rv">
+      <p>Para empresas que todavía hacen todo a mano. Herramientas sencillas que se usan desde el navegador, en la compu o en el celular.</p>
+      <ul>
+        <li>Cotizadores<span>PDF con tu logo en un minuto</span></li>
+        <li>Inventario<span>Entradas, salidas y existencias</span></li>
+        <li>Pedidos y clientes<span>Quién pidió qué y qué se debe</span></li>
+        <li>Cobranza<span>Recordatorios de pago</span></li>
+        <li>Reportes<span>Que se hagan solos cada semana</span></li>
+      </ul>
+      <div class="btns">
+        <a class="btn main" id="wa-sys" data-goatcounter-click="portafolio-sistemas-whatsapp" href="#" target="_blank" rel="noopener">Platícame qué necesitas
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <a class="btn ghost" href="sistemas/cotizador/">Probar el cotizador</a>
+      </div>
+    </div>
+    <a class="win rv" href="sistemas/cotizador/" aria-label="Abrir demo del cotizador">
+      <div class="bar"><i></i><i></i><i></i><span>cotizador · demo</span></div>
+      <div class="vp" id="sysvp"><iframe src="sistemas/cotizador/?v=0927" title="Demo del cotizador" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="cap"><span><b>Demo</b> · Cotizador con historial</span><span>Probar ↗</span></div>
+    </a>
+  </div>
+</section>
+
 <section class="sec" id="planes">
   <div class="head">
-    <div class="top"><span class="lbl"><b>(03)</b> Planes</span><span class="lbl">Precio de lanzamiento</span></div>
+    <div class="top"><span class="lbl"><b>(04)</b> Planes</span><span class="lbl">Páginas web · precio de lanzamiento</span></div>
     <h2 class="rv">Elige cómo <em>empezar.</em></h2>
   </div>
   <div class="plans">
@@ -295,7 +341,7 @@ footer a{color:var(--muted)}
 
 <section class="sec" id="como">
   <div class="head">
-    <div class="top"><span class="lbl"><b>(04)</b> Cómo funciona</span><span class="lbl">3 pasos</span></div>
+    <div class="top"><span class="lbl"><b>(05)</b> Cómo funciona</span><span class="lbl">3 pasos</span></div>
   </div>
   <div class="steps">
     <div class="step rv"><span class="n">01</span><b>Me mandas tus datos</b><p>Nombre, precios, horario y unas fotos del celular.</p></div>
@@ -305,7 +351,7 @@ footer a{color:var(--muted)}
 </section>
 
 <section class="end">
-  <span class="lbl"><b>(05)</b> ¿Hacemos la tuya?</span>
+  <span class="lbl"><b>(06)</b> ¿Hacemos la tuya?</span>
   <a class="big" id="wa" data-goatcounter-click="portafolio-whatsapp" href="#" target="_blank" rel="noopener">Hagamos <em>la tuya</em> <span class="ar">→</span></a>
   <div class="under">
     <span>Escríbeme y te preparo una muestra con el nombre de tu negocio.</span>
@@ -328,6 +374,8 @@ footer a{color:var(--muted)}
     a.href = "https://wa.me/52" + MI_WHATSAPP + "?text=" + encodeURIComponent("Hola, me interesa el plan " + a.dataset.plan + " de crusol para mi negocio");
     a.target = "_blank"; a.rel = "noopener";
   });
+  document.getElementById("wa-sys").href = "https://wa.me/52" + MI_WHATSAPP + "?text=" + encodeURIComponent("Hola, vi el portafolio de crusol y me interesa un sistema para mi negocio");
+  (function(){var vp=document.getElementById("sysvp");if(!vp)return;var f=vp.querySelector("iframe");function sc(){f.style.transform="scale("+(vp.clientWidth/1280)+")"}sc();addEventListener("resize",sc);})();
   document.getElementById("wa-text").textContent = "WhatsApp " + MI_WHATSAPP.replace(/(\d{2})(\d{4})(\d{4})/, "$1 $2 $3");
 
   (function(){

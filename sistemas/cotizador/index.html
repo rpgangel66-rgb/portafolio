@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cotizador · Suministros Arce</title>
+<meta name="description" content="Demo de sistema: cotizador con PDF, historial y seguimiento. Hecho por crusol.">
+<meta name="theme-color" content="#F4F5F7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#F4F5F7; --panel:#FFFFFF; --ink:#16181D; --muted:#667085; --line:#E4E7EC; --soft:#F9FAFB;
+  --brand:#1F4E79; --brand-2:#163A5B; --brand-soft:#E8F0F8;
+  --ok:#1E7B4F; --ok-soft:#E6F4EC; --warn:#B25E09; --warn-soft:#FDF1E3; --bad:#B42318; --bad-soft:#FDECEA;
+  --font:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* barra */
+.app{display:flex;align-items:center;gap:14px;padding:12px 18px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.mark{width:34px;height:34px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;letter-spacing:.02em;flex:none}
+.app h1{margin:0;font-size:15px;font-weight:600;line-height:1.2}
+.app h1 small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.tabs{margin-left:auto;display:flex;gap:4px;background:var(--soft);border:1px solid var(--line);padding:3px;border-radius:10px}
+.tab{border:0;background:transparent;padding:7px 12px;border-radius:7px;font-weight:600;font-size:13px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(16,24,40,.08)}
+.demo{background:var(--brand-soft);color:var(--brand-2);font-size:12px;padding:8px 18px;text-align:center}
+.demo a{font-weight:600}
+
+main{max-width:1320px;margin:0 auto;padding:18px}
+.view[hidden]{display:none}
+.split{display:grid;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card+.card{margin-top:14px}
+.card h2{margin:0 0 12px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:grid;gap:5px;font-size:12px;font-weight:600;color:#344054}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:9px 10px;font-weight:400;font-size:14px}
+textarea{resize:vertical;min-height:62px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+
+/* buscador */
+.search{position:relative}
+.search input{padding-left:34px}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+.results{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 30px rgba(16,24,40,.12);max-height:280px;overflow:auto;z-index:10}
+.results[hidden]{display:none}
+.res{display:flex;justify-content:space-between;gap:12px;width:100%;border:0;background:transparent;text-align:left;padding:9px 12px;cursor:pointer}
+.res:hover,.res.on{background:var(--soft)}
+.res b{font-weight:600}
+.res small{display:block;color:var(--muted)}
+.res span:last-child{font-weight:600;white-space:nowrap}
+
+/* conceptos */
+.lines{margin-top:12px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.line{display:grid;grid-template-columns:1fr 78px 96px 30px;gap:8px;align-items:center;padding:9px 10px;border-top:1px solid var(--line)}
+.line:first-child{border-top:0}
+.line .d input{border:0;padding:4px 0;font-weight:500;background:transparent}
+.line .d small{display:block;color:var(--muted);font-size:12px}
+.line input.num{text-align:right;padding:7px 8px}
+.line .x{border:0;background:transparent;color:var(--muted);cursor:pointer;width:30px;height:30px;border-radius:7px;font-size:18px;line-height:1}
+.line .x:hover{background:var(--bad-soft);color:var(--bad)}
+.empty{padding:22px;text-align:center;color:var(--muted)}
+.linkbtn{border:0;background:transparent;color:var(--brand);font-weight:600;cursor:pointer;padding:8px 0}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.check{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500}
+.check input{width:16px;height:16px}
+
+/* totales en panel */
+.sum{display:grid;gap:6px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{font-size:18px;font-weight:700}
+
+/* acciones */
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn svg{width:16px;height:16px}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.pri:hover{background:var(--brand-2)}
+.btn:hover{border-color:#C9CFD8}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,40px);opacity:0;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;transition:all .3s;z-index:50;pointer-events:none}
+.toast.on{transform:translate(-50%,0);opacity:1}
+
+/* hoja de cotización */
+.paper{background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 20px 50px rgba(16,24,40,.08);padding:34px 32px;color:#1D2939;font-size:12.5px;position:sticky;top:78px}
+.ph{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding-bottom:18px;border-bottom:2px solid var(--brand)}
+.ph .co{display:flex;gap:12px;align-items:center}
+.ph .co .mark{width:44px;height:44px;font-size:15px}
+.ph .co b{display:block;font-size:16px}
+.ph .co small{color:var(--muted);display:block}
+.ph .meta{text-align:right}
+.ph .meta b{display:block;font-size:20px;color:var(--brand);letter-spacing:.02em}
+.ph .meta div{color:var(--muted)}
+.pto{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+.pto h4{margin:0 0 4px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pto p{margin:0}
+.ptab{width:100%;border-collapse:collapse}
+.ptab th{background:var(--brand-soft);color:var(--brand-2);text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:8px}
+.ptab td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.ptab .r{text-align:right;white-space:nowrap}
+.ptab td small{color:var(--muted)}
+.ptot{display:flex;justify-content:flex-end;margin-top:12px}
+.ptot table{min-width:230px;border-collapse:collapse}
+.ptot td{padding:5px 8px}
+.ptot tr.t td{border-top:2px solid var(--brand);font-size:15px;font-weight:700;color:var(--brand-2);padding-top:9px}
+.pcond{margin-top:22px;display:grid;gap:4px;color:#475467}
+.pcond b{color:#1D2939}
+.psign{margin-top:36px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;color:var(--muted);font-size:11px}
+.psign div{border-top:1px solid #98A2B3;padding-top:6px;min-width:180px;text-align:center}
+
+/* historial */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi small{color:var(--muted);font-weight:500}
+.kpi b{display:block;font-size:24px;margin-top:4px;letter-spacing:-.01em}
+.kpi .bar{height:6px;background:var(--soft);border-radius:99px;margin-top:10px;overflow:hidden}
+.kpi .bar i{display:block;height:100%;background:var(--ok);border-radius:99px}
+.hist{margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.hrow{display:grid;grid-template-columns:96px 1fr 110px 120px 130px;gap:10px;align-items:center;padding:12px 16px;border-top:1px solid var(--line)}
+.hrow.head{border-top:0;background:var(--soft);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hrow b{font-weight:600}
+.hrow small{display:block;color:var(--muted)}
+.hrow .r{text-align:right;font-weight:600}
+.pill{border:0;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;appearance:none;-webkit-appearance:none;text-align:center}
+.pill.p{background:var(--warn-soft);color:var(--warn)}
+.pill.a{background:var(--ok-soft);color:var(--ok)}
+.pill.x{background:var(--bad-soft);color:var(--bad)}
+.hbtns{display:flex;gap:6px;justify-content:flex-end}
+.mini{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:6px 9px;font-size:12px;font-weight:600;cursor:pointer}
+.foot{text-align:center;color:var(--muted);font-size:12px;padding:26px 0 30px}
+.foot a{color:var(--ink);font-weight:600}
+
+@media (min-width:1000px){
+  .split{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:start}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:720px){
+  .app{flex-wrap:wrap}
+  .tabs{margin-left:0;width:100%}
+  .tab{flex:1}
+  .grid2,.opts{grid-template-columns:1fr}
+  .paper{position:static;padding:22px 18px;font-size:12px}
+  .pto{grid-template-columns:1fr}
+  .hrow{grid-template-columns:1fr auto;grid-template-areas:"a c" "b d" "e e"}
+  .hrow.head{display:none}
+  .hrow>:nth-child(1){grid-area:a}.hrow>:nth-child(2){grid-area:b}.hrow>:nth-child(3){grid-area:c}.hrow>:nth-child(4){grid-area:d;justify-self:end}.hrow>:nth-child(5){grid-area:e}
+  .line{grid-template-columns:1fr 1fr 30px;row-gap:6px}
+  .line .d{grid-column:1/-1}
+}
+@media print{
+  body{background:#fff}
+  .app,.demo,.editor,.foot,.toast,#vHist{display:none!important}
+  main{padding:0;max-width:none}
+  .split{display:block}
+  .paper{position:static;border:0;box-shadow:none;padding:0;font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:16mm}
+}
+</style>
+</head>
+<body>
+
+<header class="app">
+  <div class="mark">SA</div>
+  <h1>Suministros Arce<small>Cotizador</small></h1>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tNew" aria-selected="true">Nueva cotización</button>
+    <button class="tab" role="tab" id="tHist" aria-selected="false">Historial</button>
+  </div>
+</header>
+<div class="demo">Demo de sistema con una empresa ficticia · Pruébalo, nada se envía a nadie · Hecho por <a href="../../">crusol</a></div>
+
+<main>
+  <!-- NUEVA -->
+  <section class="view" id="vNew">
+    <div class="split">
+      <div class="editor">
+        <div class="card">
+          <h2>Cliente</h2>
+          <div class="grid2">
+            <label>Nombre<input id="cNombre" placeholder="Ej. Laura Méndez" autocomplete="off"></label>
+            <label>Empresa<input id="cEmpresa" placeholder="Ej. Plásticos del Valle" autocomplete="off"></label>
+            <label>Correo<input id="cCorreo" type="email" placeholder="correo@empresa.com" autocomplete="off"></label>
+            <label>Teléfono<input id="cTel" inputmode="tel" placeholder="81 0000 0000" autocomplete="off"></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Productos y servicios</h2>
+          <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="q" placeholder="Busca por nombre o código (ej. guantes, TOR)" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="results">
+            <div class="results" id="results" role="listbox" hidden></div>
+          </div>
+          <div class="lines" id="lines"></div>
+          <button class="linkbtn" id="addFree" type="button">+ Agregar concepto libre</button>
+          <div class="opts">
+            <label>Descuento (%)<input id="desc" type="number" min="0" max="100" step="1" value="0" inputmode="decimal"></label>
+            <label>Vigencia<select id="vig"><option value="7">7 días</option><option value="15" selected>15 días</option><option value="30">30 días</option></select></label>
+            <label>Tiempo de entrega<input id="ent" value="3 a 5 días hábiles"></label>
+            <label class="check" style="align-self:end;padding-bottom:10px"><input id="iva" type="checkbox" checked> Agregar IVA (16%)</label>
+          </div>
+          <label style="margin-top:10px">Notas para el cliente<textarea id="notas" placeholder="Ej. Precios sujetos a existencias. Envío sin costo en pedidos mayores a $5,000."></textarea></label>
+          <div class="sum">
+            <div><span>Subtotal</span><span id="sSub">$0.00</span></div>
+            <div><span>Descuento</span><span id="sDesc">$0.00</span></div>
+            <div><span>IVA</span><span id="sIva">$0.00</span></div>
+            <div class="tot"><span>Total</span><span id="sTot">$0.00</span></div>
+          </div>
+          <div class="actions">
+            <button class="btn pri" id="save" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>Guardar</button>
+            <button class="btn" id="pdf" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4v-6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6h-2M8 14h8v7H8z"/></svg>Guardar PDF</button>
+            <a class="btn" id="wa" href="#" target="_blank" rel="noopener" data-goatcounter-click="cotizador-whatsapp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>WhatsApp</a>
+            <a class="btn" id="mail" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Correo</a>
+            <button class="btn" id="nueva" type="button">Nueva</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- hoja -->
+      <div>
+        <article class="paper" id="paper" aria-label="Vista previa de la cotización">
+          <div class="ph">
+            <div class="co"><div class="mark">SA</div><div><b>Suministros Arce</b><small>Material industrial y de seguridad</small><small>ventas@suministrosarce.mx · 81 0000 0000</small></div></div>
+            <div class="meta"><b id="pFolio">COT-0000</b><div>Cotización</div><div id="pFecha"></div></div>
+          </div>
+          <div class="pto">
+            <div><h4>Para</h4><p id="pCli">—</p></div>
+            <div><h4>Condiciones</h4><p>Vigencia: <span id="pVig"></span><br>Entrega: <span id="pEnt"></span></p></div>
+          </div>
+          <table class="ptab">
+            <thead><tr><th>Concepto</th><th class="r">Cant.</th><th class="r">P. unitario</th><th class="r">Importe</th></tr></thead>
+            <tbody id="pRows"></tbody>
+          </table>
+          <div class="ptot"><table>
+            <tr><td>Subtotal</td><td class="r" id="pSub"></td></tr>
+            <tr id="pDescRow"><td id="pDescL">Descuento</td><td class="r" id="pDesc"></td></tr>
+            <tr id="pIvaRow"><td>IVA 16%</td><td class="r" id="pIva"></td></tr>
+            <tr class="t"><td>Total</td><td class="r" id="pTot"></td></tr>
+          </table></div>
+          <div class="pcond" id="pNotas"></div>
+          <div class="psign"><span>Precios en pesos mexicanos (MXN).</span><div>Atentamente<br>Suministros Arce</div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORIAL -->
+  <section class="view" id="vHist" hidden>
+    <div class="kpis">
+      <div class="kpi"><small>Cotizado este mes</small><b id="kMes">$0</b></div>
+      <div class="kpi"><small>Cotizaciones</small><b id="kNum">0</b></div>
+      <div class="kpi"><small>Vendido (aceptadas)</small><b id="kVen">$0</b></div>
+      <div class="kpi"><small>Tasa de cierre</small><b id="kTasa">0%</b><div class="bar"><i id="kBar" style="width:0"></i></div></div>
+    </div>
+    <div class="hist" id="hist"></div>
+  </section>
+
+  <div class="foot">Demo de sistema hecha por <a href="../../">crusol · ver más trabajos</a></div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var TEL="528123256381";
+  var CAT=[
+    {c:"TOR-M8",n:"Tornillo hexagonal M8 x 25",u:"Caja 100 pzas",p:185},
+    {c:"GUA-NIT",n:"Guantes de nitrilo",u:"Caja 100 pzas",p:260},
+    {c:"CIN-48",n:"Cinta canela 48 mm",u:"Paquete 6 rollos",p:210},
+    {c:"LUB-400",n:"Lubricante multiusos 400 ml",u:"Pieza",p:95},
+    {c:"DIS-45",n:"Disco de corte 4½\"",u:"Pieza",p:38},
+    {c:"CAS-SEG",n:"Casco de seguridad",u:"Pieza",p:145},
+    {c:"LEN-SEG",n:"Lentes de seguridad",u:"Pieza",p:55},
+    {c:"BRO-10",n:"Juego de brocas para metal",u:"Juego 10 pzas",p:320},
+    {c:"EMP-18",n:"Playo para emplayar 18\"",u:"Rollo",p:180},
+    {c:"ETI-TER",n:"Etiquetas térmicas 4x6",u:"Rollo 250",p:120},
+    {c:"CHA-REF",n:"Chaleco reflejante",u:"Pieza",p:89},
+    {c:"SRV-INS",n:"Servicio de instalación",u:"Hora",p:450}
+  ];
+  var money=new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN"});
+  function $(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function toast(t){var e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove("on")},1800)}
+  function fmtDate(d){return new Date(d).toLocaleDateString("es-MX",{day:"numeric",month:"short",year:"numeric"})}
+
+  /* ---- guardado (solo en este navegador) ---- */
+  var KEY="crusol_cotizador_demo_v1",DB;
+  function seed(){
+    var now=Date.now(),day=864e5;
+    return {next:5,list:[
+      {folio:"COT-0001",fecha:now-12*day,estado:"a",cli:{nombre:"Laura Méndez",empresa:"Plásticos del Valle"},items:[{c:"GUA-NIT",n:"Guantes de nitrilo",u:"Caja 100 pzas",p:260,q:10},{c:"LEN-SEG",n:"Lentes de seguridad",u:"Pieza",p:55,q:20}],desc:5,iva:true,vig:15,ent:"3 a 5 días hábiles",notas:""},
+      {folio:"COT-0002",fecha:now-8*day,estado:"p",cli:{nombre:"Jorge Salinas",empresa:"Talleres Salinas"},items:[{c:"BRO-10",n:"Juego de brocas para metal",u:"Juego 10 pzas",p:320,q:4},{c:"DIS-45",n:"Disco de corte 4½\"",u:"Pieza",p:38,q:50}],desc:0,iva:true,vig:15,ent:"3 a 5 días hábiles",notas:""},
+      {folio:"COT-0003",fecha:now-5*day,estado:"x",cli:{nombre:"Ana Torres",empresa:"Distribuidora Torres"},items:[{c:"EMP-18",n:"Playo para emplayar 18\"",u:"Rollo",p:180,q:30}],desc:10,iva:true,vig:7,ent:"Inmediata",notas:""},
+      {folio:"COT-0004",fecha:now-2*day,estado:"a",cli:{nombre:"Ricardo Leal",empresa:"Construcciones Leal"},items:[{c:"CAS-SEG",n:"Casco de seguridad",u:"Pieza",p:145,q:25},{c:"CHA-REF",n:"Chaleco reflejante",u:"Pieza",p:89,q:25},{c:"SRV-INS",n:"Servicio de instalación",u:"Hora",p:450,q:2}],desc:0,iva:true,vig:30,ent:"5 días hábiles",notas:""}
+    ]};
+  }
+  function load(){try{var r=localStorage.getItem(KEY);DB=r?JSON.parse(r):seed()}catch(e){DB=seed()}}
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
+  load();
+
+  /* ---- cotización actual ---- */
+  var cur;
+  function blank(){return {folio:"COT-"+String(DB.next).padStart(4,"0"),fecha:Date.now(),estado:"p",cli:{nombre:"",empresa:"",correo:"",tel:""},items:[],desc:0,iva:true,vig:15,ent:"3 a 5 días hábiles",notas:"",saved:false}}
+  function calc(q){
+    var sub=q.items.reduce(function(a,i){return a+(+i.p||0)*(+i.q||0)},0);
+    var d=sub*Math.min(100,Math.max(0,+q.desc||0))/100,base=sub-d,iva=q.iva?base*.16:0;
+    return {sub:sub,desc:d,iva:iva,tot:base+iva};
+  }
+  function fillForm(){
+    $("cNombre").value=cur.cli.nombre||"";$("cEmpresa").value=cur.cli.empresa||"";$("cCorreo").value=cur.cli.correo||"";$("cTel").value=cur.cli.tel||"";
+    $("desc").value=cur.desc;$("iva").checked=!!cur.iva;$("vig").value=String(cur.vig);$("ent").value=cur.ent;$("notas").value=cur.notas||"";
+    drawLines();render();
+  }
+  function drawLines(){
+    var box=$("lines");box.innerHTML="";
+    if(!cur.items.length){box.innerHTML='<div class="empty">Busca un producto arriba para agregarlo.</div>';return}
+    cur.items.forEach(function(it,i){
+      var r=document.createElement("div");r.className="line";
+      r.innerHTML='<div class="d"><input data-k="n" data-i="'+i+'" value="'+esc(it.n)+'" aria-label="Concepto"><small>'+esc((it.c?it.c+" · ":"")+(it.u||""))+'</small></div>'+
+        '<input class="num" data-k="q" data-i="'+i+'" type="number" min="0" step="1" value="'+esc(it.q)+'" inputmode="decimal" aria-label="Cantidad">'+
+        '<input class="num" data-k="p" data-i="'+i+'" type="number" min="0" step="0.5" value="'+esc(it.p)+'" inputmode="decimal" aria-label="Precio unitario">'+
+        '<button class="x" data-del="'+i+'" type="button" aria-label="Quitar">×</button>';
+      box.appendChild(r);
+    });
+  }
+  $("lines").addEventListener("input",function(e){var t=e.target,i=t.dataset.i;if(i==null)return;var k=t.dataset.k;cur.items[i][k]=k==="n"?t.value:parseFloat(t.value)||0;render()});
+  $("lines").addEventListener("click",function(e){var b=e.target.closest("[data-del]");if(!b)return;cur.items.splice(+b.dataset.del,1);drawLines();render()});
+  $("addFree").addEventListener("click",function(){cur.items.push({c:"",n:"Concepto",u:"",p:0,q:1});drawLines();render();var ins=$("lines").querySelectorAll('input[data-k="n"]');var last=ins[ins.length-1];if(last){last.focus();last.select()}});
+  [["cNombre","nombre"],["cEmpresa","empresa"],["cCorreo","correo"],["cTel","tel"]].forEach(function(p){$(p[0]).addEventListener("input",function(e){cur.cli[p[1]]=e.target.value;render()})});
+  $("desc").addEventListener("input",function(e){cur.desc=parseFloat(e.target.value)||0;render()});
+  $("iva").addEventListener("change",function(e){cur.iva=e.target.checked;render()});
+  $("vig").addEventListener("change",function(e){cur.vig=+e.target.value;render()});
+  $("ent").addEventListener("input",function(e){cur.ent=e.target.value;render()});
+  $("notas").addEventListener("input",function(e){cur.notas=e.target.value;render()});
+
+  /* ---- buscador ---- */
+  var q=$("q"),res=$("results"),hits=[],hi=-1;
+  function norm(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase()}
+  function search(){
+    var t=norm(q.value.trim());
+    hits=t?CAT.filter(function(p){return norm(p.n+" "+p.c).indexOf(t)>-1}):CAT.slice();
+    hi=hits.length?0:-1;
+    res.innerHTML=hits.length?hits.map(function(p,i){return '<button type="button" class="res'+(i===hi?" on":"")+'" data-h="'+i+'" role="option"><span><b>'+esc(p.n)+'</b><small>'+esc(p.c+" · "+p.u)+'</small></span><span>'+money.format(p.p)+'</span></button>'}).join(""):'<div class="empty">No encontré ese producto. Usa "Agregar concepto libre".</div>';
+    res.hidden=false;q.setAttribute("aria-expanded","true");
+  }
+  function pick(i){var p=hits[i];if(!p)return;var ex=cur.items.filter(function(x){return x.c===p.c})[0];if(ex)ex.q=(+ex.q||0)+1;else cur.items.push({c:p.c,n:p.n,u:p.u,p:p.p,q:1});q.value="";close();drawLines();render();toast("Agregado: "+p.n)}
+  function close(){res.hidden=true;q.setAttribute("aria-expanded","false")}
+  q.addEventListener("focus",search);q.addEventListener("input",search);
+  q.addEventListener("keydown",function(e){
+    if(res.hidden)return;
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();hi=Math.max(0,Math.min(hits.length-1,hi+(e.key==="ArrowDown"?1:-1)));[].forEach.call(res.querySelectorAll(".res"),function(b,i){b.classList.toggle("on",i===hi)})}
+    else if(e.key==="Enter"){e.preventDefault();pick(hi)}else if(e.key==="Escape")close();
+  });
+  res.addEventListener("mousedown",function(e){var b=e.target.closest("[data-h]");if(b){e.preventDefault();pick(+b.dataset.h)}});
+  document.addEventListener("click",function(e){if(!e.target.closest(".search"))close()});
+
+  /* ---- vista previa ---- */
+  function render(){
+    var t=calc(cur);
+    $("sSub").textContent=money.format(t.sub);$("sDesc").textContent="−"+money.format(t.desc);$("sIva").textContent=money.format(t.iva);$("sTot").textContent=money.format(t.tot);
+    $("pFolio").textContent=cur.folio;$("pFecha").textContent=fmtDate(cur.fecha);
+    var c=cur.cli,who=[c.nombre,c.empresa].filter(Boolean);
+    $("pCli").innerHTML=who.length?"<b>"+esc(c.nombre||c.empresa)+"</b>"+(c.nombre&&c.empresa?"<br>"+esc(c.empresa):"")+(c.correo?"<br>"+esc(c.correo):"")+(c.tel?"<br>"+esc(c.tel):""):'<span style="color:#98A2B3">Datos del cliente</span>';
+    $("pVig").textContent=cur.vig+" días";$("pEnt").textContent=cur.ent||"—";
+    $("pRows").innerHTML=cur.items.length?cur.items.map(function(i){return '<tr><td>'+esc(i.n)+(i.u?'<br><small>'+esc((i.c?i.c+" · ":"")+i.u)+'</small>':"")+'</td><td class="r">'+esc(i.q)+'</td><td class="r">'+money.format(+i.p||0)+'</td><td class="r">'+money.format((+i.p||0)*(+i.q||0))+'</td></tr>'}).join(""):'<tr><td colspan="4" style="color:#98A2B3;text-align:center;padding:22px">Sin conceptos todavía</td></tr>';
+    $("pSub").textContent=money.format(t.sub);
+    $("pDescRow").style.display=t.desc?"":"none";$("pDescL").textContent="Descuento "+(+cur.desc||0)+"%";$("pDesc").textContent="−"+money.format(t.desc);
+    $("pIvaRow").style.display=cur.iva?"":"none";$("pIva").textContent=money.format(t.iva);
+    $("pTot").textContent=money.format(t.tot);
+    $("pNotas").innerHTML=cur.notas?"<b>Notas</b>"+esc(cur.notas).replace(/\n/g,"<br>"):"";
+    var lines=cur.items.map(function(i){return "• "+i.q+" x "+i.n+" = "+money.format((+i.p||0)*(+i.q||0))}).join("\n");
+    var txt="Cotización "+cur.folio+" · Suministros Arce\n"+(c.nombre?"Para: "+c.nombre+(c.empresa?" ("+c.empresa+")":"")+"\n":"")+"\n"+lines+"\n\nTotal: "+money.format(t.tot)+(cur.iva?" (IVA incluido)":"")+"\nVigencia: "+cur.vig+" días";
+    $("wa").href="https://wa.me/"+TEL+"?text="+encodeURIComponent(txt);
+    $("mail").href="mailto:"+encodeURIComponent(c.correo||"")+"?subject="+encodeURIComponent("Cotización "+cur.folio+" · Suministros Arce")+"&body="+encodeURIComponent(txt);
+  }
+
+  /* ---- acciones ---- */
+  function saveCur(){
+    if(!cur.items.length){toast("Agrega al menos un concepto");return false}
+    var copy=JSON.parse(JSON.stringify(cur));delete copy.saved;
+    var idx=-1;DB.list.forEach(function(x,i){if(x.folio===cur.folio)idx=i});
+    if(idx>-1)DB.list[idx]=Object.assign(DB.list[idx],copy,{estado:DB.list[idx].estado});else{DB.list.push(copy);DB.next++}
+    cur.saved=true;persist();drawHist();return true;
+  }
+  $("save").addEventListener("click",function(){if(saveCur())toast("Guardada: "+cur.folio)});
+  $("pdf").addEventListener("click",function(){if(!cur.items.length){toast("Agrega al menos un concepto");return}saveCur();document.title=cur.folio+" · Suministros Arce";window.print();setTimeout(function(){document.title="Cotizador · Suministros Arce"},800)});
+  $("nueva").addEventListener("click",function(){cur=blank();fillForm();window.scrollTo({top:0,behavior:"smooth"});toast("Nueva cotización "+cur.folio)});
+
+  /* ---- historial ---- */
+  var EST={p:"Pendiente",a:"Aceptada",x:"Rechazada"};
+  function drawHist(){
+    var now=new Date(),m=now.getMonth(),y=now.getFullYear(),mes=0,ven=0,acc=0,dec=0;
+    DB.list.forEach(function(x){var t=calc(x).tot,d=new Date(x.fecha);if(d.getMonth()===m&&d.getFullYear()===y)mes+=t;if(x.estado==="a"){ven+=t;acc++}if(x.estado!=="p")dec++});
+    $("kMes").textContent=money.format(mes);$("kNum").textContent=DB.list.length;$("kVen").textContent=money.format(ven);
+    var tasa=dec?Math.round(acc/dec*100):0;$("kTasa").textContent=tasa+"%";$("kBar").style.width=tasa+"%";
+    var h='<div class="hrow head"><span>Folio</span><span>Cliente</span><span class="r">Total</span><span>Estado</span><span></span></div>';
+    DB.list.slice().sort(function(a,b){return b.fecha-a.fecha}).forEach(function(x){
+      h+='<div class="hrow"><span><b>'+esc(x.folio)+'</b><small>'+fmtDate(x.fecha)+'</small></span>'+
+        '<span><b>'+esc(x.cli.empresa||x.cli.nombre||"Sin nombre")+'</b><small>'+esc(x.cli.empresa?x.cli.nombre:"")+'</small></span>'+
+        '<span class="r">'+money.format(calc(x).tot)+'</span>'+
+        '<span><select class="pill '+x.estado+'" data-est="'+esc(x.folio)+'" aria-label="Estado">'+Object.keys(EST).map(function(k){return '<option value="'+k+'"'+(k===x.estado?" selected":"")+'>'+EST[k]+'</option>'}).join("")+'</select></span>'+
+        '<span class="hbtns"><button class="mini" data-open="'+esc(x.folio)+'" type="button">Abrir</button><button class="mini" data-dup="'+esc(x.folio)+'" type="button">Duplicar</button></span></div>';
+    });
+    $("hist").innerHTML=h;
+  }
+  function find(f){return DB.list.filter(function(x){return x.folio===f})[0]}
+  $("hist").addEventListener("change",function(e){var s=e.target.closest("[data-est]");if(!s)return;var x=find(s.dataset.est);x.estado=s.value;s.className="pill "+s.value;persist();drawHist();toast(x.folio+": "+EST[s.value])});
+  $("hist").addEventListener("click",function(e){
+    var o=e.target.closest("[data-open]"),d=e.target.closest("[data-dup]");
+    if(o){cur=JSON.parse(JSON.stringify(find(o.dataset.open)));cur.cli=Object.assign({correo:"",tel:""},cur.cli);show("new");fillForm();toast("Abriste "+cur.folio)}
+    if(d){var src=find(d.dataset.dup);cur=blank();["items","desc","iva","vig","ent","notas"].forEach(function(k){cur[k]=JSON.parse(JSON.stringify(src[k]))});cur.cli=Object.assign({correo:"",tel:""},src.cli);show("new");fillForm();toast("Copia lista como "+cur.folio)}
+  });
+
+  /* ---- pestañas ---- */
+  function show(v){var n=v==="new";$("vNew").hidden=!n;$("vHist").hidden=n;$("tNew").setAttribute("aria-selected",n);$("tHist").setAttribute("aria-selected",!n);if(!n)drawHist();window.scrollTo(0,0)}
+  $("tNew").addEventListener("click",function(){show("new")});
+  $("tHist").addEventListener("click",function(){show("hist")});
+
+  /* arranque con un ejemplo para que no se vea vacío */
+  cur=blank();
+  cur.cli={nombre:"Laura Méndez",empresa:"Plásticos del Valle",correo:"laura@ejemplo.com",tel:""};
+  cur.items=[{c:"GUA-NIT",n:"Guantes de nitrilo",u:"Caja 100 pzas",p:260,q:6},{c:"CIN-48",n:"Cinta canela 48 mm",u:"Paquete 6 rollos",p:210,q:4},{c:"LEN-SEG",n:"Lentes de seguridad",u:"Pieza",p:55,q:12}];
+  fillForm();drawHist();
+})();
+</script>
+<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
+<script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
