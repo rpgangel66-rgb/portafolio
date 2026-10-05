@@ -30,7 +30,6 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
   - Parámetros `?vista=cliente|mensajes` y `?folio=TR-1042`. Estado en `crusol_taller_demo_v1`.
 - `sitios/arce/`: demo de sitio corporativo B2B (Archivo + Inter, azul #1F4E79, amarillo #F2B705).
 - `facebook/`: logos, portadas e imágenes de publicaciones.
-- Carpetas viejas (`barberia`, `estetica`, `taqueria`, `unas`, `ropa`, `muestras`) son demos anteriores para negocios pequeños; ya no se muestran en el portafolio.
 
 ## Marca
 
