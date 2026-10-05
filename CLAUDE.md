@@ -8,10 +8,12 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
 
 ## Estructura
 
-- `index.html`: portafolio principal (HTML/CSS/JS estático, sin build). Estilo minimalista: nada de cintas, fotos gigantes ni cursor personalizado.
-  - Orden: hero, Acerca de (3 principios), 001 Sistemas, 002 Automatización, 003 Sitios web, Proceso (4 pasos en fila), Preguntas frecuentes, Contacto.
-  - 001 Sistemas: lista tipo acordeón a la izquierda + ventana con el demo en iframe (array `SYS` en el JS, 5 demos). Rota cada 8 s solo en escritorio hasta que el usuario hace clic.
-  - Los iframes son de 1280x820 y se escalan con la función `sc()`. Cambiar la constante `V` (y el `?v=` del sitio Arce) para romper caché.
+- `index.html`: portafolio principal (HTML/CSS/JS estático, sin build). Estilo limpio: nada de cintas ni fotos gigantes; animaciones simples (palabras que suben con máscara, inclinación de ventanas al hacer scroll, botones magnéticos).
+  - Orden: hero (hélice que se arma en 4 cuartos + 2 tarjetas), Acerca de (texto que se ilumina al bajar, sello giratorio y 3 principios), 001 Sistemas, 002 Automatización (sección oscura), 003 Sitios web (ventana + celular con el sitio Arce), Proceso (4 pasos con línea que se dibuja), Preguntas frecuentes, Contacto (sección oscura con el pie).
+  - Cursor propio solo en escritorio (punto + aro con `mix-blend-mode:difference`): crece sobre ligas y botones, se vuelve barra sobre texto y muestra una etiqueta en elementos con `data-cur="..."`.
+  - 001 Sistemas: ventana tipo navegador con 5 pestañas (array `SYS` en el JS) y la descripción debajo. Rota cada 8 s solo en escritorio hasta que el usuario hace clic. En celular (<640px) el demo se carga a 390x740 para ver su versión móvil.
+  - Los iframes se escalan con `sc()` según `data-w`/`data-h` de cada `.vp` (1280x800 en escritorio). Cambiar la constante `V` (y el `?v=` del sitio Arce) para romper caché.
+  - Menú de celular a pantalla completa; el `body` usa la clase `mopen` (no `menu`, que es el panel). Cuidado con nombres genéricos que ya existen (`.lbl`, `.menu`, `.w`, `.on`).
   - El correo de contacto está en `MI_CORREO`.
 - `sistemas/`: cada demo tiene su propia empresa ficticia y su propio estilo visual (no reutilizar el mismo diseño entre demos):
   - `cotizador/`: Suministros Arce (distribuidor de material industrial y EPP). Catálogo con normas y existencias por almacén, listas de precios por cliente, escalas por volumen y flete; la cotización se arma sobre la hoja. Archivo condensada + IBM Plex Mono, amarillo #F2B705 y azul #1F4E79. Estado en `crusol_cotizador_demo_v2`.
