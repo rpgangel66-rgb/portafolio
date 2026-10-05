@@ -6,6 +6,11 @@
 <title>crusol · Software a la medida y automatización</title>
 <meta name="description" content="crusol desarrolla sistemas a la medida, automatización de procesos y sitios web para empresas. Por Angel Cruz.">
 <meta name="theme-color" content="#FAFAF8">
+<meta property="og:title" content="crusol · Software a la medida y automatización">
+<meta property="og:description" content="Sistemas a la medida, automatización de procesos y sitios web para empresas. Prueba los demos en vivo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://crusol.com.mx/">
+<meta property="og:image" content="https://crusol.com.mx/apple-touch-icon.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
@@ -22,29 +27,30 @@
   --sans:"Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --mono:"Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --pad:clamp(18px,4vw,48px);
+  --sec:clamp(56px,7vw,96px);
   --ease:cubic-bezier(.7,0,.2,1);
   --out:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}
 img{display:block;max-width:100%}
+::selection{background:var(--sage);color:var(--ink)}
 .mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--muted)}
-.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:var(--pad)}
 .g{color:var(--gray)}
 
-/* marca */
 svg.mk{display:block;width:1em;height:1em;flex:none}
 svg.mk .a{fill:currentColor}
 svg.mk .b{fill:var(--sage)}
 
 /* botones */
-.btn{--h:52px;position:relative;display:inline-flex;align-items:stretch;height:var(--h);text-decoration:none;font:500 15px/1 var(--sans);color:var(--bg);background:var(--ink);border:0;border-radius:6px;overflow:hidden;isolation:isolate;cursor:pointer;padding:0;will-change:transform}
+.btn{--h:50px;position:relative;display:inline-flex;align-items:stretch;height:var(--h);text-decoration:none;font:500 15px/1 var(--sans);color:var(--bg);background:var(--ink);border:0;border-radius:6px;overflow:hidden;isolation:isolate;cursor:pointer;padding:0}
 .btn::before{content:"";position:absolute;inset:0;background:var(--green);transform:scaleX(0);transform-origin:100% 50%;transition:transform .6s var(--ease);z-index:-1}
 .btn:hover::before{transform:scaleX(1);transform-origin:0 50%}
-.btn .lb{display:flex;align-items:center;padding:0 22px}
+.btn .lb{display:flex;align-items:center;padding:0 20px}
 .rl{display:block;height:1.3em;line-height:1.3em;overflow:hidden}
 .rl>span{display:block;transition:transform .55s var(--ease)}
 .rl>span::after{content:attr(data-t);display:block}
@@ -56,58 +62,64 @@ svg.mk .b{fill:var(--sage)}
 .btn.ghost{color:var(--ink);background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
 .btn.ghost::before{background:var(--soft)}
 .btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--ink)}
-.btn.ghost .ic{border-left-color:var(--line)}
-.btn.ghost .ic .a{fill:var(--green)}
 .btn.sm{--h:40px;font-size:14px}
-.btn.sm .lb{padding:0 16px}
+.btn.sm .lb{padding:0 15px}
 .btn[disabled]{opacity:.55;cursor:default}
 .btn[disabled]::before{transform:scaleX(0)}
 .chip{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:0 12px;height:34px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s,color .2s}
 .chip:hover{border-color:var(--ink)}
 .chip.done{background:var(--green);border-color:var(--green);color:#fff}
+.lnk{display:inline-flex;align-items:center;gap:8px;font-weight:500;text-decoration:none;font-size:15px;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.lnk svg{width:13px;height:13px;transition:transform .4s var(--out)}
+.lnk:hover svg{transform:translateX(4px)}
 
-/* progreso */
 .prog{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--green);z-index:60}
 
 /* nav */
-.nav{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.84);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line)}
-.nav .in{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:12px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.86);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.sc{border-bottom-color:var(--line)}
+.nav .in{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:11px}
 .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-.brand .mk{font-size:26px;color:var(--green);transition:transform .8s var(--ease)}
+.brand .mk{font-size:24px;color:var(--green);transition:transform .8s var(--ease)}
 .brand:hover .mk{transform:rotate(90deg)}
 .brand .wm{font-weight:500;font-size:14px;letter-spacing:.3em;margin-right:-.3em;line-height:1}
-.links{display:flex;gap:24px;font-size:14px}
+.links{display:flex;gap:22px;font-size:14px}
 .links a{text-decoration:none;color:var(--muted);transition:color .2s;position:relative}
 .links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s var(--ease)}
-.links a:hover{color:var(--ink)}
-.links a:hover::after{transform:scaleX(1);transform-origin:0 50%}
+.links a:hover,.links a.on{color:var(--ink)}
+.links a:hover::after,.links a.on::after{transform:scaleX(1);transform-origin:0 50%}
 .dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 2s infinite;flex:none}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
 
 /* hero */
-.hero{display:grid;gap:44px;padding-block:52px 44px;align-items:center}
-.avail{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--paper);padding:7px 12px;border-radius:999px}
-.hero h1{font-weight:500;font-size:clamp(40px,5vw,72px);line-height:1.02;letter-spacing:-.045em;margin:22px 0 0}
+.hero{display:grid;gap:40px;padding-block:44px 40px;align-items:center}
+.avail{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--paper);padding:6px 12px;border-radius:999px}
+.hero h1{font-weight:500;font-size:clamp(36px,4.4vw,62px);line-height:1.03;letter-spacing:-.045em;margin:20px 0 0}
 .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.35em);animation:in .9s var(--out) forwards}
+.hero h1 .u{position:relative}
+.scr{position:absolute;left:-2%;bottom:-.1em;width:104%;height:.3em;overflow:visible;pointer-events:none}
+.scr path{fill:none;stroke:var(--sage);stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s 1.5s var(--out) forwards;vector-effect:non-scaling-stroke}
 @keyframes in{to{opacity:1;transform:none}}
-.hero p{margin:24px 0 0;font-size:18px;color:var(--muted);max-width:44ch}
-.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.hero p{margin:22px 0 0;font-size:18px;color:var(--muted);max-width:44ch}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.sig{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:13.5px;color:var(--muted)}
+.sig .mk{font-size:18px;color:var(--green)}
 
 /* escenario */
-.stage{position:relative;height:clamp(440px,46vw,600px)}
+.stage{position:relative;height:clamp(380px,40vw,520px)}
 .fl{position:absolute;transition:transform .25s ease-out;will-change:transform}
-.ph{right:0;top:0;width:74%;height:88%;margin:0;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px rgba(17,17,16,.18)}
+.ph{right:0;top:0;width:76%;height:90%;margin:0;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(17,17,16,.16)}
 .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
 .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,61,46,.05),rgba(15,61,46,.35))}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 50px rgba(17,17,16,.14);padding:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 50px rgba(17,17,16,.13);padding:16px}
 .card small{display:block;font-size:12px;color:var(--muted);line-height:1.3}
 .card b{font-weight:500}
-.dash{left:0;top:9%;width:min(300px,64%)}
+.dash{left:0;top:10%;width:min(290px,62%)}
 .dash .top{display:flex;justify-content:space-between;align-items:center}
 .dash .val{display:flex;align-items:baseline;gap:10px;margin-top:6px}
-.dash .val b{font-size:27px;font-weight:600;letter-spacing:-.03em}
+.dash .val b{font-size:26px;font-weight:600;letter-spacing:-.03em}
 .delta{font:500 11.5px var(--mono);color:var(--green);background:var(--sage-soft);padding:3px 7px;border-radius:4px}
-.dash svg.ch{display:block;width:100%;height:70px;margin-top:10px;overflow:visible}
+.dash svg.ch{display:block;width:100%;height:64px;margin-top:10px;overflow:visible}
 .ch .ln{fill:none;stroke:var(--green);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s .5s var(--out) forwards}
 .ch .ar{fill:url(#ga);opacity:0;animation:fade 1s 1.2s forwards}
 .ch .pt{fill:var(--green);opacity:0;animation:fade .4s 2.1s forwards}
@@ -115,11 +127,7 @@ svg.mk .b{fill:var(--sage)}
 @keyframes fade{to{opacity:1}}
 .axis{display:flex;justify-content:space-between;margin-top:6px}
 .axis span{font:10.5px var(--mono);color:var(--gray)}
-.alert{right:-3%;top:47%;width:min(250px,56%);display:flex;gap:12px;align-items:center;padding:13px 14px}
-.alert .ai{width:34px;height:34px;border-radius:8px;background:#FBF1E3;display:grid;place-items:center;flex:none}
-.alert .ai i{width:9px;height:9px;border-radius:2px;background:var(--amber)}
-.alert b{display:block;font-size:14px;line-height:1.25}
-.flow{left:8%;bottom:0;width:min(290px,64%);padding:14px}
+.flow{left:7%;bottom:0;width:min(286px,62%);padding:14px}
 .fh{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .fh .mk{font-size:22px;color:var(--green)}
 .fh .mk.spin{animation:spin 1.6s var(--ease) infinite}
@@ -135,90 +143,76 @@ svg.mk .b{fill:var(--sage)}
 .flow li.done i{background:var(--green);border-color:var(--green)}
 .flow li.done i::after{opacity:1}
 
-/* cinta */
-.tape{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;background:var(--paper)}
-.tape div{display:inline-flex;align-items:center;padding:17px 0;font-size:15px;color:var(--muted);animation:tape 46s linear infinite}
-.tape b{color:var(--ink);font-weight:500}
-.tape svg{display:inline-block;width:12px;height:12px;margin:0 24px;color:var(--gray)}
-@keyframes tape{to{transform:translateX(-50%)}}
-
-/* info */
-.info{padding-block:clamp(80px,11vw,150px) clamp(50px,6vw,80px)}
-.info .mono{display:block;margin-bottom:20px}
-.say{font-size:clamp(28px,4.2vw,54px);line-height:1.12;letter-spacing:-.035em;font-weight:500;margin:0;max-width:23ch}
-.say span{color:#D7D7D1;transition:color .35s}
-.say span.on{color:var(--ink)}
-
-/* sectores */
-.sectors{display:grid;gap:14px;padding-bottom:clamp(70px,9vw,120px)}
-.sec{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/11;background:#1a1a18;isolation:isolate;margin:0}
-.sec img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.4s var(--out)}
-.sec::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,20,16,0) 30%,rgba(11,20,16,.78) 100%)}
-.sec:hover img{transform:scale(1.06)}
-.sec .ov{position:absolute;left:0;right:0;bottom:0;padding:22px;color:#fff}
-.sec .ov .mono{color:rgba(255,255,255,.7)}
-.sec h3{margin:6px 0 4px;font-weight:500;font-size:22px;letter-spacing:-.02em}
-.sec p{margin:0;font-size:14.5px;color:rgba(255,255,255,.8);max-width:32ch}
+/* acerca de */
+.about{display:grid;gap:28px;padding-block:var(--sec);border-top:1px solid var(--line)}
+.about .lead{margin:12px 0 0;font-size:clamp(22px,2.4vw,30px);line-height:1.28;letter-spacing:-.025em;font-weight:500;max-width:30ch}
+.about .lead .g{color:var(--gray)}
+.about .sect{margin:18px 0 0;line-height:1.9}
+.prin{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.prin li{display:grid;grid-template-columns:44px 1fr;gap:2px 12px;padding:16px 0;border-bottom:1px solid var(--line)}
+.prin .mono{grid-row:span 2;padding-top:3px}
+.prin b{font-weight:500;font-size:17px;letter-spacing:-.015em}
+.prin span:last-child{color:var(--muted);font-size:14.5px}
 
 /* secciones */
-.svc{padding-block:clamp(70px,9vw,120px);border-top:1px solid var(--line)}
-.svhead{display:grid;gap:14px;margin-bottom:clamp(30px,5vw,56px)}
+.svc{padding-block:var(--sec);border-top:1px solid var(--line)}
+.svhead{display:grid;gap:12px;margin-bottom:clamp(26px,4vw,44px)}
 .svhead .mono b{color:var(--ink);font-weight:500}
-.svhead h2{margin:0;font-weight:500;font-size:clamp(36px,5.6vw,72px);line-height:1.02;letter-spacing:-.045em}
-.svhead p{margin:0;color:var(--muted);max-width:46ch;font-size:17px}
+.svhead h2{margin:12px 0 0;font-weight:500;font-size:clamp(32px,4.4vw,56px);line-height:1.03;letter-spacing:-.045em}
+.svhead p{margin:0;color:var(--muted);max-width:46ch;font-size:16.5px}
 
-/* sistemas */
-.sys{display:grid;gap:28px;align-items:start}
-.win{display:block;text-decoration:none;border-radius:14px;overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 70px rgba(17,17,16,.10);transition:transform .7s var(--out)}
-.win:hover{transform:translateY(-6px)}
-.win .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--soft)}
-.win .bar i{width:10px;height:10px;border-radius:50%;background:#DADAD4}
+/* ventana de demo */
+.win{display:block;text-decoration:none;border-radius:12px;overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 70px rgba(17,17,16,.09);transition:transform .7s var(--out),box-shadow .7s var(--out)}
+.win:hover{transform:translateY(-4px);box-shadow:0 40px 80px rgba(17,17,16,.12)}
+.win .bar{display:flex;align-items:center;gap:6px;padding:9px 14px;border-bottom:1px solid var(--line);background:var(--soft)}
+.win .bar i{width:9px;height:9px;border-radius:50%;background:#DADAD4}
 .win .bar span{margin-left:10px}
+.win .bar em{margin-left:auto;font:500 11px var(--mono);font-style:normal;color:var(--green);display:flex;align-items:center;gap:6px}
+.win .bar em::before{content:"";width:6px;height:6px;border-radius:50%;background:#4ADE80}
 .win .vp{position:relative;aspect-ratio:1280/820;overflow:hidden;background:#F4F5F7}
 .win iframe{position:absolute;top:0;left:0;width:1280px;height:820px;border:0;transform-origin:0 0;pointer-events:none}
-.win .cap{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;font-size:14px}
-.win .cap b{font-weight:500}
-.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.list li{display:grid;grid-template-columns:54px 1fr;gap:4px 12px;padding:18px 0;border-bottom:1px solid var(--line)}
-.list li .mono{grid-row:span 2;padding-top:4px}
-.list li b{font-weight:500;font-size:19px;letter-spacing:-.02em}
-.list li span{color:var(--muted);font-size:15px}
-
-/* selector de sistemas */
-.picker{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.picker button{position:relative;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:14px 16px 16px;cursor:pointer;overflow:hidden;transition:border-color .25s,background .25s}
-.picker button:hover{border-color:#C9C9C2}
-.picker button .mono{display:block}
-.picker button b{display:block;font-weight:500;font-size:17px;letter-spacing:-.02em;margin-top:4px}
-.picker button::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--green);transform:scaleX(0);transform-origin:0 50%}
-.picker button[aria-selected="true"]{border-color:var(--ink);background:var(--paper)}
-.picker button[aria-selected="true"]::after{transform:scaleX(1)}
-.picker.auto button[aria-selected="true"]::after{animation:pk 8s linear forwards}
-@keyframes pk{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .win .vp iframe{opacity:0;visibility:hidden;transition:opacity .45s}
 .win .vp iframe.on{opacity:1;visibility:visible}
-.sysinfo{border-top:1px solid var(--line);padding-top:22px;transition:opacity .3s}
-.sysinfo.rv.sw{opacity:0}
-.sysinfo h3{margin:10px 0 0;font-weight:500;font-size:clamp(24px,2.4vw,30px);line-height:1.12;letter-spacing:-.03em}
-.sysinfo p{margin:12px 0 0;color:var(--muted);font-size:15.5px}
-.feats{list-style:none;margin:18px 0 22px;padding:0;border-top:1px solid var(--line)}
-.feats li{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
-.feats li::before{content:"";width:7px;height:7px;background:var(--green);border-radius:1px;flex:none}
-.more{margin:22px 0 0;line-height:1.7}
+
+/* sistemas: lista + ventana */
+.sx{display:grid;gap:26px;align-items:start}
+.slist{border-top:1px solid var(--line)}
+.si{border-bottom:1px solid var(--line);position:relative}
+.si::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+.si.on::after{transform:scaleX(1)}
+.slist.auto .si.on::after{animation:pk 8s linear forwards}
+@keyframes pk{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.sh{display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:2px 10px;width:100%;padding:15px 0;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink)}
+.sh .mono{grid-row:span 2}
+.sh b{font-weight:500;font-size:18px;letter-spacing:-.02em;transition:color .25s}
+.sh small{grid-column:2;font-size:13px;color:var(--muted)}
+.sh svg{grid-row:1/3;grid-column:3;width:14px;height:14px;color:var(--gray);transition:transform .45s var(--ease)}
+.si:not(.on) .sh:hover b{color:var(--green)}
+.si.on .sh svg{transform:rotate(45deg);color:var(--ink)}
+.sp{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--out)}
+.si.on .sp{grid-template-rows:1fr}
+.sp>div{overflow:hidden;padding-left:48px}
+.sp .t{margin:0;font-weight:500;font-size:16px;letter-spacing:-.01em}
+.sp p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+.feats{list-style:none;margin:12px 0 14px;padding:0;display:grid;gap:6px}
+.feats li{display:flex;gap:10px;align-items:baseline;font-size:14px}
+.feats li::before{content:"";width:6px;height:6px;background:var(--green);border-radius:1px;flex:none;transform:translateY(-1px)}
+.sp .lnk{margin-bottom:18px}
+.more{margin:22px 0 0;line-height:1.8}
 
 /* automatización */
-.auto{display:grid;gap:28px;align-items:start}
-.demo{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 70px rgba(17,17,16,.10);overflow:hidden}
+.auto{display:grid;gap:26px;align-items:start}
+.demo{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 70px rgba(17,17,16,.08);overflow:hidden}
 .tabs{display:flex;gap:4px;padding:6px;background:var(--soft);border-bottom:1px solid var(--line)}
-.tabs button{flex:1;border:0;background:transparent;border-radius:8px;padding:10px 12px;font:500 14px var(--sans);color:var(--muted);cursor:pointer;transition:background .25s,color .25s}
+.tabs button{flex:1;border:0;background:transparent;border-radius:8px;padding:9px 12px;font:500 14px var(--sans);color:var(--muted);cursor:pointer;transition:background .25s,color .25s}
 .tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(17,17,16,.08),0 0 0 1px var(--line)}
 .pane{display:none;padding:18px}
 .pane.on{display:block}
-.phd{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}
+.phd{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:14px}
 .phd b{display:block;font-weight:500;font-size:16px}
 .nodes{list-style:none;margin:0;padding:0;position:relative}
 .nodes::before{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:1px;background:var(--line)}
-.nodes li{position:relative;display:flex;align-items:center;gap:14px;padding:9px 0}
+.nodes li{position:relative;display:flex;align-items:center;gap:14px;padding:8px 0}
 .nodes .st{width:35px;height:35px;border-radius:9px;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;flex:none;font-size:15px;color:var(--gray);transition:background .3s,border-color .3s,color .3s;z-index:1}
 .nodes .st svg .b{fill:currentColor;opacity:.5}
 .nodes li b{display:block;font-weight:500;font-size:15px;line-height:1.25}
@@ -229,18 +223,17 @@ svg.mk .b{fill:var(--sage)}
 .nodes li.done .st{background:var(--green);border-color:var(--green);color:#fff}
 .nodes li.done .st svg .b{fill:var(--sage);opacity:1}
 .nodes li.done em{color:var(--green)}
-.log{margin-top:14px;background:#0F1512;color:#B9CCC1;border-radius:10px;padding:12px 14px;height:128px;overflow:hidden;font-size:11.5px;line-height:1.75;display:flex;flex-direction:column;justify-content:flex-end}
+.log{margin-top:14px;background:#0F1512;color:#B9CCC1;border-radius:10px;padding:12px 14px;height:118px;overflow:hidden;font-size:11.5px;line-height:1.75;display:flex;flex-direction:column;justify-content:flex-end}
 .log div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:pop .3s ease-out}
 .log .t{color:#5E7A6B;margin-right:10px}
 .log .ok{color:#7EE2A8}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}}
-/* asistente */
 .chat{display:flex;flex-direction:column}
 .chd{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .chd .av{width:34px;height:34px;border-radius:9px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:16px}
 .chd b{display:block;font-weight:500;font-size:15px;line-height:1.2}
 .chd small{font-size:12px;color:var(--muted)}
-.msgs{height:300px;overflow-y:auto;padding:14px 2px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.msgs{height:288px;overflow-y:auto;padding:14px 2px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
 .m{max-width:84%;padding:9px 12px;border-radius:12px;font-size:14.5px;line-height:1.42;animation:pop .3s ease-out}
 .m.in{background:var(--soft);align-self:flex-start;border-top-left-radius:4px}
 .m.out{background:var(--ink);color:#fff;align-self:flex-end;border-top-right-radius:4px}
@@ -249,118 +242,98 @@ svg.mk .b{fill:var(--sage)}
 .m.ty i:nth-child(2){animation-delay:.2s}.m.ty i:nth-child(3){animation-delay:.4s}
 @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
 .qr{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
-.qr button{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:9px 12px;font:500 13.5px var(--sans);cursor:pointer;color:var(--ink);transition:border-color .2s,background .2s}
+.qr button{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:8px 12px;font:500 13.5px var(--sans);cursor:pointer;color:var(--ink);transition:border-color .2s,background .2s}
 .qr button:hover{border-color:var(--ink);background:var(--soft)}
 .qr button[disabled]{opacity:.45;cursor:default}
 .demo-note{margin:12px 2px 0}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.list li{display:grid;grid-template-columns:44px 1fr;gap:2px 12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.list li .mono{grid-row:span 2;padding-top:3px}
+.list li b{font-weight:500;font-size:17px;letter-spacing:-.015em}
+.list li span{color:var(--muted);font-size:14.5px}
 
-.sys.rev .win{order:0}
-
-/* franja con foto */
-.band{position:relative;height:clamp(440px,72vh,720px);overflow:hidden;display:flex;align-items:flex-end;color:#fff;isolation:isolate;background:#0d1411}
-.band img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover;z-index:-2;will-change:transform}
-.band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(9,16,13,.25) 0%,rgba(9,16,13,.35) 40%,rgba(9,16,13,.85) 100%)}
-.band .in{width:100%;padding-block:clamp(40px,6vw,80px)}
-.band .mono{color:rgba(255,255,255,.7)}
-.band p{margin:14px 0 0;font-weight:500;font-size:clamp(34px,5.4vw,76px);line-height:1.02;letter-spacing:-.045em;max-width:17ch}
-.band p .g{color:rgba(255,255,255,.55)}
+/* sitios */
+.web{display:grid;gap:26px;align-items:start}
 
 /* proceso */
-.proc{display:grid;gap:30px;align-items:start}
-.pimg{margin:0;border-radius:16px;overflow:hidden;position:relative;aspect-ratio:4/5;background:var(--soft)}
-.pimg img{width:100%;height:100%;object-fit:cover}
-.pimg figcaption{position:absolute;left:12px;bottom:12px;background:rgba(250,250,248,.92);color:var(--ink);padding:6px 10px;border-radius:4px;backdrop-filter:blur(6px)}
-.steps{display:grid;border-top:1px solid var(--line)}
-.step{display:grid;grid-template-columns:64px 1fr;gap:6px 16px;padding:26px 0;border-bottom:1px solid var(--line)}
-.step .mono{padding-top:6px}
-.step b{font-weight:500;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.03em}
-.step p{margin:0;color:var(--muted);grid-column:2}
+.steps{display:grid;gap:0;border-top:1px solid var(--line)}
+.step{padding:20px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:44px 1fr;gap:2px 12px}
+.step .mono{grid-row:span 2;padding-top:4px}
+.step b{font-weight:500;font-size:19px;letter-spacing:-.02em}
+.step p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* preguntas */
+.faq{display:grid;gap:0 40px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:17px 0;cursor:pointer;font-weight:500;font-size:16.5px;letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{width:13px;height:13px;color:var(--gray);transition:transform .4s var(--ease);flex:none}
+.faq details[open] summary svg{transform:rotate(45deg);color:var(--ink)}
+.faq p{margin:-4px 0 18px;color:var(--muted);font-size:15px;max-width:52ch}
 
 /* contacto */
-.end{padding-block:clamp(90px,12vw,170px) 40px;border-top:1px solid var(--line)}
-.endrow{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
-.big{display:inline-block;text-decoration:none;font-weight:500;font-size:clamp(64px,14vw,210px);line-height:.9;letter-spacing:-.06em;margin-top:18px;position:relative}
+.end{padding-block:var(--sec) 34px;border-top:1px solid var(--line);display:grid;gap:26px;align-items:end}
+.big{display:inline-block;text-decoration:none;font-weight:500;font-size:clamp(56px,9vw,128px);line-height:.92;letter-spacing:-.06em;margin-top:14px;position:relative}
 .big .g{transition:color .3s}
 .big:hover .g{color:var(--green)}
-.big::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:3px;background:var(--ink);transform:scaleX(0);transform-origin:100% 50%;transition:transform .7s var(--ease)}
+.big::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:100% 50%;transition:transform .7s var(--ease)}
 .big:hover::after{transform:scaleX(1);transform-origin:0 50%}
-.bigmk{font-size:clamp(70px,12vw,170px);color:var(--green);margin-bottom:6px}
-.end .row{display:grid;gap:22px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);align-items:center}
-.end .row p{margin:0;font-size:17px;max-width:46ch}
+.end .txt p{margin:0 0 16px;font-size:17px;max-width:40ch}
 .cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .cta .mono{margin-right:4px}
-footer{padding:22px 0 30px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer{padding:20px 0 28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
 footer a{color:var(--muted)}
 footer .fb{display:inline-flex;align-items:center;gap:10px}
 footer .fb .mk{font-size:16px;color:var(--green)}
+footer nav{display:flex;gap:16px}
 
-/* cursor */
-html.cc,html.cc *{cursor:none!important}
-.cdot,.cring{position:fixed;left:0;top:0;pointer-events:none;z-index:90;border-radius:50%;opacity:0;transition:opacity .3s}
-.cdot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--green)}
-.cring{width:36px;height:36px;margin:-18px 0 0 -18px;border:1.5px solid rgba(15,61,46,.45);display:grid;place-items:center;color:#fff;font:500 12px var(--sans);transition:opacity .3s,width .35s var(--out),height .35s var(--out),margin .35s var(--out),background .3s,border-color .3s}
-.cring span{opacity:0;transition:opacity .2s}
-html.cc .cdot,html.cc .cring{opacity:1}
-.cring.link{width:52px;height:52px;margin:-26px 0 0 -26px;background:rgba(169,196,182,.28);border-color:var(--sage)}
-.cring.label{width:78px;height:78px;margin:-39px 0 0 -39px;background:var(--green);border-color:var(--green)}
-.cring.label span{opacity:1}
-.cring.press{scale:.85}
-.cdot.hide{opacity:0!important}
-
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s,transform .9s var(--out)}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s var(--out)}
 .rv.on{opacity:1;transform:none}
 
-@media (max-width:900px){
-  .links{display:none}
-}
+@media (max-width:980px){.links{display:none}}
 @media (min-width:760px){
-  .sectors{grid-template-columns:repeat(3,1fr)}
-  .sec{aspect-ratio:4/5}
-  .end .row{grid-template-columns:1fr auto}
+  .faq{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:repeat(4,1fr);border-top:0;gap:18px}
+  .step{display:block;border-top:1px solid var(--ink);border-bottom:0;padding:16px 0 0}
+  .step .mono{display:block;margin-bottom:22px}
+  .step b{display:block;margin-bottom:6px}
+  .end{grid-template-columns:1fr auto}
 }
 @media (min-width:900px){
-  .hero{grid-template-columns:1.05fr .95fr;padding-block:76px 64px}
+  .hero{grid-template-columns:1.05fr .95fr;padding-block:60px 56px}
+  .about{grid-template-columns:1fr 1fr;gap:60px}
   .svhead{grid-template-columns:1fr 1fr;align-items:end}
-  .sys{grid-template-columns:1.35fr .65fr}
-  .sys.rev{grid-template-columns:.65fr 1.35fr}
-  .sys.rev .win{order:2}
-  .auto{grid-template-columns:1.1fr .9fr}
-  .proc{grid-template-columns:.8fr 1.2fr}
-  .pimg{position:sticky;top:96px}
+  .sx{grid-template-columns:minmax(0,.78fr) minmax(0,1.5fr);gap:40px}
+  .sx .win{position:sticky;top:84px}
+  .auto{grid-template-columns:1.15fr .85fr;gap:40px}
+  .web{grid-template-columns:.85fr 1.15fr;gap:40px}
 }
+@media (max-width:899px){.sx .win{order:-1}}
 @media (max-width:600px){
-  .picker{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--pad)*-1);padding-inline:var(--pad)}
-  .picker::-webkit-scrollbar{display:none}
-  .picker button{flex:0 0 auto;padding:10px 14px 12px}
-  .picker button b{font-size:15px;white-space:nowrap}
-  .stage{height:450px}
-  .ph{width:82%;height:80%}
-  .dash{width:70%;top:6%}
-  .alert{display:none}
-  .flow{left:0;width:74%}
-  .btn{--h:50px}
+  .stage{height:340px}
+  .ph{width:84%;height:80%}
+  .dash{width:72%;top:5%}
+  .flow{left:0;width:76%}
   .nav .btn .ic{display:none}
-  .endrow .bigmk{display:none}
+  .sp>div{padding-left:0}
+  .hero p{font-size:17px}
 }
-@media (hover:none),(pointer:coarse){.cdot,.cring{display:none}}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .hero h1 .w{opacity:1;transform:none}
   .rv{opacity:1;transform:none}
-  .say span{color:var(--ink)}
-  .ch .ln{stroke-dashoffset:0}.ch .ar,.ch .pt{opacity:1}
+  .ch .ln,.scr path{stroke-dashoffset:0}.ch .ar,.ch .pt{opacity:1}
 }
 </style>
 </head>
 <body>
 <div class="prog" id="prog"></div>
-<div class="cring" id="cring" aria-hidden="true"><span>Ver</span></div><div class="cdot" id="cdot" aria-hidden="true"></div>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="wrap in">
     <a class="brand" href="#" aria-label="crusol, inicio"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg><span class="wm">CRUSOL</span></a>
-    <nav class="links"><a href="#sistemas">Sistemas</a><a href="#automatizacion">Automatización</a><a href="#web">Sitios web</a><a href="#proceso">Proceso</a></nav>
-    <a class="btn sm mag" id="mail-nav" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Solicitar propuesta">Solicitar propuesta</span></span></span><span class="ic"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></span></a>
+    <nav class="links" id="links"><a href="#sistemas">Sistemas</a><a href="#automatizacion">Automatización</a><a href="#web">Sitios web</a><a href="#proceso">Proceso</a><a href="#preguntas">Preguntas</a></nav>
+    <a class="btn sm" id="mail-nav" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Solicitar propuesta">Solicitar propuesta</span></span></span><span class="ic"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></span></a>
   </div>
 </header>
 
@@ -368,40 +341,41 @@ html.cc .cdot,html.cc .cring{opacity:1}
   <section class="wrap hero">
     <div>
       <span class="avail"><span class="dot"></span>Disponible para nuevos proyectos</span>
-      <h1 id="h1"><span>Software a la medida</span><span class="g">, automatización y</span> <span>sitios web</span> <span class="g">para empresas en</span> <span>crecimiento.</span></h1>
-      <p>Desarrollo herramientas que ordenan la operación de tu empresa: cotizaciones, inventario, reportes y los procesos que hoy dependen de hojas de cálculo.</p>
+      <h1 id="h1"><span>Software a la medida,</span> <span class="g">automatización y</span> <span>sitios web</span> <span class="g">para empresas en</span> <span>crecimiento.</span></h1>
+      <p>Desarrollo herramientas que ordenan la operación de tu empresa: cotizaciones, citas, inventario, reportes y los procesos que hoy dependen de hojas de cálculo.</p>
       <div class="btns">
-        <a class="btn mag" id="mail-top" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Solicitar propuesta">Solicitar propuesta</span></span></span><span class="ic"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></span></a>
-        <a class="btn ghost mag" href="#sistemas"><span class="lb"><span class="rl"><span data-t="Ver proyectos">Ver proyectos</span></span></span></a>
+        <a class="btn" id="mail-top" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Solicitar propuesta">Solicitar propuesta</span></span></span><span class="ic"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></span></a>
+        <a class="btn ghost" href="#sistemas"><span class="lb"><span class="rl"><span data-t="Probar los demos">Probar los demos</span></span></span></a>
       </div>
+      <div class="sig"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>Angel Cruz · diseño y programo cada proyecto personalmente</div>
     </div>
     <div class="stage" id="stage" aria-hidden="true">
       <figure class="fl ph" data-d="12"><img src="https://images.unsplash.com/photo-1504297050568-910d24c426d3?auto=format&fit=crop&w=900&h=1100&q=70" alt=""></figure>
-      <div class="fl card dash" data-d="34">
+      <div class="fl card dash" data-d="30">
         <div class="top"><small>Ventas del trimestre</small><span class="delta">+18.4%</span></div>
         <div class="val"><b id="kpiN">$0</b></div>
         <svg class="ch" viewBox="0 0 260 70" preserveAspectRatio="none"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9C4B6" stop-opacity=".55"/><stop offset="1" stop-color="#A9C4B6" stop-opacity="0"/></linearGradient></defs><path class="ar" d="M0 58 C18 55 30 57 44 52 S70 50 88 44 S116 46 132 38 S160 36 176 30 S204 30 218 22 S246 14 260 10 L260 70 L0 70Z"/><path class="ln" pathLength="1" d="M0 58 C18 55 30 57 44 52 S70 50 88 44 S116 46 132 38 S160 36 176 30 S204 30 218 22 S246 14 260 10"/><circle class="pt" cx="260" cy="10" r="4"/></svg>
         <div class="axis"><span>Jul</span><span>Ago</span><span>Sep</span></div>
       </div>
-      <div class="fl card alert" data-d="24"><span class="ai"><i></i></span><div><b>Existencias bajas</b><small>Guantes de nitrilo · 12 cajas. Orden de compra sugerida.</small></div></div>
-      <div class="fl card flow" data-d="42">
+      <div class="fl card flow" data-d="40">
         <div class="fh"><svg class="mk spin" id="fmk" viewBox="0 0 100 100"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg><div><b>Cierre semanal</b><small>Flujo automatizado</small></div><em id="fst">En curso</em></div>
         <ul id="fsteps"><li><i></i>Ventas consolidadas</li><li><i></i>Reporte PDF generado</li><li><i></i>Enviado a dirección</li></ul>
       </div>
     </div>
   </section>
 
-  <div class="tape" aria-hidden="true"><div id="tape"></div></div>
-
-  <section class="wrap info">
-    <span class="mono">Acerca de</span>
-    <p class="say" id="say">Soy Angel Cruz, desarrollador de software. Ayudo a empresas a sustituir procesos manuales y hojas de cálculo sueltas por herramientas claras que su equipo adopta desde el primer día.</p>
-  </section>
-
-  <section class="wrap sectors" aria-label="Sectores">
-    <figure class="sec rv"><img src="https://images.unsplash.com/photo-1586528116022-aeda1613c63d?auto=format&fit=crop&w=800&h=1000&q=70" alt="Pasillo de un almacén con personal trabajando" loading="lazy"><figcaption class="ov"><span class="mono">01 · Sector</span><h3>Distribución y logística</h3><p>Inventario, órdenes de compra y entregas en un solo sistema.</p></figcaption></figure>
-    <figure class="sec rv"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&h=1000&q=70" alt="Reunión de trabajo con laptop" loading="lazy"><figcaption class="ov"><span class="mono">02 · Sector</span><h3>Servicios profesionales</h3><p>Cotizaciones, clientes y seguimiento de cada proyecto.</p></figcaption></figure>
-    <figure class="sec rv"><img src="https://images.unsplash.com/photo-1646154034833-d10291080448?auto=format&fit=crop&w=800&h=1000&q=70" alt="Oficina corporativa con escritorios" loading="lazy"><figcaption class="ov"><span class="mono">03 · Sector</span><h3>Corporativos y oficinas</h3><p>Reportes, aprobaciones y procesos internos sin papeleo.</p></figcaption></figure>
+  <!-- ACERCA DE -->
+  <section class="wrap about" id="acerca">
+    <div class="rv">
+      <span class="mono">Acerca de</span>
+      <p class="lead">Soy Angel Cruz. Sustituyo procesos manuales y hojas de cálculo sueltas por herramientas claras <span class="g">que tu equipo adopta desde el primer día.</span></p>
+      <p class="mono sect">Para empresas de distribución · manufactura · salud · talleres · servicios profesionales · corporativos</p>
+    </div>
+    <ul class="prin rv">
+      <li><span class="mono">01</span><b>Trato directo</b><span>Hablas con quien diseña y programa tu sistema, de principio a fin.</span></li>
+      <li><span class="mono">02</span><b>Primero tu proceso</b><span>Entiendo cómo trabaja tu equipo antes de escribir una línea de código.</span></li>
+      <li><span class="mono">03</span><b>Avances que puedes tocar</b><span>Pruebas cada etapa en tu celular o computadora antes de seguir.</span></li>
+    </ul>
   </section>
 
   <!-- 001 SISTEMAS -->
@@ -409,28 +383,16 @@ html.cc .cdot,html.cc .cring{opacity:1}
     <div class="svhead">
       <div>
         <span class="mono"><b>001</b> · Sistemas a la medida</span>
-        <h2 class="rv" style="margin-top:14px">Tu operación, <span class="g">en un solo lugar.</span></h2>
+        <h2 class="rv">Tu operación, <span class="g">en un solo lugar.</span></h2>
       </div>
-      <p class="rv">Plataformas web construidas sobre tus procesos actuales. Funcionan desde cualquier computadora o celular, sin instalar nada.</p>
+      <p class="rv">Plataformas web construidas sobre tus procesos actuales. Funcionan desde cualquier computadora o celular, sin instalar nada. Cada ejemplo es de una empresa ficticia y puedes usarlo.</p>
     </div>
-    <div class="picker rv" id="picker" role="tablist" aria-label="Sistemas de ejemplo">
-      <button type="button" role="tab" aria-selected="true" data-i="0"><span class="mono">01 · Ventas</span><b>Cotizador</b></button>
-      <button type="button" role="tab" aria-selected="false" data-i="1"><span class="mono">02 · Dirección</span><b>Tablero de dirección</b></button>
-      <button type="button" role="tab" aria-selected="false" data-i="2"><span class="mono">03 · Compras</span><b>Requisiciones</b></button>
-    </div>
-    <div class="sys">
-      <a class="win rv" id="syswin" href="sistemas/cotizador/" data-cursor="Probar" aria-label="Abrir demo del cotizador">
-        <div class="bar"><i></i><i></i><i></i><span class="mono" id="sysurl">cotizador · demo en vivo</span></div>
-        <div class="vp" id="sysvp"><iframe data-k="0" class="on" src="sistemas/cotizador/?v=0928" title="Demo del cotizador" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="cap"><b id="syscap">Cotizador con historial</b><span class="mono">Empresa ficticia · Probar demo</span></div>
+    <div class="sx">
+      <div class="slist rv" id="slist" role="tablist" aria-label="Sistemas de ejemplo" aria-orientation="vertical"></div>
+      <a class="win rv" id="syswin" href="sistemas/cotizador/" aria-label="Abrir demo">
+        <div class="bar"><i></i><i></i><i></i><span class="mono" id="sysurl">cotizador</span><em>demo en vivo</em></div>
+        <div class="vp" id="sysvp"></div>
       </a>
-      <div class="sysinfo rv" id="sysinfo">
-        <span class="mono" id="sysarea">Para el área de ventas</span>
-        <h3 id="systit">Cotizaciones en menos de un minuto.</h3>
-        <p id="sysdesc">Tu equipo arma cotizaciones con precios de catálogo, descuentos e IVA, y las envía en PDF con tu imagen y folio consecutivo.</p>
-        <ul class="feats" id="sysfeat"><li>Catálogo con búsqueda por código</li><li>PDF con tu logo y folio consecutivo</li><li>Historial con estado y tasa de cierre</li></ul>
-        <a class="btn ghost mag" id="sysopen" href="sistemas/cotizador/"><span class="lb"><span class="rl"><span data-t="Probar demo" id="sysopenl">Probar demo</span></span></span></a>
-      </div>
     </div>
     <p class="more mono rv">También desarrollo: inventario multialmacén · portales de proveedores · control de gastos y viáticos · cuentas por cobrar · mesa de ayuda interna</p>
   </section>
@@ -440,7 +402,7 @@ html.cc .cdot,html.cc .cring{opacity:1}
     <div class="svhead">
       <div>
         <span class="mono"><b>002</b> · Automatización e IA</span>
-        <h2 class="rv" style="margin-top:14px">Procesos que <span class="g">se ejecutan solos.</span></h2>
+        <h2 class="rv">Procesos que <span class="g">se ejecutan solos.</span></h2>
       </div>
       <p class="rv">Conecto las herramientas que ya usas, como correo, hojas de cálculo, WhatsApp Business o tu sistema actual, para que las tareas repetitivas ocurran sin intervención.</p>
     </div>
@@ -487,77 +449,83 @@ html.cc .cdot,html.cc .cring{opacity:1}
     <div class="svhead">
       <div>
         <span class="mono"><b>003</b> · Sitios web</span>
-        <h2 class="rv" style="margin-top:14px">Presencia digital <span class="g">que genera solicitudes.</span></h2>
+        <h2 class="rv">Presencia digital <span class="g">que genera solicitudes.</span></h2>
       </div>
       <p class="rv">Sitios corporativos rápidos, medibles y fáciles de administrar, pensados para convertir visitas en solicitudes de cotización.</p>
     </div>
-    <div class="sys rev">
-      <a class="win rv" href="sitios/arce/" data-cursor="Abrir" aria-label="Abrir demo del sitio corporativo">
-        <div class="bar"><i></i><i></i><i></i><span class="mono">suministrosarce.mx · demo en vivo</span></div>
-        <div class="vp"><iframe src="sitios/arce/?v=0928" title="Demo de sitio corporativo" loading="lazy" tabindex="-1"></iframe></div>
-        <div class="cap"><b>Sitio corporativo B2B</b><span class="mono">Empresa ficticia · Abrir demo</span></div>
-      </a>
+    <div class="web">
       <ul class="list rv">
         <li><span class="mono">01</span><b>Sitios corporativos</b><span>Presentación de la empresa, líneas de producto y solicitudes de cotización.</span></li>
         <li><span class="mono">02</span><b>Catálogos en línea</b><span>Productos con fichas técnicas, filtros y existencias.</span></li>
         <li><span class="mono">03</span><b>Portales de clientes</b><span>Pedidos, facturas y estados de cuenta con acceso privado.</span></li>
-        <li><span class="mono">04</span><b>Páginas de campaña</b><span>Lanzamientos y publicidad con medición de resultados.</span></li>
-        <li><span class="mono">05</span><b>Posicionamiento y analítica</b><span>Presencia en Google y reportes de visitas y solicitudes.</span></li>
+        <li><span class="mono">04</span><b>Posicionamiento y analítica</b><span>Presencia en Google y reportes de visitas y solicitudes.</span></li>
       </ul>
-    </div>
-  </section>
-
-  <!-- FRANJA -->
-  <section class="band" id="band">
-    <img id="bandimg" src="https://images.unsplash.com/photo-1489465033131-30f7e2025f68?auto=format&fit=crop&w=2000&q=70" alt="" loading="lazy">
-    <div class="wrap in">
-      <span class="mono">Enfoque</span>
-      <p>Tecnología que se adapta a tu operación, <span class="g">no al revés.</span></p>
+      <a class="win rv" href="sitios/arce/" aria-label="Abrir demo del sitio corporativo">
+        <div class="bar"><i></i><i></i><i></i><span class="mono">suministrosarce.mx</span><em>demo en vivo</em></div>
+        <div class="vp"><iframe class="on" src="sitios/arce/?v=1006" title="Demo de sitio corporativo" loading="lazy" tabindex="-1"></iframe></div>
+      </a>
     </div>
   </section>
 
   <!-- PROCESO -->
-  <section class="wrap svc" id="proceso" style="border-top:0">
+  <section class="wrap svc" id="proceso">
     <div class="svhead">
       <div>
         <span class="mono">Proceso</span>
-        <h2 class="rv" style="margin-top:14px">Un método claro, <span class="g">de principio a fin.</span></h2>
+        <h2 class="rv">Tecnología que se adapta a tu operación, <span class="g">no al revés.</span></h2>
       </div>
       <p class="rv">Cada proyecto avanza por etapas, con entregables revisados contigo antes de pasar a la siguiente.</p>
     </div>
-    <div class="proc">
-      <figure class="pimg rv"><img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=900&h=1125&q=70" alt="Mapeo de un proceso en un pizarrón" loading="lazy"><figcaption class="mono">Etapa de diagnóstico</figcaption></figure>
-      <div class="steps">
-        <div class="step rv"><span class="mono">01</span><b>Diagnóstico</b><p>Revisamos cómo opera tu equipo hoy y detectamos dónde se pierde tiempo o información.</p></div>
-        <div class="step rv"><span class="mono">02</span><b>Propuesta</b><p>Alcance, tiempos y una demostración funcional antes de comenzar el desarrollo.</p></div>
-        <div class="step rv"><span class="mono">03</span><b>Desarrollo por etapas</b><p>Entregas parciales para validar avances contigo y ajustar a tiempo.</p></div>
-        <div class="step rv"><span class="mono">04</span><b>Implementación y soporte</b><p>Capacitación a tu equipo y acompañamiento después de la entrega.</p></div>
+    <div class="steps">
+      <div class="step rv"><span class="mono">01</span><b>Diagnóstico</b><p>Revisamos cómo opera tu equipo hoy y detectamos dónde se pierde tiempo o información.</p></div>
+      <div class="step rv"><span class="mono">02</span><b>Propuesta</b><p>Alcance, tiempos y una demostración funcional antes de comenzar el desarrollo.</p></div>
+      <div class="step rv"><span class="mono">03</span><b>Desarrollo por etapas</b><p>Entregas parciales para validar avances contigo y ajustar a tiempo.</p></div>
+      <div class="step rv"><span class="mono">04</span><b>Implementación</b><p>Capacitación a tu equipo y acompañamiento después de la entrega.</p></div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS -->
+  <section class="wrap svc" id="preguntas">
+    <div class="svhead">
+      <div>
+        <span class="mono">Preguntas frecuentes</span>
+        <h2 class="rv">Antes de empezar.</h2>
+      </div>
+    </div>
+    <div class="faq rv">
+      <div>
+        <details><summary>¿Puedo empezar con algo pequeño?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></summary><p>Sí, y es lo que recomiendo: resolver primero el proceso que más tiempo les quita y crecer desde ahí con lo que ya funciona.</p></details>
+        <details><summary>¿Necesito instalar algo o comprar servidores?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></summary><p>No. Todo funciona desde el navegador de cualquier computadora o celular. Te recomiendo la opción de alojamiento más sencilla para tu caso.</p></details>
+        <details><summary>¿Se conecta con lo que ya usamos?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></summary><p>En la mayoría de los casos sí: hojas de cálculo, correo, WhatsApp Business o tu sistema actual. Lo revisamos en el diagnóstico.</p></details>
+      </div>
+      <div>
+        <details><summary>¿Cuánto tarda un proyecto?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></summary><p>Depende del alcance. En la propuesta recibes un calendario por etapas, con una primera versión que tu equipo puede usar lo antes posible.</p></details>
+        <details><summary>¿Cómo cuidan la información de mi empresa?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></summary><p>Cada sistema tiene usuarios con permisos por puesto, conexión cifrada y respaldos. Tú decides quién ve qué.</p></details>
+        <details><summary>¿Qué pasa después de la entrega?<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></summary><p>Capacito a tu equipo y te acompaño después de la entrega para ajustes y dudas, para que la herramienta se use de verdad.</p></details>
       </div>
     </div>
   </section>
 
   <!-- CONTACTO -->
   <section class="wrap end" id="contacto">
-    <span class="mono">Contacto</span>
-    <div class="endrow">
-      <a class="big" id="mail" data-goatcounter-click="portafolio-correo" data-cursor="Escribir" href="#">Hablemos<span class="g">.</span></a>
-      <svg class="mk bigmk" id="bigmk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>
+    <div>
+      <span class="mono">Contacto</span><br>
+      <a class="big" id="mail" data-goatcounter-click="portafolio-correo" href="#">Hablemos<span class="g">.</span></a>
     </div>
-    <div class="row">
-      <p>Cuéntame sobre tu empresa y el proceso que quieres mejorar. Te respondo con una propuesta sin costo.</p>
+    <div class="txt">
+      <p>Cuéntame sobre tu empresa y el proceso que quieres mejorar. Te respondo personalmente con una propuesta sin costo.</p>
       <div class="cta">
         <span class="mono" id="mail-text"></span>
         <button type="button" class="chip" id="copy"><span class="rl"><span data-t="Copiar" id="copyl">Copiar</span></span></button>
-        <a class="btn mag" id="mail-2" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Escribir correo">Escribir correo</span></span></span><span class="ic"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></span></a>
+        <a class="btn" id="mail-2" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Escribir correo">Escribir correo</span></span></span><span class="ic"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></span></a>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="wrap">
-  <span class="fb"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>© 2026 crusol · Angel Cruz</span>
-  <span id="credits"></span>
-  <a href="#">Volver arriba</a>
+  <span class="fb"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>© 2026 crusol · Angel Cruz · Diseñado y programado a mano, sin plantillas</span>
+  <nav><a href="https://unsplash.com/?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Fotos: Unsplash</a><a href="#">Volver arriba</a></nav>
 </footer>
 
 <script>
@@ -575,14 +543,16 @@ html.cc .cdot,html.cc .cring{opacity:1}
 (function(){
   var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine=window.matchMedia&&window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-  var MK='<svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="currentColor" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>';
+  var V="1006";
 
-  /* título palabra por palabra */
+  /* título palabra por palabra, con un trazo a mano bajo la última palabra */
   var h=document.getElementById("h1"),n=0;
   [].slice.call(h.children).forEach(function(sp){
     var words=sp.textContent.split(/(\s+)/);sp.textContent="";
     words.forEach(function(w){if(!w)return;if(/^\s+$/.test(w)){sp.appendChild(document.createTextNode(" "));return}var s=document.createElement("span");s.className="w";s.textContent=w;s.style.animationDelay=(0.1+n++*0.05)+"s";sp.appendChild(s)});
   });
+  var lw=h.lastElementChild.lastElementChild;lw.classList.add("u");
+  lw.insertAdjacentHTML("beforeend",'<svg class="scr" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 13C60 6 118 5 176 8S262 14 296 6"/></svg>');
 
   /* número del tablero */
   var kpi=document.getElementById("kpiN"),goal=1284560,t0=null;
@@ -596,74 +566,48 @@ html.cc .cdot,html.cc .cring{opacity:1}
     (function next(){if(i<fl.length){fl[i++].classList.add("done");setTimeout(next,900)}else{fst.textContent="Completado";fst.classList.add("ok");fmk.classList.remove("spin");setTimeout(heroFlow,3800)}})();}
   if(still){fl.forEach(function(li){li.classList.add("done")});fst.textContent="Completado";fst.classList.add("ok");fmk.classList.remove("spin")}else setTimeout(heroFlow,1400);
 
-  /* tarjetas que siguen al mouse */
+  /* tarjetas que siguen ligeramente al mouse */
   var stage=document.getElementById("stage"),cards=[].slice.call(stage.querySelectorAll(".fl"));
-  if(fine&&!still){
-    addEventListener("mousemove",function(e){
-      var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
-      cards.forEach(function(c){var d=+c.dataset.d;c.style.transform="translate("+(-x*d)+"px,"+(-y*d)+"px)"});
-    },{passive:true});
-  }
+  if(fine&&!still){addEventListener("mousemove",function(e){var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;cards.forEach(function(c){var d=+c.dataset.d;c.style.transform="translate("+(-x*d)+"px,"+(-y*d)+"px)"})},{passive:true})}
 
-  /* cinta */
-  var W=["<b>Software a la medida</b>","Automatización de procesos","<b>Cotizadores</b>","Control de inventario","<b>Tableros de indicadores</b>","Integraciones","<b>Asistentes con IA</b>","Sitios corporativos","<b>Reportes programados</b>","Portales de clientes"],s="";
-  W.forEach(function(w){s+=w+MK});document.getElementById("tape").innerHTML=s+s;
+  /* progreso, borde del menú y sección activa */
+  var prog=document.getElementById("prog"),nav=document.getElementById("nav");
+  function onScroll(){var m=document.documentElement.scrollHeight-innerHeight;prog.style.transform="scaleX("+(m>0?scrollY/m:0)+")";nav.classList.toggle("sc",scrollY>8)}
+  onScroll();addEventListener("scroll",onScroll,{passive:true});
+  var links=[].slice.call(document.querySelectorAll("#links a"));
+  if("IntersectionObserver" in window){var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id)})}})},{rootMargin:"-45% 0px -50% 0px"});
+    ["sistemas","automatizacion","web","proceso","preguntas"].forEach(function(id){so.observe(document.getElementById(id))})}
 
-  /* palabras que se encienden */
-  var say=document.getElementById("say"),ws=say.textContent.split(/\s+/);say.innerHTML=ws.map(function(w){return "<span>"+w+"</span>"}).join(" ");
-  var sw=[].slice.call(say.children);
-  function lit(){var r=say.getBoundingClientRect(),vh=innerHeight,p=(vh*.85-r.top)/(r.height+vh*.35);p=Math.max(0,Math.min(1,p));var k=Math.round(p*sw.length);sw.forEach(function(w,i){w.classList.toggle("on",i<k)})}
-
-  /* progreso, franja y marca que gira */
-  var prog=document.getElementById("prog"),band=document.getElementById("band"),bimg=document.getElementById("bandimg"),bigmk=document.getElementById("bigmk");
-  function onScroll(){
-    var m=document.documentElement.scrollHeight-innerHeight;prog.style.transform="scaleX("+(m>0?scrollY/m:0)+")";lit();
-    if(!still){
-      var r=band.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){var p=(r.top+r.height)/(innerHeight+r.height);bimg.style.transform="translateY("+((p-.5)*14)+"%)"}
-      bigmk.style.transform="rotate("+(Math.round(scrollY/240)*90)+"deg)";
-    }
-  }
-  bigmk.style.transition="transform .9s cubic-bezier(.7,0,.2,1)";
-  onScroll();addEventListener("scroll",onScroll,{passive:true});addEventListener("resize",onScroll);
-
-  /* selector de sistemas */
+  /* sistemas de ejemplo */
   var SYS=[
-    {u:"sistemas/cotizador/",url:"cotizador · demo en vivo",cap:"Cotizador con historial",al:"Abrir demo del cotizador",area:"Para el área de ventas",t:"Cotizaciones en menos de un minuto.",d:"Tu equipo arma cotizaciones con precios de catálogo, descuentos e IVA, y las envía en PDF con tu imagen y folio consecutivo.",f:["Catálogo con búsqueda por código","PDF con tu logo y folio consecutivo","Historial con estado y tasa de cierre"]},
-    {u:"sistemas/tablero/",url:"tablero · demo en vivo",cap:"Tablero de dirección",al:"Abrir demo del tablero",area:"Para dirección general",t:"Toda la empresa en una sola pantalla.",d:"Ventas, margen, cartera e inventario con los datos de tu operación, filtrados por periodo y sucursal.",f:["Indicadores comparados contra el periodo anterior","Alertas de inventario con orden de compra en un clic","Reporte en PDF que llega solo cada lunes"]},
-    {u:"sistemas/requisiciones/",url:"requisiciones · demo en vivo",cap:"Requisiciones y aprobaciones",al:"Abrir demo de requisiciones",area:"Para compras y finanzas",t:"Compras aprobadas, con orden y con presupuesto.",d:"Cada solicitud sigue una ruta de aprobación según su monto y se revisa contra el presupuesto del área antes de volverse orden de compra.",f:["Ruta por monto: gerente, finanzas y dirección","Control de presupuesto por centro de costo","Historial de quién aprobó, cuándo y por qué"]}
+    {u:"sistemas/cotizador/",url:"cotizador",n:"Cotizador industrial",a:"Ventas · distribuidora de material industrial",t:"Cotizaciones que ya saben qué hay en almacén.",d:"Catálogo con existencias por almacén, precios según la lista de cada cliente y escalas por volumen. La cotización sale en PDF con tu imagen y folio.",f:["Existencias por almacén y fecha de surtido","Listas de precios por cliente y por volumen","Historial con tasa de cierre y productos más cotizados"]},
+    {u:"sistemas/tablero/",url:"tablero",n:"Tablero de dirección",a:"Dirección · cadena con sucursales",t:"Toda la empresa en una sola pantalla.",d:"Ventas, margen, cartera e inventario con los datos de tu operación, filtrados por periodo y sucursal.",f:["Indicadores comparados contra el periodo anterior","Alertas de inventario con orden de compra en un clic","Reporte en PDF que llega solo cada lunes"]},
+    {u:"sistemas/requisiciones/",url:"requisiciones",n:"Requisiciones",a:"Compras · planta industrial",t:"Compras aprobadas, con orden y con presupuesto.",d:"Cada solicitud sigue una ruta de aprobación según su monto y se revisa contra el presupuesto del área antes de volverse orden de compra.",f:["Ruta por monto: gerente, finanzas y dirección","Control de presupuesto por centro de costo","Historial de quién aprobó, cuándo y por qué"]},
+    {u:"sistemas/agenda/",url:"agenda",n:"Agenda de citas",a:"Consultorios, salones y veterinarias",t:"Citas reales, sin llamadas ni empalmes.",d:"Tus pacientes o clientes reservan desde el celular a cualquier hora. Cada cita se confirma con un código que les llega por WhatsApp, así no se registran citas falsas ni números ajenos.",f:["Verificación del celular con código por WhatsApp","Horarios sin empalmes y anticipo para apartar","Recordatorio automático un día antes"]},
+    {u:"sistemas/taller/",url:"taller",n:"Seguimiento de servicio",a:"Talleres y servicio técnico",t:"Tus clientes saben cómo va su auto sin llamar.",d:"Con su folio y su placa, el cliente ve en qué etapa va su vehículo, revisa la cotización y la autoriza desde el celular. Cada cambio de etapa le llega por WhatsApp.",f:["Tablero por etapas para el equipo del taller","Autorización de la cotización en línea","Aviso automático en cada cambio de etapa"]}
   ];
-  var pk=document.getElementById("picker"),pbs=[].slice.call(pk.querySelectorAll("button")),svp=document.getElementById("sysvp"),swin=document.getElementById("syswin"),sinfo=document.getElementById("sysinfo"),cur=0,auto=!still,ptimer=null;
-  function pick(i,user){if(i===cur&&!user)return;cur=i;var S=SYS[i];
-    pbs.forEach(function(b,j){b.setAttribute("aria-selected",j===i)});
+  var list=document.getElementById("slist"),svp=document.getElementById("sysvp"),swin=document.getElementById("syswin"),cur=-1,auto=!still&&innerWidth>=900,ptimer=null,items=[];
+  var PLUS='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>',ARR='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  SYS.forEach(function(S,i){var d=document.createElement("div");d.className="si";
+    d.innerHTML='<button type="button" class="sh" role="tab" id="st'+i+'" aria-selected="false" aria-controls="sp'+i+'"><span class="mono">0'+(i+1)+'</span><b>'+esc(S.n)+'</b><small>'+esc(S.a)+'</small>'+PLUS+'</button>'+
+      '<div class="sp" id="sp'+i+'" role="tabpanel" aria-labelledby="st'+i+'"><div><p class="t">'+esc(S.t)+'</p><p>'+esc(S.d)+'</p><ul class="feats">'+S.f.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+'</ul><a class="lnk" href="'+S.u+'">Probar demo '+ARR+'</a></div></div>';
+    d.querySelector(".sh").addEventListener("click",function(){auto=false;list.classList.remove("auto");clearInterval(ptimer);pick(i)});
+    list.appendChild(d);items.push(d)});
+  function pick(i){if(i===cur)return;cur=i;var S=SYS[i];
+    items.forEach(function(d,j){d.classList.toggle("on",j===i);d.querySelector(".sh").setAttribute("aria-selected",String(j===i))});
     var fr=svp.querySelector('iframe[data-k="'+i+'"]');
-    if(!fr){fr=document.createElement("iframe");fr.dataset.k=i;fr.src=S.u+"?v=0928";fr.title="Demo: "+S.cap;fr.tabIndex=-1;svp.appendChild(fr);sc()}
+    if(!fr){fr=document.createElement("iframe");fr.dataset.k=i;fr.src=S.u+"?v="+V;fr.title="Demo: "+S.n;fr.tabIndex=-1;fr.loading="lazy";svp.appendChild(fr);sc()}
     [].forEach.call(svp.querySelectorAll("iframe"),function(f){f.classList.toggle("on",f===fr)});
-    swin.href=S.u;swin.setAttribute("aria-label",S.al);document.getElementById("sysurl").textContent=S.url;document.getElementById("syscap").textContent=S.cap;
-    sinfo.classList.add("sw");setTimeout(function(){document.getElementById("sysarea").textContent=S.area;document.getElementById("systit").textContent=S.t;document.getElementById("sysdesc").textContent=S.d;
-      var ul=document.getElementById("sysfeat");ul.textContent="";S.f.forEach(function(x){var li=document.createElement("li");li.textContent=x;ul.appendChild(li)});document.getElementById("sysopen").href=S.u;sinfo.classList.remove("sw")},still?0:220);
-    if(auto){pk.classList.remove("auto");void pk.offsetWidth;pk.classList.add("auto")}
-  }
-  pbs.forEach(function(b,j){b.addEventListener("click",function(){auto=false;pk.classList.remove("auto");clearInterval(ptimer);pick(j,true)})});
-  if(auto&&"IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){clearInterval(ptimer);if(e.isIntersecting&&auto){pk.classList.add("auto");ptimer=setInterval(function(){pick((cur+1)%SYS.length)},8000)}else pk.classList.remove("auto")})},{threshold:.4}).observe(pk.parentNode)}
+    swin.href=S.u;swin.setAttribute("aria-label","Abrir demo: "+S.n);document.getElementById("sysurl").textContent=S.url;
+    if(auto){list.classList.remove("auto");void list.offsetWidth;list.classList.add("auto")}}
+  pick(0);
+  if(auto&&"IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){clearInterval(ptimer);if(e.isIntersecting&&auto){list.classList.add("auto");ptimer=setInterval(function(){pick((cur+1)%SYS.length)},8000)}else list.classList.remove("auto")})},{threshold:.35}).observe(list.parentNode)}
 
-  /* ventana del sistema a escala */
+  /* ventanas a escala */
   function sc(){[].forEach.call(document.querySelectorAll(".win .vp"),function(vp){var k=vp.clientWidth/1280;[].forEach.call(vp.querySelectorAll("iframe"),function(f){f.style.transform="scale("+k+")"})})}sc();addEventListener("resize",sc);
 
-  /* cursor y botones magnéticos */
-  if(fine&&!still){
-    var ring=document.getElementById("cring"),dot=document.getElementById("cdot"),rl=ring.querySelector("span"),mx=-100,my=-100,rx=-100,ry=-100,started=false;
-    addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;dot.style.transform="translate("+mx+"px,"+my+"px)";if(!started){started=true;rx=mx;ry=my;document.documentElement.classList.add("cc");requestAnimationFrame(loop)}},{passive:true});
-    function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.transform="translate("+rx+"px,"+ry+"px)";requestAnimationFrame(loop)}
-    document.addEventListener("mouseover",function(e){var t=e.target.closest("[data-cursor]"),l=e.target.closest("a,button");ring.classList.toggle("label",!!t);ring.classList.toggle("link",!t&&!!l);dot.classList.toggle("hide",!!t);if(t)rl.textContent=t.dataset.cursor});
-    addEventListener("mousedown",function(){ring.classList.add("press")});addEventListener("mouseup",function(){ring.classList.remove("press")});
-    document.addEventListener("mouseleave",function(){document.documentElement.classList.remove("cc");started=false});
-    [].forEach.call(document.querySelectorAll(".mag"),function(b){
-      b.addEventListener("mousemove",function(e){var r=b.getBoundingClientRect();b.style.transform="translate("+((e.clientX-r.left-r.width/2)*.18)+"px,"+((e.clientY-r.top-r.height/2)*.28)+"px)"});
-      b.addEventListener("mouseleave",function(){b.style.transform=""});
-    });
-  }
-
-  /* pestañas del demo */
+  /* pestañas del demo de automatización */
   var tabs=[document.getElementById("t-flow"),document.getElementById("t-ai")];
   tabs.forEach(function(t){t.addEventListener("click",function(){tabs.forEach(function(o){var on=o===t;o.setAttribute("aria-selected",on);document.getElementById(o.getAttribute("aria-controls")).classList.toggle("on",on)})})});
 
@@ -689,8 +633,8 @@ html.cc .cdot,html.cc .cring{opacity:1}
   /* asistente con IA */
   var msgs=document.getElementById("msgs"),qr=document.getElementById("qr"),st=document.getElementById("botst");
   var QA=[
-    ["¿Tienen guantes de nitrilo en existencia?","Sí. Hay 340 cajas disponibles en almacén, a $260.00 por caja más IVA. ¿Te preparo una cotización?"],
-    ["Sí, 20 cajas para Plásticos del Valle","Listo. Generé la cotización COT-0007 por $5,200.00 más IVA y la envié a compras@plasticosdelvalle.mx. Vigencia de 15 días."],
+    ["¿Tienen guantes de nitrilo en existencia?","Sí. Hay 430 cajas disponibles entre CEDIS y mostrador, a $260.00 por caja más IVA. ¿Te preparo una cotización?"],
+    ["Sí, 20 cajas para Plásticos del Valle","Listo. Generé la cotización COT-0007 con su precio de mayoreo y la envié a compras@plasticosdelvalle.mx. Vigencia de 15 días."],
     ["¿Cuándo llega mi pedido PED-1184?","Tu pedido salió hoy a las 9:40 am. La entrega estimada es mañana antes de las 2:00 pm."],
     ["Quiero hablar con un asesor","Claro. Le pasé el resumen de esta conversación a Laura, de ventas, para que no tengas que repetir nada. Te contacta en unos minutos."]
   ];
@@ -703,10 +647,6 @@ html.cc .cdot,html.cc .cring{opacity:1}
     setTimeout(function(){ty.remove();add(q[1],"in");st.textContent="en línea";stp=i+1;chips()},still?100:1100)}
   function reset(){msgs.innerHTML="";stp=0;add("Hola, soy el asistente de Suministros Arce. Puedo revisar existencias, preparar cotizaciones y darte el estado de tus pedidos.","in");chips()}
   reset();
-
-  /* créditos de fotos */
-  var U="?utm_source=crusol&utm_medium=referral",P=[["Mia Baker","miabaker"],["Adrian Sulyok","sulyok_imaging"],["Headway","headwayio"],["PHC Software","phcsoftware"],["Guillaume Bolduc","guibolduc"],["Alvaro Reyes","alvarordesign"]];
-  document.getElementById("credits").innerHTML='Fotos de <a href="https://unsplash.com/'+U+'" target="_blank" rel="noopener">Unsplash</a>: '+P.map(function(p){return '<a href="https://unsplash.com/@'+p[1]+U+'" target="_blank" rel="noopener">'+p[0]+'</a>'}).join(", ");
 
   /* aparecer al bajar */
   var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}})},{threshold:.12}):null;
