@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,15 +10,28 @@
 <meta property="og:description" content="Sistemas a la medida, automatización de procesos y sitios web para empresas. Prueba los demos en vivo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://crusol.com.mx/">
-<meta property="og:image" content="https://crusol.com.mx/apple-touch-icon.png">
+<meta property="og:image" content="https://crusol.com.mx/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="crusol · Software a la medida, automatización y sitios web para empresas">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="crusol">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Angel Cruz">
+<link rel="canonical" href="https://crusol.com.mx/">
+<link rel="manifest" href="site.webmanifest">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"crusol","url":"https://crusol.com.mx/","logo":"https://crusol.com.mx/favicon-64.png","image":"https://crusol.com.mx/og.png","description":"Sistemas a la medida, automatización de procesos y sitios web para empresas.","areaServed":{"@type":"Country","name":"México"},"founder":{"@type":"Person","name":"Angel Cruz"},"knowsAbout":["Software a la medida","Automatización de procesos","Sitios web corporativos","Tableros de indicadores","Agenda de citas en línea"]}
+</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Geist";src:url("fonts/Geist-Variable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url("fonts/GeistMono-Variable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 :root{
   color-scheme: light;
   --bg:#FAFAF8; --paper:#FFFFFF; --ink:#111110; --gray:#A3A39C; --muted:#6C6C66; --line:#E6E6E0; --soft:#F1F1ED;
@@ -438,6 +451,57 @@ footer nav{display:flex;gap:18px}
 .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}
 
 
+
+/* ---------- fluidez y tipografía ---------- */
+html{-webkit-tap-highlight-color:transparent;text-rendering:optimizeLegibility}
+h2,h3,.state,.lead{text-wrap:balance}
+p,li,summary{text-wrap:pretty}
+@media (hover:none){.btn:active,.chip:active,.tab:active,.opt:active,.qr button:active{transform:scale(.96);transition:transform .15s}}
+.stg>*{opacity:0;transform:translateY(16px);transition:opacity .8s,transform .9s var(--out)}
+.stg.on>*{opacity:1;transform:none}
+.stg.on>*:nth-child(2){transition-delay:.08s}.stg.on>*:nth-child(3){transition-delay:.16s}.stg.on>*:nth-child(4){transition-delay:.24s}.stg.on>*:nth-child(5){transition-delay:.32s}.stg.on>*:nth-child(6){transition-delay:.4s}
+.hero>div:first-child,.stage{will-change:transform}
+
+/* transición al abrir otra página */
+.pt{position:fixed;inset:0;z-index:250;background:var(--green-2);color:var(--d-ink);display:grid;place-items:center;transform:translateY(101%);transition:transform .65s var(--ease);pointer-events:none}
+.pt.in{transform:none;pointer-events:auto}
+.pt .mk{font-size:56px;opacity:0;transition:opacity .3s .25s}
+.pt.in .mk{opacity:1;animation:spin 1.6s .3s var(--ease) infinite}
+.pt .mk .b{fill:var(--sage)}
+.pt span{position:absolute;left:var(--pad);bottom:clamp(22px,3vw,40px);font:12px var(--mono);color:var(--d-mute)}
+
+/* arma tu correo */
+.comp{background:rgba(246,245,240,.04);border:1px solid var(--d-line);border-radius:20px;padding:clamp(18px,2.4vw,28px);display:grid;gap:18px;min-width:0}
+.comp>.mono{display:flex;justify-content:space-between;gap:12px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1px solid var(--d-line);background:transparent;color:var(--d-ink);border-radius:999px;padding:8px 14px;font:500 13.5px var(--sans);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .3s,border-color .3s,color .3s}
+.opt::before{content:"";width:7px;height:7px;border-radius:2px;border:1.5px solid currentColor;transform:rotate(45deg);transition:background .3s}
+.opt:hover{border-color:var(--d-ink)}
+.opt[aria-pressed="true"]{background:var(--sage);border-color:var(--sage);color:var(--green-2)}
+.opt[aria-pressed="true"]::before{background:currentColor}
+.f2{display:grid;gap:18px}
+.fld{position:relative;display:block}
+.fld input,.fld textarea{display:block;width:100%;background:transparent;border:0;border-bottom:1px solid var(--d-line);color:var(--d-ink);font:16px/1.4 var(--sans);padding:22px 0 9px;outline:none;resize:none;border-radius:0;transition:border-color .3s}
+.fld span{position:absolute;left:0;top:22px;color:var(--d-mute);font-size:15px;pointer-events:none;transform-origin:0 0;transition:transform .4s var(--out),color .3s}
+.fld input:focus~span,.fld input:not(:placeholder-shown)~span,.fld textarea:focus~span,.fld textarea:not(:placeholder-shown)~span{transform:translateY(-20px) scale(.78);color:var(--sage)}
+.fld::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--sage);transform:scaleX(0);transform-origin:0 50%;transition:transform .6s var(--out)}
+.fld:focus-within::after{transform:scaleX(1)}
+.comp .acts{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.comp .acts small{font:12px var(--mono);color:var(--d-dim)}
+.endl p{margin:0 0 22px}
+
+/* pie con columnas */
+.fcols{display:grid;grid-template-columns:1fr 1fr;gap:30px 20px;padding:clamp(40px,5vw,64px) 0 clamp(26px,3vw,36px);border-bottom:1px solid var(--d-line)}
+.fcols b{display:block;font:500 12px var(--mono);letter-spacing:.04em;color:var(--d-dim);margin-bottom:14px;font-weight:400}
+.fcols a{display:table;color:var(--d-mute);text-decoration:none;font-size:14.5px;padding:4px 0;position:relative;transition:color .3s}
+.fcols a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:100% 50%;transition:transform .5s var(--ease)}
+.fcols a:hover{color:var(--d-ink)}
+.fcols a:hover::after{transform:scaleX(1);transform-origin:0 50%}
+.fbr,.fcols>div:last-child{grid-column:1/-1}
+.fbr .mk{font-size:30px;color:var(--d-ink);margin-bottom:16px}
+.fbr p{margin:0;color:var(--d-mute);font-size:14.5px;max-width:30ch}
+.fcols .fsm{font-family:var(--mono);font-size:12.5px}
+
 /* ---------- detalles ---------- */
 html{scrollbar-color:#CFCFC8 transparent}
 ::-webkit-scrollbar{width:11px;height:11px}
@@ -558,10 +622,13 @@ body.mopen .totop{opacity:0;pointer-events:none}
   .track{left:0;right:0;top:7px;bottom:auto;width:auto;height:1px}
   .track i{transform:scaleX(0);transform-origin:0 50%}
   .step .nd{left:0;top:-42px}
-  .endg{grid-template-columns:1fr auto;align-items:end}
+  .endg{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start;gap:56px}
   .nums{grid-template-columns:repeat(4,minmax(0,1fr))}
   .num:nth-child(n){border-left:1px solid var(--line);padding-left:22px;border-top:0}
   .num:first-child{border-left:0;padding-left:0}
+  .f2{grid-template-columns:1fr 1fr}
+  .fcols{grid-template-columns:1.3fr 1fr 1fr 1fr}
+  .fbr,.fcols>div:last-child{grid-column:auto}
   .atop{grid-template-columns:1fr auto}
   .badge{display:grid}
 }
@@ -591,7 +658,8 @@ body.mopen .totop{opacity:0;pointer-events:none}
   .totop{width:46px;height:46px}
 }
 @media (prefers-reduced-motion:reduce){
-  .ld0{display:none}
+  .ld0,.pt{display:none}
+  .stg>*{opacity:1!important;transform:none!important}
   *{animation:none!important;transition:none!important}
   .w>span,.avail,.fi,.pop,.rv,.step>*,.hmk .q,.hmk .sat{opacity:1!important;transform:none!important}
   .ch .ln,.hmk .orb{stroke-dashoffset:0}.scr{clip-path:none}.ch .ar,.ch .pt{opacity:1}
@@ -613,6 +681,7 @@ body.mopen .totop{opacity:0;pointer-events:none}
 <script>try{if(sessionStorage.getItem("crusol_intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.getElementById("ld0").remove();else{sessionStorage.setItem("crusol_intro","1");document.documentElement.classList.add("lding")}}catch(e){document.getElementById("ld0").remove()}</script>
 <noscript><style>.ld0{display:none}</style></noscript>
 <div class="prog" id="prog"></div>
+<div class="pt" id="pt" aria-hidden="true"><svg class="mk" viewBox="0 0 100 100"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg><span id="ptt">Abriendo</span></div>
 <div class="cur" id="cur" aria-hidden="true"><div class="cdot" id="cdot"><i></i></div><div class="cring" id="cring"><div class="cb"><span id="curl"></span></div></div></div>
 
 <header class="nav" id="nav">
@@ -736,7 +805,7 @@ body.mopen .totop{opacity:0;pointer-events:none}
         <p class="rv">Conecto las herramientas que ya usas, como correo, hojas de cálculo, WhatsApp Business o tu sistema actual, para que las tareas repetitivas ocurran sin intervención.</p>
       </div>
       <div class="autog">
-        <ul class="list rv">
+        <ul class="list stg">
           <li><span class="mono">01</span><b>Flujos entre sistemas</b><span>Órdenes, facturas y avisos que pasan de un sistema a otro sin capturas manuales.</span></li>
           <li><span class="mono">02</span><b>Recordatorios y seguimiento</b><span>Pagos, renovaciones y citas por correo o WhatsApp Business.</span></li>
           <li><span class="mono">03</span><b>Reportes programados</b><span>Los indicadores de la semana en tu correo cada lunes a primera hora.</span></li>
@@ -828,13 +897,13 @@ body.mopen .totop{opacity:0;pointer-events:none}
         <h2 class="split">Antes de empezar.</h2>
       </div>
     </div>
-    <div class="faq rv">
-      <div>
+    <div class="faq">
+      <div class="stg">
         <details><summary>¿Puedo empezar con algo pequeño?<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></i></summary><div class="an"><p>Sí, y es lo que recomiendo: resolver primero el proceso que más tiempo les quita y crecer desde ahí con lo que ya funciona.</p></div></details>
         <details><summary>¿Necesito instalar algo o comprar servidores?<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></i></summary><div class="an"><p>No. Todo funciona desde el navegador de cualquier computadora o celular. Te recomiendo la opción de alojamiento más sencilla para tu caso.</p></div></details>
         <details><summary>¿Se conecta con lo que ya usamos?<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></i></summary><div class="an"><p>En la mayoría de los casos sí: hojas de cálculo, correo, WhatsApp Business o tu sistema actual. Lo revisamos en el diagnóstico.</p></div></details>
       </div>
-      <div>
+      <div class="stg">
         <details><summary>¿Cuánto tarda un proyecto?<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></i></summary><div class="an"><p>Depende del alcance. En la propuesta recibes un calendario por etapas, con una primera versión que tu equipo puede usar lo antes posible.</p></div></details>
         <details><summary>¿Cómo cuidan la información de mi empresa?<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></i></summary><div class="an"><p>Cada sistema tiene usuarios con permisos por puesto, conexión cifrada y respaldos. Tú decides quién ve qué.</p></div></details>
         <details><summary>¿Qué pasa después de la entrega?<i><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 2v12M2 8h12"/></svg></i></summary><div class="an"><p>Capacito a tu equipo y te acompaño después de la entrega para ajustes y dudas, para que la herramienta se use de verdad.</p></div></details>
@@ -849,17 +918,31 @@ body.mopen .totop{opacity:0;pointer-events:none}
       <div class="ctop"><span class="mono lbl">Contacto</span><span class="mono clk" id="clkw"><span class="dot" id="clkd"></span><span id="clk">Hora en México</span></span></div>
       <a class="big split" id="mail" data-goatcounter-click="portafolio-correo" data-cur="Escribir" href="#">Hablemos.</a>
       <div class="endg">
-        <p class="rv">Cuéntame sobre tu empresa y el proceso que quieres mejorar. Te respondo personalmente con una propuesta sin costo.</p>
-        <div class="cta rv d1">
-          <span class="mono" id="mail-text"></span>
-          <button type="button" class="chip" id="copy"><span class="rl"><span data-t="Copiar" id="copyl">Copiar</span></span></button>
-          <a class="btn light mag" id="mail-2" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Escribir correo">Escribir correo</span></span></span><span class="ic"><i><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></i></span></a>
+        <div class="endl rv">
+          <p>Cuéntame sobre tu empresa y el proceso que quieres mejorar. Te respondo personalmente con una propuesta sin costo.</p>
+          <div class="cta">
+            <span class="mono" id="mail-text"></span>
+            <button type="button" class="chip" id="copy"><span class="rl"><span data-t="Copiar" id="copyl">Copiar</span></span></button>
+          </div>
         </div>
+        <form class="comp rv d1" id="comp" onsubmit="return false" aria-label="Arma tu correo">
+          <span class="mono"><span>Arma tu correo</span><span>se abre en tu aplicación de correo</span></span>
+          <div class="opts" id="opts" role="group" aria-label="¿Qué quieres mejorar?"><button type="button" class="opt" aria-pressed="false">Cotizaciones</button><button type="button" class="opt" aria-pressed="false">Inventario</button><button type="button" class="opt" aria-pressed="false">Citas y agenda</button><button type="button" class="opt" aria-pressed="false">Reportes</button><button type="button" class="opt" aria-pressed="false">Compras</button><button type="button" class="opt" aria-pressed="false">Seguimiento de servicio</button><button type="button" class="opt" aria-pressed="false">Sitio web</button><button type="button" class="opt" aria-pressed="false">Tareas repetitivas</button></div>
+          <div class="f2"><label class="fld"><input id="cn" type="text" placeholder=" " autocomplete="name"><span>Tu nombre</span></label><label class="fld"><input id="ce" type="text" placeholder=" " autocomplete="organization"><span>Empresa</span></label></div>
+          <label class="fld"><textarea id="cm" rows="2" placeholder=" "></textarea><span>Cuéntame en una línea qué pasa hoy (opcional)</span></label>
+          <div class="acts"><small id="csum">Elige uno o varios temas</small>
+          <a class="btn light mag" id="mail-2" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Escribir correo">Escribir correo</span></span></span><span class="ic"><i><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></i></span></a></div>
+        </form>
+      </div>
+      <div class="fcols">
+        <div class="fbr"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg><p>Software a la medida, automatización y sitios web para empresas en crecimiento.</p></div>
+        <nav aria-label="Demos"><b>Demos en vivo</b><a href="sistemas/cotizador/">Cotizador industrial</a><a href="sistemas/tablero/">Tablero de dirección</a><a href="sistemas/requisiciones/">Requisiciones</a><a href="sistemas/agenda/">Agenda de citas</a><a href="sistemas/taller/">Seguimiento de taller</a><a href="sitios/arce/">Sitio corporativo</a></nav>
+        <nav aria-label="Secciones"><b>Secciones</b><a href="#sistemas">Sistemas</a><a href="#automatizacion">Automatización</a><a href="#web">Sitios web</a><a href="#proceso">Proceso</a><a href="#preguntas">Preguntas</a></nav>
+        <div><b>Contacto</b><a class="fsm" id="mail-foot" data-goatcounter-click="portafolio-correo" href="#"></a><a href="privacidad.html">Aviso de privacidad</a><a href="#">Volver arriba</a></div>
       </div>
       <footer>
         <span class="fb"><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>© 2026 crusol · Angel Cruz · Diseñado y programado a mano, sin plantillas</span>
         <span class="perf" id="perf"></span>
-        <nav><a href="#sistemas">Demos</a><a href="#">Volver arriba</a></nav>
       </footer>
     </div>
     <div class="giant split" aria-hidden="true">crusol</div>
@@ -872,8 +955,9 @@ body.mopen .totop{opacity:0;pointer-events:none}
 <script>
   var MI_CORREO = "angelcruzwebb@gmail.com";
   var mailto = "mailto:" + MI_CORREO + "?subject=" + encodeURIComponent("Solicitud de propuesta") + "&body=" + encodeURIComponent("Hola Angel:\n\nMe interesa una propuesta para mi empresa.\n\nEmpresa:\nGiro:\nProceso que queremos mejorar:\n\nSaludos.");
-  ["mail","mail-top","mail-nav","mail-2","mail-menu","mail-faq"].forEach(function(id){ document.getElementById(id).href = mailto; });
+  ["mail","mail-top","mail-nav","mail-2","mail-menu","mail-faq","mail-foot"].forEach(function(id){ document.getElementById(id).href = mailto; });
   document.getElementById("mail-text").textContent = MI_CORREO;
+  document.getElementById("mail-foot").textContent = MI_CORREO;
   var toastT;
   function toast(t){var el=document.getElementById("toast");document.getElementById("toastt").textContent=t;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove("show")},2200)}
   document.getElementById("copy").addEventListener("click", function(){
@@ -908,7 +992,9 @@ body.mopen .totop{opacity:0;pointer-events:none}
     (function tick(ts){if(!l0)l0=ts;var p=Math.min(1,(ts-l0)/1150),e=1-Math.pow(1-p,3),v=Math.round(e*100);lc.textContent=(v<10?"00":v<100?"0":"")+v;lb.style.setProperty("--p",e);
       if(p<1)requestAnimationFrame(tick);else{ld.classList.add("go");document.documentElement.classList.remove("lding");setTimeout(function(){ld.remove()},1000)}})(performance.now());
     setTimeout(function(){document.documentElement.classList.remove("lding")},3600)}
-  requestAnimationFrame(function(){setTimeout(function(){hero.classList.add("on");$("h1").classList.add("on")},120+T0)});
+  /* el hero arranca cuando la tipografía ya cargó, así no brinca a media animación */
+  var fontsOk=document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,900)})]):Promise.resolve();
+  fontsOk.then(function(){requestAnimationFrame(function(){setTimeout(function(){hero.classList.add("on");$("h1").classList.add("on")},120+T0)})});
   setTimeout(function(){hmk.classList.add("done")},2400+T0);
 
   /* mes en curso en la etiqueta de disponibilidad */
@@ -955,7 +1041,7 @@ body.mopen .totop{opacity:0;pointer-events:none}
       cu.classList.toggle("dk",!!t.closest(".dark"));
       if(l){curl.textContent=l.getAttribute("data-cur");cu.classList.add("cl")}
       else if(t.closest("a,button,summary,[role=tab],.tag,.hmk"))cu.classList.add("hov");
-      else if(t.closest("p,h1,h2,h3,.feats li,.list li,.cols li"))cu.classList.add("txt")});
+      else if(t.closest("p,h1,h2,h3,.feats li,.list li,.cols li,input,textarea"))cu.classList.add("txt")});
     document.addEventListener("mouseout",function(e){if(!e.relatedTarget){cu.classList.remove("vis");shown=false}});
     addEventListener("mousedown",function(){cu.classList.add("down");var r=document.createElement("i");r.className="rip";r.style.transform="translate3d("+mx+"px,"+my+"px,0)";cu.appendChild(r);setTimeout(function(){r.remove()},750)});
     addEventListener("mouseup",function(){cu.classList.remove("down")});
@@ -1003,6 +1089,8 @@ body.mopen .totop{opacity:0;pointer-events:none}
     b.addEventListener("click",function(){auto=false;sysb.classList.remove("auto");clearInterval(ptimer);pick(i)});
     b.addEventListener("keydown",function(e){var k=e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0;if(!k)return;e.preventDefault();var n=(i+k+SYS.length)%SYS.length;tabs[n].focus();tabs[n].click()});
     tabsEl.appendChild(b);tabs.push(b)});
+  var uT=null;
+  function typeUrl(t,now){var el=$("sysurl");clearInterval(uT);if(now||still){el.textContent=t;return}var k=0;el.textContent="";uT=setInterval(function(){el.textContent=t.slice(0,++k);if(k>=t.length)clearInterval(uT)},28)}
   function pick(i){if(i===cur)return;var first=cur<0;cur=i;var S=SYS[i];
     tabs.forEach(function(b,j){b.classList.toggle("on",j===i);b.setAttribute("aria-selected",String(j===i))});
     var b=tabs[i];if(tabsEl.scrollWidth>tabsEl.clientWidth)tabsEl.scrollTo({left:b.offsetLeft-tabsEl.clientWidth/2+b.offsetWidth/2,behavior:first?"auto":"smooth"});
@@ -1010,7 +1098,7 @@ body.mopen .totop{opacity:0;pointer-events:none}
     if(!fr){fr=document.createElement("iframe");fr.dataset.k=i;fr.title="Demo: "+S.n;fr.tabIndex=-1;fr.loading="lazy";fr.addEventListener("load",function(){this.dataset.ok="1";if(this.classList.contains("on"))svp.classList.add("ok")});fr.src=S.u+"?v="+V;svp.appendChild(fr);sc()}
     svp.classList.toggle("ok",!!fr.dataset.ok);$("sysnew").href=S.u;
     [].forEach.call(svp.querySelectorAll("iframe"),function(f){f.classList.toggle("on",f===fr)});
-    svp.href=S.u;svp.setAttribute("aria-label","Abrir demo: "+S.n);$("sysurl").textContent=S.url;
+    svp.href=S.u;svp.setAttribute("aria-label","Abrir demo: "+S.n);typeUrl(S.url,first);
     $("sysa").textContent=S.a;$("syst").textContent=S.t;$("sysd").textContent=S.d;
     var ul=$("sysf");ul.innerHTML="";S.f.forEach(function(x){var li=document.createElement("li");li.textContent=x;ul.appendChild(li)});
     cta.href=S.u;
@@ -1080,7 +1168,7 @@ body.mopen .totop{opacity:0;pointer-events:none}
   (function(){var words=state.textContent.split(/\s+/);state.textContent="";words.forEach(function(w,i){var s=document.createElement("span");s.className="sw";s.textContent=w;state.appendChild(s);if(i<words.length-1)state.appendChild(document.createTextNode(" "));sws.push(s)})})();
 
   /* efectos ligados al scroll */
-  var totop=$("totop"),tt=$("tt"),hrot=$("hrot"),badge=$("badge"),bg1=$("bgmk1"),tilts=[].slice.call(document.querySelectorAll(".tilt")),phone=$("phone"),ticking=false;
+  var hcopy=document.querySelector(".hero>div"),stg0=$("stage"),totop=$("totop"),tt=$("tt"),hrot=$("hrot"),badge=$("badge"),bg1=$("bgmk1"),tilts=[].slice.call(document.querySelectorAll(".tilt")),phone=$("phone"),ticking=false;
   function frame(){ticking=false;var y=scrollY,vh=innerHeight,m=document.documentElement.scrollHeight-vh;
     prog.style.transform="scaleX("+(m>0?y/m:0)+")";
     totop.classList.toggle("vis",y>innerHeight*.9);tt.style.strokeDashoffset=1-(m>0?y/m:0);totop.style.setProperty("--r",(y*.15)+"deg");
@@ -1089,6 +1177,8 @@ body.mopen .totop{opacity:0;pointer-events:none}
     lastY=y;
     if(still){sws.forEach(function(s){s.classList.add("on")});return}
     if(y<vh*1.2)hrot.style.setProperty("--r",(y*.12)+"deg");
+    if(innerWidth>=960&&y<vh*1.3){hcopy.style.transform="translate3d(0,"+(y*.14).toFixed(1)+"px,0)";hcopy.style.opacity=Math.max(0,1-y/(vh*.95)).toFixed(3);stg0.style.transform="translate3d(0,"+(y*.06).toFixed(1)+"px,0)"}
+    else if(innerWidth<960){hcopy.style.transform=hcopy.style.opacity=stg0.style.transform=""}
     if(badge.offsetParent)badge.style.setProperty("--r",(y*.09)+"deg");
     var r=state.getBoundingClientRect(),p=clamp((vh*.82-r.top)/(r.height+vh*.25),0,1),k=Math.round(p*sws.length);
     sws.forEach(function(s,i){s.classList.toggle("on",i<k)});
@@ -1129,12 +1219,45 @@ body.mopen .totop{opacity:0;pointer-events:none}
   /* título de la pestaña cuando la persona se va a otra */
   var TT=document.title;document.addEventListener("visibilitychange",function(){document.title=document.hidden?"Aquí te espero · crusol":TT});
 
+  /* arma tu correo: el botón abre el correo ya redactado */
+  var optsB=[].slice.call(document.querySelectorAll("#opts .opt")),cn=$("cn"),ce=$("ce"),cm=$("cm"),csum=$("csum"),m2=$("mail-2");
+  function compose(){var sel=optsB.filter(function(b){return b.getAttribute("aria-pressed")==="true"}).map(function(b){return b.textContent}),
+      n=cn.value.trim(),e=ce.value.trim(),d=cm.value.trim(),
+      body="Hola Angel:\n\nMe interesa una propuesta para mi empresa.\n\n"+"Nombre: "+(n||"")+"\nEmpresa: "+(e||"")+"\nQuiero mejorar: "+(sel.join(", ")||"")+(d?"\n\nHoy: "+d:"")+"\n\nSaludos.";
+    m2.href="mailto:"+MI_CORREO+"?subject="+encodeURIComponent("Solicitud de propuesta"+(e?" · "+e:""))+"&body="+encodeURIComponent(body);
+    csum.textContent=sel.length?(sel.length===1?"1 tema elegido":sel.length+" temas elegidos"):"Elige uno o varios temas"}
+  optsB.forEach(function(b){b.addEventListener("click",function(){b.setAttribute("aria-pressed",String(b.getAttribute("aria-pressed")!=="true"));compose()})});
+  [cn,ce,cm].forEach(function(el){el.addEventListener("input",compose)});
+  cm.addEventListener("input",function(){cm.style.height="auto";cm.style.height=cm.scrollHeight+"px"});
+  compose();
+
+  /* transición al abrir otra página del sitio (demos, privacidad) */
+  var pt=$("pt");
+  document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");
+    if(still||!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target==="_blank"||a.hasAttribute("download"))return;
+    var h=a.getAttribute("href");if(!h||h.charAt(0)==="#"||/^(mailto|tel|https?|javascript):/i.test(h))return;
+    e.preventDefault();$("ptt").textContent=/sistemas|sitios/.test(h)?"Abriendo demo · empresa ficticia":"Abriendo";pt.classList.add("in");setTimeout(function(){location.href=a.href},620)});
+  addEventListener("pageshow",function(){if(!pt.classList.contains("in"))return;pt.style.transition="none";pt.classList.remove("in");void pt.offsetWidth;pt.style.transition=""});
+
+  /* scroll suave con inercia (solo con mouse en escritorio) */
+  if(fine&&!still){
+    var sy=scrollY,ty=scrollY,sm=false;
+    function scrollable(el,dy){while(el&&el!==document.body&&el!==document.documentElement){if(el.scrollHeight>el.clientHeight+1&&/(auto|scroll)/.test(getComputedStyle(el).overflowY)){if(dy>0?el.scrollTop+el.clientHeight<el.scrollHeight-1:el.scrollTop>0)return true}el=el.parentElement}return false}
+    function stepS(){sy+=(ty-sy)*.13;if(Math.abs(ty-sy)<.6){sy=ty;sm=false}window.scrollTo({top:sy,behavior:"instant"});if(sm)requestAnimationFrame(stepS)}
+    addEventListener("wheel",function(e){if(e.ctrlKey||document.body.classList.contains("mopen"))return;
+      var dy=e.deltaY*(e.deltaMode===1?40:e.deltaMode===2?innerHeight:1);if(!dy||Math.abs(e.deltaX)>Math.abs(dy)||scrollable(e.target,dy))return;
+      e.preventDefault();if(!sm){sy=ty=scrollY}ty=clamp(ty+dy,0,document.documentElement.scrollHeight-innerHeight);if(!sm){sm=true;requestAnimationFrame(stepS)}},{passive:false});
+    addEventListener("scroll",function(){if(!sm)sy=ty=scrollY},{passive:true});
+    document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest('a[href^="#"]'))sm=false},true);
+    addEventListener("keydown",function(){sm=false});
+  }
+
   /* firma en la consola */
   try{console.log("%c crusol %c Diseñado y programado a mano, sin plantillas ni librerías. ¿Revisando el código? Escríbeme: "+MI_CORREO,"background:#0B2A20;color:#A9C4B6;padding:4px 8px;border-radius:4px;font-weight:600","color:inherit")}catch(e){}
 
   /* aparecer al bajar */
   var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}})},{threshold:.15,rootMargin:"0px 0px -6% 0px"}):null;
-  [].forEach.call(document.querySelectorAll(".rv,.split:not(#h1),#steps"),function(el){io?io.observe(el):el.classList.add("on")});
+  [].forEach.call(document.querySelectorAll(".rv,.stg,.split:not(#h1),#steps"),function(el){io?io.observe(el):el.classList.add("on")});
 })();
 </script>
 <!-- Contador de visitas y clics (GoatCounter). -->
