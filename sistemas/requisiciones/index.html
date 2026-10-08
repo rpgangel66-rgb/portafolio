@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Envases Cumbre · Requisiciones de compra</title>
+<link rel="canonical" href="https://crusol.com.mx/sistemas/requisiciones/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="crusol">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://crusol.com.mx/sistemas/requisiciones/">
+<meta property="og:title" content="Requisiciones de compra · Demo de crusol">
+<meta property="og:description" content="Cada solicitud sigue una ruta de aprobación según su monto y se revisa contra el presupuesto del área.">
+<meta property="og:image" content="https://crusol.com.mx/og/og-requisiciones.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Requisiciones de compra · Demo de crusol">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="Demo de sistema con una empresa ficticia, hecho por crusol.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#E9E3D6">
@@ -217,7 +229,7 @@ td.num{font-family:var(--type);font-size:13.5px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
-<body>
+<body data-demo="Requisiciones de compra">
 <div class="cbar"><span><b>Demo</b> · Empresa ficticia · Cambia de usuario para aprobar como cada puesto</span><span class="r"><button type="button" id="reset">Reiniciar demo</button> · Hecho por <a href="../../" target="_top">crusol</a></span></div>
 <header class="app">
   <div class="mark">EC</div>
@@ -453,5 +465,45 @@ td.num{font-family:var(--type);font-size:13.5px}
 </script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- crusol: invitación a contacto (solo cuando el demo se abre fuera del portafolio) -->
+<div id="crcta" hidden role="complementary" aria-label="Contacto con crusol">
+  <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="#f6f5f0" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#a9c4b6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>
+  <p><b><em class="lg">¿Te gustaría uno así para tu empresa?</em><em class="sm">¿Quieres uno así?</em></b><span>Lo adapto a tus servicios, horarios y marca.</span></p>
+  <a class="go" id="crgo" href="#">Platiquemos</a>
+  <a class="mas" href="/#sistemas" target="_top">Más ejemplos</a>
+  <button type="button" id="crx" aria-label="Cerrar">&times;</button>
+</div>
+<style>
+#crcta{position:fixed;z-index:2147483000;right:16px;bottom:16px;max-width:680px;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 14px;background:#0b2a20;color:#f6f5f0;border:1px solid rgba(169,196,182,.25);border-radius:14px;box-shadow:0 18px 50px -12px rgba(0,0,0,.45);font:14px/1.3 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transform:translateY(140%);opacity:0;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s}
+#crcta.on{transform:none;opacity:1}
+#crcta[hidden]{display:none}
+#crcta svg{width:26px;height:26px;flex:none}
+#crcta p{margin:0;display:flex;flex-direction:column;gap:2px;min-width:0}
+#crcta p b{font-weight:600;white-space:nowrap}#crcta em{font-style:normal}#crcta .sm{display:none}
+#crcta p span{color:#b9cbc1;font-size:13px}
+#crcta a{text-decoration:none;white-space:nowrap}
+#crcta .go{background:#f6f5f0;color:#0b2a20;font-weight:600;padding:9px 14px;border-radius:9px}
+#crcta .go:hover{background:#a9c4b6}
+#crcta .mas{color:#a9c4b6;font:12px "Geist Mono",ui-monospace,monospace;text-decoration:underline;text-underline-offset:3px}
+#crcta button{background:transparent;border:0;color:#b9cbc1;font-size:20px;line-height:1;width:28px;height:28px;border-radius:7px;cursor:pointer;flex:none}
+#crcta button:hover{background:rgba(255,255,255,.08);color:#fff}
+#crcta a:focus-visible,#crcta button:focus-visible{outline:2px solid #a9c4b6;outline-offset:2px}
+@media (max-width:640px){#crcta{left:10px;right:10px;bottom:10px;bottom:max(10px,env(safe-area-inset-bottom));max-width:none;flex-wrap:wrap;gap:8px 10px}
+  #crcta p{flex:1 1 0}#crcta p span{display:none}#crcta .lg{display:none}#crcta .sm{display:inline}#crcta .mas{display:none}#crcta .go{padding:8px 12px}}
+@media (prefers-reduced-motion:reduce){#crcta{transition:none}}
+@media print{#crcta{display:none!important}}
+</style>
+<script>
+(function(){try{if(window.self!==window.top)return}catch(e){return}
+  var el=document.getElementById("crcta");if(!el)return;
+  try{if(sessionStorage.getItem("crusol_cta_x"))return}catch(e){}
+  var demo=document.body.getAttribute("data-demo")||document.title;
+  document.getElementById("crgo").href="mailto:angel@crusol.com.mx?subject="+encodeURIComponent("Me interesa: "+demo)+"&body="+encodeURIComponent("Hola Angel:\n\nVi el demo de "+demo+" y me gustaría algo así para mi empresa.\n\nEmpresa:\nGiro:\nQué me gustaría resolver:\n\nSaludos.");
+  function show(){if(el.dataset.s)return;el.dataset.s=1;el.hidden=false;if(innerWidth<=640)document.body.style.paddingBottom="76px";requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add("on")})})}
+  var t=setTimeout(show,9000);
+  ["click","keydown"].forEach(function(ev){document.addEventListener(ev,function f(e){if(el.contains(e.target))return;document.removeEventListener(ev,f,true);clearTimeout(t);t=setTimeout(show,4000)},true)});
+  document.getElementById("crx").addEventListener("click",function(){el.classList.remove("on");setTimeout(function(){el.hidden=true;document.body.style.paddingBottom=""},500);try{sessionStorage.setItem("crusol_cta_x","1")}catch(e){}});
+})();
+</script>
 </body>
 </html>

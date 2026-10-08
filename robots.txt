@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /barberia/
+Disallow: /estetica/
+Disallow: /taqueria/
+Disallow: /unas/
+Disallow: /ropa/
+Disallow: /muestras/
+
+Sitemap: https://crusol.com.mx/sitemap.xml
