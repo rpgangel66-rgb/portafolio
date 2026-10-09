@@ -1,232 +1,406 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Suministros Arce · Suministro industrial y de seguridad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Suministros Arce · Lo que tu planta necesita, a tiempo</title>
 <link rel="canonical" href="https://crusol.com.mx/sitios/arce/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="crusol">
 <meta property="og:locale" content="es_MX">
 <meta property="og:url" content="https://crusol.com.mx/sitios/arce/">
 <meta property="og:title" content="Sitio corporativo · Demo de crusol">
-<meta property="og:description" content="Ejemplo de sitio corporativo B2B con catálogo, portal de clientes y solicitud de cotización.">
-<meta property="og:image" content="https://crusol.com.mx/og/og-crusol.jpg">
+<meta property="og:description" content="Ejemplo de sitio corporativo B2B con catálogo, cotización en línea, logística y portal de clientes.">
+<meta property="og:image" content="https://crusol.com.mx/og/og-arce.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Sitio corporativo · Demo de crusol">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="Sitio de demostración de una empresa ficticia, hecho por crusol.">
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="theme-color" content="#F3F1EC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23D7261E'/%3E%3Cpath fill='%23fff' d='M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://images.unsplash.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
+@font-face{font-family:"Schibsted Grotesk";src:url("../../fonts/demos/schibsted-grotesk-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("../../fonts/demos/schibsted-grotesk-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("../../fonts/demos/schibsted-grotesk-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("../../fonts/demos/schibsted-grotesk-800.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"Schibsted Grotesk";src:url("../../fonts/demos/schibsted-grotesk-400i.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"DM Mono";src:url("../../fonts/demos/dm-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"DM Mono";src:url("../../fonts/demos/dm-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
 :root{
-  --ink:#0E1B2B; --text:#344054; --muted:#667085; --line:#E4E7EC; --soft:#F5F7FA; --paper:#fff;
-  --brand:#1F4E79; --brand-2:#143756; --brand-soft:#E8F0F8; --accent:#F2B705;
-  --head:"Archivo", "Inter", system-ui, sans-serif; --body:"Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
-  --pad:clamp(18px,4vw,56px);
+  --red:#D7261E; --red-d:#B21D16; --ink:#141414; --ink-2:#262624; --paper:#F3F1EC; --white:#FFFFFF; --stone:#E7E3DA;
+  --line:#D8D3C8; --line-2:#C5BFB2; --gray:#6F6A60; --mute:#9A948A; --ok:#2E7D4F;
+  --sans:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif; --mono:"DM Mono", ui-monospace, Menlo, monospace;
+  --pad:clamp(20px,4vw,56px); --max:1320px;
+  --ease:cubic-bezier(.7,0,.2,1); --out:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--text);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
-.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
-h1,h2,h3{font-family:var(--head);color:var(--ink);margin:0;letter-spacing:-.02em}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 12px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
-.eyebrow::before{content:"";width:18px;height:2px;background:var(--accent)}
+button{font:inherit;color:inherit}
+::selection{background:var(--red);color:#fff}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* demo */
-.demo{background:var(--ink);color:#C9D3E0;font-size:12.5px;text-align:center;padding:7px 12px}
-.demo b{color:#fff;font-weight:600}
+/* barra de demo */
+.demo{background:var(--ink);color:#BDB8AE;font:12px/1 var(--mono);text-align:center;padding:9px 12px;letter-spacing:.02em}
+.demo b{color:#fff;font-weight:500}
+.demo a{color:#fff}
 
-/* barra superior */
-.top{border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
-.top .in{display:flex;justify-content:space-between;gap:16px;padding-block:9px}
-.top span+span{margin-left:22px}
+/* encabezado */
+.hd{position:sticky;top:0;z-index:40;background:rgba(243,241,236,.9);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line);transition:background .3s}
+.hd .in{display:flex;align-items:center;gap:28px;height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.logo svg{width:36px;height:36px;flex:none}
+.logo b{display:block;font-weight:800;font-size:22px;letter-spacing:-.04em;line-height:1}
+.logo small{display:block;font:10.5px/1.2 var(--mono);color:var(--gray);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.nav{display:flex;gap:4px;margin-left:8px}
+.nav a{text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;position:relative;white-space:nowrap}
+.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:0 50%;transition:transform .45s var(--ease)}
+.nav a:hover::after{transform:scaleX(1)}
+.hd .sp{flex:1}
+.srch{display:flex;align-items:center;gap:10px;height:42px;padding:0 14px;border:1px solid var(--line-2);background:var(--white);color:var(--gray);font-size:14px;min-width:250px;cursor:text;transition:border-color .2s}
+.srch:hover{border-color:var(--ink)}
+.srch svg{width:16px;height:16px;flex:none}
+.srch kbd{margin-left:auto;font:11px var(--mono);border:1px solid var(--line);padding:2px 6px;color:var(--mute)}
+.qbtn{display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;background:var(--ink);color:#fff;border:0;cursor:pointer;font-weight:600;font-size:14.5px;transition:background .25s}
+.qbtn:hover{background:var(--red)}
+.qbtn i{font-style:normal;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);display:grid;place-items:center;font:500 12px var(--mono);transition:transform .4s var(--out)}
+.qbtn:hover i{background:#fff;color:var(--red)}
+.qbtn i.bump{animation:bump .5s var(--out)}
+@keyframes bump{40%{transform:scale(1.35)}}
+.mbt{display:none;width:42px;height:42px;border:1px solid var(--line-2);background:var(--white);cursor:pointer;position:relative}
+.mbt i{position:absolute;left:12px;right:12px;height:2px;background:var(--ink);transition:transform .4s var(--ease),top .4s var(--ease)}
+.mbt i:first-child{top:15px}.mbt i:last-child{top:24px}
+.mopen .mbt i:first-child{top:20px;transform:rotate(45deg)}.mopen .mbt i:last-child{top:20px;transform:rotate(-45deg)}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
-.nav.sh{box-shadow:0 8px 24px rgba(14,27,43,.06)}
-.nav .in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:74px}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo i{width:40px;height:40px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font:800 15px var(--head);font-style:normal;letter-spacing:.02em;position:relative}
-.logo i::after{content:"";position:absolute;right:-3px;bottom:-3px;width:10px;height:10px;background:var(--accent);border-radius:2px}
-.logo b{display:block;font:700 18px/1.1 var(--head);color:var(--ink)}
-.logo small{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.02em}
-.menu{display:flex;gap:30px;font-size:15px;font-weight:500}
-.menu a{text-decoration:none;color:var(--text);transition:color .2s}
-.menu a:hover{color:var(--brand)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:6px;background:var(--brand);color:#fff;border:0;font:600 15px var(--body);text-decoration:none;cursor:pointer;transition:background .25s,transform .25s}
-.btn:hover{background:var(--brand-2)}
-.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
-.btn.line:hover{box-shadow:inset 0 0 0 1.5px var(--ink);background:transparent}
-.btn.sm{height:42px;padding:0 18px;font-size:14px}
-.btn svg{width:16px;height:16px}
+/* botones */
+.btn{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 24px;font-weight:600;font-size:16px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:color .3s}
+.btn svg{width:18px;height:18px;transition:transform .45s var(--out)}
+.btn:hover svg{transform:translateX(4px)}
+.btn.r{background:var(--red);color:#fff}
+.btn.r::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .5s var(--ease);z-index:-1}
+.btn.r:hover::before{transform:none}
+.btn.o{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.o::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .5s var(--ease);z-index:-1}
+.btn.o:hover{color:#fff}
+.btn.o:hover::before{transform:none}
 
-/* hero */
-.hero{display:grid;gap:40px;padding-block:56px 64px;align-items:center}
-.hero h1{font-size:clamp(38px,4.6vw,62px);line-height:1.04;font-weight:800;margin-top:18px;letter-spacing:-.03em}
-.hero h1 em{font-style:normal;color:var(--brand)}
-.hero p{font-size:18px;color:var(--muted);max-width:48ch;margin:22px 0 0}
-.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:1px solid var(--line)}
-.stats div{padding:18px 16px 0 0}
-.stats div+div{padding-left:18px;border-left:1px solid var(--line)}
-.stats b{display:block;font:800 30px/1 var(--head);color:var(--ink);letter-spacing:-.02em}
-.stats span{display:block;font-size:13.5px;color:var(--muted);margin-top:6px}
-.hv{position:relative}
-.hv .ph{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:5/4.4;background:var(--soft)}
-.hv .ph img{width:100%;height:100%;object-fit:cover}
-.hv .tag{position:absolute;left:-22px;bottom:34px;background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 24px 50px rgba(14,27,43,.16);display:flex;gap:12px;align-items:center;min-width:250px}
-.hv .tag .ic{width:38px;height:38px;border-radius:8px;background:var(--brand-soft);display:grid;place-items:center;color:var(--brand)}
-.hv .tag b{display:block;font:600 14px var(--body);color:var(--ink)}
-.hv .tag small{font-size:12.5px;color:var(--muted)}
-.hv .tag em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:600;color:#1E7B4F;background:#E6F4EC;padding:4px 8px;border-radius:4px;white-space:nowrap}
-.hv .badge{position:absolute;right:18px;top:18px;background:var(--accent);color:var(--ink);font:700 12.5px var(--body);padding:8px 12px;border-radius:6px}
+/* héroe */
+.hero{position:relative;padding-top:clamp(28px,4vw,56px);padding-bottom:clamp(40px,5vw,72px)}
+.hgrid{display:grid;gap:clamp(28px,4vw,56px);align-items:stretch}
+.kick{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;color:var(--gray)}
+.kick b{color:var(--red);font-weight:500}
+.kick span{display:inline-flex;align-items:center;gap:8px}
+.kick span+span::before{content:"";width:16px;height:1px;background:var(--line-2)}
+.hero h1{margin:22px 0 0;font-weight:800;font-size:clamp(50px,7.4vw,118px);line-height:.9;letter-spacing:-.055em}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.hero h1 .ln>span{display:block;transform:translateY(105%);transition:transform 1.1s var(--out)}
+.hero.on h1 .ln>span{transform:none}
+.hero.on h1 .ln:nth-child(2)>span{transition-delay:.09s}
+.hero.on h1 .ln:nth-child(3)>span{transition-delay:.18s}
+.hero h1 em{font-style:normal;color:var(--red)}
+.lead{margin:26px 0 0;font-size:clamp(17px,1.4vw,19.5px);color:var(--ink-2);max-width:46ch;line-height:1.5}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.cut{margin-top:30px;display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line-2);background:var(--white);max-width:520px}
+.cut .lt{width:10px;height:10px;border-radius:50%;background:var(--red);flex:none;box-shadow:0 0 0 0 rgba(215,38,30,.5);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(215,38,30,0)}100%{box-shadow:0 0 0 0 rgba(215,38,30,0)}}
+.cut p{margin:0;font-size:14.5px;line-height:1.35}
+.cut p small{display:block;color:var(--gray);font-size:13px}
+.cut .tm{margin-left:auto;font:500 22px var(--mono);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hfig{position:relative;margin:0;min-height:460px;background:#2A2725 url("https://images.unsplash.com/photo-1776937482510-b794a7d0c267?auto=format&fit=crop&w=1100&h=1300&q=70") center/cover no-repeat}
+.hfig::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,20,0) 45%,rgba(20,20,20,.75));pointer-events:none}
+.hfig .cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:12px;padding:16px 18px;color:#fff;font:12px var(--mono);letter-spacing:.04em;z-index:1}
+.hfig .cnr{position:absolute;top:0;right:0;width:84px;height:84px;background:var(--red);z-index:1;display:grid;place-items:center}
+.hfig .cnr svg{width:38px;height:38px}
+.ord{position:absolute;left:-28px;top:16%;z-index:2;width:290px;background:var(--white);border:1px solid var(--line);box-shadow:0 30px 60px -24px rgba(20,20,20,.45);padding:16px 18px 14px;opacity:0;transform:translateY(16px);transition:opacity .8s .6s,transform 1s var(--out) .6s}
+.hero.on .ord{opacity:1;transform:none}
+.ord .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ord .top b{font-weight:700;font-size:15px}
+.ord .top span{color:var(--gray)}
+.ord ol{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:9px}
+.ord li{display:grid;grid-template-columns:16px 1fr auto;gap:10px;align-items:center;font-size:13.5px;color:var(--mute)}
+.ord li i{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center}
+.ord li.ok{color:var(--ink)}
+.ord li.ok i{background:var(--ink);border-color:var(--ink)}
+.ord li.ok i::after{content:"";width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.ord li.now{color:var(--ink);font-weight:600}
+.ord li.now i{border-color:var(--red)}
+.ord li.now i::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);animation:ping 1.6s infinite}
+.ord li em{font:11.5px var(--mono);font-style:normal;color:var(--gray)}
+.ord .bar{margin-top:14px;height:3px;background:var(--stone);position:relative;overflow:hidden}
+.ord .bar::after{content:"";position:absolute;inset:0;width:68%;background:var(--red)}
 
-/* clientes */
-.clients{border-block:1px solid var(--line);background:var(--soft)}
-.clients .in{display:flex;align-items:center;gap:40px;padding-block:22px;overflow:hidden}
-.clients span{font-size:13px;color:var(--muted);white-space:nowrap}
-.clients ul{list-style:none;margin:0;padding:0;display:flex;flex:1;justify-content:space-between;gap:24px 32px;flex-wrap:wrap}
-.clients li{font:700 16px var(--head);color:#98A2B3;letter-spacing:-.01em;white-space:nowrap}
+/* ficha técnica */
+.sheet{display:grid;grid-template-columns:repeat(2,1fr);border-top:1.5px solid var(--ink);border-bottom:1px solid var(--line)}
+.sheet>div{padding:20px 18px 22px 0;border-bottom:1px solid var(--line)}
+.sheet>div:nth-child(2n){padding-left:18px;border-left:1px solid var(--line)}
+.sheet .mono{color:var(--gray)}
+.sheet b{display:block;font-weight:800;font-size:clamp(26px,2.6vw,36px);letter-spacing:-.04em;margin:10px 0 4px;line-height:1}
+.sheet p{margin:0;color:var(--gray);font-size:14px;max-width:28ch}
 
 /* secciones */
-.sec{padding-block:clamp(64px,8vw,104px)}
-.head{display:grid;gap:14px;margin-bottom:40px}
-.head h2{font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800;max-width:20ch}
-.head p{margin:0;color:var(--muted);max-width:52ch}
+.sec{padding-block:clamp(72px,9vw,128px)}
+.shd{display:grid;gap:18px;margin-bottom:clamp(30px,4vw,52px);align-items:end}
+.shd .mono{color:var(--red);display:flex;gap:12px;align-items:center}
+.shd .mono::after{content:"";height:1px;width:48px;background:var(--red)}
+.shd h2{margin:14px 0 0;font-weight:800;font-size:clamp(38px,5.2vw,76px);line-height:.95;letter-spacing:-.05em}
+.shd p{margin:0;color:var(--ink-2);font-size:17px;max-width:46ch}
 
-/* lineas */
-.lines{display:grid;gap:18px}
-.line-c{border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;background:#fff;transition:box-shadow .35s,transform .35s;display:flex;flex-direction:column}
-.line-c:hover{box-shadow:0 22px 44px rgba(14,27,43,.10);transform:translateY(-4px)}
-.line-c .im{aspect-ratio:4/3;overflow:hidden;background:var(--soft)}
-.line-c .im img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
-.line-c:hover .im img{transform:scale(1.05)}
-.line-c .tx{padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
-.line-c h3{font-size:19px;font-weight:700}
-.line-c p{margin:0;font-size:14.5px;color:var(--muted)}
-.line-c .mt{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;font-size:13px;color:var(--brand);font-weight:600}
-.line-c .mt span:last-child{color:var(--muted);font-weight:500}
+/* índice del catálogo */
+.idx{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.idx li{border-bottom:1px solid var(--line)}
+.idx button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:64px 1fr auto 40px;align-items:center;gap:16px;padding:20px 8px;position:relative;isolation:isolate;transition:color .35s,padding .5s var(--out)}
+.idx button::before{content:"";position:absolute;inset:0;background:var(--red);transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s var(--ease);z-index:-1}
+.idx button:hover,.idx button:focus-visible{color:#fff;padding-left:24px}
+.idx button:hover::before,.idx button:focus-visible::before{transform:none}
+.idx .n{font:13px var(--mono);color:var(--mute);transition:color .35s}
+.idx button:hover .n{color:rgba(255,255,255,.75)}
+.idx .t{font-weight:700;font-size:clamp(26px,3.6vw,52px);letter-spacing:-.045em;line-height:1}
+.idx .c{font:13px var(--mono);color:var(--gray);transition:color .35s;text-align:right}
+.idx button:hover .c{color:#fff}
+.idx .g{width:40px;height:40px;border:1.5px solid currentColor;border-radius:50%;display:grid;place-items:center;transition:transform .5s var(--out)}
+.idx .g svg{width:16px;height:16px}
+.idx button:hover .g{transform:rotate(-45deg)}
+.idx .th{display:none}
+.flt{position:fixed;left:0;top:0;width:280px;height:340px;pointer-events:none;z-index:30;opacity:0;transform:translate(-50%,-50%) scale(.85) rotate(-3deg);transition:opacity .3s,transform .5s var(--out);background:#2A2725 center/cover no-repeat;box-shadow:0 30px 60px -20px rgba(20,20,20,.5)}
+.flt.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
+
+/* productos */
+.pbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px}
+.chip{height:38px;padding:0 15px;border:1px solid var(--line-2);background:transparent;cursor:pointer;font-size:14px;font-weight:500;transition:background .25s,color .25s,border-color .25s}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.pbar .cnt{margin-left:auto;color:var(--gray)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.pc{background:var(--paper);display:flex;flex-direction:column;position:relative;transition:background .3s}
+.pc:hover{background:var(--white)}
+.pc .ph{aspect-ratio:1/1;background:var(--stone) center/cover no-repeat;position:relative;overflow:hidden}
+.pc .ph::after{content:"";position:absolute;inset:0;background:inherit;transition:transform .9s var(--out)}
+.pc:hover .ph::after{transform:scale(1.06)}
+.pc .ph .cd{position:absolute;top:10px;left:10px;z-index:1;background:var(--white);font:11.5px var(--mono);padding:4px 7px}
+.pc .ph .nw{position:absolute;top:10px;right:10px;z-index:1;background:var(--red);color:#fff;font:11px var(--mono);padding:4px 7px}
+.pc .bd{padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc h3{margin:0;font-weight:700;font-size:17px;letter-spacing:-.02em;line-height:1.2}
+.pc .sp{color:var(--gray);font-size:13.5px}
+.pc .st{display:flex;align-items:center;gap:7px;font:12px var(--mono);color:var(--ok);margin-top:auto;padding-top:8px}
+.pc .st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pc .st.lo{color:#B26B00}.pc .st.po{color:var(--gray)}
+.pc .ft{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:12px 16px}
+.pc .ft small{color:var(--gray);font-size:12.5px;line-height:1.25}
+.add{height:36px;padding:0 13px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:7px;transition:background .25s,color .25s;white-space:nowrap}
+.add:hover{background:var(--ink);color:#fff}
+.add.in{background:var(--red);border-color:var(--red);color:#fff}
+.add svg{width:13px;height:13px}
+.pc.hide{display:none}
 
 /* industrias */
-.ind{background:var(--ink);color:#C9D3E0}
-.ind .head h2{color:#fff}
-.ind .head p{color:#98A2B3}
-.ind .eyebrow{color:var(--accent)}
-.grid-i{display:grid;gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden}
-.grid-i div{background:var(--ink);padding:26px 24px;transition:background .3s}
-.grid-i div:hover{background:#13253A}
-.grid-i b{display:block;font:700 19px var(--head);color:#fff}
-.grid-i span{display:block;font-size:14px;color:#98A2B3;margin-top:6px}
-.grid-i i{display:block;font:600 12px var(--body);font-style:normal;color:var(--accent);letter-spacing:.1em;margin-bottom:14px}
+.ind{display:grid;gap:0;border:1px solid var(--line);background:var(--white)}
+.itab{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.itab::-webkit-scrollbar{display:none}
+.itab button{flex:1 0 auto;height:58px;padding:0 22px;border:0;border-right:1px solid var(--line);background:transparent;cursor:pointer;font-weight:600;font-size:15px;position:relative;white-space:nowrap;color:var(--gray);transition:color .25s,background .25s}
+.itab button:last-child{border-right:0}
+.itab button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--red);transform:scaleX(0);transition:transform .45s var(--ease)}
+.itab button[aria-selected="true"]{color:var(--ink);background:var(--paper)}
+.itab button[aria-selected="true"]::after{transform:none}
+.ipan{display:grid}
+.ipan .im{min-height:320px;background:#2A2725 center/cover no-repeat;transition:opacity .4s}
+.ipan .tx{padding:clamp(24px,3.4vw,48px);display:flex;flex-direction:column;gap:16px}
+.ipan h3{margin:0;font-weight:800;font-size:clamp(28px,3vw,42px);letter-spacing:-.045em;line-height:1}
+.ipan p{margin:0;color:var(--ink-2);font-size:16.5px;max-width:48ch}
+.ipan ul{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line)}
+.ipan li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.ipan li span{font:12px var(--mono);color:var(--gray)}
+.ipan .fx{animation:fx .6s var(--out)}
+@keyframes fx{from{opacity:0;transform:translateY(10px)}}
 
-/* servicios */
-.split{display:grid;gap:40px;align-items:center}
-.split .ph{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3.4}
-.split .ph img{width:100%;height:100%;object-fit:cover}
-.feat{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
-.feat li{display:grid;grid-template-columns:44px 1fr;gap:4px 14px;padding:18px 0;border-bottom:1px solid var(--line)}
-.feat .n{grid-row:span 2;width:36px;height:36px;border-radius:8px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font:700 13px var(--head)}
-.feat b{font:600 16.5px var(--body);color:var(--ink)}
-.feat span{font-size:14.5px;color:var(--muted)}
+/* ruta de entrega */
+.route{background:var(--ink);color:#EDEAE3}
+.route .shd .mono{color:#FF6B63}.route .shd .mono::after{background:#FF6B63}
+.route .shd p{color:#BDB8AE}
+.rt{position:relative;margin-top:10px}
+.rt svg.map{display:block;width:100%;height:auto;overflow:visible}
+.rt .road{fill:none;stroke:#3A3835;stroke-width:14;stroke-linecap:round}
+.rt .dash{fill:none;stroke:#6A665F;stroke-width:1.6;stroke-dasharray:10 12}
+.rt .done{fill:none;stroke:var(--red);stroke-width:4;stroke-linecap:round}
+.rt .stop{fill:var(--ink);stroke:#6A665F;stroke-width:2;transition:fill .4s,stroke .4s}
+.rt .stop.on{fill:var(--red);stroke:var(--red)}
+.rt .truck{transition:none}
+.stops{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.stops div{border-top:1px solid #3A3835;padding-top:14px;color:#8E897F;transition:color .4s,border-color .4s}
+.stops div.on{color:#EDEAE3;border-color:var(--red)}
+.stops b{display:block;font-weight:700;font-size:18px;letter-spacing:-.02em;margin:6px 0 4px}
+.stops .mono{color:inherit;opacity:.85}
+.stops p{margin:0;font-size:14px;line-height:1.45}
+.fleet{display:grid;gap:18px;margin-top:clamp(40px,5vw,64px);align-items:stretch}
+.fleet .ph{min-height:260px;background:#2A2725 url("https://images.unsplash.com/photo-1601467995997-ac1ae9a8fff4?auto=format&fit=crop&w=1200&h=700&q=70") center/cover no-repeat}
+.fleet .kp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#3A3835;border:1px solid #3A3835}
+.fleet .kp div{background:var(--ink);padding:20px}
+.fleet .kp b{display:block;font-weight:800;font-size:clamp(30px,3vw,44px);letter-spacing:-.05em;color:#fff;line-height:1}
+.fleet .kp span{display:block;margin-top:8px;color:#9A958B;font-size:13.5px}
 
 /* portal */
-.portal{background:var(--soft);border-block:1px solid var(--line)}
-.pgrid{display:grid;gap:36px;align-items:center}
-.app{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 30px 60px rgba(14,27,43,.10);overflow:hidden}
-.app .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
-.app .bar b{font:600 14.5px var(--body);color:var(--ink)}
-.app .bar small{color:var(--muted);font-size:12.5px}
-.kp{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
-.kp div{padding:14px 18px}
-.kp div+div{border-left:1px solid var(--line)}
-.kp small{display:block;font-size:12px;color:var(--muted)}
-.kp b{font:700 20px var(--head);color:var(--ink)}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:10px 18px;background:var(--soft)}
-td{padding:12px 18px;border-top:1px solid var(--line);color:var(--ink)}
-td:last-child,th:last-child{text-align:right}
-.st{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:4px}
-.st.ok{background:#E6F4EC;color:#1E7B4F}.st.go{background:var(--brand-soft);color:var(--brand)}.st.wt{background:#FDF1E3;color:#B25E09}
+.portal{display:grid;gap:clamp(30px,4vw,64px);align-items:center}
+.portal ul{list-style:none;margin:22px 0 28px;padding:0;display:grid;gap:12px}
+.portal li{display:flex;gap:12px;align-items:baseline;font-size:16px}
+.portal li::before{content:"";width:8px;height:8px;background:var(--red);flex:none;transform:translateY(-2px)}
+.pui{background:var(--white);border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(20,20,20,.35);font-size:13.5px}
+.pui .bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.pui .bar .logo svg{width:22px;height:22px}
+.pui .bar .logo b{font-size:15px}
+.pui .bar .org{margin-left:auto;color:var(--gray)}
+.pui .av{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:600 11px var(--sans)}
+.pui .bd{padding:18px 16px;display:grid;gap:14px}
+.pui .k{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pui .k div{border:1px solid var(--line);padding:10px 12px}
+.pui .k small{display:block;color:var(--gray);font-size:11.5px}
+.pui .k b{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.pui table{width:100%;border-collapse:collapse}
+.pui th{text-align:left;font:11px var(--mono);color:var(--gray);font-weight:400;padding:8px 6px;border-bottom:1px solid var(--line)}
+.pui td{padding:10px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+.pui td.r{text-align:right;font-family:var(--mono);font-size:12.5px}
+.tg{display:inline-flex;align-items:center;gap:6px;font:11.5px var(--mono);padding:3px 8px}
+.tg::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.tg.ok{color:var(--ok);background:#E5F1E9}.tg.rt2{color:var(--red);background:#FBE7E5}.tg.fa{color:var(--gray);background:var(--stone)}
+.pui .rp{font:600 12px var(--sans);border:1px solid var(--ink);background:transparent;padding:4px 9px;cursor:pointer}
 
-/* flota */
-.fleet{position:relative;min-height:440px;display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden}
-.fleet img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.fleet::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,27,43,.88) 0%,rgba(14,27,43,.55) 55%,rgba(14,27,43,.15) 100%)}
-.fleet .in{width:100%;padding-block:56px}
-.fleet h2{color:#fff;font-size:clamp(28px,3.4vw,44px);font-weight:800;max-width:18ch;line-height:1.1}
-.fleet p{max-width:46ch;color:#D0D8E3;margin:14px 0 0}
-.fleet .row{display:flex;flex-wrap:wrap;gap:34px;margin-top:28px}
-.fleet .row b{display:block;font:800 28px var(--head);color:#fff}
-.fleet .row span{font-size:13.5px;color:#C9D3E0}
+/* cita */
+.quote{border-top:1.5px solid var(--ink);padding-top:clamp(30px,4vw,48px);display:grid;gap:24px}
+.quote blockquote{margin:0;font-weight:700;font-size:clamp(28px,3.6vw,52px);line-height:1.08;letter-spacing:-.04em;max-width:22ch;position:relative}
+.quote blockquote::before{content:"“";position:absolute;left:-.55em;top:-.12em;color:var(--red);font-size:1.4em}
+.quote .who{display:flex;gap:14px;align-items:center}
+.quote .who i{width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
+.quote .who b{display:block}
+.quote .who span{color:var(--gray);font-size:14px}
 
-/* cotizacion */
-.quote{display:grid;gap:36px}
-.form{border:1px solid var(--line);border-radius:14px;padding:26px;background:#fff;box-shadow:0 20px 44px rgba(14,27,43,.06)}
-.fg{display:grid;gap:14px}
-label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
-input,textarea,select{width:100%;font:15px var(--body);color:var(--ink);border:1.5px solid var(--line);border-radius:6px;padding:11px 12px;background:#fff;transition:border-color .2s,box-shadow .2s}
-textarea{min-height:110px;resize:vertical}
-input:focus,textarea:focus,select:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
-.err input,.err textarea{border-color:#B42318}
-.form .note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
-.ok-msg{display:none;border-radius:10px;background:#E6F4EC;color:#1E7B4F;padding:14px 16px;font-size:14.5px;margin-top:14px}
-.ok-msg.on{display:block}
-.contact{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:16px}
-.contact li{display:flex;gap:14px;align-items:flex-start}
-.contact .ic{width:40px;height:40px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;color:var(--brand);flex:none}
-.contact b{display:block;color:var(--ink);font-weight:600;font-size:15px}
-.contact span{font-size:14px;color:var(--muted)}
+/* contacto */
+.ct{display:grid;gap:clamp(30px,4vw,64px)}
+.ced{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:26px}
+.ced div{background:var(--paper);padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:2px 12px}
+.ced b{font-size:16px}
+.ced span{color:var(--gray);font-size:13.5px}
+.ced em{grid-row:span 2;align-self:center;font:12px var(--mono);font-style:normal;color:var(--ok);display:flex;align-items:center;gap:6px}
+.ced em::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.ced em.off{color:var(--gray)}
+.cinfo{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px;font-size:15px}
+.cinfo a{text-decoration:none;border-bottom:1px solid var(--line-2)}
+form.fm{background:var(--white);border:1px solid var(--line);padding:clamp(20px,3vw,36px);display:grid;gap:18px}
+.fm .row{display:grid;gap:18px}
+.fm label{display:grid;gap:7px;font-size:13px;font-weight:600}
+.fm input,.fm textarea,.fm select{width:100%;height:48px;border:1px solid var(--line-2);background:var(--paper);padding:0 14px;font:15px var(--sans);color:var(--ink);border-radius:0;transition:border-color .2s,background .2s}
+.fm textarea{height:110px;padding:12px 14px;resize:vertical}
+.fm input:focus,.fm textarea:focus,.fm select:focus{outline:none;border-color:var(--ink);background:#fff}
+.fm .note{font:12px var(--mono);color:var(--gray)}
+.fm .ok{display:none;padding:20px;background:var(--ink);color:#fff}
+.fm .ok b{display:block;font-size:20px;margin-bottom:6px}
+.fm.sent .ok{display:block}
+.fm.sent .fld{display:none}
 
-footer{background:var(--ink);color:#98A2B3;font-size:13.5px}
-footer .in{display:grid;gap:26px;padding-block:44px 26px}
-footer .logo b{color:#fff}
-footer .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-footer h4{margin:0 0 10px;color:#fff;font:600 14px var(--body)}
-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
-footer a{text-decoration:none}
-footer a:hover{color:#fff}
-footer .legal{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:12.5px}
-footer .legal a{text-decoration:underline}
+/* pie */
+footer{background:var(--ink);color:#BDB8AE;padding-top:clamp(56px,7vw,96px);overflow:hidden}
+.fcols{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.fcols b{display:block;color:#fff;font-weight:600;margin-bottom:12px}
+.fcols a{display:block;text-decoration:none;padding:4px 0;font-size:14.5px;transition:color .2s}
+.fcols a:hover{color:#fff}
+.big{font-weight:800;font-size:clamp(110px,30vw,440px);letter-spacing:-.07em;line-height:.74;color:transparent;-webkit-text-stroke:1.5px #3A3835;margin:clamp(40px,6vw,80px) 0 -.06em -.04em;user-select:none;white-space:nowrap}
+.fbot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 20px;border-top:1px solid #3A3835;padding:18px 0 24px;font:12px var(--mono)}
+.fbot a{color:#fff}
 
-.rv{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+/* cotización (cajón lateral) */
+.scrim{position:fixed;inset:0;background:rgba(20,20,20,.45);z-index:60;opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+.drw{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--paper);z-index:61;transform:translateX(100%);visibility:hidden;transition:transform .6s var(--ease),visibility 0s .6s;display:flex;flex-direction:column;box-shadow:-30px 0 60px -30px rgba(20,20,20,.4)}
+.qopen .scrim{opacity:1;visibility:visible;transition:opacity .4s}
+.qopen .drw{transform:none;visibility:visible;transition:transform .6s var(--ease)}
+.drw .dh{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1.5px solid var(--ink)}
+.drw .dh b{font-weight:800;font-size:24px;letter-spacing:-.04em}
+.drw .x{width:40px;height:40px;border:1px solid var(--line-2);background:transparent;cursor:pointer;font-size:20px}
+.drw .ls{flex:1;overflow:auto;padding:6px 22px}
+.drw .it{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.drw .it .ph{width:56px;height:56px;background:var(--stone) center/cover}
+.drw .it b{display:block;font-size:14.5px;line-height:1.25}
+.drw .it span{font:11.5px var(--mono);color:var(--gray)}
+.qty{display:flex;align-items:center;border:1px solid var(--line-2)}
+.qty button{width:30px;height:32px;border:0;background:transparent;cursor:pointer;font-size:16px}
+.qty input{width:44px;height:32px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font:13px var(--mono);background:transparent}
+.drw .em{padding:40px 0;color:var(--gray);text-align:center}
+.drw .em svg{width:44px;height:44px;margin:0 auto 12px;color:var(--line-2)}
+.drw .df{padding:18px 22px 22px;border-top:1px solid var(--line);display:grid;gap:12px;background:var(--white)}
+.drw .df input{height:46px;border:1px solid var(--line-2);padding:0 12px;font:15px var(--sans);background:var(--paper)}
+.drw .df .btn{justify-content:center;height:52px}
+.drw .df .btn[disabled]{opacity:.45;pointer-events:none}
+.drw .sent{padding:22px;background:var(--ink);color:#fff;margin:16px 0}
+.drw .sent b{display:block;font-size:19px;margin-bottom:6px}
+
+/* buscador */
+.sk{position:fixed;inset:0;z-index:70;background:rgba(20,20,20,.5);display:none;align-items:flex-start;justify-content:center;padding:12vh 16px 16px}
+.sk.on{display:flex}
+.sk .bx{width:min(640px,100%);background:var(--paper);border:1px solid var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.5);animation:fx .35s var(--out)}
+.sk input{width:100%;height:62px;border:0;border-bottom:1.5px solid var(--ink);background:transparent;padding:0 20px;font:500 20px var(--sans);outline:none}
+.sk ul{list-style:none;margin:0;padding:6px 0;max-height:52vh;overflow:auto}
+.sk li a{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:10px 20px;text-decoration:none}
+.sk li a:hover,.sk li a.sel{background:var(--white)}
+.sk li .ph{width:44px;height:44px;background:var(--stone) center/cover}
+.sk li span{font:11.5px var(--mono);color:var(--gray)}
+.sk .no{padding:22px 20px;color:var(--gray)}
+
+/* aparición */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s,transform 1s var(--out)}
 .rv.on{opacity:1;transform:none}
 
+.toast{position:fixed;left:50%;bottom:22px;z-index:80;transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:var(--ink);color:#fff;padding:12px 18px;font-size:14px;display:flex;gap:10px;align-items:center;transition:transform .5s var(--out)}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+.toast i{width:8px;height:8px;background:var(--red)}
+
 @media (min-width:720px){
-  .lines{grid-template-columns:repeat(2,1fr)}
-  .grid-i{grid-template-columns:repeat(3,1fr)}
-  .fg.two{grid-template-columns:1fr 1fr}
-  footer .cols{grid-template-columns:repeat(3,1fr)}
+  .sheet{grid-template-columns:repeat(4,1fr)}
+  .sheet>div{border-bottom:0}
+  .sheet>div:nth-child(n+2){padding-left:18px;border-left:1px solid var(--line)}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .fm .row{grid-template-columns:1fr 1fr}
+  .fcols{grid-template-columns:1.4fr repeat(3,1fr)}
+  .fleet{grid-template-columns:1.5fr 1fr}
 }
 @media (min-width:1000px){
-  .hero{grid-template-columns:1.02fr .98fr;gap:56px}
-  .lines{grid-template-columns:repeat(4,1fr)}
-  .head{grid-template-columns:1.1fr .9fr;align-items:end}
-  .split{grid-template-columns:1fr 1fr;gap:64px}
-  .pgrid{grid-template-columns:.85fr 1.15fr;gap:56px}
-  .quote{grid-template-columns:.9fr 1.1fr;gap:64px}
-  footer .in{grid-template-columns:1fr 1.6fr}
+  .hgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)}
+  .shd{grid-template-columns:1.2fr .8fr}
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ipan{grid-template-columns:1fr 1fr}
+  .ipan .im{min-height:460px}
+  .portal{grid-template-columns:.9fr 1.1fr}
+  .quote{grid-template-columns:1fr auto;align-items:end}
+  .ct{grid-template-columns:.9fr 1.1fr}
 }
-@media (max-width:999px){ .menu{display:none} }
+@media (max-width:1180px){.nav{display:none}.mbt{display:block}.srch{min-width:0;width:42px;padding:0;justify-content:center}.srch span,.srch kbd{display:none}}
+@media (max-width:999px){
+  .hfig{min-height:420px}
+  .ord{left:12px;top:auto;bottom:62px;width:min(290px,calc(100% - 24px))}
+}
 @media (max-width:640px){
-  .top{display:none}
-  .nav .in{height:64px}
-  .nav .btn{display:none}
-  .hv .tag{left:12px;right:12px;bottom:12px;min-width:0}
-  .stats b{font-size:24px}
-  .clients .in{flex-direction:column;align-items:flex-start;gap:12px}
-  .clients ul{gap:14px 26px;justify-content:flex-start}
-  .kp b{font-size:16px}
-  td,th{padding:10px 12px}
-  .hide-s{display:none}
+  .hd .in{gap:10px;height:64px}
+  .logo small{display:none}
+  .qbtn{padding:0 12px}.qbtn span{display:none}
+  .cut{flex-wrap:wrap}.cut .tm{margin-left:24px;font-size:20px}
+  .idx button{grid-template-columns:34px 1fr 32px;gap:10px;padding:16px 4px}
+  .idx .c{display:none}.idx .g{width:32px;height:32px}
+  .idx .th{display:block;grid-column:2/3;height:0;overflow:hidden}
+  .stops{grid-template-columns:1fr 1fr}
+  .rt .mw{overflow:hidden;margin-inline:calc(var(--pad)*-1)}
+  .rt svg.map{width:300%;max-width:none;will-change:transform}
+  .pc .ft{flex-direction:column;align-items:stretch}.add{justify-content:center}
+  .pui .k{grid-template-columns:1fr 1fr}.pui .k div:last-child{display:none}
+  .pui .hm{display:none}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
+/* menú móvil */
+.mnav{position:fixed;inset:0;z-index:35;background:var(--paper);padding:110px var(--pad) 30px;display:flex;flex-direction:column;gap:4px;transform:translateY(-100%);transition:transform .6s var(--ease);visibility:hidden}
+.mopen .mnav{transform:none;visibility:visible}
+.mnav a{font-weight:800;font-size:38px;letter-spacing:-.045em;text-decoration:none;border-bottom:1px solid var(--line);padding:10px 0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero h1 .ln>span,.ord{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body data-demo="Sitio corporativo">
@@ -237,200 +411,330 @@ try{var r=document.referrer?new URL(document.referrer):null;if(window.top!==wind
 function go(){if(go.d)return;go.d=1;setTimeout(function(){c.style.transform="translateY(-101%)";setTimeout(off,800)},120)}
 if(document.readyState!=="loading")go();else document.addEventListener("DOMContentLoaded",go);setTimeout(go,1800);
 addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})();</script>
-<div class="demo">Sitio de demostración con una empresa ficticia · <b>Hecho por crusol</b></div>
-<div class="top"><div class="wrap in"><div><span>Atención a empresas · Lunes a viernes de 8:00 a 18:00</span></div><div><span>ventas@suministrosarce.mx</span><span>800 000 0000</span></div></div></div>
+<div class="demo">Sitio de demostración con una <b>empresa ficticia</b> · Hecho por <a href="../../" target="_top">crusol</a></div>
 
-<header class="nav" id="nav">
+<header class="hd" id="hd">
   <div class="wrap in">
-    <a class="logo" href="#"><i>SA</i><span><b>Suministros Arce</b><small>Industrial y seguridad</small></span></a>
-    <nav class="menu"><a href="#lineas">Productos</a><a href="#industrias">Industrias</a><a href="#servicios">Servicios</a><a href="#portal">Portal de clientes</a><a href="#contacto">Contacto</a></nav>
-    <a class="btn sm" href="#contacto">Solicitar cotización</a>
+    <a class="logo" href="#" aria-label="Suministros Arce, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg>
+      <span><b>ARCE</b><small>Suministros industriales</small></span>
+    </a>
+    <nav class="nav" aria-label="Principal"><a href="#catalogo">Catálogo</a><a href="#industrias">Industrias</a><a href="#logistica">Logística</a><a href="#portal">Portal</a><a href="#contacto">Contacto</a></nav>
+    <span class="sp"></span>
+    <button type="button" class="srch" id="srch" aria-label="Buscar productos"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><span>Buscar 2,412 productos</span><kbd>/</kbd></button>
+    <button type="button" class="qbtn" id="qbtn"><span>Cotización</span><i id="qn">0</i></button>
+    <button type="button" class="mbt" id="mbt" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i></button>
   </div>
 </header>
+<nav class="mnav" id="mnav" aria-label="Menú"><a href="#catalogo">Catálogo</a><a href="#industrias">Industrias</a><a href="#logistica">Logística</a><a href="#portal">Portal de clientes</a><a href="#contacto">Contacto</a></nav>
 
 <main>
-  <section class="wrap hero">
-    <div>
-      <span class="eyebrow">Distribuidor B2B desde 2008</span>
-      <h1>Suministro industrial y de seguridad para <em>operaciones que no se detienen.</em></h1>
-      <p>Equipo de protección, empaque y almacenaje con entrega programada, crédito empresarial y un asesor asignado a tu cuenta.</p>
-      <div class="cta">
-        <a class="btn" href="#contacto">Solicitar cotización</a>
-        <a class="btn line" href="#lineas">Ver catálogo</a>
+  <section class="wrap hero" id="hero">
+    <div class="hgrid">
+      <div>
+        <div class="kick mono"><span><b>№ 01</b></span><span>Distribuidor industrial</span><span>Desde 1987</span></div>
+        <h1><span class="ln"><span>Lo que tu planta</span></span><span class="ln"><span>necesita,</span></span><span class="ln"><span><em>a tiempo.</em></span></span></h1>
+        <p class="lead">Equipo de protección, herramienta, empaque y almacenaje para empresas que no pueden detenerse. Existencias reales en tres centros de distribución y un asesor que conoce tu operación.</p>
+        <div class="ctas">
+          <a class="btn r" href="#catalogo">Armar mi cotización <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn o" href="#contacto">Hablar con un asesor</a>
+        </div>
+        <div class="cut" aria-live="polite"><span class="lt"></span><p id="cutt"><b>Pedidos antes de las 14:00 salen hoy</b><small>Zona metropolitana · días hábiles</small></p><span class="tm" id="cutc">--:--:--</span></div>
       </div>
-      <div class="stats">
-        <div><b data-n="2400" data-s="+">0</b><span>productos en catálogo</span></div>
-        <div><b data-n="24" data-s=" h">0</b><span>entrega en zona metropolitana</span></div>
-        <div><b data-n="600" data-s="+">0</b><span>empresas atendidas</span></div>
-      </div>
-    </div>
-    <div class="hv">
-      <figure class="ph"><img src="https://images.unsplash.com/photo-1664382953403-fc1ac77073a0?auto=format&fit=crop&w=1100&h=968&q=70" alt="Personal revisando inventario en un almacén"></figure>
-      <span class="badge">Crédito hasta 30 días</span>
-      <div class="tag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span><div><b>Pedido PED-1184</b><small>En ruta · llega hoy 14:00</small></div><em>A tiempo</em></div>
+      <figure class="hfig" role="img" aria-label="Trabajador con casco frente a una nave industrial">
+        <span class="cnr" aria-hidden="true"><svg viewBox="0 0 32 32"><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg></span>
+        <div class="ord" aria-hidden="true">
+          <div class="top"><b>Pedido ARC-24817</b><span class="mono">12 partidas</span></div>
+          <ol><li class="ok"><i></i>Recibido<em>09:12</em></li><li class="ok"><i></i>Surtido en CEDIS Norte<em>10:40</em></li><li class="now"><i></i>En ruta a tu planta<em>13:05</em></li><li><i></i>Entregado<em>15:30</em></li></ol>
+          <div class="bar"></div>
+        </div>
+        <figcaption class="cap"><span>CEDIS Norte · Andén 3</span><span>06:40</span></figcaption>
+      </figure>
     </div>
   </section>
 
-  <div class="clients"><div class="wrap in"><span>Confían en nosotros</span><ul><li>Plásticos del Valle</li><li>Grupo Norteño Metal</li><li>Logística Cumbres</li><li>Alimentos Sierra</li><li>Constructora Roble</li></ul></div></div>
-
-  <section class="wrap sec" id="lineas">
-    <div class="head">
-      <div><span class="eyebrow">Líneas de producto</span><h2 style="margin-top:14px">Todo lo que tu planta necesita, con un solo proveedor.</h2></div>
-      <p>Marcas certificadas, existencias en almacén propio y fichas técnicas disponibles para tu área de compras.</p>
-    </div>
-    <div class="lines">
-      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1552879890-3a06dd3a06c2?auto=format&fit=crop&w=700&h=525&q=70" alt="Cascos de seguridad"></div><div class="tx"><h3>Protección personal</h3><p>Cascos, lentes, chalecos y protección auditiva con certificación.</p><div class="mt"><span>Ver línea</span><span>480 productos</span></div></div></a>
-      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1634852836003-c0aa5b67d243?auto=format&fit=crop&w=700&h=525&q=70" alt="Guantes de trabajo"></div><div class="tx"><h3>Protección de manos</h3><p>Nitrilo, carnaza, anticorte y guantes para industria alimentaria.</p><div class="mt"><span>Ver línea</span><span>320 productos</span></div></div></a>
-      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1644308977849-45a83bf3b067?auto=format&fit=crop&w=700&h=525&q=70" alt="Empaque de mercancía"></div><div class="tx"><h3>Empaque y embalaje</h3><p>Cajas, cintas, emplaye y esquineros para envío y almacén.</p><div class="mt"><span>Ver línea</span><span>650 productos</span></div></div></a>
-      <a class="line-c rv" href="#contacto"><div class="im"><img loading="lazy" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700&h=525&q=70" alt="Contenedores en almacén"></div><div class="tx"><h3>Almacenaje</h3><p>Contenedores, tarimas, racks y señalización para piso.</p><div class="mt"><span>Ver línea</span><span>290 productos</span></div></div></a>
+  <section class="wrap" aria-label="Condiciones">
+    <div class="sheet rv">
+      <div><span class="mono">01 · Entrega</span><b>Mismo día</b><p>Pedidos confirmados antes de las 14:00 en zona metropolitana.</p></div>
+      <div><span class="mono">02 · Crédito</span><b>30 días</b><p>Línea de crédito empresarial sujeta a aprobación.</p></div>
+      <div><span class="mono">03 · Factura</span><b>CFDI 4.0</b><p>Factura al confirmar el pedido, con tu uso de CFDI.</p></div>
+      <div><span class="mono">04 · Atención</span><b>1 asesor</b><p>Una persona asignada a tu cuenta, con nombre y celular.</p></div>
     </div>
   </section>
 
-  <section class="sec ind" id="industrias">
+  <section class="wrap sec" id="catalogo">
+    <div class="shd">
+      <div><span class="mono">№ 02 · Catálogo</span><h2>Seis líneas, un solo proveedor.</h2></div>
+      <p class="rv">Elige una línea para ver sus productos. Agrega lo que necesites a tu cotización y te respondemos con precios de tu lista en menos de dos horas.</p>
+    </div>
+    <ul class="idx rv" id="idx"></ul>
+  </section>
+
+  <section class="wrap" id="productos" style="padding-bottom:clamp(72px,9vw,128px)">
+    <div class="pbar" id="pbar" role="group" aria-label="Filtrar por línea"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap sec" id="industrias" style="padding-top:0">
+    <div class="shd">
+      <div><span class="mono">№ 03 · Industrias</span><h2>Conocemos tu operación.</h2></div>
+      <p class="rv">Cada industria tiene sus normas, sus urgencias y sus temporadas. Preparamos el surtido de tu planta con base en lo que de verdad consumes.</p>
+    </div>
+    <div class="ind rv">
+      <div class="itab" id="itab" role="tablist" aria-label="Industrias"></div>
+      <div class="ipan" id="ipan" role="tabpanel"><div class="im" id="iim"></div><div class="tx" id="itx"></div></div>
+    </div>
+  </section>
+
+  <section class="route sec" id="logistica">
     <div class="wrap">
-      <div class="head">
-        <div><span class="eyebrow">Industrias</span><h2 style="margin-top:14px">Experiencia en los sectores que mueven la región.</h2></div>
-        <p>Armamos paquetes por tipo de operación para que tu equipo tenga lo necesario desde el primer turno.</p>
+      <div class="shd">
+        <div><span class="mono">№ 04 · Logística</span><h2>De nuestro andén a tu planta.</h2></div>
+        <p class="rv">Flotilla propia, rutas diarias y seguimiento en línea. Así viaja un pedido confirmado a las 9 de la mañana.</p>
       </div>
-      <div class="grid-i">
-        <div class="rv"><i>01</i><b>Manufactura</b><span>Protección para líneas de producción y mantenimiento.</span></div>
-        <div class="rv"><i>02</i><b>Construcción</b><span>Equipo para obra, alturas y señalización.</span></div>
-        <div class="rv"><i>03</i><b>Alimentos</b><span>Insumos grado alimenticio e higiene.</span></div>
-        <div class="rv"><i>04</i><b>Logística</b><span>Empaque, emplaye y almacenaje para centros de distribución.</span></div>
-        <div class="rv"><i>05</i><b>Automotriz</b><span>Guantes anticorte y protección visual especializada.</span></div>
-        <div class="rv"><i>06</i><b>Servicios</b><span>Limpieza, mantenimiento y consumibles de oficina.</span></div>
+      <div class="rt" id="rt">
+        <div class="mw"><svg class="map" id="rmap" viewBox="0 0 1200 200" aria-hidden="true">
+          <path class="road" d="M30 150 C 200 150 230 50 400 50 S 620 150 800 150 S 1010 50 1170 50"/>
+          <path class="dash" d="M30 150 C 200 150 230 50 400 50 S 620 150 800 150 S 1010 50 1170 50"/>
+          <path class="done" id="rdone" d="M30 150 C 200 150 230 50 400 50 S 620 150 800 150 S 1010 50 1170 50"/>
+          <path id="rpath" fill="none" stroke="none" d="M30 150 C 200 150 230 50 400 50 S 620 150 800 150 S 1010 50 1170 50"/>
+          <circle class="stop" cx="30" cy="150" r="11"/><circle class="stop" cx="400" cy="50" r="11"/><circle class="stop" cx="800" cy="150" r="11"/><circle class="stop" cx="1170" cy="50" r="11"/>
+          <g class="truck" id="truck"><rect x="-26" y="-14" width="34" height="24" rx="2" fill="#D7261E"/><path d="M8 -6h11l8 8v8H8z" fill="#EDEAE3"/><path d="M12 -3h6l5 5h-11z" fill="#141414"/><circle cx="-16" cy="12" r="5" fill="#141414" stroke="#EDEAE3" stroke-width="2"/><circle cx="17" cy="12" r="5" fill="#141414" stroke="#EDEAE3" stroke-width="2"/><path d="M-20 -6h18" stroke="#fff" stroke-width="2"/></g>
+        </svg></div>
+        <div class="stops" id="stops">
+          <div><span class="mono">09:12</span><b>Pedido confirmado</b><p>Tu asesor valida existencias y precios de tu lista.</p></div>
+          <div><span class="mono">10:40</span><b>Surtido y empaque</b><p>Se arma en el CEDIS más cercano con etiqueta por área.</p></div>
+          <div><span class="mono">13:05</span><b>En ruta</b><p>Recibes la liga de seguimiento con hora estimada.</p></div>
+          <div><span class="mono">15:30</span><b>Entregado</b><p>Firma digital, fotos de la entrega y factura en tu correo.</p></div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="wrap sec" id="servicios">
-    <div class="split">
-      <figure class="ph rv"><img loading="lazy" src="https://images.unsplash.com/photo-1644079446600-219068676743?auto=format&fit=crop&w=1000&h=850&q=70" alt="Pasillo de almacén con estantería"></figure>
-      <div>
-        <span class="eyebrow">Por qué Arce</span>
-        <h2 style="margin-top:14px;font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800">Un proveedor que trabaja al ritmo de tu operación.</h2>
-        <ul class="feat">
-          <li class="rv"><span class="n">01</span><b>Crédito empresarial</b><span>Hasta 30 días para cuentas con historial de compra.</span></li>
-          <li class="rv"><span class="n">02</span><b>Entregas programadas</b><span>Surtido semanal o quincenal en la fecha que tu almacén necesita.</span></li>
-          <li class="rv"><span class="n">03</span><b>Asesor asignado</b><span>Una persona que conoce tu cuenta, tus consumos y tus precios.</span></li>
-          <li class="rv"><span class="n">04</span><b>Facturación inmediata</b><span>CFDI al momento de la entrega y estados de cuenta en línea.</span></li>
-        </ul>
+      <div class="fleet">
+        <div class="ph rv" role="img" aria-label="Camión de reparto junto a una nave"></div>
+        <div class="kp rv"><div><b>38</b><span>unidades de reparto propias</span></div><div><b>97.6%</b><span>entregas a tiempo en el último trimestre</span></div><div><b>3</b><span>centros de distribución</span></div><div><b>6 h</b><span>tiempo promedio de entrega en zona</span></div></div>
       </div>
     </div>
   </section>
 
-  <section class="sec portal" id="portal">
-    <div class="wrap pgrid">
-      <div>
-        <span class="eyebrow">Portal de clientes</span>
-        <h2 style="margin-top:14px;font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800">Tus pedidos, facturas y saldos en un solo lugar.</h2>
-        <p style="color:var(--muted);margin:16px 0 0;max-width:46ch">Consulta el estado de cada entrega, descarga facturas y repite pedidos frecuentes sin llamar a nadie.</p>
-        <div class="cta" style="display:flex;gap:12px;margin-top:26px;flex-wrap:wrap"><a class="btn" href="#contacto">Solicitar acceso</a></div>
+  <section class="wrap sec" id="portal">
+    <div class="portal">
+      <div class="rv">
+        <div class="shd" style="display:block;margin-bottom:0"><span class="mono">№ 05 · Portal de clientes</span><h2>Tu cuenta, abierta las 24 horas.</h2></div>
+        <ul><li>Repite pedidos anteriores en un clic</li><li>Descarga facturas, complementos y estados de cuenta</li><li>Sigue cada entrega en el mapa</li><li>Cotiza en línea con los precios de tu lista</li></ul>
+        <a class="btn r" href="../../sistemas/cotizador/">Probar el cotizador en línea <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
-      <div class="app rv">
-        <div class="bar"><b>Plásticos del Valle</b><small>Cuenta 10482 · Asesora: Laura Méndez</small></div>
-        <div class="kp"><div><small>Compras del mes</small><b>$184,320</b></div><div><small>Saldo al día</small><b>$42,150</b></div><div><small>Pedidos activos</small><b>3</b></div></div>
-        <table>
-          <thead><tr><th>Pedido</th><th class="hide-s">Fecha</th><th>Estado</th><th>Importe</th></tr></thead>
+      <div class="pui rv" aria-hidden="true">
+        <div class="bar"><span class="logo"><svg viewBox="0 0 32 32"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg><b>Portal</b></span><span class="org">Plásticos del Valle</span><i class="av">LM</i></div>
+        <div class="bd">
+          <div class="k"><div><small>Pedidos del mes</small><b>14</b></div><div><small>Crédito disponible</small><b>$182 mil</b></div><div><small>Por vencer</small><b>$24 mil</b></div></div>
+          <table><thead><tr><th>Pedido</th><th class="hm">Fecha</th><th>Estatus</th><th class="r">Importe</th><th></th></tr></thead>
           <tbody>
-            <tr><td>PED-1184</td><td class="hide-s">27 sep</td><td><span class="st go">En ruta</span></td><td>$18,560.00</td></tr>
-            <tr><td>PED-1179</td><td class="hide-s">24 sep</td><td><span class="st ok">Entregado</span></td><td>$9,742.40</td></tr>
-            <tr><td>PED-1171</td><td class="hide-s">20 sep</td><td><span class="st wt">Por facturar</span></td><td>$23,118.00</td></tr>
-            <tr><td>PED-1165</td><td class="hide-s">17 sep</td><td><span class="st ok">Entregado</span></td><td>$6,480.00</td></tr>
-          </tbody>
-        </table>
+            <tr><td>ARC-24817</td><td class="hm">Hoy</td><td><span class="tg rt2">En ruta</span></td><td class="r">$18,560</td><td><button class="rp" tabindex="-1">Repetir</button></td></tr>
+            <tr><td>ARC-24702</td><td class="hm">3 oct</td><td><span class="tg ok">Entregado</span></td><td class="r">$6,032</td><td><button class="rp" tabindex="-1">Repetir</button></td></tr>
+            <tr><td>ARC-24611</td><td class="hm">28 sep</td><td><span class="tg ok">Entregado</span></td><td class="r">$12,480</td><td><button class="rp" tabindex="-1">Repetir</button></td></tr>
+            <tr><td>ARC-24540</td><td class="hm">22 sep</td><td><span class="tg fa">Facturado</span></td><td class="r">$3,161</td><td><button class="rp" tabindex="-1">Repetir</button></td></tr>
+          </tbody></table>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="fleet">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1778015862504-b877b548266e?auto=format&fit=crop&w=2000&q=70" alt="Camión de reparto frente a un almacén">
-    <div class="wrap in">
-      <span class="eyebrow" style="color:var(--accent)">Logística propia</span>
-      <h2 style="margin-top:14px">Flota propia y rutas diarias.</h2>
-      <p>Controlamos la entrega de principio a fin, con aviso de salida, rastreo del pedido y evidencia de recepción.</p>
-      <div class="row"><div><b>3</b><span>rutas diarias</span></div><div><b>98%</b><span>entregas a tiempo</span></div><div><b>2</b><span>almacenes propios</span></div></div>
+  <section class="wrap" style="padding-bottom:clamp(72px,9vw,128px)">
+    <div class="quote rv">
+      <blockquote>Antes esperábamos tres días por una cotización. Hoy la tenemos antes de comer y el pedido llega esa misma tarde.</blockquote>
+      <div class="who"><i>LM</i><div><b>Laura Méndez</b><span>Jefa de compras · Plásticos del Valle</span></div></div>
     </div>
   </section>
 
-  <section class="wrap sec" id="contacto">
-    <div class="quote">
-      <div>
-        <span class="eyebrow">Cotización</span>
-        <h2 style="margin-top:14px;font-size:clamp(30px,3.4vw,44px);line-height:1.1;font-weight:800">Recibe tu cotización en menos de 24 horas.</h2>
-        <p style="color:var(--muted);margin:16px 0 0;max-width:44ch">Envíanos la lista de productos o el requerimiento de tu área de compras y un asesor te responde con precios y tiempos de entrega.</p>
-        <ul class="contact">
-          <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><b>ventas@suministrosarce.mx</b><span>Respuesta el mismo día hábil</span></div></li>
-          <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><div><b>800 000 0000</b><span>Lunes a viernes de 8:00 a 18:00</span></div></li>
-        </ul>
+  <section class="wrap sec" id="contacto" style="border-top:1px solid var(--line)">
+    <div class="ct">
+      <div class="rv">
+        <div class="shd" style="display:block;margin-bottom:0"><span class="mono">№ 06 · Contacto</span><h2>Cotiza con nosotros.</h2></div>
+        <p style="margin:18px 0 0;color:var(--ink-2);font-size:17px;max-width:42ch">Envíanos tu lista o lo que necesitas surtir. Un asesor te responde hoy mismo con existencias y precios de tu lista.</p>
+        <div class="ced" id="ced"></div>
+        <div class="cinfo mono"><a href="#contacto">ventas@suministrosarce.mx</a><a href="#contacto">800 000 0000</a><span>Lun a vie 8:00 a 18:00 · Sáb 9:00 a 13:00</span></div>
       </div>
-      <form class="form" id="form" novalidate>
-        <div class="fg two">
-          <div><label for="f1">Empresa</label><input id="f1" required placeholder="Razón social o nombre comercial"></div>
-          <div><label for="f2">Nombre</label><input id="f2" required placeholder="Nombre y apellido"></div>
+      <form class="fm rv" id="fm" novalidate>
+        <div class="fld" style="display:grid;gap:18px">
+          <div class="row"><label>Empresa<input name="e" required autocomplete="organization" placeholder="Nombre de tu empresa"></label><label>Tu nombre<input name="n" required autocomplete="name" placeholder="Nombre y apellido"></label></div>
+          <div class="row"><label>Correo<input name="c" type="email" required autocomplete="email" placeholder="compras@tuempresa.mx"></label><label>Línea de interés<select name="l"><option>Protección personal</option><option>Protección de manos</option><option>Calzado de seguridad</option><option>Herramienta eléctrica</option><option>Empaque y embalaje</option><option>Almacenaje</option><option>Varias líneas</option></select></label></div>
+          <label>¿Qué necesitas?<textarea name="m" placeholder="Ejemplo: 40 cascos clase E, 20 cajas de guante de nitrilo talla M, entrega la próxima semana."></textarea></label>
+          <button class="btn r" type="submit" style="justify-content:center">Enviar solicitud <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+          <span class="note">Demo con una empresa ficticia: el formulario no envía nada.</span>
         </div>
-        <div class="fg two" style="margin-top:14px">
-          <div><label for="f3">Correo</label><input id="f3" type="email" required placeholder="compras@empresa.com"></div>
-          <div><label for="f4">Industria</label><select id="f4"><option>Manufactura</option><option>Construcción</option><option>Alimentos</option><option>Logística</option><option>Automotriz</option><option>Otra</option></select></div>
-        </div>
-        <div style="margin-top:14px"><label for="f5">Productos o requerimiento</label><textarea id="f5" required placeholder="Ejemplo: 20 cajas de guantes de nitrilo talla M, 50 cascos clase E"></textarea></div>
-        <button class="btn" type="submit" style="margin-top:18px;width:100%">Enviar solicitud</button>
-        <p class="note">Demo: el formulario no envía información.</p>
-        <div class="ok-msg" id="okmsg" role="status"></div>
+        <div class="ok" role="status"><b>Solicitud recibida</b>Gracias. En un sitio real, tu asesor te escribiría en menos de dos horas con existencias y precios. Este es un demo: no se envió nada.</div>
       </form>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap in">
-    <div>
-      <a class="logo" href="#"><i>SA</i><span><b>Suministros Arce</b><small style="color:#98A2B3">Industrial y seguridad</small></span></a>
-      <p style="max-width:34ch;margin:14px 0 0">Empresa ficticia creada para demostrar un sitio corporativo.</p>
+  <div class="wrap">
+    <div class="fcols">
+      <div><span class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg><span><b style="color:#fff">ARCE</b><small style="color:#8E897F">Suministros industriales</small></span></span><p style="margin:16px 0 0;max-width:30ch;font-size:14.5px">Equipo de protección, herramienta, empaque y almacenaje para la industria desde 1987.</p></div>
+      <div><b>Catálogo</b><a href="#catalogo">Protección personal</a><a href="#catalogo">Protección de manos</a><a href="#catalogo">Calzado de seguridad</a><a href="#catalogo">Herramienta eléctrica</a></div>
+      <div><b>Empresa</b><a href="#industrias">Industrias</a><a href="#logistica">Logística</a><a href="#portal">Portal de clientes</a><a href="#contacto">Contacto</a></div>
+      <div><b>Atención</b><a href="#contacto">ventas@suministrosarce.mx</a><a href="#contacto">800 000 0000</a><a href="../../sistemas/cotizador/">Cotizador en línea</a></div>
     </div>
-    <div class="cols">
-      <div><h4>Productos</h4><ul><li><a href="#lineas">Protección personal</a></li><li><a href="#lineas">Protección de manos</a></li><li><a href="#lineas">Empaque y embalaje</a></li><li><a href="#lineas">Almacenaje</a></li></ul></div>
-      <div><h4>Empresa</h4><ul><li><a href="#servicios">Servicios</a></li><li><a href="#industrias">Industrias</a></li><li><a href="#portal">Portal de clientes</a></li></ul></div>
-      <div><h4>Contacto</h4><ul><li>ventas@suministrosarce.mx</li><li>800 000 0000</li></ul></div>
-    </div>
-    <div class="legal" style="grid-column:1/-1"><span>Diseño y desarrollo: <a href="../../" target="_top">crusol</a></span><span id="credits"></span></div>
+    <div class="big" aria-hidden="true">ARCE</div>
+    <div class="fbot"><span>© 2026 Suministros Arce · Empresa ficticia para demostración</span><span>Fotos: <a href="https://unsplash.com/?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a> · Sitio hecho por <a href="../../" target="_top">crusol</a></span></div>
   </div>
 </footer>
 
+<div class="scrim" id="scrim"></div>
+<aside class="drw" id="drw" aria-label="Tu cotización" aria-hidden="true">
+  <div class="dh"><b>Tu cotización</b><button type="button" class="x" id="dx" aria-label="Cerrar">&times;</button></div>
+  <div class="ls" id="dls"></div>
+  <div class="df" id="dft">
+    <input id="dco" type="email" placeholder="Correo para recibir la cotización" autocomplete="email">
+    <button type="button" class="btn r" id="dsend" disabled>Solicitar precios</button>
+    <span class="mono" style="color:var(--gray)">Demo: no se envía nada.</span>
+  </div>
+</aside>
+<div class="sk" id="sk" role="dialog" aria-label="Buscar productos"><div class="bx"><input id="skq" placeholder="Busca por producto, código o norma" autocomplete="off"><ul id="skl"></ul></div></div>
+<div class="flt" id="flt" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status"><i></i><span id="toastt"></span></div>
+
 <script>
 (function(){
-  var still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var nav=document.getElementById("nav");
-  addEventListener("scroll",function(){nav.classList.toggle("sh",scrollY>10)},{passive:true});
+  var still=matchMedia("(prefers-reduced-motion: reduce)").matches,fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
+  function $(id){return document.getElementById(id)}
+  function U(id,w,h){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&h="+h+"&q=70"}
+  var IMG={casco:"1567954970774-58d6aa6c50dc",cascos:"1781157080615-ffde66c035a5",guanteA:"1634852836003-c0aa5b67d243",guanteB:"1673294861057-4584f92b91d2",bota:"1613325267798-05214c4d65f1",botas:"1520639888713-7851133b1ed0",chaleco:"1759542877976-5d870f7cd0a9",taladro:"1572981779307-38b8cabb2407",herr:"1645651964715-d200ce0939cc",cajas:"1586528116311-ad8dd3c8310d",rack:"1587293852726-70cdb56c2866",nave:"1553413077-190dd305871c",nave2:"1684695749267-233af13276d0",ingen:"1621905252507-b35492cc74b4",camion:"1601467995997-ac1ae9a8fff4",tarimas:"1672552226380-486fe900b322"};
+  var CAT=[
+    {k:"epp",n:"Protección personal",c:612,img:"cascos"},
+    {k:"manos",n:"Protección de manos",c:288,img:"guanteA"},
+    {k:"calzado",n:"Calzado de seguridad",c:164,img:"botas"},
+    {k:"herr",n:"Herramienta eléctrica",c:342,img:"herr"},
+    {k:"empaque",n:"Empaque y embalaje",c:518,img:"cajas"},
+    {k:"alm",n:"Almacenaje",c:488,img:"nave"}
+  ];
+  var P=[
+    {id:"CAS-115",k:"epp",n:"Casco tipo I clase E",s:"NOM-115-STPS · ajuste de matraca",st:240,img:"casco"},
+    {id:"CAS-118",k:"epp",n:"Casco de ala completa",s:"ANSI Z89.1 · 4 puntos",st:96,img:"cascos",nw:1},
+    {id:"CHA-107",k:"epp",n:"Chaleco reflejante clase 2",s:"ANSI 107 · malla transpirable",st:260,img:"chaleco"},
+    {id:"GUA-NIT",k:"manos",n:"Guante de nitrilo, caja 100",s:"EN 374 · tallas CH a XG",st:430,img:"guanteA"},
+    {id:"GUA-CAR",k:"manos",n:"Guante de carnaza reforzado",s:"EN 388 · palma doble",st:820,img:"guanteB"},
+    {id:"BOT-DIE",k:"calzado",n:"Bota dieléctrica con casquillo",s:"NOM-113-STPS · 18 kV",st:32,img:"bota"},
+    {id:"BOT-TRK",k:"calzado",n:"Bota de trabajo antiderrapante",s:"NOM-113-STPS · suela de nitrilo",st:74,img:"botas"},
+    {id:"TAL-20V",k:"herr",n:"Taladro inalámbrico 20 V",s:"Kit con 2 baterías y cargador",st:58,img:"taladro",nw:1},
+    {id:"HER-064",k:"herr",n:"Juego de herramienta 64 piezas",s:"Acero cromo vanadio · estuche",st:41,img:"herr"},
+    {id:"CAJ-060",k:"empaque",n:"Caja plástica apilable 60 L",s:"Polipropileno · tapa abatible",st:1240,img:"cajas"},
+    {id:"ANQ-5N",k:"alm",n:"Anaquel metálico 5 niveles",s:"200 kg por nivel · calibre 22",st:85,img:"rack"},
+    {id:"RAC-SEL",k:"alm",n:"Rack selectivo de carga pesada",s:"Bajo medida · instalación incluida",st:0,img:"nave2"}
+  ];
+  var IND=[
+    {n:"Manufactura",img:"ingen",t:"Líneas de producción que no se detienen.",d:"Surtido programado por área y por turno, con existencias apartadas para tus consumos de cada semana.",l:[["Guante anticorte y de nitrilo","Mensual"],["Lentes y protección auditiva","Quincenal"],["Herramienta de mantenimiento","Bajo pedido"]]},
+    {n:"Alimentos y bebidas",img:"cajas",t:"Inocuidad en cada partida.",d:"Productos grado alimenticio, guantes desechables y empaque con fichas técnicas listas para tus auditorías.",l:[["Guante de nitrilo azul","Semanal"],["Cajas y charolas grado alimenticio","Mensual"],["Cofias, cubrebocas y batas","Semanal"]]},
+    {n:"Construcción",img:"cascos",t:"Seguridad que llega a la obra.",d:"Entregas directas en obra, kits de bienvenida para cuadrillas nuevas y control de lo que se entrega a cada frente.",l:[["Casco, chaleco y botas","Por cuadrilla"],["Arnés y línea de vida","Bajo pedido"],["Herramienta eléctrica","Renta o venta"]]},
+    {n:"Logística",img:"tarimas",t:"Almacenes ordenados y seguros.",d:"Racks, anaqueles, emplaye y señalización para centros de distribución que mueven miles de piezas al día.",l:[["Rack selectivo e instalación","Proyecto"],["Película estirable y fleje","Semanal"],["Señalización de piso","Proyecto"]]}
+  ];
+  var CED=[{n:"CEDIS Norte",d:"Entrega el mismo día en zona"},{n:"CEDIS Bajío",d:"Entrega en 24 h"},{n:"CEDIS Centro",d:"Entrega en 24 h"}];
+  var ARR='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>';
+  var PLUS='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v12M2 8h12"/></svg>';
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 
-  /* contadores */
-  [].forEach.call(document.querySelectorAll("[data-n]"),function(el){
-    var goal=+el.dataset.n,suf=el.dataset.s||"",t0=null;
-    function f(v){return Math.round(v).toLocaleString("es-MX")+suf}
-    if(still){el.textContent=f(goal);return}
-    function run(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1600),e=1-Math.pow(1-p,3);el.textContent=f(goal*e);if(p<1)requestAnimationFrame(run)}
-    setTimeout(function(){requestAnimationFrame(run)},300);
-  });
+  /* héroe y corte de pedidos */
+  requestAnimationFrame(function(){setTimeout(function(){$("hero").classList.add("on")},80)});
+  function mx(){var p=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Mexico_City",hour12:false,weekday:"short",hour:"2-digit",minute:"2-digit",second:"2-digit"}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});return o}
+  function pad(n){return (n<10?"0":"")+n}
+  function tick(){try{var o=mx(),s=(+o.hour%24)*3600+(+o.minute)*60+(+o.second),cut=14*3600,wd=o.weekday,lab=!/Sat|Sun/.test(wd),left,txt;
+    if(lab&&s<cut){left=cut-s;txt="<b>Pedidos antes de las 14:00 salen hoy</b><small>Zona metropolitana · días hábiles</small>"}
+    else{var add=wd==="Fri"&&s>=cut?2:wd==="Sat"?1:0;left=(86400-s)+cut+add*86400;txt="<b>Tu pedido sale el siguiente día hábil</b><small>Siguiente corte a las 14:00</small>"}
+    var h=Math.floor(left/3600),m=Math.floor(left%3600/60),se=left%60;$("cutc").textContent=pad(h)+":"+pad(m)+":"+pad(se);if($("cutt").innerHTML!==txt)$("cutt").innerHTML=txt}catch(e){}}
+  tick();setInterval(tick,1000);
 
-  /* aparecer */
+  /* cotización */
+  var KEY="arce_sitio_cot_v1",Q={};
+  try{Q=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(Q))}catch(e){}}
+  function count(){var n=0;for(var k in Q)n+=Q[k];return n}
+  function byId(id){for(var i=0;i<P.length;i++)if(P[i].id===id)return P[i]}
+  function toast(t){$("toastt").textContent=t;var el=$("toast");el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove("on")},2000)}
+  function upd(bump){var n=Object.keys(Q).length,qn=$("qn");qn.textContent=n;if(bump){qn.classList.remove("bump");void qn.offsetWidth;qn.classList.add("bump")}
+    [].forEach.call(document.querySelectorAll(".add"),function(b){var on=!!Q[b.dataset.id];b.classList.toggle("in",on);b.innerHTML=on?"En tu cotización":PLUS+"Agregar"});
+    var ls=$("dls");if(!n){ls.innerHTML='<div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="3" width="16" height="18"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Tu cotización está vacía.<br>Agrega productos del catálogo.</div>'}
+    else{ls.innerHTML=Object.keys(Q).map(function(id){var p=byId(id);return '<div class="it"><span class="ph" style="background-image:url('+U(IMG[p.img],140,140)+')"></span><div><b>'+esc(p.n)+'</b><span>'+p.id+'</span></div><div class="qty"><button type="button" data-d="-1" data-id="'+p.id+'" aria-label="Menos">−</button><input data-id="'+p.id+'" value="'+Q[id]+'" inputmode="numeric" aria-label="Cantidad"><button type="button" data-d="1" data-id="'+p.id+'" aria-label="Más">+</button></div></div>'}).join("")}
+    $("dsend").disabled=!n}
+  function add(id){if(Q[id]){openQ();return}Q[id]=1;save();upd(true);toast(byId(id).n+" agregado a tu cotización")}
+  function openQ(){document.body.classList.add("qopen");$("drw").setAttribute("aria-hidden","false");setTimeout(function(){$("dx").focus()},300)}
+  function closeQ(){document.body.classList.remove("qopen");$("drw").setAttribute("aria-hidden","true")}
+  $("qbtn").addEventListener("click",openQ);$("dx").addEventListener("click",closeQ);$("scrim").addEventListener("click",closeQ);
+  $("dls").addEventListener("click",function(e){var b=e.target.closest("button[data-d]");if(!b)return;var id=b.dataset.id;Q[id]=Math.max(0,(Q[id]||0)+(+b.dataset.d));if(!Q[id])delete Q[id];save();upd()});
+  $("dls").addEventListener("change",function(e){var i=e.target;if(!i.dataset.id)return;var v=parseInt(i.value,10);if(!v||v<1)delete Q[i.dataset.id];else Q[i.dataset.id]=Math.min(9999,v);save();upd()});
+  $("dsend").addEventListener("click",function(){var f=$("dft"),n=Object.keys(Q).length,folio="ARC-COT-"+(2400+Math.floor(Math.random()*500));
+    $("dls").innerHTML='<div class="sent" role="status"><b>Solicitud '+folio+'</b>Recibimos '+n+(n===1?' producto':' productos')+'. En un sitio real tu asesor te respondería en menos de dos horas con precios de tu lista. Es un demo: no se envió nada.</div>';
+    Q={};save();$("qn").textContent=0;$("dsend").disabled=true;[].forEach.call(document.querySelectorAll(".add"),function(b){b.classList.remove("in");b.innerHTML=PLUS+"Agregar"})});
+
+  /* productos */
+  var cur="all";
+  function card(p){var stc=p.st===0?"po":p.st<60?"lo":"",stt=p.st===0?"Sobre pedido · 10 días":p.st.toLocaleString("es-MX")+" en existencia";
+    return '<article class="pc" data-k="'+p.k+'"><div class="ph" style="background-image:url('+U(IMG[p.img],600,600)+')" role="img" aria-label="'+esc(p.n)+'"><span class="cd">'+p.id+'</span>'+(p.nw?'<span class="nw">Nuevo</span>':'')+'</div><div class="bd"><h3>'+esc(p.n)+'</h3><span class="sp">'+esc(p.s)+'</span><span class="st '+stc+'">'+stt+'</span></div><div class="ft"><small>Precio según<br>tu lista de cliente</small><button type="button" class="add" data-id="'+p.id+'">'+PLUS+'Agregar</button></div></article>'}
+  $("grid").innerHTML=P.map(card).join("");
+  $("grid").addEventListener("click",function(e){var b=e.target.closest(".add");if(b)add(b.dataset.id)});
+  var chips=[{k:"all",n:"Todas"}].concat(CAT);
+  $("pbar").innerHTML=chips.map(function(c){return '<button type="button" class="chip" data-k="'+c.k+'" aria-pressed="'+(c.k==="all")+'">'+esc(c.n)+'</button>'}).join("")+'<span class="cnt mono" id="pcnt"></span>';
+  function filt(k){cur=k;[].forEach.call(document.querySelectorAll("#pbar .chip"),function(b){b.setAttribute("aria-pressed",String(b.dataset.k===k))});var n=0;
+    [].forEach.call(document.querySelectorAll(".pc"),function(c){var on=k==="all"||c.dataset.k===k;c.classList.toggle("hide",!on);if(on)n++});
+    var cat=CAT.filter(function(c){return c.k===k})[0];$("pcnt").textContent=k==="all"?"Mostrando "+n+" de 2,412":"Mostrando "+n+" de "+cat.c+" en "+cat.n.toLowerCase()}
+  $("pbar").addEventListener("click",function(e){var b=e.target.closest(".chip");if(b)filt(b.dataset.k)});
+  filt("all");
+
+  /* índice con imagen que sigue al mouse */
+  $("idx").innerHTML=CAT.map(function(c,i){return '<li><button type="button" data-k="'+c.k+'" data-img="'+IMG[c.img]+'"><span class="n">0'+(i+1)+'</span><span class="t">'+esc(c.n)+'</span><span class="c">'+c.c+' productos</span><span class="g">'+ARR+'</span></button></li>'}).join("");
+  var flt=$("flt"),fx=0,fy=0,tx=0,ty=0,fr=0;
+  function fl(){fx+=(tx-fx)*.18;fy+=(ty-fy)*.18;flt.style.left=fx+"px";flt.style.top=fy+"px";if(Math.abs(tx-fx)+Math.abs(ty-fy)>.3)fr=requestAnimationFrame(fl);else fr=0}
+  if(fine){$("idx").addEventListener("mousemove",function(e){tx=e.clientX+150;ty=e.clientY;if(!flt.classList.contains("on")){fx=tx;fy=ty}if(!fr)fr=requestAnimationFrame(fl)});
+    $("idx").addEventListener("mouseover",function(e){var b=e.target.closest("button");if(!b)return;flt.style.backgroundImage="url("+U(b.dataset.img,560,680)+")";flt.classList.add("on")});
+    $("idx").addEventListener("mouseleave",function(){flt.classList.remove("on")})}
+  $("idx").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;filt(b.dataset.k);flt.classList.remove("on");$("productos").scrollIntoView({behavior:still?"auto":"smooth",block:"start"})});
+
+  /* industrias */
+  var ib=$("itab");ib.innerHTML=IND.map(function(d,i){return '<button type="button" role="tab" aria-selected="'+(i===0)+'" data-i="'+i+'">'+esc(d.n)+'</button>'}).join("");
+  function ind(i){var d=IND[i];[].forEach.call(ib.children,function(b,j){b.setAttribute("aria-selected",String(j===i))});
+    $("iim").style.backgroundImage="url("+U(IMG[d.img],1000,900)+")";$("iim").setAttribute("aria-label",d.n);
+    $("itx").innerHTML='<div class="fx"><span class="mono" style="color:var(--red)">'+esc(d.n)+'</span><h3 style="margin-top:12px">'+esc(d.t)+'</h3><p style="margin-top:14px">'+esc(d.d)+'</p><ul style="margin-top:22px">'+d.l.map(function(x){return '<li>'+esc(x[0])+'<span>'+esc(x[1])+'</span></li>'}).join("")+'</ul></div>'}
+  ib.addEventListener("click",function(e){var b=e.target.closest("button");if(b)ind(+b.dataset.i)});ind(0);
+  ib.addEventListener("keydown",function(e){var i=[].indexOf.call(ib.children,document.activeElement),k=e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0;if(!k||i<0)return;var n=(i+k+IND.length)%IND.length;ib.children[n].focus();ind(n)});
+
+  /* centros de distribución con horario */
+  function ced(){var o;try{o=mx()}catch(e){return}var h=+o.hour%24,lab=!/Sun/.test(o.weekday),sat=o.weekday==="Sat",open=lab&&(sat?h>=9&&h<13:h>=8&&h<18);
+    $("ced").innerHTML=CED.map(function(c){return '<div><b>'+c.n+'</b><em class="'+(open?"":"off")+'">'+(open?"Abierto":"Cerrado")+'</em><span>'+c.d+'</span></div>'}).join("")}
+  ced();setInterval(ced,60000);
+
+  /* ruta: el camión avanza con el scroll */
+  var rp=$("rpath"),rd=$("rdone"),tr=$("truck"),L=rp.getTotalLength(),stopsS=[].slice.call(document.querySelectorAll("#rt .stop")),stopsT=[].slice.call(document.querySelectorAll("#stops>div")),marks=[0,.29,.66,1];
+  rd.style.strokeDasharray=L;rd.style.strokeDashoffset=L;
+  function route(){var r=$("rt").getBoundingClientRect(),vh=innerHeight,p=still?1:Math.min(1,Math.max(0,(vh*.85-r.top)/(r.height+vh*.3)));
+    var pt=rp.getPointAtLength(p*L),pt2=rp.getPointAtLength(Math.min(L,p*L+1)),a=Math.atan2(pt2.y-pt.y,pt2.x-pt.x)*180/Math.PI;
+    tr.setAttribute("transform","translate("+pt.x+" "+(pt.y-4)+") rotate("+(p>=1?0:a)+")");rd.style.strokeDashoffset=L*(1-p);
+    var mw=$("rmap").parentNode,map=$("rmap");if(innerWidth<=640){var over=map.getBoundingClientRect().width-mw.clientWidth;map.style.transform="translateX("+(-over*Math.min(1,Math.max(0,p*1.04-.02))).toFixed(1)+"px)"}else map.style.transform="";
+    marks.forEach(function(m,i){var on=p>=m-.005;stopsS[i].classList.toggle("on",on);stopsT[i].classList.toggle("on",on)})}
+  addEventListener("scroll",function(){requestAnimationFrame(route)},{passive:true});addEventListener("resize",route);route();
+
+  /* formulario */
+  $("fm").addEventListener("submit",function(e){e.preventDefault();var f=this,ok=true;[].forEach.call(f.querySelectorAll("[required]"),function(i){if(!i.value.trim()||(i.type==="email"&&!/^\S+@\S+\.\S+$/.test(i.value))){ok=false;i.style.borderColor="var(--red)"}else i.style.borderColor=""});
+    if(!ok){toast("Revisa los campos marcados");return}f.classList.add("sent")});
+
+  /* buscador */
+  var sk=$("sk"),skq=$("skq"),skl=$("skl"),sel=0;
+  function skR(){var q=skq.value.trim().toLowerCase(),r=P.filter(function(p){return !q||(p.n+" "+p.id+" "+p.s).toLowerCase().indexOf(q)>=0});sel=0;
+    skl.innerHTML=r.length?r.map(function(p,i){return '<li><a href="#productos" data-id="'+p.id+'" class="'+(i===0?"sel":"")+'"><span class="ph" style="background-image:url('+U(IMG[p.img],120,120)+')"></span><span><b>'+esc(p.n)+'</b><br><span>'+p.id+' · '+esc(p.s)+'</span></span><span>'+(Q[p.id]?"En cotización":"Agregar")+'</span></a></li>'}).join(""):'<li class="no">Sin resultados. Escríbenos y lo conseguimos.</li>'}
+  function skO(){sk.classList.add("on");skq.value="";skR();setTimeout(function(){skq.focus()},30)}
+  function skC(){sk.classList.remove("on")}
+  $("srch").addEventListener("click",skO);sk.addEventListener("click",function(e){if(e.target===sk)skC()});skq.addEventListener("input",skR);
+  skl.addEventListener("click",function(e){var a=e.target.closest("a[data-id]");if(!a)return;e.preventDefault();add(a.dataset.id);skR()});
+  skq.addEventListener("keydown",function(e){var as=skl.querySelectorAll("a");if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();if(!as.length)return;as[sel].classList.remove("sel");sel=(sel+(e.key==="ArrowDown"?1:-1)+as.length)%as.length;as[sel].classList.add("sel");as[sel].scrollIntoView({block:"nearest"})}else if(e.key==="Enter"&&as[sel]){e.preventDefault();add(as[sel].dataset.id);skR()}});
+  addEventListener("keydown",function(e){if(e.key==="Escape"){skC();closeQ();setM(false)}else if(e.key==="/"&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();skO()}});
+
+  /* menú en celular */
+  function setM(o){document.body.classList.toggle("mopen",o);$("mbt").setAttribute("aria-expanded",String(o))}
+  $("mbt").addEventListener("click",function(){setM(!document.body.classList.contains("mopen"))});
+  [].forEach.call(document.querySelectorAll("#mnav a"),function(a){a.addEventListener("click",function(){setM(false)})});
+
+  /* aparecer al bajar */
   var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}})},{threshold:.12}):null;
-  [].forEach.call(document.querySelectorAll(".rv"),function(el,i){el.style.transitionDelay=(i%4*0.07)+"s";io?io.observe(el):el.classList.add("on")});
-
-  /* formulario de demo */
-  var form=document.getElementById("form"),ok=document.getElementById("okmsg");
-  form.addEventListener("submit",function(e){
-    e.preventDefault();var bad=false;
-    [].forEach.call(form.querySelectorAll("[required]"),function(i){var v=i.value.trim(),w=!v||(i.type==="email"&&!/^\S+@\S+\.\S+$/.test(v));i.parentNode.classList.toggle("err",w);if(w)bad=true});
-    if(bad){ok.classList.remove("on");return}
-    ok.textContent="Gracias, "+document.getElementById("f2").value.trim().split(" ")[0]+". Recibimos la solicitud de "+document.getElementById("f1").value.trim()+". Folio SOL-"+(2300+Math.floor(Math.random()*600))+". Un asesor te contactará hoy.";
-    ok.classList.add("on");form.reset();
-  });
-
-  /* créditos de fotos */
-  var U="?utm_source=crusol&utm_medium=referral",P=[["Centre for Ageing Better","ageing_better"],["Pop & Zebra","popandzebra"],["Hybrid Storytellers","hybridstorytellers"],["Jimmy Nilsson Masth","jimmynilssonmasth"],["Adrian Sulyok","sulyok_imaging"],["Lance Chang","carmendis"],["Troy Mortier","troyscanon"]];
-  var c=document.getElementById("credits");c.appendChild(document.createTextNode("Fotos de "));
-  P.forEach(function(p,i){var a=document.createElement("a");a.href="https://unsplash.com/@"+p[1]+U;a.target="_blank";a.rel="noopener";a.textContent=p[0];c.appendChild(a);c.appendChild(document.createTextNode(i<P.length-1?", ":" en "))});
-  var u=document.createElement("a");u.href="https://unsplash.com/"+U;u.target="_blank";u.rel="noopener";u.textContent="Unsplash";c.appendChild(u);
+  [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
+  upd();
 })();
 </script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
@@ -477,3 +781,4 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
 </script>
 </body>
 </html>
+
