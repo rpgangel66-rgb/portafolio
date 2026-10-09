@@ -6,5 +6,6 @@ Disallow: /taqueria/
 Disallow: /unas/
 Disallow: /ropa/
 Disallow: /muestras/
+Disallow: /demo/
 
 Sitemap: https://crusol.com.mx/sitemap.xml

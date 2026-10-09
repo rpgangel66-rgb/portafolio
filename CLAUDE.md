@@ -41,6 +41,7 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
 - En el portafolio, `crusol.com.mx/#agenda` (o `#taller`, `#cotizador`, `#tablero`, `#requisiciones`) abre esa pestaña de 001 Sistemas.
 - Vistas previas (og:image) en `og/*.jpg`, 1200x630 y menos de 150 KB. Si cambia un demo, regenerar su imagen.
 - Los demos y el sitio Arce traen al final el bloque `#crcta` (invitación a contacto): solo aparece cuando el demo se abre fuera del portafolio, a los 9 s o 4 s después de la primera interacción, y se puede cerrar. El nombre del demo sale de `data-demo` en el `<body>`.
+- `demo/<cliente>-<código>/`: demos personalizados para un prospecto (copia de un demo con su nombre y servicios, `noindex`, sin liga desde el portafolio). Ejemplo: `demo/dr-marines-k7p2/` (agenda de pediatría).
 - `robots.txt` y `sitemap.xml` en la raíz; las carpetas viejas de negocios pequeños están excluidas.
 
 ## Marca
