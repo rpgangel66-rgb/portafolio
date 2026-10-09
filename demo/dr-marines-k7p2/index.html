@@ -573,7 +573,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
   var B={
     ped:{k:"ped",n:"Dr. Gilberto Marines",m:"GM",g:"Pediatría",fp:"GM",n0:1201,c:["#4C8FD6"],
       place:"consultorio",Cli:"Paciente",pro:"pediatra",ic:"steth",sub:"Pediatra",
-      hr:{img:"https://images.unsplash.com/photo-1676313030076-4ac0b37050fd?auto=format&fit=crop&w=1400&q=70",alt:"Pediatra revisando a una niña con el estetoscopio",kick:"Consulta pediátrica",t:"La cita de tu hijo, en dos minutos.",s:"Elige el servicio y el horario que te acomode. Recibes la confirmación por WhatsApp al momento y un recordatorio un día antes.",facts:["Lun a vie · 10:30 a 3:30","Sáb · 10:00 a 12:00","Consulta $900"]},
+      hr:{img:"https://images.unsplash.com/photo-1758691463331-2ac00e6f676f?auto=format&fit=crop&w=1400&q=70",alt:"Pediatra platicando con un niño y su mamá durante la consulta",kick:"Consulta pediátrica",t:"La cita de tu hijo, en dos minutos.",s:"Elige el servicio y el horario que te acomode. Recibes la confirmación por WhatsApp al momento y un recordatorio un día antes.",facts:["Lun a vie · 10:30 a 3:30","Sáb · 10:00 a 12:00","Consulta $900"]},
       ask:"¿Qué servicio necesitas?",hero:"Elige el servicio y el horario que mejor te acomode.",
       h:wk([1,2,3,4,5],[[630,930]],{6:[[600,720]]}),
       svcs:[
@@ -691,7 +691,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
   function canNext(){return bk.step===1?!!bk.s:bk.step===2?!!bk.p:bk.step===3?!!(bk.d&&bk.t!=null):bk.step===5?String(bk.vin||"").length===6:true}
   function go(n){bk.step=n;rBook();var m=document.querySelector(".bkm");if(m&&m.getBoundingClientRect().top<0)m.scrollIntoView({behavior:"smooth",block:"start"})}
   function rBook(){var b=biz(),v=document.getElementById("vR");v.textContent="";
-    var main=h("div.card.bkm"),hd=h("div.bkh",bk.step>1?[h("h2",bk.step===6?"Tu cita en "+b.n:"Reserva tu cita en "+b.n),h("p",b.hero)]:null);
+    var main=h("div.card.bkm"),hd=h("div.bkh",bk.step>1?[h("h2",bk.step===6?"Tu cita con el "+b.n:"Reserva tu cita con el "+b.n),h("p",b.hero)]:null);
     var ol=h("ol.steps");STEPS.forEach(function(s,i){ol.appendChild(h("li"+(bk.step===i+1?".on":bk.step>i+1?".done":""),h("i",(i+1)+"."),h("span"," "+s)))});if(bk.step<6)hd.appendChild(ol);main.appendChild(hd);
     var body=h("div.bkb");main.appendChild(body);
     [null,step1,step2,step3,step4,stepVerify,stepDone][bk.step](body);
@@ -742,7 +742,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
     var g=h("div.fg");
     function inp(key,label,attrs,full){var a={value:fm[key]||"",oninput:function(){fm[key]=this.value;this.classList.remove("err")},id:"fm-"+key};for(var k in attrs)a[k]=attrs[k];
       var i=h("input",a);g.appendChild(h("label.f"+(full?".full":""),label,i))}
-    inp("n","Nombre completo",{autocomplete:"name",placeholder:"Como aparece en tu identificación"},!b.pet);
+    inp("n","Nombre del paciente",{autocomplete:"name",placeholder:"Nombre completo del niño o niña"},!b.pet);
     if(b.pet){inp("pet","Nombre de tu mascota",{placeholder:"Ej. Rocky"});
       var se=h("select",{id:"fm-sp",onchange:function(){fm.sp=this.value}});["Perro","Gato","Otro"].forEach(function(x){var o=h("option",x);if(fm.sp===x)o.selected=true;se.appendChild(o)});g.appendChild(h("label.f","Especie",se))}
     inp("tel","Celular (WhatsApp)",{type:"tel",inputmode:"numeric",autocomplete:"tel",placeholder:"Te llegará un código",maxlength:"14"});
