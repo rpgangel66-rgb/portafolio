@@ -20,7 +20,7 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
   - Contacto: "Arma tu correo" (temas + nombre + empresa) redacta el `mailto` del botón `#mail-2`; no guarda nada. Pie con columnas (demos, secciones, contacto y aviso de privacidad).
 - `fonts/`: Geist y Geist Mono variables servidas desde el propio sitio (licencia OFL en `fonts/OFL.txt`); ya no se usa Google Fonts en `index.html`, `404.html` ni `privacidad.html`.
 - `privacidad.html`: aviso de privacidad (sin cookies, GoatCounter anónimo, demos en localStorage).
-- SEO: `og.png` (1200x630 para compartir), JSON-LD en `index.html`, `sitemap.xml`, `robots.txt` y `site.webmanifest`. Si se agrega un demo, sumarlo al `sitemap.xml`, al pie y al `404.html`.
+- SEO: JSON-LD en `index.html`, `sitemap.xml`, `robots.txt` y `site.webmanifest` (vistas previas en `og/`, ver abajo). Si se agrega un demo, sumarlo al `sitemap.xml`, al pie del portafolio y al `404.html`.
 - `sistemas/`: cada demo tiene su propia empresa ficticia y su propio estilo visual (no reutilizar el mismo diseño entre demos):
   - `cotizador/`: Suministros Arce (distribuidor de material industrial y EPP). Catálogo con normas y existencias por almacén, listas de precios por cliente, escalas por volumen y flete; la cotización se arma sobre la hoja. Archivo condensada + IBM Plex Mono, amarillo #F2B705 y azul #1F4E79. Estado en `crusol_cotizador_demo_v2`.
   - `tablero/`: Mercantil Alba (distribuidora, sucursales Centro, Poniente y Oriente). Terminal oscura: Barlow Condensed + JetBrains Mono, ámbar #F5B342, cinta de indicadores.
@@ -39,6 +39,15 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
 - `sitios/arce/`: demo de sitio corporativo B2B (Archivo + Inter, azul #1F4E79, amarillo #F2B705).
 - `facebook/`: logos, portadas e imágenes de publicaciones.
 - Carpetas viejas (`barberia`, `estetica`, `taqueria`, `unas`, `ropa`, `muestras`) son demos anteriores para negocios pequeños; ya no se muestran en el portafolio.
+
+## Ligas para prospectos y vistas previas
+
+- Ligas cortas (páginas que redirigen y conservan `?` y `#`): `/agenda/` (dental), `/agenda/salon/`, `/agenda/veterinaria/`, `/taller/`. Cada una tiene su propia vista previa para WhatsApp.
+- En el portafolio, `crusol.com.mx/#agenda` (o `#taller`, `#cotizador`, `#tablero`, `#requisiciones`) abre esa pestaña de 001 Sistemas.
+- Vistas previas (og:image) en `og/*.jpg`, 1200x630 y menos de 150 KB. Si cambia un demo, regenerar su imagen.
+- Los demos y el sitio Arce traen al final el bloque `#crcta` (invitación a contacto): solo aparece cuando el demo se abre fuera del portafolio, a los 9 s o 4 s después de la primera interacción, y se puede cerrar. El nombre del demo sale de `data-demo` en el `<body>`.
+- `demo/<cliente>-<código>/`: demos personalizados para un prospecto (copia de un demo con su nombre y servicios, `noindex`, sin liga desde el portafolio). Ejemplo: `demo/dr-marines-k7p2/` (agenda de pediatría).
+- `robots.txt` y `sitemap.xml` en la raíz; las carpetas viejas de negocios pequeños están excluidas.
 
 ## Marca
 

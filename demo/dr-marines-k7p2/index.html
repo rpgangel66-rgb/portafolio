@@ -1,22 +1,22 @@
 <!doctype html>
-<html lang="es" data-g="dental">
+<html lang="es" data-g="ped">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Agenda de citas en línea · Demo</title>
-<link rel="canonical" href="https://crusol.com.mx/sistemas/agenda/">
+<title>Dr. Gilberto Marines · Agenda de citas · Demo</title>
+<meta name="description" content="Demo de agenda en línea preparado para el consultorio del Dr. Gilberto Marines, pediatra.">
+<meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="crusol">
 <meta property="og:locale" content="es_MX">
-<meta property="og:url" content="https://crusol.com.mx/sistemas/agenda/">
-<meta property="og:title" content="Agenda de citas en línea · Demo de crusol">
-<meta property="og:description" content="Tus clientes reservan solos desde el celular: confirmación por WhatsApp, recordatorios y cero empalmes. Pruébalo en vivo.">
-<meta property="og:image" content="https://crusol.com.mx/og/og-agenda.jpg">
+<meta property="og:url" content="https://crusol.com.mx/demo/dr-marines-k7p2/">
+<meta property="og:title" content="Agenda en línea · Dr. Gilberto Marines, Pediatra">
+<meta property="og:description" content="Demo preparado para su consultorio: los papás reservan desde el celular, confirman por WhatsApp y reciben recordatorio un día antes.">
+<meta property="og:image" content="https://crusol.com.mx/demo/dr-marines-k7p2/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agenda de citas en línea · Demo de crusol">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="description" content="Demo de sistema: agenda de citas en línea para consultorios, salones y veterinarias, con empresas ficticias. Hecho por crusol.">
+
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#F4F5F7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,14 @@
   color-scheme:light;
   --ok:#1E7B4F; --ok-soft:#E3F3EA; --warn:#B25E09; --warn-soft:#FCEFDF; --bad:#B42318; --bad-soft:#FDECEA;
   --cb:#0b2a20; --cb-t:#f6f5f0; --cb-s:#a9c4b6;
+}
+html[data-g="ped"]{
+  --bg:#EEF4FA; --panel:#FFFFFF; --ink:#132A40; --text2:#3E566D; --muted:#6B8196; --line:#D8E3EE; --soft:#F5F9FD;
+  --brand:#2C6CB0; --brand-2:#1F5590; --brand-soft:#DDEAF7; --acc:#F2B544;
+  --font:"Nunito",system-ui,sans-serif; --fh:"Manrope",system-ui,sans-serif; --fhw:800; --fls:-.02em;
+  --r:20px; --rb:999px; --ri:12px; --ro:16px; --rc:999px; --bw:1px; --cl:var(--line);
+  --sh:0 1px 2px rgba(19,42,64,.04),0 12px 32px -14px rgba(19,42,64,.18); --bsh:none;
+  --tt:none; --tls:0; --capf:var(--font);
 }
 html[data-g="dental"]{
   --bg:#EDF4F3; --panel:#FFFFFF; --ink:#0E2A2D; --text2:#3F5B5E; --muted:#6A8285; --line:#D6E5E2; --soft:#F4F9F8;
@@ -379,6 +387,15 @@ main{max-width:1320px;margin:0 auto;padding:18px 22px 30px}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
 /* ===== Dental: clínico y luminoso ===== */
+html[data-g="ped"] .app{border-bottom:1px solid var(--line)}
+html[data-g="ped"] .mark{border-radius:14px;background:linear-gradient(140deg,#4C8FD6,var(--brand-2))}
+html[data-g="ped"] .hero{background:linear-gradient(120deg,#DCEAF7 0%,#FFF8E8 75%);border-radius:28px;padding:10px 10px 10px 40px;border:1px solid var(--line)}
+html[data-g="ped"] .hero h2{color:var(--ink)}
+html[data-g="ped"] .himg{min-height:290px}
+html[data-g="ped"] .himg img{border-radius:22px}
+html[data-g="ped"] .tabs{background:#E3EDF8;border-color:transparent}
+html[data-g="ped"] .cbar .g{display:none}
+@media (max-width:760px){html[data-g="ped"] .hero{padding:10px}}
 html[data-g="dental"] .app{border-bottom:1px solid var(--line)}
 html[data-g="dental"] .mark{border-radius:14px;background:linear-gradient(140deg,var(--acc),var(--brand))}
 html[data-g="dental"] .hero{background:linear-gradient(120deg,#DCF1EC 0%,#F6FBFA 60%);border-radius:28px;padding:10px 10px 10px 40px;border:1px solid var(--line)}
@@ -526,7 +543,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
 </style>
 </head>
 <body data-demo="Agenda de citas">
-<div class="cbar"><span><b>Demo</b> · Empresas ficticias</span><div class="g" id="giro" role="group" aria-label="Giro de ejemplo"></div><span class="r"><button type="button" id="reset">Reiniciar demo</button> · Hecho por <a href="../../" target="_top">crusol</a></span></div>
+<div class="cbar"><span><b>Demo</b> · Preparado para el Dr. Gilberto Marines · Pacientes de ejemplo</span><div class="g" id="giro" role="group" aria-label="Giro de ejemplo"></div><span class="r"><button type="button" id="reset">Reiniciar demo</button> · Hecho por <a href="../../" target="_top">crusol</a></span></div>
 <header class="app">
   <div class="mark" id="mark"></div>
   <h1><span id="bizn">Clínica Dental Alameda</span><small id="bizs">Agenda de citas en línea</small></h1>
@@ -548,69 +565,29 @@ html[data-g="vet"] .kpi b{font-size:26px}
 
 <script>
 (function(){
-  var KEY="crusol_agenda_demo_v1";
+  var KEY="crusol_demo_marines_v1";
 
   /* ---------- giros de ejemplo (empresas ficticias) ---------- */
   function wk(days,r,extra){var o={};days.forEach(function(d){o[d]=r});for(var k in extra)o[k]=extra[k];return o}
   function hm(a,b){return [a*60,b*60]}
   var B={
-    dental:{k:"dental",n:"Clínica Dental Alameda",m:"DA",g:"Dental",fp:"DA",n0:2381,c:["#2FB597"],
-      place:"consultorio",Cli:"Paciente",pro:"especialista",ic:"tooth",sub:"Odontología general y estética",
-      hr:{img:"https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1400&q=70",alt:"Consultorio dental luminoso con sillón y equipo",kick:"Odontología general, ortodoncia y estética",t:"Tu cita con el dentista, en dos minutos.",s:"Elige el tratamiento, tu especialista y el horario que te acomode. Recibes la confirmación al momento.",facts:["Lun a vie · 9:00 a 19:00","Sáb · 9:00 a 14:00","3 especialistas"]},
-      ask:"¿Qué tratamiento necesitas?",hero:"Elige el tratamiento, tu especialista y el horario que te acomode.",
-      h:wk([1,2,3,4,5],[hm(9,14),hm(15,19)],{6:[hm(9,14)]}),
+    ped:{k:"ped",n:"Dr. Gilberto Marines",m:"GM",g:"Pediatría",fp:"GM",n0:1201,c:["#4C8FD6"],
+      place:"consultorio",Cli:"Paciente",pro:"pediatra",ic:"steth",sub:"Pediatra",
+      hr:{img:"https://images.unsplash.com/photo-1758691463331-2ac00e6f676f?auto=format&fit=crop&w=1400&q=70",alt:"Pediatra platicando con un niño y su mamá durante la consulta",kick:"Consulta pediátrica",t:"La cita de tu hijo, en dos minutos.",s:"Elige el servicio y el horario que te acomode. Recibes la confirmación por WhatsApp al momento y un recordatorio un día antes.",facts:["Lun a vie · 10:30 a 3:30","Sáb · 10:00 a 12:00","Consulta $900"]},
+      ask:"¿Qué servicio necesitas?",hero:"Elige el servicio y el horario que mejor te acomode.",
+      h:wk([1,2,3,4,5],[[630,930]],{6:[[600,720]]}),
       svcs:[
-        {id:"val",n:"Valoración inicial",u:30,p:400,dep:false,ds:"Revisión, diagnóstico y plan de tratamiento"},
-        {id:"lim",n:"Limpieza dental",u:60,p:850,ds:"Profilaxis con ultrasonido y pulido"},
-        {id:"res",n:"Resina por pieza",u:60,p:1200,ds:"Restauración del color natural del diente"},
-        {id:"ort",n:"Ajuste de ortodoncia",u:30,p:900,ds:"Revisión mensual de brackets"},
-        {id:"bla",n:"Blanqueamiento",u:90,p:3800,ds:"Sesión en consultorio con lámpara LED"},
-        {id:"ext",n:"Extracción simple",u:60,p:1100,ds:"Incluye revisión a los 7 días"}],
+        {id:"con",n:"Consulta pediátrica",u:30,p:900,dep:false,ds:"Revisión completa, diagnóstico y receta"},
+        {id:"vac",n:"Vacunación",u:30,p:0,pv:"Según vacuna",dep:false,ds:"Aplicación y registro en cartilla"},
+        {id:"pas",n:"Carta para pasaporte",u:30,p:800,dep:false,ds:"Valoración y carta médica"},
+        {id:"jus",n:"Justificante médico",u:30,p:500,dep:false,ds:"Para escuela o guardería"}],
       pros:[
-        {id:"ms",n:"Dra. Mariana Solís",sn:"Dra. Solís",r:"Odontología general",i:"MS",days:[1,2,3,4,5,6],sv:["val","lim","res","ext"]},
-        {id:"av",n:"Dr. Andrés Villalobos",sn:"Dr. Villalobos",r:"Ortodoncia",i:"AV",days:[1,2,4,6],sv:["val","ort"]},
-        {id:"ph",n:"Dra. Paula Herrera",sn:"Dra. Herrera",r:"Estética dental",i:"PH",days:[1,3,4,5],sv:["val","lim","bla","res"]}],
-      pol:"La valoración inicial no requiere anticipo.",
-      tip:function(a,s){return s.id==="ext"?"Come algo ligero antes de tu cita y llega 10 minutos antes.":"Llega 10 minutos antes. Si tienes radiografías o estudios recientes, tráelos."}},
-    salon:{k:"salon",n:"Estudio Nara",m:"EN",g:"Salón",fp:"EN",n0:5120,c:["#D9A58F"],
-      place:"salón",Cli:"Cliente",pro:"estilista",ic:null,sub:"Color · Corte · Uñas",
-      hr:{img:"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1400&q=70",alt:"Interior de salón con sillas negras frente a espejos redondos",kick:"Color · Corte · Uñas",t:"Tu tiempo, reservado.",s:"Elige servicio, estilista y horario. Cuando llegues, todo estará listo para ti.",facts:["Mar a sáb · 10:00 a 20:00","Dom · 10:00 a 16:00","Lunes cerrado"]},
-      ask:"¿Qué servicio quieres?",hero:"Reserva tu servicio en minutos y elige con quién.",
-      h:wk([2,3,4,5,6],[hm(10,20)],{0:[hm(10,16)]}),
-      svcs:[
-        {id:"cd",n:"Corte de dama",u:60,p:450,ds:"Incluye lavado y secado"},
-        {id:"cc",n:"Corte de caballero",u:30,p:260,ds:"Máquina y tijera, con lavado"},
-        {id:"tin",n:"Tinte completo",u:120,p:1400,ds:"Color de raíz a puntas"},
-        {id:"bal",n:"Balayage",u:180,p:2900,ds:"Incluye matizante y peinado"},
-        {id:"man",n:"Manicure en gel",u:60,p:380,ds:"Limado, cutícula y esmalte en gel"},
-        {id:"pei",n:"Peinado para evento",u:60,p:650,ds:"Ondas, recogido o alaciado"}],
-      pros:[
-        {id:"no",n:"Nara Ortiz",sn:"Nara",r:"Colorista",i:"NO",days:[2,3,4,5,6,0],sv:["cd","tin","bal","pei"]},
-        {id:"dr",n:"Daniel Rangel",sn:"Daniel",r:"Estilista",i:"DR",days:[2,3,4,5,6],sv:["cd","cc","pei"]},
-        {id:"fl",n:"Fernanda Luna",sn:"Fernanda",r:"Uñas",i:"FL",days:[2,4,5,6,0],sv:["man"]}],
-      pol:"Tolerancia de 15 minutos; después, la cita se reagenda.",
-      tip:function(a,s){return s.id==="tin"||s.id==="bal"?"Llega con el cabello sin lavar del día; así el color se fija mejor.":"Te esperamos 5 minutos antes para empezar a tiempo."}},
-    vet:{k:"vet",n:"Veterinaria Huellas del Bosque",m:"HB",g:"Veterinaria",fp:"HB",n0:3307,c:["#F3C969"],
-      place:"clínica",Cli:"Cliente",pro:"médico",pet:true,ic:"paw",sub:"Clínica veterinaria y estética",
-      hr:{img:"https://images.unsplash.com/photo-1630438994394-3deff7a591bf?auto=format&fit=crop&w=1400&q=70",alt:"Perro en consulta veterinaria",kick:"Medicina, cirugía y estética",t:"Consultas, vacunas y baños para tu mejor amigo.",s:"Agenda en minutos y te mandamos un recordatorio un día antes.",facts:["Abrimos los 7 días","Urgencias sin cita","Estética canina"]},
-      ask:"¿Qué necesita tu mascota?",hero:"Agenda la consulta, vacuna o estética de tu mascota.",
-      h:wk([1,2,3,4,5],[hm(9,14),hm(16,20)],{6:[hm(9,15)],0:[hm(10,14)]}),
-      svcs:[
-        {id:"con",n:"Consulta general",u:30,p:450,ds:"Revisión completa y receta"},
-        {id:"vac",n:"Vacunación",u:30,p:380,ds:"Incluye registro en cartilla"},
-        {id:"des",n:"Desparasitación",u:30,p:250,ds:"Interna, según el peso"},
-        {id:"ban",n:"Baño y corte",u:90,p:420,ds:"Perro chico; incluye corte de uñas"},
-        {id:"ult",n:"Ultrasonido",u:60,p:850,ds:"Abdominal, con reporte"},
-        {id:"ldv",n:"Limpieza dental",u:120,p:1900,ds:"Con sedación y revisión previa"}],
-      pros:[
-        {id:"lp",n:"MVZ Lucía Paredes",sn:"Dra. Paredes",r:"Medicina general",i:"LP",days:[1,2,3,4,5,6],sv:["con","vac","des","ult"]},
-        {id:"ti",n:"MVZ Tomás Iturbe",sn:"Dr. Iturbe",r:"Cirugía y odontología",i:"TI",days:[1,2,3,4,5,0],sv:["con","ldv","ult"]},
-        {id:"km",n:"Karla Mena",sn:"Karla",r:"Estética canina",i:"KM",days:[2,3,4,5,6,0],sv:["ban"]}],
-      pol:"Las urgencias se atienden sin cita y sin anticipo.",
-      tip:function(a,s){var p=a.pet||"tu mascota";return s.id==="ldv"?p+" debe llegar con 8 horas de ayuno. Trae su cartilla.":s.id==="ult"?p+" debe llegar con 4 horas de ayuno.":s.id==="ban"?"Lo puedes recoger 90 minutos después de dejarlo.":"Trae la cartilla de "+p+"."}}
+        {id:"gm",n:"Dr. Gilberto Marines",sn:"Dr. Marines",r:"Pediatría",i:"GM",days:[1,2,3,4,5,6],sv:["con","vac","pas","jus"]}],
+      pol:"Si tu hijo presenta una urgencia, escribe directamente al consultorio.",
+      tip:function(a,s){return s.id==="vac"?"Trae la cartilla de vacunación de tu hijo.":s.id==="pas"?"Trae la cartilla de vacunación y una identificación del menor.":"Llega 10 minutos antes y trae la cartilla de vacunación."}}
   };
-  var ORDER=["dental","salon","vet"];
-  var NAMES=["Lucía Fernández","Roberto Aguilar","Daniela Cortés","Héctor Villarreal","Sofía Medina","Jorge Castañeda","Valeria Ríos","Andrés Montoya","Camila Navarro","Luis Ochoa","Mariana Treviño","Diego Salazar","Paola Garza","Eduardo Lara","Regina Páez","Arturo Domínguez","Fernanda Quiroga","Iván Estrada","Natalia Cruz","Ernesto Valdez","Ximena Robles","Gabriel Meza","Alejandra Pineda","Óscar Benítez","Renata Solano","Mauricio Galván","Andrea Zamora","Pablo Huerta","Carolina Vega","Ricardo Fuentes","Itzel Morales","Sergio Cantú","Mónica Ledesma","Tomás Arriaga","Verónica Ibarra","Emilio Rentería"];
+  var ORDER=["ped"];
+  var NAMES=["Santiago Treviño","Valentina Garza","Mateo Cantú","Regina Salazar","Emiliano Villarreal","Ximena Elizondo","Leonardo Guerra","Sofía Leal","Diego Rodríguez","Camila Martínez","Sebastián Flores","Renata González","Iker Hernández","Victoria Sánchez","Thiago Ramírez","Isabella Cavazos","Matías Peña","Romina Benavides","Gael Morales","Natalia Ruiz","Emilio Garza","Paula Medina","Daniel Treviño","Fernanda Saldaña","Andrés Lozano","Ana Paula Cortés","Rodrigo Montemayor","Mía Zambrano","Bruno Tamez","Luciana Villegas","Maximiliano Ríos","Elena Chapa","Tomás de la Garza","Julieta Ochoa"];
   var PETS=[["Rocky","Perro"],["Luna","Gato"],["Max","Perro"],["Canela","Perro"],["Toby","Perro"],["Kiara","Gato"],["Bruno","Perro"],["Nala","Gato"],["Simón","Perro"],["Frida","Perro"],["Coco","Perro"],["Milo","Gato"],["Pelusa","Gato"],["Chester","Perro"],["Lola","Perro"],["Oreo","Gato"],["Thor","Perro"],["Mía","Gato"],["Bombón","Perro"],["Duque","Perro"],["Michi","Gato"],["Zeus","Perro"],["Princesa","Perro"],["Tom","Gato"]];
 
   /* ---------- fechas y formato ---------- */
@@ -630,6 +607,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
   function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
   function rel(d){var o=diff(TODAY,d);return o===0?"hoy, "+fD(d):o===1?"mañana, "+fD(d):fD(d)}
   function money(v){return "$"+v.toLocaleString("es-MX")}
+  function price(s){return s.pv||money(s.p)}
   function depOf(s){return s.dep===false?0:Math.max(100,Math.round(s.p*.3/50)*50)}
   function first(n){return n.split(" ")[0]}
   function mask(t){return t?"•• •••• "+String(t).slice(-4):"Sin teléfono"}
@@ -652,12 +630,12 @@ html[data-g="vet"] .kpi b{font-size:26px}
     L.forEach(function(a,i){a.f=b.fp+"-"+(b.n0+i)});
     return {l:L,n:b.n0+L.length}}
   function pickName(R,used){var i=Math.floor(R()*NAMES.length);for(var j=0;j<NAMES.length&&used[NAMES[i]];j++)i=(i+1)%NAMES.length;used[NAMES[i]]=1;return NAMES[i]}
-  function fresh(){var x={v:1,base:TODAY,g:"dental",a:{},n:{}};ORDER.forEach(function(k){var r=seedBiz(k);x.a[k]=r.l;x.n[k]=r.n});return x}
+  function fresh(){var x={v:1,base:TODAY,g:"ped",a:{},n:{}};ORDER.forEach(function(k){var r=seedBiz(k);x.a[k]=r.l;x.n[k]=r.n});return x}
   var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
   if(!S||S.v!==1||!S.a||!S.base||Math.abs(diff(S.base,TODAY))>=5)S=fresh();
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
   var qs={};location.search.slice(1).split("&").forEach(function(x){var p=x.split("=");if(p[0])qs[p[0]]=decodeURIComponent(p[1]||"")});
-  if(Object.prototype.hasOwnProperty.call(B,qs.giro))S.g=qs.giro;
+  if(Object.prototype.hasOwnProperty.call(B,qs.giro))S.g=qs.giro;if(!B[S.g])S.g="ped";
 
   function biz(){return B[S.g]}
   function A(){return S.a[S.g]}
@@ -697,6 +675,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
     cal:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="12" height="11" rx="1.6"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>',
     tooth:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 3C4.8 3 3 4.8 3 7.3c0 2 .7 3.4 1.4 4.7.6 1.2.9 2.6 1.1 4l.5 3.5c.2 1.4 2.2 1.5 2.5.1l.9-3.7c.2-.8.9-1.4 1.6-1.4s1.4.6 1.6 1.4l.9 3.7c.3 1.4 2.3 1.3 2.5-.1l.5-3.5c.2-1.4.5-2.8 1.1-4 .7-1.3 1.4-2.7 1.4-4.7C21 4.8 19.2 3 17 3c-1.6 0-2.6.8-5 .8S8.6 3 7 3z"/></svg>',
     paw:'<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16.2" rx="4.6" ry="3.9"/><circle cx="5.6" cy="10.6" r="2.1"/><circle cx="9.4" cy="6.4" r="2.1"/><circle cx="14.6" cy="6.4" r="2.1"/><circle cx="18.4" cy="10.6" r="2.1"/></svg>',
+    steth:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v5a4 4 0 0 0 8 0V3"/><path d="M9 12v2a5 5 0 0 0 10 0v-1.5"/><circle cx="19" cy="10.5" r="2"/></svg>',
     bell:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 11.5V7.3a4 4 0 0 1 8 0v4.2l1.2 1.3H2.8z"/><path d="M6.6 14.2a1.5 1.5 0 0 0 2.8 0"/></svg>'
   };
   var tt;function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},3800)}
@@ -712,7 +691,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
   function canNext(){return bk.step===1?!!bk.s:bk.step===2?!!bk.p:bk.step===3?!!(bk.d&&bk.t!=null):bk.step===5?String(bk.vin||"").length===6:true}
   function go(n){bk.step=n;rBook();var m=document.querySelector(".bkm");if(m&&m.getBoundingClientRect().top<0)m.scrollIntoView({behavior:"smooth",block:"start"})}
   function rBook(){var b=biz(),v=document.getElementById("vR");v.textContent="";
-    var main=h("div.card.bkm"),hd=h("div.bkh",bk.step>1?[h("h2",bk.step===6?"Tu cita en "+b.n:"Reserva tu cita en "+b.n),h("p",b.hero)]:null);
+    var main=h("div.card.bkm"),hd=h("div.bkh",bk.step>1?[h("h2",bk.step===6?"Tu cita con el "+b.n:"Reserva tu cita con el "+b.n),h("p",b.hero)]:null);
     var ol=h("ol.steps");STEPS.forEach(function(s,i){ol.appendChild(h("li"+(bk.step===i+1?".on":bk.step>i+1?".done":""),h("i",(i+1)+"."),h("span"," "+s)))});if(bk.step<6)hd.appendChild(ol);main.appendChild(hd);
     var body=h("div.bkb");main.appendChild(body);
     [null,step1,step2,step3,step4,stepVerify,stepDone][bk.step](body);
@@ -730,7 +709,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
   function step1(body){var b=biz();body.appendChild(h("h3",b.ask));var g=h("div.opts");
     b.svcs.forEach(function(s){g.appendChild(h("button.opt",{type:"button","aria-pressed":String(bk.s===s.id),onclick:function(){
       if(bk.s!==s.id){bk.s=s.id;if(bk.p&&bk.p!=="any"&&!offers(pro(bk.p),s.id))bk.p=null;bk.d=null;bk.t=null;bk.ap=null}go(2)}},
-      h("b",s.n),h("span.s",s.ds),h("span.r",h("strong",money(s.p)),s.u+" min",s.dep===false?h("span.tag","Sin anticipo"):null)))});
+      h("b",s.n),h("span.s",s.ds),h("span.r",h("strong",price(s)),s.u+" min")))});
     body.appendChild(g)}
 
   function step2(body){var b=biz(),s=svc(bk.s);body.appendChild(h("h3","¿Con quién quieres tu cita?"));var g=h("div.opts");
@@ -763,7 +742,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
     var g=h("div.fg");
     function inp(key,label,attrs,full){var a={value:fm[key]||"",oninput:function(){fm[key]=this.value;this.classList.remove("err")},id:"fm-"+key};for(var k in attrs)a[k]=attrs[k];
       var i=h("input",a);g.appendChild(h("label.f"+(full?".full":""),label,i))}
-    inp("n","Nombre completo",{autocomplete:"name",placeholder:"Como aparece en tu identificación"},!b.pet);
+    inp("n","Nombre del paciente",{autocomplete:"name",placeholder:"Nombre completo del niño o niña"},!b.pet);
     if(b.pet){inp("pet","Nombre de tu mascota",{placeholder:"Ej. Rocky"});
       var se=h("select",{id:"fm-sp",onchange:function(){fm.sp=this.value}});["Perro","Gato","Otro"].forEach(function(x){var o=h("option",x);if(fm.sp===x)o.selected=true;se.appendChild(o)});g.appendChild(h("label.f","Especie",se))}
     inp("tel","Celular (WhatsApp)",{type:"tel",inputmode:"numeric",autocomplete:"tel",placeholder:"Te llegará un código",maxlength:"14"});
@@ -773,8 +752,8 @@ html[data-g="vet"] .kpi b{font-size:26px}
     var rc=h("div.blk",h("div.cap","Recordatorio un día antes por"));var pl=h("div.pills");
     [["wa","WhatsApp","chat"],["mail","Correo","mail"]].forEach(function(x){pl.appendChild(h("button.pill",{type:"button","aria-pressed":String(fm.ch===x[0]),onclick:function(){fm.ch=x[0];rBook()}},svg(x[2]),x[1]))});
     rc.appendChild(pl);body.appendChild(rc);
-    var an=h("div.blk",h("div.cap","Anticipo para apartar tu horario"));
-    if(!dep){an.appendChild(h("div.hint",{style:"margin-top:0"},svg("check"),h("span",s.n+" no requiere anticipo. Tu cita queda confirmada en cuanto la reserves.")))}
+    var an=h("div.blk",h("div.cap","Confirmación"));
+    if(!dep){an.appendChild(h("div.hint",{style:"margin-top:0"},svg("check"),h("span","Tu cita queda confirmada en cuanto verifiques tu celular con el código que te llega por WhatsApp.")))}
     else{
       [["now","Pagar anticipo ahora","Tarjeta o transferencia. Tu cita queda confirmada al momento."],["later","Pagar después","Te enviamos los datos para transferir. Envíalo a más tardar 24 horas antes de tu cita; si no llega, el horario se libera."]].forEach(function(x){
         var r=h("input",{type:"radio",name:"pay",value:x[0],onchange:function(){fm.pay=x[0];rBook()}});r.checked=fm.pay===x[0];
@@ -828,7 +807,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
     w.appendChild(h("h3",a.st==="pend"?"Tu horario quedó apartado":"Tu cita está confirmada"));
     w.appendChild(h("p",a.st==="pend"?"Envía tu anticipo de "+money(dep)+" a más tardar 24 horas antes para conservarlo. Te mandamos los datos por "+(a.ch==="wa"?"WhatsApp":"correo")+".":"Te enviaremos un recordatorio por "+(a.ch==="wa"?"WhatsApp":"correo")+" un día antes de tu cita."));
     var tk=h("div.ticket",h("div.th",h("span","Folio"),h("b.num",a.f)));
-    tk.appendChild(kv([[b.Cli,a.c],b.pet?["Mascota",a.pet+" ("+a.sp.toLowerCase()+")"]:null,["Servicio",s.n],["Con",p.n],["Día",cap(rel(a.d))],["Hora",fT(a.t)+" a "+fT(a.t+a.u)],dep?["Anticipo",money(dep)+(a.st==="pend"?" · pendiente":" · recibido")]:["Anticipo","No aplica"]]));
+    tk.appendChild(kv([[b.Cli,a.c],b.pet?["Mascota",a.pet+" ("+a.sp.toLowerCase()+")"]:null,["Servicio",s.n],["Con",p.n],["Día",cap(rel(a.d))],["Hora",fT(a.t)+" a "+fT(a.t+a.u)]]));
     w.appendChild(tk);
     w.appendChild(h("div.row",
       h("button.btn.pri",{type:"button",onclick:function(){rm.sel=a.f;rm.ch=a.ch;show("M")}},svg("bell"),"Ver el recordatorio"),
@@ -840,14 +819,13 @@ html[data-g="vet"] .kpi b{font-size:26px}
     if(bk.step===6){var a=byF(bk.done);if(a){s=svc(a.s);p=pro(a.p);dep=depOf(s)}}
     var box=h("aside.card.sum",h("div.cap","Resumen"));
     var d=bk.step===6?byF(bk.done):bk;
-    box.appendChild(kv([["Servicio",s?s.n:null],["Duración",s?s.u+" min":null],["Con",p?p.n:bk.p==="any"?"Primer disponible":null],["Día",d&&d.d?cap(rel(d.d)):null],["Hora",d&&d.t!=null?fT(d.t):null],["Precio",s?money(s.p):null,"tot"],["Anticipo",s?(dep?money(dep):"No aplica"):null]]));
-    var pol=h("div.pol",h("div.cap","Política de anticipo y cancelación")),ul=h("ul");
-    ["Para apartar tu horario pedimos un anticipo del 30 % del servicio (mínimo $100). Se descuenta del total el día de tu cita.",
-     "Si eliges pagar después, envíalo a más tardar 24 horas antes; si no llega, el horario se libera para alguien más.",
-     "Si cancelas con 24 horas o más de anticipación, te devolvemos el anticipo completo.",
-     "Con menos de 24 horas o si no llegas, el anticipo no es reembolsable.",b.pol].forEach(function(t){ul.appendChild(h("li",svg("shield"),h("span",t)))});
+    box.appendChild(kv([["Servicio",s?s.n:null],["Duración",s?s.u+" min":null],["Con",p?p.n:bk.p==="any"?"Primer disponible":null],["Día",d&&d.d?cap(rel(d.d)):null],["Hora",d&&d.t!=null?fT(d.t):null],["Precio",s?price(s):null,"tot"]]));
+    var pol=h("div.pol",h("div.cap","Antes de tu cita")),ul=h("ul");
+    ["Tu cita se confirma con un código que te llega por WhatsApp, así nadie más puede apartar a tu nombre.",
+     "Un día antes te mandamos un recordatorio con la hora y lo que debes traer.",
+     "Si no puedes asistir, responde al recordatorio y tu horario se libera para otro paciente.",b.pol].forEach(function(t){ul.appendChild(h("li",svg("shield"),h("span",t)))});
     pol.appendChild(ul);box.appendChild(pol);
-    box.appendChild(h("div.sim",svg("info"),"Demo: no se realiza ningún pago"));
+    box.appendChild(h("div.sim",svg("info"),"Demo con pacientes de ejemplo"));
     return box}
 
   /* ================= AGENDA ================= */
@@ -870,7 +848,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
     var k=h("div.kpis");
     [[ag.v==="day"?"Citas del día":"Citas de la semana",String(act.length),conf+" confirmadas"],
      ["Ocupación",(openM?Math.round(bookM/openM*100):0)+" %",openM?Math.max(0,Math.floor((openM-bookM)/30))+" espacios libres":"cerrado"],
-     ["Anticipos por recibir",money(pendT),pend.length+(pend.length===1?" cita":" citas")],
+     ["Ingreso estimado",money(act.reduce(function(x,a){return x+svc(a.s).p},0)),"según servicios agendados"],
      ["Reservadas en línea",(act.length?Math.round(web/act.length*100):0)+" %","sin llamadas"]].forEach(function(x){k.appendChild(h("div.card.kpi",h("small",x[0]),h("b.num",x[1]),h("span",x[2])))});
     v.appendChild(k);
     /* barra */
@@ -883,7 +861,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
     tb.appendChild(h("div.dl",lab));
     var sg=h("div.seg",{role:"group","aria-label":"Vista"});[["day","Día"],["week","Semana"]].forEach(function(x){sg.appendChild(h("button",{type:"button","aria-pressed":String(ag.v===x[0]),onclick:function(){ag.v=x[0];rAgenda()}},x[1]))});tb.appendChild(sg);
     var fl=h("div.fils");[{id:"all",sn:"Todos"}].concat(b.pros).forEach(function(p){fl.appendChild(h("button.fil",{type:"button","aria-pressed":String(ag.p===p.id),onclick:function(){ag.p=p.id;rAgenda()}},p.sn))});tb.appendChild(fl);
-    tb.appendChild(h("div.lg",h("span",h("i",{style:"background:var(--brand)"}),"Confirmada"),h("span",h("i",{style:"background:var(--warn)"}),"Anticipo pendiente"),h("span",h("i",{style:"background:#B8C0CC"}),"Cancelada")));
+    tb.appendChild(h("div.lg",h("span",h("i",{style:"background:var(--brand)"}),"Confirmada"),h("span",h("i",{style:"background:#B8C0CC"}),"Cancelada")));
     card.appendChild(tb);
     if(innerWidth<=760)card.appendChild(agList(days,ps));else card.appendChild(agGrid(days,ps));
     var wrap=h("div.agw",card,detail());v.appendChild(wrap);
@@ -901,7 +879,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
         if(c.ps.length>1){var ln=h("span.ln");c.ps.forEach(function(p){ln.appendChild(h("span",p.i))});cell.firstChild.appendChild(ln)}head.appendChild(cell)}});
     box.appendChild(head);
     var body=h("div.cb",{style:"grid-template-columns:"+tpl}),gut=h("div.gut",{style:"height:"+H+"px"});
-    for(var t=s;t<=e;t+=60){if(t===s)continue;if(t<e)gut.appendChild(h("span",{style:"top:"+((t-s)/30*SL)+"px"},fH(t)))}
+    for(var t=Math.ceil(s/60)*60;t<=e;t+=60){if(t===s)continue;if(t<e)gut.appendChild(h("span",{style:"top:"+((t-s)/30*SL)+"px"},fH(t)))}
     body.appendChild(gut);
     cols.forEach(function(c){var col=h("div.col"+(c.d===TODAY?".is":""),{style:"height:"+H+"px;background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% "+(SL*2)+"px;background-position:0 "+(((60-(s%60))%60)/30*SL)+"px"}),n=c.ps.length,compact=ag.v==="week";
       c.ps.forEach(function(p,li){var L="calc("+(li*100/n)+"% + "+(n>1?2:4)+"px)",W="calc("+(100/n)+"% - "+(n>1?4:8)+"px)",hrs=hoursOf(b,p,c.d);
@@ -927,11 +905,11 @@ html[data-g="vet"] .kpi b{font-size:26px}
     return box}
 
   function detail(){var b=biz(),a=ag.sel&&byF(ag.sel),box=h("aside.card.det"+(a?".open":".idle"));
-    if(!a){box.appendChild(h("div.ph",svg("cal"),"Selecciona una cita para ver el detalle, registrar el anticipo o cancelarla."));return box}
+    if(!a){box.appendChild(h("div.ph",svg("cal"),"Selecciona una cita para ver el detalle, confirmarla o cancelarla."));return box}
     var s=svc(a.s),p=pro(a.p),dep=depOf(s);
     box.appendChild(h("div.top",h("div",h("div.fo",a.f),h("h2",a.c),b.pet?h("div.pt",a.pet+" · "+a.sp):null),h("div",{style:"display:flex;gap:8px;align-items:center"},chip(a),h("button.x",{type:"button","aria-label":"Cerrar",onclick:function(){ag.sel=null;rAgenda()}},svg("x")))));
     var rem=a.st==="canc"?"No se envía":a.rc==="ok"?"Confirmó asistencia":a.rc==="cambio"?"Pidió cambiar su cita":diff(TODAY,a.d)>=1?"Programado · "+(a.ch==="wa"?"WhatsApp":"correo"):diff(TODAY,a.d)<0?"Enviado":"Enviado ayer";
-    box.appendChild(kv([["Servicio",s.n],["Con",p.n],["Día",cap(rel(a.d))],["Hora",fT(a.t)+" a "+fT(a.t+a.u)],["Precio",money(s.p)],["Anticipo",dep?money(dep)+(a.dep?" · recibido":" · pendiente"):"No aplica"],["Origen",a.src==="web"?"Reservó en línea":"Por teléfono"],["Celular",mask(a.tel)+(a.src==="web"?" · verificado":"")],["Recordatorio",rem]].concat(a.nt?[["Notas",a.nt]]:[])));
+    box.appendChild(kv([["Servicio",s.n],["Con",p.n],["Día",cap(rel(a.d))],["Hora",fT(a.t)+" a "+fT(a.t+a.u)],["Precio",price(s)],["Origen",a.src==="web"?"Reservó en línea":"Por teléfono"],["Celular",mask(a.tel)+(a.src==="web"?" · verificado":"")],["Recordatorio",rem]].concat(a.nt?[["Notas",a.nt]]:[])));
     var ac=h("div.acts");
     if(a.st==="pend"){ac.appendChild(h("p",null,"El "+b.Cli.toLowerCase()+" eligió pagar después. Registra el anticipo cuando llegue la transferencia."));
       ac.appendChild(h("button.btn.ok",{type:"button",onclick:function(){a.st="conf";a.dep=true;save();toast("Anticipo registrado. "+first(a.c)+" recibe la confirmación por "+(a.ch==="wa"?"WhatsApp":"correo")+".");rAgenda()}},svg("check"),"Registrar anticipo recibido"))}
@@ -967,12 +945,12 @@ html[data-g="vet"] .kpi b{font-size:26px}
   function b0(){return biz()}
   function msgLines(a){var b=biz(),s=svc(a.s),p=pro(a.p),dep=depOf(s),tip=b.tip(a,s);
     var depL=!dep?null:a.dep?"Anticipo recibido: "+money(dep)+". Se descuenta del total.":"Tu anticipo de "+money(dep)+" sigue pendiente. Envíalo hoy para conservar tu horario.";
-    return {hi:"Hola, "+first(a.c)+". Te recordamos tu cita en "+b.n+":",what:s.n+(b.pet&&a.pet?" para "+a.pet:""),when:cap(rel(a.d).split(",")[0])+", "+fD(a.d)+", a las "+fT(a.t),with:"Con "+p.n,dep:depL,tip:tip}}
+    return {hi:"Hola. Te recordamos la cita de "+first(a.c)+" con el "+b.n+":",what:s.n+(b.pet&&a.pet?" para "+a.pet:""),when:cap(rel(a.d).split(",")[0])+", "+fD(a.d)+", a las "+fT(a.t),with:"Consultorio pediátrico",dep:depL,tip:tip}}
   function waView(a){var b=biz(),m=msgLines(a),ph=h("div.phone");
     ph.appendChild(h("div.wah",markEl("span.av"),h("div",h("b",b.n),h("small","Cuenta de empresa"))));
     var bd=h("div.wab"),sent=diff(TODAY,a.d)>=1?addD(a.d,-1):TODAY;
     bd.appendChild(h("div.dp",cap(rel(sent).split(",")[0])));
-    if(a.st==="canc"){bd.appendChild(h("div.bub",h("p","Hola, "+first(a.c)+". Tu cita del "+fD(a.d)+" a las "+fT(a.t)+" quedó cancelada."),h("p","Si quieres agendar otra fecha, responde a este mensaje."),h("time","10:00")));ph.appendChild(bd);return ph}
+    if(a.st==="canc"){bd.appendChild(h("div.bub",h("p","Hola. La cita de "+first(a.c)+" del "+fD(a.d)+" a las "+fT(a.t)+" quedó cancelada."),h("p","Si quieres agendar otra fecha, responde a este mensaje."),h("time","10:00")));ph.appendChild(bd);return ph}
     var bub=h("div.bub",h("p",m.hi),h("p",h("b",m.what),h("br"),m.when,h("br"),m.with));
     if(m.dep)bub.appendChild(h("p",m.dep));bub.appendChild(h("p",m.tip));bub.appendChild(h("p","¿Nos confirmas tu asistencia?"));bub.appendChild(h("time","10:00"));bd.appendChild(bub);
     var q=h("div.qr");[["ok","Confirmo asistencia"],["cambio","Necesito cambiar mi cita"]].forEach(function(x){q.appendChild(h("button",{type:"button",disabled:!!a.rc,onclick:function(){reply(a,x[0])}},x[1]))});bd.appendChild(q);
@@ -984,14 +962,14 @@ html[data-g="vet"] .kpi b{font-size:26px}
     box.appendChild(h("div.mh",h("span",h("b",b.n)," · Recordatorios"),h("span","Para: "+a.c),h("span",h("b",a.st==="canc"?"Tu cita fue cancelada":"Recordatorio: tu cita "+rel(a.d).split(",")[0]+" a las "+fT(a.t)))));
     box.appendChild(h("div.mtop",markEl("span.mark"),h("b",b.n)));
     var mb=h("div.mb");
-    if(a.st==="canc"){mb.appendChild(h("p","Hola, "+first(a.c)+". Tu cita del "+fD(a.d)+" a las "+fT(a.t)+" quedó cancelada. Si quieres agendar otra fecha, responde a este correo."));box.appendChild(mb);return box}
+    if(a.st==="canc"){mb.appendChild(h("p","Hola. La cita de "+first(a.c)+" del "+fD(a.d)+" a las "+fT(a.t)+" quedó cancelada. Si quieres agendar otra fecha, responde a este correo."));box.appendChild(mb);return box}
     mb.appendChild(h("p",m.hi));
     mb.appendChild(kv([["Servicio",m.what],["Día",cap(fD(a.d))],["Hora",fT(a.t)],["Con",pro(a.p).n],["Folio",a.f]]));
     if(m.dep)mb.appendChild(h("p",m.dep));mb.appendChild(h("p",m.tip));
     var row=h("div.mb.row",{style:"padding:0"});
     if(a.rc)mb.appendChild(h("div.hint",{style:"margin:0"},svg("check"),h("span",a.rc==="ok"?"Confirmaste tu asistencia. Gracias.":"Pediste cambiar tu cita. Te enviamos la liga para elegir otro horario.")));
     else{row.appendChild(h("button.btn.pri",{type:"button",onclick:function(){reply(a,"ok")}},"Confirmar asistencia"));row.appendChild(h("button.btn",{type:"button",onclick:function(){reply(a,"cambio")}},"Cambiar o cancelar"));mb.appendChild(row)}
-    mb.appendChild(h("p.ft","Enviado "+rel(sent).split(",")[0]+" a las 10:00 a. m. Cancelaciones con 24 horas o más de anticipación: reembolso completo del anticipo."));
+    mb.appendChild(h("p.ft","Enviado "+rel(sent).split(",")[0]+" a las 10:00 a. m. Si no puedes asistir, responde a este mensaje para cambiar tu cita."));
     box.appendChild(mb);return box}
 
   /* ================= navegación y giro ================= */
@@ -1014,45 +992,6 @@ html[data-g="vet"] .kpi b{font-size:26px}
 </script>
 <script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<!-- crusol: invitación a contacto (solo cuando el demo se abre fuera del portafolio) -->
-<div id="crcta" hidden role="complementary" aria-label="Contacto con crusol">
-  <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="#f6f5f0" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#a9c4b6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>
-  <p><b><em class="lg">¿Te gustaría uno así para tu empresa?</em><em class="sm">¿Quieres uno así?</em></b><span>Lo adapto a tus servicios, horarios y marca.</span></p>
-  <a class="go" id="crgo" href="#">Platiquemos</a>
-  <a class="mas" href="/#sistemas" target="_top">Más ejemplos</a>
-  <button type="button" id="crx" aria-label="Cerrar">&times;</button>
-</div>
-<style>
-#crcta{position:fixed;z-index:2147483000;right:16px;bottom:16px;max-width:680px;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 14px;background:#0b2a20;color:#f6f5f0;border:1px solid rgba(169,196,182,.25);border-radius:14px;box-shadow:0 18px 50px -12px rgba(0,0,0,.45);font:14px/1.3 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transform:translateY(140%);opacity:0;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s}
-#crcta.on{transform:none;opacity:1}
-#crcta[hidden]{display:none}
-#crcta svg{width:26px;height:26px;flex:none}
-#crcta p{margin:0;display:flex;flex-direction:column;gap:2px;min-width:0}
-#crcta p b{font-weight:600;white-space:nowrap}#crcta em{font-style:normal}#crcta .sm{display:none}
-#crcta p span{color:#b9cbc1;font-size:13px}
-#crcta a{text-decoration:none;white-space:nowrap}
-#crcta .go{background:#f6f5f0;color:#0b2a20;font-weight:600;padding:9px 14px;border-radius:9px}
-#crcta .go:hover{background:#a9c4b6}
-#crcta .mas{color:#a9c4b6;font:12px "Geist Mono",ui-monospace,monospace;text-decoration:underline;text-underline-offset:3px}
-#crcta button{background:transparent;border:0;color:#b9cbc1;font-size:20px;line-height:1;width:28px;height:28px;border-radius:7px;cursor:pointer;flex:none}
-#crcta button:hover{background:rgba(255,255,255,.08);color:#fff}
-#crcta a:focus-visible,#crcta button:focus-visible{outline:2px solid #a9c4b6;outline-offset:2px}
-@media (max-width:640px){#crcta{left:10px;right:10px;bottom:10px;bottom:max(10px,env(safe-area-inset-bottom));max-width:none;flex-wrap:wrap;gap:8px 10px}
-  #crcta p{flex:1 1 0}#crcta p span{display:none}#crcta .lg{display:none}#crcta .sm{display:inline}#crcta .mas{display:none}#crcta .go{padding:8px 12px}}
-@media (prefers-reduced-motion:reduce){#crcta{transition:none}}
-@media print{#crcta{display:none!important}}
-</style>
-<script>
-(function(){try{if(window.self!==window.top)return}catch(e){return}
-  var el=document.getElementById("crcta");if(!el)return;
-  try{if(sessionStorage.getItem("crusol_cta_x"))return}catch(e){}
-  var demo=document.body.getAttribute("data-demo")||document.title;
-  document.getElementById("crgo").href="mailto:angel@crusol.com.mx?subject="+encodeURIComponent("Me interesa: "+demo)+"&body="+encodeURIComponent("Hola Angel:\n\nVi el demo de "+demo+" y me gustaría algo así para mi empresa.\n\nEmpresa:\nGiro:\nQué me gustaría resolver:\n\nSaludos.");
-  function show(){if(el.dataset.s)return;el.dataset.s=1;el.hidden=false;if(innerWidth<=640)document.body.style.paddingBottom="76px";requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add("on")})})}
-  var t=setTimeout(show,9000);
-  ["click","keydown"].forEach(function(ev){document.addEventListener(ev,function f(e){if(el.contains(e.target))return;document.removeEventListener(ev,f,true);clearTimeout(t);t=setTimeout(show,4000)},true)});
-  document.getElementById("crx").addEventListener("click",function(){el.classList.remove("on");setTimeout(function(){el.hidden=true;document.body.style.paddingBottom=""},500);try{sessionStorage.setItem("crusol_cta_x","1")}catch(e){}});
-})();
-</script>
+
 </body>
 </html>

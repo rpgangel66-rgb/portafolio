@@ -4,25 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>crusol · Software a la medida y automatización</title>
-<meta name="description" content="crusol desarrolla sistemas a la medida, automatización de procesos y sitios web para empresas. Por Angel Cruz.">
-<meta name="theme-color" content="#FAFAF8">
+<link rel="canonical" href="https://crusol.com.mx/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="crusol">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://crusol.com.mx/">
 <meta property="og:title" content="crusol · Software a la medida y automatización">
 <meta property="og:description" content="Sistemas a la medida, automatización de procesos y sitios web para empresas. Prueba los demos en vivo.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://crusol.com.mx/">
-<meta property="og:image" content="https://crusol.com.mx/og.png">
+<meta property="og:image" content="https://crusol.com.mx/og/og-crusol.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="crusol · Software a la medida, automatización y sitios web para empresas">
-<meta property="og:locale" content="es_MX">
-<meta property="og:site_name" content="crusol">
+<meta property="og:image:alt" content="crusol · Software a la medida y automatización">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "crusol", "url": "https://crusol.com.mx/", "logo": "https://crusol.com.mx/apple-touch-icon.png", "image": "https://crusol.com.mx/og/og-crusol.jpg", "description": "Software a la medida, automatización de procesos y sitios web para empresas.", "email": "angel@crusol.com.mx", "founder": {"@type": "Person", "name": "Angel Cruz"}, "areaServed": {"@type": "Country", "name": "México"}, "knowsLanguage": "es-MX", "sameAs": ["https://www.facebook.com/people/Crusol-P%C3%A1ginas-Web/61594746690802/"]}</script>
+
+<meta name="description" content="crusol desarrolla sistemas a la medida, automatización de procesos y sitios web para empresas. Por Angel Cruz.">
+<meta name="theme-color" content="#FAFAF8">
 <meta name="author" content="Angel Cruz">
-<link rel="canonical" href="https://crusol.com.mx/">
 <link rel="manifest" href="site.webmanifest">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"crusol","url":"https://crusol.com.mx/","logo":"https://crusol.com.mx/favicon-64.png","image":"https://crusol.com.mx/og.png","description":"Sistemas a la medida, automatización de procesos y sitios web para empresas.","areaServed":{"@type":"Country","name":"México"},"founder":{"@type":"Person","name":"Angel Cruz"},"knowsAbout":["Software a la medida","Automatización de procesos","Sitios web corporativos","Tableros de indicadores","Agenda de citas en línea"]}
-</script>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
@@ -556,8 +555,8 @@ html.lding{overflow:hidden}
 body.mopen .totop{opacity:0;pointer-events:none}
 
 /* aviso flotante */
-.toast{position:fixed;left:50%;bottom:24px;z-index:90;transform:translate(-50%,160%);background:var(--ink);color:var(--bg);padding:10px 18px 10px 11px;border-radius:999px;font-size:14px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px -12px rgba(0,0,0,.35);transition:transform .6s var(--out);pointer-events:none}
-.toast.show{transform:translate(-50%,0)}
+.toast{visibility:hidden;position:fixed;left:50%;bottom:24px;z-index:90;transform:translate(-50%,160%);background:var(--ink);color:var(--bg);padding:10px 18px 10px 11px;border-radius:999px;font-size:14px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px -12px rgba(0,0,0,.35);transition:transform .6s var(--out),visibility 0s .6s;pointer-events:none}
+.toast.show{visibility:visible;transform:translate(-50%,0);transition:transform .6s var(--out)}
 .toast i{width:22px;height:22px;border-radius:50%;background:var(--sage);display:grid;place-items:center;flex:none}
 .toast i::after{content:"";width:8px;height:4px;border-left:1.7px solid var(--green-2);border-bottom:1.7px solid var(--green-2);transform:rotate(-45deg) translate(1px,-1px)}
 
@@ -710,8 +709,8 @@ body.mopen .totop{opacity:0;pointer-events:none}
   <section class="wrap hero" id="hero">
     <div>
       <span class="avail"><span class="dot"></span><span id="availt">Disponible para nuevos proyectos</span></span>
-      <h1 class="split" id="h1">Software a la medida, <span class="g">automatización y</span> sitios web <span class="g">para empresas en</span> <span class="u">crecimiento.<svg class="scr" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 13C60 6 118 5 176 8S262 14 296 6"/></svg></span></h1>
-      <p class="sub fi d1">Desarrollo herramientas que ordenan la operación de tu empresa: cotizaciones, citas, inventario, reportes y los procesos que hoy dependen de hojas de cálculo.</p>
+      <h1 class="split" id="h1">Software a la medida <span class="g">para empresas en</span> <span class="u">crecimiento.<svg class="scr" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 13C60 6 118 5 176 8S262 14 296 6"/></svg></span></h1>
+      <p class="sub fi d1">Sistemas, automatizaciones y sitios web que ordenan la operación de tu empresa: cotizaciones, citas, inventario, reportes y todo lo que hoy depende de hojas de cálculo.</p>
       <div class="btns fi d2">
         <a class="btn mag" id="mail-top" data-goatcounter-click="portafolio-correo" href="#"><span class="lb"><span class="rl"><span data-t="Solicitar propuesta">Solicitar propuesta</span></span></span><span class="ic"><i><svg class="mk" viewBox="0 0 100 100" aria-hidden="true"><path class="a" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path class="b" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></i></span></a>
         <a class="btn ghost mag" href="#sistemas"><span class="lb"><span class="rl"><span data-t="Probar los demos">Probar los demos</span></span></span></a>
@@ -856,11 +855,11 @@ body.mopen .totop{opacity:0;pointer-events:none}
     <div class="dev">
       <a class="bw tilt rv" href="sitios/arce/" data-cur="Ver sitio" aria-label="Abrir demo del sitio corporativo">
         <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg>suministrosarce.mx</span><span class="fict">Empresa ficticia</span></div>
-        <span class="vp" data-w="1280" data-h="800"><iframe src="sitios/arce/?v=1007" title="Demo de sitio corporativo" loading="lazy" tabindex="-1" class="on"></iframe></span>
+        <span class="vp" data-w="1280" data-h="800"><iframe src="sitios/arce/?v=1008" title="Demo de sitio corporativo" loading="lazy" tabindex="-1" class="on"></iframe></span>
       </a>
       <a class="phone rv d2" id="phone" href="sitios/arce/" data-cur="Ver sitio" aria-label="Abrir demo del sitio en celular" tabindex="-1">
         <span class="nt"></span>
-        <span class="vp" data-w="390" data-h="844"><iframe src="sitios/arce/?v=1007" title="Demo de sitio corporativo en celular" loading="lazy" tabindex="-1" class="on"></iframe></span>
+        <span class="vp" data-w="390" data-h="844"><iframe src="sitios/arce/?v=1008" title="Demo de sitio corporativo en celular" loading="lazy" tabindex="-1" class="on"></iframe></span>
       </a>
     </div>
     <ul class="cols">
@@ -970,7 +969,7 @@ body.mopen .totop{opacity:0;pointer-events:none}
 (function(){
   var still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine=window.matchMedia&&window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-  var V="1007";
+  var V="1008";
   function $(id){return document.getElementById(id)}
   function clamp(v,a,b){return v<a?a:v>b?b:v}
 
@@ -1105,6 +1104,11 @@ body.mopen .totop{opacity:0;pointer-events:none}
     if(!first&&!still){info.classList.remove("sw-in");void info.offsetWidth;info.classList.add("sw-in")}
     if(auto){sysb.classList.remove("auto");void sysb.offsetWidth;sysb.classList.add("auto")}}
   pick(0);
+  /* ligas directas: crusol.com.mx/#agenda abre esa pestaña */
+  function fromHash(go){var h=(location.hash||"").slice(1).toLowerCase(),k=-1;SYS.forEach(function(S,i){if(S.url===h)k=i});if(k<0)return;
+    auto=false;sysb.classList.remove("auto");clearInterval(ptimer);pick(k);
+    if(go){var el=$("sistemas");setTimeout(function(){scrollTo({top:el.getBoundingClientRect().top+scrollY-70,behavior:"auto"})},60)}}
+  fromHash(true);addEventListener("hashchange",function(){fromHash(true)});
   $("sysrl").addEventListener("click",function(){var b=this,fr=svp.querySelector("iframe.on");b.classList.remove("go");void b.offsetWidth;b.classList.add("go");if(!fr)return;fr.dataset.ok="";svp.classList.remove("ok");try{fr.contentWindow.location.reload()}catch(e){fr.src=fr.src}});
   if(auto&&"IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){clearInterval(ptimer);if(e.isIntersecting&&auto){sysb.classList.remove("auto");void sysb.offsetWidth;sysb.classList.add("auto");ptimer=setInterval(function(){pick((cur+1)%SYS.length)},8000)}else sysb.classList.remove("auto")})},{threshold:.4}).observe(sysb)}
 
