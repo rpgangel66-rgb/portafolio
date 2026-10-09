@@ -230,6 +230,13 @@ td.num{font-family:var(--type);font-size:13.5px}
 </style>
 </head>
 <body data-demo="Requisiciones de compra">
+<!-- crusol: la cortina verde termina de subir al llegar desde el portafolio -->
+<div id="crin" aria-hidden="true" style="position:fixed;inset:0;z-index:2147483600;background:#0b2a20;display:grid;place-items:center;transition:transform .75s cubic-bezier(.7,0,.2,1);will-change:transform"><svg viewBox="0 0 100 100" style="width:56px;height:56px;animation:crin-g 1.6s cubic-bezier(.7,0,.2,1) infinite"><path fill="#f6f5f0" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#a9c4b6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg><style>@keyframes crin-g{0%{transform:rotate(0)}25%{transform:rotate(90deg)}50%{transform:rotate(180deg)}75%{transform:rotate(270deg)}to{transform:rotate(360deg)}}</style></div>
+<script>(function(){var c=document.getElementById("crin");function off(){c.remove()}
+try{var r=document.referrer?new URL(document.referrer):null;if(window.top!==window.self||!r||r.host!==location.host||!/^\/(index\.html)?$/.test(r.pathname)||matchMedia("(prefers-reduced-motion: reduce)").matches){off();return}}catch(e){off();return}
+function go(){if(go.d)return;go.d=1;setTimeout(function(){c.style.transform="translateY(-101%)";setTimeout(off,800)},120)}
+if(document.readyState!=="loading")go();else document.addEventListener("DOMContentLoaded",go);setTimeout(go,1800);
+addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})();</script>
 <div class="cbar"><span><b>Demo</b> · Empresa ficticia · Cambia de usuario para aprobar como cada puesto</span><span class="r"><button type="button" id="reset">Reiniciar demo</button> · Hecho por <a href="../../" target="_top">crusol</a></span></div>
 <header class="app">
   <div class="mark">EC</div>
