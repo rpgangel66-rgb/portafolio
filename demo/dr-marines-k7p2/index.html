@@ -635,7 +635,7 @@ html[data-g="vet"] .kpi b{font-size:26px}
   if(!S||S.v!==1||!S.a||!S.base||Math.abs(diff(S.base,TODAY))>=5)S=fresh();
   function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
   var qs={};location.search.slice(1).split("&").forEach(function(x){var p=x.split("=");if(p[0])qs[p[0]]=decodeURIComponent(p[1]||"")});
-  if(B[qs.giro])S.g=qs.giro;if(!B[S.g])S.g="ped";
+  if(Object.prototype.hasOwnProperty.call(B,qs.giro))S.g=qs.giro;if(!B[S.g])S.g="ped";
 
   function biz(){return B[S.g]}
   function A(){return S.a[S.g]}
