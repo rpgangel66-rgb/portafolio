@@ -55,6 +55,7 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
 - Vistas previas (og:image) en `og/*.jpg`, 1200x630 y menos de 150 KB. Si cambia un demo, regenerar su imagen.
 - Los demos y el sitio Arce traen al final el bloque `#crcta` (invitación a contacto): solo aparece cuando el demo se abre fuera del portafolio, a los 9 s o 4 s después de la primera interacción, y se puede cerrar. El nombre del demo sale de `data-demo` en el `<body>`.
 - `demo/<cliente>-<código>/`: demos personalizados para un prospecto (copia de un demo con su nombre y servicios, `noindex`, sin liga desde el portafolio). Ejemplo: `demo/dr-marines-k7p2/` (agenda de pediatría).
+  - `demo/lazer-x9m3/`: expediente clínico digital para Lazer Medicina Estética (6 sucursales), con pacientes ficticios. Un solo `index.html` más su `og.jpg`. Estado en localStorage (`crusol_demo_lazer_v1`). Parámetros `?rol=rec|med|dir` y `?vista=nuevo` (con `rol=dir` abre siempre el tablero). Pendiente: cambiar "Sucursal 2" a "Sucursal 6" por los nombres reales cuando lleguen (arreglo `BR` al inicio del script); no modificar nada más por ahora.
 - `robots.txt` y `sitemap.xml` en la raíz; las carpetas viejas de negocios pequeños están excluidas.
 
 ## Marca
