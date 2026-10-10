@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lazer Medicina Estética · Expediente digital · Demo</title>
+<meta name="description" content="Demo de expediente clínico digital preparado para Lazer Medicina Estética.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="crusol">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://crusol.com.mx/demo/lazer-x9m3/">
+<meta property="og:title" content="Expediente digital · Lazer Medicina Estética">
+<meta property="og:description" content="Demo preparado para Lazer: ficha clínica, consentimiento informado con firmas, control de sesiones y pagos. Sin papel.">
+<meta property="og:image" content="https://crusol.com.mx/demo/lazer-x9m3/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Antonio:wght@600;700&family=Comfortaa:wght@500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F6F4F0;--panel:#FFFFFF;--soft:#FAF8F5;--ink:#132D2B;--t2:#3F5856;--mut:#768885;--line:#E6E1D9;--line2:#EFEBE5;
+  --teal:#1E6B67;--teal2:#14514E;--tealS:#E0EFEC;--teal3:#2E8A84;
+  --pink:#D98A9C;--pinkS:#FBE8ED;--pinkI:#9E4A5E;
+  --ok:#1E7B4F;--okS:#E3F3EA;--warn:#A85A08;--warnS:#FCEFDF;--bad:#B42318;--badS:#FDECEA;
+  --r:16px;--ri:10px;--sh:0 1px 2px rgba(19,45,43,.04),0 10px 30px -14px rgba(19,45,43,.18);
+  --f:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--m:"DM Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--f);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--teal)}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--m)}
+:focus-visible{outline:2px solid var(--teal3);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* barra de demo crusol */
+.cbar{display:flex;align-items:center;gap:14px;background:#0b2a20;color:#f6f5f0;font:12px/1.3 "Geist Mono",ui-monospace,monospace;padding:7px 18px;flex-wrap:wrap}
+.cbar b{font-weight:500;color:#a9c4b6;text-transform:uppercase;letter-spacing:.08em}
+.cbar .r{margin-left:auto;color:rgba(246,245,240,.72);white-space:nowrap}
+.cbar button{background:none;border:0;color:#f6f5f0;text-decoration:underline;text-underline-offset:3px;padding:0;font:inherit}
+.cbar a{color:#f6f5f0}
+
+/* cabecera */
+.top{display:flex;align-items:center;gap:18px;padding:14px 24px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+.logo{display:flex;align-items:center;gap:9px;color:var(--teal);text-decoration:none;flex:none}
+.logo .lz{font:700 30px/1 "Antonio",sans-serif;letter-spacing:.02em;position:relative;padding-top:4px}
+.logo .lz::before{content:"";position:absolute;left:-2px;right:-2px;top:-1px;height:7px;border:2px solid currentColor;border-bottom:0;border-radius:50% 50% 0 0/100% 100% 0 0}
+.logo .me{font:600 12.5px/1.05 "Comfortaa",sans-serif;color:var(--teal3)}
+.brsel{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 12px;background:var(--soft);font-size:13px;color:var(--t2)}
+.brsel select{border:0;background:var(--panel);border-radius:999px;padding:5px 26px 5px 10px;font-weight:600;color:var(--ink);appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 13px) 52%,calc(100% - 8px) 52%;background-size:5px 5px;background-repeat:no-repeat;box-shadow:0 0 0 1px var(--line)}
+.srch{flex:1;max-width:380px;position:relative}
+.srch input{width:100%;border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:9px 14px 9px 36px}
+.srch svg{position:absolute;left:12px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--mut)}
+.role{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--mut)}
+.seg{display:inline-flex;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;color:var(--t2);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--teal);color:#fff;box-shadow:0 2px 6px -2px rgba(20,81,78,.5)}
+
+/* estructura */
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100vh - 110px)}
+.nav{border-right:1px solid var(--line);padding:18px 12px;background:var(--panel);display:flex;flex-direction:column;gap:4px}
+.nav button{display:flex;align-items:center;gap:10px;border:0;background:none;border-radius:12px;padding:10px 12px;text-align:left;font-weight:500;color:var(--t2)}
+.nav button svg{width:18px;height:18px;flex:none}
+.nav button[aria-current="page"]{background:var(--tealS);color:var(--teal2)}
+.nav button:hover{background:var(--soft)}
+.nav .sep{height:1px;background:var(--line);margin:10px 6px}
+.nav .paper{margin-top:auto;border:1px dashed var(--line);border-radius:14px;padding:12px;font-size:12.5px;color:var(--t2);background:var(--soft)}
+.nav .paper b{display:block;font:600 22px/1.1 var(--f);color:var(--teal);margin-bottom:2px}
+main{padding:24px 28px 60px;min-width:0}
+.ph{display:flex;align-items:flex-end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.ph h1{margin:0;font-size:26px;letter-spacing:-.02em;line-height:1.1}
+.ph p{margin:4px 0 0;color:var(--mut)}
+.ph .act{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.cap{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap}
+.btn svg{width:16px;height:16px}
+.btn:hover{border-color:#cfc8bd}
+.btn.pri{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.pri:hover{background:var(--teal2)}
+.btn.pri:disabled{background:#9DBCB9;border-color:#9DBCB9;cursor:not-allowed}
+.btn.sm{padding:6px 12px;font-size:13px}
+.btn.ghost{border-color:transparent;background:none;color:var(--teal)}
+.btn.pink{background:var(--pinkS);border-color:#F2CBD5;color:var(--pinkI)}
+
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:600;white-space:nowrap}
+.chip svg{width:12px;height:12px}
+.chip.ok{background:var(--okS);color:var(--ok)}
+.chip.warn{background:var(--warnS);color:var(--warn)}
+.chip.bad{background:var(--badS);color:var(--bad)}
+.chip.mut{background:var(--line2);color:var(--t2)}
+.chip.pk{background:var(--pinkS);color:var(--pinkI)}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi{padding:14px 16px}
+.kpi small{display:block;color:var(--mut);font-size:12.5px}
+.kpi b{display:block;font-size:26px;letter-spacing:-.02em;margin:4px 0 2px;font-weight:600}
+.kpi span{font-size:12.5px;color:var(--t2)}
+
+/* lista de pacientes */
+.fil{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.fil button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;color:var(--t2)}
+.fil button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.plist{overflow:hidden}
+.prow{display:grid;grid-template-columns:minmax(0,2.2fr) .7fr minmax(0,1.6fr) minmax(0,1.5fr) .9fr;gap:14px;align-items:center;padding:12px 18px;border-top:1px solid var(--line2);width:100%;background:none;border-left:0;border-right:0;border-bottom:0;text-align:left}
+.prow:hover{background:var(--soft)}
+.prow.hd{border-top:0;background:var(--soft);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;cursor:default;padding-top:10px;padding-bottom:10px}
+.who{display:flex;align-items:center;gap:11px;min-width:0}
+.av{width:36px;height:36px;border-radius:50%;background:var(--tealS);color:var(--teal2);display:grid;place-items:center;font-weight:600;font-size:13px;flex:none}
+.who b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who small{color:var(--mut);font-family:var(--m);font-size:12px}
+.prow .tx{color:var(--t2);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow .st{display:flex;gap:5px;flex-wrap:wrap}
+.empty{padding:40px 20px;text-align:center;color:var(--mut)}
+
+/* formularios */
+.steps{display:flex;gap:6px;margin-bottom:18px;counter-reset:s;flex-wrap:wrap}
+.steps li{list-style:none;flex:1;min-width:120px;border-top:3px solid var(--line);padding-top:8px;font-size:13px;color:var(--mut);font-weight:500}
+.steps li.on{border-color:var(--teal);color:var(--ink)}
+.steps li.done{border-color:var(--teal3);color:var(--t2)}
+.steps{padding:0;margin-top:0}
+.fbox{padding:22px 24px}
+.fbox h2{margin:0 0 4px;font-size:19px}
+.fbox>p.d{margin:0 0 18px;color:var(--mut)}
+.fg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px 16px}
+.f{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--t2);grid-column:span 3;min-width:0}
+.f.s2{grid-column:span 2}.f.s6{grid-column:span 6}.f.s4{grid-column:span 4}
+.f input,.f select,.f textarea{border:1px solid var(--line);border-radius:var(--ri);background:var(--panel);padding:10px 12px;font-weight:400;font-size:15px;color:var(--ink);width:100%}
+.f textarea{resize:vertical;min-height:62px}
+.f input:focus,.f textarea:focus,.f select:focus{border-color:var(--teal3);outline:none;box-shadow:0 0 0 3px rgba(46,138,132,.15)}
+.f .err{border-color:var(--bad)!important;background:#FFF8F7}
+.f .lb{display:flex;align-items:center;gap:8px}
+.f .lb .pk{background:var(--pinkS);color:var(--pinkI);border-radius:4px;padding:1px 6px}
+.f .ng{margin-left:auto;border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;color:var(--t2)}
+.f .ng:hover{border-color:var(--teal3);color:var(--teal)}
+.f .ro{background:var(--soft)!important;color:var(--mut)}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pills button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 16px;font-weight:500}
+.pills button[aria-pressed="true"]{background:var(--tealS);border-color:var(--teal3);color:var(--teal2)}
+.rule{display:flex;gap:10px;align-items:flex-start;background:var(--pinkS);border:1px solid #F2CBD5;color:var(--pinkI);border-radius:12px;padding:10px 14px;font-size:13.5px;margin-bottom:16px}
+.rule svg{width:18px;height:18px;flex:none;margin-top:1px}
+.hint{display:flex;gap:9px;align-items:flex-start;background:var(--tealS);color:var(--teal2);border-radius:12px;padding:10px 14px;font-size:13.5px}
+.hint svg{width:17px;height:17px;flex:none;margin-top:1px}
+.fnav{display:flex;gap:10px;justify-content:flex-end;padding:16px 24px;border-top:1px solid var(--line2);flex-wrap:wrap}
+.fnav .l{margin-right:auto}
+
+/* firma */
+.sig{border:1px dashed #CFC8BD;border-radius:12px;background:var(--soft);position:relative;height:150px;touch-action:none}
+.sig canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:12px;cursor:crosshair}
+.sig .ph2{position:absolute;inset:0;display:grid;place-items:center;color:#B3AAA0;font-size:13px;pointer-events:none}
+.sig .ln{position:absolute;left:18px;right:18px;bottom:34px;border-bottom:1px solid #D6CFC5;pointer-events:none}
+.sig .clr{position:absolute;right:8px;top:8px;border:0;background:var(--panel);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--t2);box-shadow:0 0 0 1px var(--line)}
+.sig.err{border-color:var(--bad);background:#FFF8F7}
+.sigs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sigb .who2{display:flex;justify-content:space-between;align-items:center;min-height:30px;gap:8px;font-size:13px;font-weight:600;color:var(--t2);margin-bottom:6px}
+.sigb .who2 input,.sigb .who2 select{border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:13px;font-weight:500;width:62%;min-width:0}
+.sigb small{display:block;margin-top:5px;color:var(--mut);font-size:12px}
+.sigimg{height:56px;display:block}
+.sigimg path{fill:none;stroke:#1b2b4b;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* expediente */
+.xhead{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 22px;margin-bottom:14px}
+.xhead .av{width:58px;height:58px;font-size:19px}
+.xhead h1{margin:0;font-size:24px;letter-spacing:-.02em}
+.xhead .meta{display:flex;gap:6px 16px;flex-wrap:wrap;color:var(--t2);font-size:13.5px;margin-top:5px}
+.xhead .meta b{font-weight:600;color:var(--ink)}
+.xhead .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.xgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{border:0;background:none;padding:10px 14px;font-weight:600;color:var(--mut);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tabs button[aria-selected="true"]{color:var(--teal2);border-color:var(--teal)}
+.tabs button i{font-style:normal;background:var(--line2);color:var(--t2);border-radius:999px;padding:0 7px;font-size:11.5px}
+.sec{padding:18px 20px;margin-bottom:14px}
+.sec h3{margin:0 0 12px;font-size:16px;display:flex;align-items:center;gap:8px}
+.sec h3 .act{margin-left:auto}
+dl.kv{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:9px 16px;margin:0;font-size:14px}
+dl.kv dt{color:var(--mut)}
+dl.kv dd{margin:0;font-weight:500}
+dl.kv dd.al{color:var(--bad);font-weight:600}
+.lock{display:flex;gap:12px;align-items:center;border:1px dashed var(--line);border-radius:12px;padding:16px;color:var(--t2);background:var(--soft);font-size:13.5px}
+.lock svg{width:22px;height:22px;color:var(--mut);flex:none}
+.chk{list-style:none;margin:0;padding:0}
+.chk li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line2);font-size:13.5px}
+.chk li:first-child{border-top:0}
+.chk li .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none}
+.chk li .ic svg{width:13px;height:13px}
+.chk li.y .ic{background:var(--okS);color:var(--ok)}
+.chk li.n .ic{background:var(--warnS);color:var(--warn)}
+.chk li small{display:block;color:var(--mut);font-size:12px}
+.chk li>div{min-width:0;flex:1}.chk li button{margin-top:7px}
+
+.doc{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line2)}
+.doc:first-of-type{border-top:0}
+.doc .di{width:40px;height:48px;border-radius:6px;background:var(--pinkS);color:var(--pinkI);display:grid;place-items:center;flex:none}
+.doc .di svg{width:20px;height:20px}
+.doc b{display:block}
+.doc small{color:var(--mut);font-size:12.5px}
+.doc .r{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+.pkg{padding:16px 18px;margin-bottom:14px}
+.pkg .ptop{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.pkg h4{margin:0;font-size:16px}
+.pkg .ptop small{color:var(--mut)}
+.bars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.bar small{display:flex;justify-content:space-between;font-size:12.5px;color:var(--t2);margin-bottom:5px}
+.bar small b{color:var(--ink)}
+.bar .tr{height:8px;background:var(--line2);border-radius:99px;overflow:hidden}
+.bar .tr i{display:block;height:100%;background:var(--teal);border-radius:99px}
+.bar.p .tr i{background:var(--pink)}
+.two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+.tbl td{padding:8px;border-bottom:1px solid var(--line2);vertical-align:middle}
+.tbl td.num,.tbl td.mono{white-space:nowrap}
+.tbl td.n{font-family:var(--m);color:var(--mut);width:28px}
+.tbl tr.fut td{color:#B7AEA4}
+.tbl .r{text-align:right}
+.tbl .sigimg{height:30px}
+.saldo{display:flex;justify-content:space-between;padding:10px 8px 0;font-weight:600}
+.saldo span.b{color:var(--pinkI)}
+
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.pcard .im{aspect-ratio:4/5;position:relative;background:linear-gradient(160deg,#EFE9E2,#E2D9CF);display:grid;place-items:center;overflow:hidden}
+.pcard .im img{width:100%;height:100%;object-fit:cover}
+.pcard .im svg.face{width:56%;height:auto;color:#C9BDB0}
+.pcard .im .tg{position:absolute;left:10px;top:10px}
+.pcard .ft{padding:9px 12px;font-size:12.5px;color:var(--t2);display:flex;justify-content:space-between;gap:8px}
+.cmp{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:#E8E1D8;user-select:none;touch-action:none}
+.cmp .a,.cmp .b{position:absolute;inset:0;display:grid;place-items:center}
+.cmp .b{clip-path:inset(0 0 0 50%)}
+.cmp .hd2{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.cmp .hd2::after{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+.note{border-left:3px solid var(--teal3);padding:10px 14px;background:var(--soft);border-radius:0 12px 12px 0;margin-bottom:10px}
+.note.fix{border-color:var(--pink)}
+.note header{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--mut);margin-bottom:4px;flex-wrap:wrap}
+.note header b{color:var(--ink);font-weight:600}
+.note p{margin:0;font-size:14px}
+.log{list-style:none;margin:0;padding:0;font-size:13.5px}
+.log li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line2)}
+.log li:first-child{border-top:0}
+.log time{color:var(--mut);font-family:var(--m);font-size:12px}
+.log b{font-weight:600}
+
+/* dirección */
+.brt{width:100%;border-collapse:collapse;font-size:14px}
+.brt th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line)}
+.brt td{padding:11px 12px;border-bottom:1px solid var(--line2)}
+.brt td.r,.brt th.r{text-align:right}
+.brt .hb{display:flex;align-items:center;gap:10px}
+.brt .hb i{display:block;width:calc(var(--w) * 1.2px);height:8px;background:var(--teal);border-radius:99px;min-width:2px}
+.brt tr:last-child td{border-bottom:0}
+.alerts li{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line2);font-size:13.5px}
+.alerts{list-style:none;margin:0;padding:0}
+.alerts li:first-child{border-top:0}
+@media (max-width:860px){
+  .brt thead{display:none}
+  .brt,.brt tbody{display:block}
+  .brt tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 8px;padding:12px 0;border-bottom:1px solid var(--line2)}
+  .brt tr:last-child{border-bottom:0}
+  .brt td{padding:0;border:0!important}
+  .brt td:nth-child(1){grid-column:1/4}
+  .brt td:nth-child(6){grid-column:4;grid-row:1;text-align:right}
+  .brt td:nth-child(5){grid-column:1/-1;grid-row:3}
+  .brt td:nth-child(7){grid-column:4;grid-row:2}
+  .brt .hb i{width:calc(var(--w) * .55%)}
+  .brt td[data-l]{text-align:left;font-size:13px}
+  .brt td[data-l]::before{content:attr(data-l);display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);font-weight:600}
+  .alerts li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 10px}
+  .alerts li .chip{justify-self:start}
+  .alerts li button{grid-column:2;grid-row:1/3;align-self:center}
+}
+.alerts li .chip{flex:none}
+.alerts li button{margin-left:auto}
+
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(19,45,43,.42);z-index:60;display:flex;justify-content:center;align-items:flex-start;padding:28px 16px;overflow-y:auto;backdrop-filter:blur(2px)}
+.modal{background:var(--panel);border-radius:20px;width:100%;max-width:860px;box-shadow:0 30px 80px -20px rgba(0,0,0,.35);overflow:hidden}
+.modal.sm{max-width:520px}
+.mh{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--line2)}
+.mh h2{margin:0;font-size:18px}
+.mh .x{margin-left:auto;border:0;background:var(--soft);width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+.mh .x svg{width:16px;height:16px}
+.mb{padding:20px 22px}
+.mf{display:flex;justify-content:flex-end;gap:10px;padding:14px 22px;border-top:1px solid var(--line2);background:var(--soft);flex-wrap:wrap}
+.mf .l{margin-right:auto;font-size:12.5px;color:var(--mut);align-self:center}
+
+/* documento de consentimiento */
+.paper{background:#fff;border:1px solid var(--line);border-radius:6px;padding:34px 40px;box-shadow:0 1px 0 var(--line2);font-size:13px;line-height:1.55;color:#1d2a29}
+.paper .plogo{display:flex;justify-content:center;margin-bottom:10px}
+.paper h3{text-align:center;margin:0;font-size:15px;letter-spacing:.02em}
+.paper h4{text-align:center;margin:2px 0 14px;font-size:13px;font-weight:600;color:var(--t2)}
+.paper p{margin:8px 0}
+.paper ul{margin:6px 0 10px;padding-left:20px}
+.paper .fld{display:inline-block;min-width:120px;border-bottom:1px solid #9aa;padding:0 4px;font-weight:600}
+.paper .pro{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:10px 0;background:var(--soft)}
+.paper .pro div{display:flex;gap:8px;padding:2px 0}
+.paper .pro div b{min-width:24px;color:var(--teal)}
+.paper .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 30px;margin-top:20px}
+.paper .sgrid div{text-align:center;font-size:11.5px;color:var(--t2)}
+.paper .sgrid .sigimg{height:54px;margin:0 auto}
+.paper .sgrid .nm{border-top:1px solid #9aa;padding-top:4px;font-weight:600;color:var(--ink)}
+.paper .seal{display:flex;justify-content:space-between;gap:10px;margin-top:18px;padding-top:10px;border-top:1px dashed var(--line);font:11.5px var(--m);color:var(--mut);flex-wrap:wrap}
+.legal{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.55;background:var(--soft);color:var(--t2)}
+.legal p{margin:0 0 8px}
+.legal ul{margin:0 0 8px;padding-left:18px}
+.ptypes{display:grid;gap:10px}
+.ptype{display:grid;grid-template-columns:auto 190px minmax(0,1fr);gap:10px;align-items:center;font-size:14px}
+.ptype input[type=text]{border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+.ptype input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal)}
+.toggle{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.toggle input{width:18px;height:18px;accent-color:var(--teal)}
+
+.toast{position:fixed;left:50%;top:14px;transform:translate(-50%,calc(-100% - 30px));visibility:hidden;opacity:0;background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-size:14px;z-index:90;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s,visibility 0s .45s;box-shadow:0 14px 30px -10px rgba(0,0,0,.4);max-width:calc(100vw - 32px);text-align:center}
+.toast.on{transform:translate(-50%,0);visibility:visible;opacity:1;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .2s}
+
+@media (max-width:1100px){.xgrid{grid-template-columns:minmax(0,1fr)}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;align-content:start}
+  .nav{flex-direction:row;border-right:0;border-bottom:1px solid var(--line);padding:8px 10px;overflow-x:auto;gap:2px;position:sticky;top:61px;z-index:20}
+  .nav .sep,.nav .paper{display:none}
+  .nav button{padding:8px 12px;white-space:nowrap}
+  .top{flex-wrap:wrap;gap:10px;padding:10px 14px}
+  .srch{order:5;max-width:none;flex-basis:100%}
+  .role{margin-left:auto}
+  .role span{display:none}
+  main{padding:18px 14px 50px}
+  .prow{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px}
+  .prow .c3,.prow .c2,.prow.hd{display:none}
+  .prow .st{grid-column:1/-1;grid-row:2;padding-left:47px}
+  .prow>span:last-child{grid-column:2;grid-row:1;align-self:start;padding-top:2px;font-size:12.5px;color:var(--mut);white-space:nowrap}
+  .fg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .f,.f.s2{grid-column:span 1}
+  .f.s4,.f.s6{grid-column:1/-1}
+  .sigs,.two,.bars{grid-template-columns:1fr}
+  .xhead{grid-template-columns:auto minmax(0,1fr);align-items:start;gap:12px 14px;padding:16px}
+  .xhead .av{width:44px;height:44px;font-size:15px}
+  .xhead h1{font-size:21px}
+  .doc{flex-wrap:wrap;align-items:flex-start}
+  .doc>div:nth-child(2){flex:1;min-width:0}
+  .doc .r{margin-left:54px;flex-wrap:wrap}
+  .xhead .xa{grid-column:1/-1}
+  .ptype{grid-template-columns:auto minmax(0,1fr)}
+  .ptype input[type=text]{grid-column:2}
+  .paper{padding:22px 18px}
+  .paper .sgrid{grid-template-columns:1fr}
+  .log li{grid-template-columns:1fr;gap:2px}
+  dl.kv{grid-template-columns:1fr;gap:2px}
+  dl.kv dd{margin-bottom:8px}
+  .brsel span{display:none}
+}
+@media (max-width:560px){.fg{grid-template-columns:minmax(0,1fr)}.f,.f.s2,.f.s4,.f.s6{grid-column:auto}}
+@media (max-width:520px){.kpis{grid-template-columns:1fr 1fr}.kpi b{font-size:22px}.logo .me{display:none}}
+@media print{
+  @page{size:letter;margin:14mm 16mm}
+  html,body{background:#fff}
+  body:has(.scrim)>*:not(.scrim){display:none!important}
+  .cbar,.top,.nav,.ph,.tabs,.xhead,.xside,.toast,.mh,.mf,#crcta{display:none!important}
+  .scrim{position:static;display:block;background:none;padding:0;backdrop-filter:none;overflow:visible}
+  .modal{box-shadow:none;max-width:none;border-radius:0;overflow:visible}
+  .mb{padding:0}
+  .paper{border:0;padding:0;box-shadow:none;font-size:11.5px;line-height:1.45}
+  .paper .sgrid{grid-template-columns:1fr 1fr!important;gap:14px 30px;break-inside:avoid}
+  .paper .seal{break-inside:avoid}
+}
+
+</style>
+</head>
+<body>
+<div class="cbar"><span><b>Demo</b> · Preparado para Lazer Medicina Estética · Pacientes de ejemplo</span><span class="r"><button type="button" id="reset">Reiniciar demo</button> · Hecho por <a href="/" target="_top">crusol</a></span></div>
+<header class="top">
+  <a class="logo" href="#" id="home" aria-label="Lazer Medicina Estética, inicio"><span class="lz">LAZER</span><span class="me">Medicina<br>Estética</span></a>
+  <label class="brsel"><span>Sucursal</span><select id="br" aria-label="Sucursal"></select></label>
+  <div class="srch"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6"/><path d="m13.5 13.5 3.5 3.5" stroke-linecap="round"/></svg><input id="q" type="search" placeholder="Buscar paciente por nombre, ficha o teléfono" aria-label="Buscar paciente"></div>
+  <div class="role"><span>Ver como</span><div class="seg" id="roles" role="group" aria-label="Ver como"></div></div>
+</header>
+<div class="wrap">
+  <nav class="nav" id="nav" aria-label="Secciones"></nav>
+  <main id="main"></main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var KEY="crusol_demo_lazer_v1";
+
+/* ---------- catálogo, sucursales y personal (sucursal 2 a 6: nombres de ejemplo) ---------- */
+var BR=[{id:"sp",n:"San Pedro",pf:"SP"},{id:"s2",n:"Sucursal 2",pf:"S2"},{id:"s3",n:"Sucursal 3",pf:"S3"},{id:"s4",n:"Sucursal 4",pf:"S4"},{id:"s5",n:"Sucursal 5",pf:"S5"},{id:"s6",n:"Sucursal 6",pf:"S6"}];
+var CAT=[
+  {id:"val",n:"Valoración general",p:500,s:1,k:"Valoración"},
+  {id:"rf",n:"Radiofrecuencia facial",p:7000,s:10,k:"Facial"},
+  {id:"mn",n:"Microneedling",p:3900,s:1,k:"Facial"},
+  {id:"pq",n:"Peeling químico",p:5000,s:1,k:"Facial"},
+  {id:"co2",n:"Láser CO2 fraccionado (ojeras)",p:7000,s:1,k:"Láser"},
+  {id:"cx",n:"Carboxiterapia",p:7000,s:10,k:"Corporal"},
+  {id:"ms",n:"Mesoterapia",p:7000,s:10,k:"Corporal"},
+  {id:"cv",n:"Cavitación",p:7000,s:10,k:"Corporal"},
+  {id:"bt",n:"Toxina botulínica (60 u)",p:4080,s:1,k:"Inyectable",lote:true},
+  {id:"lb",n:"Aumento de labios",p:3999,s:1,k:"Inyectable",lote:true},
+  {id:"af",n:"Armonización facial",p:9999,s:1,k:"Inyectable",lote:true},
+  {id:"dp",n:"Depilación láser cuerpo completo",p:12500,s:6,k:"Láser"},
+  {id:"el",n:"Endolift medio rostro",p:15000,s:1,k:"Láser"}];
+var STAFF={rec:{n:"Ana Treviño",r:"Recepción"},med:{n:"Dra. Mariana Leal",r:"Médico"},dir:{n:"Dirección",r:"Dirección"}};
+var MEDS=["Dra. Mariana Leal","Dr. Iván Garza","Dra. Sofía Montemayor"];
+var ROLES=[["rec","Recepción"],["med","Médico"],["dir","Dirección"]];
+var NOMF=["María José","Daniela","Andrea","Sofía","Valeria","Fernanda","Paola","Regina","Mariana","Ximena","Lucía","Ana Paula","Gabriela","Alejandra","Renata","Carolina","Camila","Natalia","Mónica","Isabel"];
+var NOMM=["Rodrigo","Alejandro","Eduardo","Mauricio","Jorge","Luis Fernando","Ricardo","Diego"];
+var APS=["Garza","Treviño","Cantú","Villarreal","Elizondo","Salinas","Leal","González","Rodríguez","Martínez","Sada","Zambrano","Lozano","Benavides","Montemayor","Cavazos","Guerra","Chapa","Tamez","Saldaña","De la Garza","Medina","Ríos","Quiroga"];
+var OCUPF=["Arquitecta","Contadora","Empresaria","Abogada","Diseñadora","Ingeniera","Médica","Maestra","Hogar","Mercadóloga","Administradora","Nutrióloga"],OCUPM=["Arquitecto","Contador","Empresario","Abogado","Ingeniero","Médico","Administrador","Comerciante"];
+var CALLES=["Av. Vasconcelos","Calz. del Valle","Av. Gómez Morín","Río Missouri","Av. Lázaro Cárdenas","Av. Fundadores","Río Orinoco","Av. Roberto Garza Sada"];
+var COLS=["Del Valle","Valle Oriente","Carrizalejo","Fuentes del Valle","Lomas del Valle","Residencial San Agustín","Valle de Santa Engracia","Cumbres"];
+var ENF=[["Ninguno",.6],["Hipotiroidismo controlado",.12],["Migraña",.1],["Hipertensión controlada",.08],["Resistencia a la insulina",.1]];
+var MEDI=[["Ninguno",.55],["Levotiroxina 50 mcg",.12],["Anticonceptivos orales",.18],["Vitamina D",.1],["Losartán 50 mg",.05]];
+var HER=[["Diabetes (madre)",.3],["Hipertensión (padre)",.25],["Niega",.45]];
+var QUI=[["Ninguno",.55],["Cesárea (2019)",.2],["Apendicectomía",.1],["Rinoplastia (2017)",.08],["Liposucción abdominal (2022)",.07]];
+var ALE=[["Ninguna",.72],["Penicilina",.12],["Lidocaína",.06],["Látex",.05],["AINE (ibuprofeno)",.05]];
+
+/* ---------- utilidades ---------- */
+function p2(n){return (n<10?"0":"")+n}
+function ds(x){return x.getFullYear()+"-"+p2(x.getMonth()+1)+"-"+p2(x.getDate())}
+function pd(s){var a=s.split("-");return new Date(+a[0],a[1]-1,+a[2])}
+function addD(s,n){var x=pd(s);x.setDate(x.getDate()+n);return ds(x)}
+var DIAS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],MES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],MC=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+var NOW=new Date(),TODAY=ds(NOW);
+function fD(s){var x=pd(s);return x.getDate()+" "+MC[x.getMonth()]+" "+x.getFullYear()}
+function fDL(s){var x=pd(s);return DIAS[x.getDay()]+" "+x.getDate()+" de "+MES[x.getMonth()]}
+function rel(s){var d=Math.round((pd(TODAY)-pd(s))/864e5);return d===0?"Hoy":d===1?"Ayer":d<7?"Hace "+d+" días":fD(s)}
+function fT(m){var h=Math.floor(m/60);return (h%12||12)+":"+p2(m%60)+" "+(h<12?"a. m.":"p. m.")}
+function money(v){return "$"+Math.round(v).toLocaleString("es-MX")}
+function age(fn){var b=pd(fn),n=pd(TODAY),a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a}
+function full(p){return [p.nom,p.ap,p.am].filter(Boolean).join(" ")}
+function ini(p){return ((p.nom||" ")[0]+(p.ap||" ")[0]).toUpperCase()}
+function br(id){return BR.filter(function(b){return b.id===id})[0]}
+function cat(id){return CAT.filter(function(c){return c.id===id})[0]}
+function rng(s){var h=1779033703^s.length;for(var i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}var a=h>>>0;return function(){a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function pick(R,a){return a[Math.floor(R()*a.length)]}
+function wpick(R,a){var x=R(),c=0;for(var i=0;i<a.length;i++){c+=a[i][1];if(x<=c)return a[i][0]}return a[a.length-1][0]}
+function hash(s){var h1=0x811c9dc5,h2=0x1b873593;for(var i=0;i<s.length;i++){h1=Math.imul(h1^s.charCodeAt(i),16777619);h2=Math.imul(h2^s.charCodeAt(i),2246822507)}return ((h1>>>0).toString(16).toUpperCase().padStart(8,"0")+(h2>>>0).toString(16).toUpperCase().padStart(8,"0")).replace(/(.{4})/g,"$1-").slice(0,19)}
+var SPC={};
+function scrib(R){return {k:Math.floor(R()*1e6)}}
+function sigPath(seed){if(SPC[seed])return SPC[seed];var R=rng("firma"+seed),n=5+Math.floor(R()*4),base=37,sl=.22+R()*.22,L=[],d="",x=0,y=0,mx=0,x0=8;
+  for(var i=0;i<n;i++)L.push({h:i===0?22+R()*7:(R()<.3?13+R()*8:5+R()*6),k:i===0?1.4+R()*.6:(R()<.35?.25+R()*.4:1.2+R()*1),sp:2.2+R()*1.5});
+  for(var i=0;i<n;i++){var a=L[i],b=L[(i+1)%n];for(var j=0;j<=14;j++){if(i>0&&j===0)continue;var t=2*Math.PI*j/14,hh=a.h+(b.h-a.h)*Math.max(0,(j-10)/14);
+    y=base-hh*(1-Math.cos(t))/2+(R()-.5)*.6;x=x0+a.sp*(t+a.k*Math.sin(t))+(base-y)*sl;if(x>mx)mx=x;d+=(d?" L":"M")+x.toFixed(1)+" "+y.toFixed(1)}x0+=a.sp*2*Math.PI}
+  var ux=6+R()*14;d+=" Q"+(x+10).toFixed(1)+" "+(base+6).toFixed(1)+" "+(x-6).toFixed(1)+" "+(base+7).toFixed(1)+" L"+ux.toFixed(1)+" "+(base+9+R()*3).toFixed(1);
+  return SPC[seed]={p:d,w:Math.ceil(mx+14)}}
+
+/* ---------- DOM ---------- */
+function h(tag,a){var pa=tag.split("."),e=document.createElement(pa[0]),i=1;if(pa.length>1)e.className=pa.slice(1).join(" ");
+  if(a&&typeof a==="object"&&!a.nodeType&&!Array.isArray(a)){for(var k in a){var v=a[k];if(v==null||v===false)continue;if(k.slice(0,2)==="on")e[k]=v;else if(k==="style")e.style.cssText=v;else e.setAttribute(k,v===true?"":v)}i=2}
+  for(;i<arguments.length;i++)put(e,arguments[i]);return e}
+function put(e,c){if(c==null||c===false)return;if(Array.isArray(c))c.forEach(function(x){put(e,x)});else e.appendChild(c.nodeType?c:document.createTextNode(String(c)))}
+var IC={
+ users:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="7.5" cy="7" r="3"/><path d="M2 16.5c.6-2.8 2.8-4.3 5.5-4.3s4.9 1.5 5.5 4.3"/><path d="M13 4.3a3 3 0 0 1 0 5.4M15.2 12.6c1.4.6 2.4 1.9 2.8 3.9"/></svg>',
+ plus:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M10 4v12M4 10h12"/></svg>',
+ chart:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 17h14M6 14V9M10 14V5M14 14v-3"/></svg>',
+ check:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>',
+ alert:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2 14.5 13.5h-13z"/><path d="M8 6.5v3M8 11.6v.1"/></svg>',
+ clock:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.2l2 1.3"/></svg>',
+ doc:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.5 10h5M7.5 13h5"/></svg>',
+ pen:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 3.5l3 3L7 16H4v-3z"/></svg>',
+ cam:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M2.5 6.5h3l1.5-2h6l1.5 2h3v10h-15z"/><circle cx="10" cy="11" r="3"/></svg>',
+ lock:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>',
+ x:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg>',
+ print:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M5.5 7.5V2.5h9v5M5.5 14H3V8h14v6h-2.5M5.5 11.5h9v6h-9z"/></svg>',
+ cash:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="2" y="5" width="16" height="10" rx="1.5"/><circle cx="10" cy="10" r="2.3"/></svg>',
+ shield:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M8 1.8 13.2 4v4c0 3.1-2.2 5.3-5.2 6.2C5 13.3 2.8 11.1 2.8 8V4z"/><path d="m5.8 8 1.6 1.6 3-3.2" stroke-linecap="round"/></svg>',
+ face:'<svg class="face" viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><ellipse cx="50" cy="52" rx="28" ry="36"/><path d="M38 46h6M56 46h6M50 52v10M42 72c5 4 11 4 16 0M22 120c2-16 13-24 28-24s26 8 28 24"/></svg>'};
+function ic(k){var s=document.createElement("span");s.innerHTML=IC[k];return s.firstChild}
+var tt;function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},3600)}
+function sigEl(s,cls){if(!s)return h("span.chip.warn",ic("clock"),"Pendiente");
+  if(typeof s==="string")return h("img.sigimg"+(cls?"."+cls:""),{src:s,alt:"Firma"});
+  if(s.k!=null)s=sigPath(s.k);var ns="http://www.w3.org/2000/svg",svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox","0 0 "+s.w+" 50");svg.setAttribute("class","sigimg"+(cls?" "+cls:""));svg.setAttribute("role","img");svg.setAttribute("aria-label","Firma");var p=document.createElementNS(ns,"path");p.setAttribute("d",s.p);svg.appendChild(p);return svg}
+
+/* ---------- datos de ejemplo ---------- */
+function seed(){var S={v:2,base:TODAY,br:"sp",role:"rec",seq:{},pts:[]},R0=rng("lazer-seed");
+  BR.forEach(function(b,bi){S.seq[b.id]=1240+Math.floor(R0()*300)-bi*37;var n=b.id==="sp"?16:10+Math.floor(R0()*5);
+    for(var i=0;i<n;i++)S.pts.push(mkPatient(S,b.id,rng(b.id+"|"+i),i))});
+  return S}
+function mkPatient(S,bid,R,i){var stage=i===1?"nocons":i===2?"partial":"ok",fem=R()<.82,cre=addD(TODAY,-Math.floor(R()*150)-(i<3?0:2));if(i<2)cre=TODAY;if(i===2)cre=addD(TODAY,-1);
+  var p={id:bid+"-"+i+"-"+Math.floor(R()*1e6),ficha:br(bid).pf+"-"+p2(0)+(S.seq[bid]++),br:bid,nom:pick(R,fem?NOMF:NOMM),ap:pick(R,APS),am:pick(R,APS),sexo:fem?"F":"M",
+    fn:addD(TODAY,-Math.floor((22+R()*34)*365.25)),tel:"81 "+(1000+Math.floor(R()*8999))+" "+(1000+Math.floor(R()*8999)),dir:pick(R,CALLES)+" "+(100+Math.floor(R()*2800))+", "+pick(R,COLS),ocup:pick(R,fem?OCUPF:OCUPM),
+    ant:{enf:wpick(R,ENF),med:wpick(R,MEDI),her:wpick(R,HER),qui:wpick(R,QUI),imp:R()<.12?"Sí":"No",impT:"",ale:wpick(R,ALE)},
+    mot:"",dx:"",created:cre,by:"Ana Treviño",priv:{at:cre,sig:scrib(R)},cons:[],pkgs:[],photos:[],notes:[],log:[]};
+  p.mail=(p.nom.split(" ")[0]+"."+p.ap).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\s/g,"")+"@correo.com";
+  if(p.ant.imp==="Sí")p.ant.impT=pick(R,fem?["Implantes mamarios","DIU"]:["Marcapasos","Prótesis de rodilla"]);
+  if(!fem){if(/Anticonceptivos/.test(p.ant.med))p.ant.med="Ninguno";if(/Cesárea/.test(p.ant.qui))p.ant.qui="Ninguno"}
+  var c=pick(R,CAT.filter(function(x){return x.id!=="val"}));
+  p.mot={rf:"Flacidez y líneas de expresión en rostro",mn:"Textura irregular y poros abiertos",pq:"Manchas y tono desigual",co2:"Ojeras marcadas",cx:"Celulitis en glúteos y piernas",ms:"Grasa localizada en abdomen",cv:"Grasa localizada en abdomen y flancos",bt:"Líneas de expresión en frente y entrecejo",lb:"Desea mayor volumen en labios",af:"Desea armonizar perfil y pómulos",dp:"Depilación definitiva",el:"Flacidez en tercio inferior del rostro"}[c.id];
+  p.dx={rf:"Flacidez cutánea leve, fototipo III",mn:"Poros dilatados y cicatrices superficiales de acné",pq:"Melasma epidérmico leve",co2:"Hiperpigmentación periorbitaria",cx:"Celulitis grado II",ms:"Adiposidad localizada abdominal",cv:"Adiposidad localizada abdominal",bt:"Arrugas dinámicas frontales y glabelares",lb:"Labios delgados, buena hidratación",af:"Retrusión malar leve",dp:"Vello terminal en zonas extensas",el:"Flacidez moderada en tercio inferior"}[c.id];
+  var meds=MEDS,med=pick(R,meds),days=Math.round((pd(TODAY)-pd(cre))/864e5);
+  var pk={id:"pk"+Math.floor(R()*1e7),cat:c.id,precio:c.p,ses:c.s,start:cre,sessions:[],pays:[]};
+  var done=c.s===1?(days>0||R()<.5?1:0):Math.min(c.s,Math.max(i<4?1:0,Math.floor(Math.min(days/7,c.s)*(0.6+R()*.4))));
+  if(i<4&&done===0)done=1;
+  if(stage!=="ok")done=0;
+  for(var k=0;k<done;k++){var d=c.s===1?cre:addD(cre,k*7);if(pd(d)>pd(TODAY))d=TODAY;if(k===done-1&&i<5)d=TODAY;
+    pk.sessions.push({n:k+1,d:d,br:bid,by:c.lote?med:(R()<.5?med:"Lic. Karla Rangel (cosmetóloga)"),lote:c.lote?("TB"+(2400+Math.floor(R()*600))+"-"+pick(R,["A","B","C"])):"",exp:c.lote?addD(TODAY,200+Math.floor(R()*300)):"",sig:(R()<.92||k<done-1)?scrib(R):null,t:600+Math.floor(R()*16)*30})}
+  var paid=0,target=c.s===1?c.p:Math.min(c.p,Math.ceil(c.p*(done/c.s+R()*.4)/500)*500);if(R()<.3)target=c.p;
+  var pdx=cre;while(paid<target){var amt=Math.min(target-paid,c.s===1?c.p:pick(R,[1000,1500,2000,3500,c.p]));pk.pays.push({d:pdx,amt:amt,met:pick(R,["Tarjeta","Efectivo","Transferencia"]),by:"Ana Treviño"});paid+=amt;pdx=addD(pdx,7);if(pd(pdx)>pd(TODAY))pdx=TODAY}
+  if(i<5&&pk.pays.length)pk.pays[pk.pays.length-1].d=TODAY;
+  p.pkgs.push(pk);
+  var miss=stage==="partial"?"t2":null;
+  var con={id:"c"+Math.floor(R()*1e7),at:cre,t:600+Math.floor(R()*10)*30,tipos:{qui:"",anes:c.lote?"Tópica (crema anestésica)":"",rad:"",trat:c.n},rep:"",names:{med:med,t1:"Ana Treviño (Recepción)",t2:miss==="t2"?"Paola Ríos (Recepción)":pick(R,["Lic. Karla Rangel","Paola Ríos (Recepción)"])},sigs:{pac:scrib(R),med:miss==="med"?null:scrib(R),t1:scrib(R),t2:miss==="t2"?null:scrib(R)}};
+  con.hash=hash(p.ficha+con.at+con.tipos.trat+full(p));
+  if(stage!=="nocons")p.cons.push(con);
+  pk.sessions.forEach(function(s){if(s.n===1||R()<.35){p.photos.push({id:"f"+Math.floor(R()*1e7),d:s.d,kind:"antes",src:null});if(R()<.6&&s.n>1)p.photos.push({id:"f"+Math.floor(R()*1e7),d:s.d,kind:"después",src:null})}});
+  if(!pk.sessions.length)p.photos=[];
+  if(i===1)p.photos=[];
+  p.notes.push({id:"n1",at:cre,t:620,by:med,txt:"Valoración inicial. "+p.dx+". Se explican alternativas, riesgos y cuidados posteriores. Paciente de acuerdo con plan de "+c.n.toLowerCase()+"."});
+  if(pk.sessions.length>1)p.notes.push({id:"n2",at:pk.sessions[pk.sessions.length-1].d,t:660,by:med,txt:"Sesión "+pk.sessions.length+" sin incidentes. Buena tolerancia. Se recomienda protector solar FPS 50 e hidratación."});
+  p.log=[{at:cre,t:600,by:"Ana Treviño",r:"Recepción",a:"Creó la ficha clínica "+p.ficha+" en tableta"},{at:cre,t:603,by:full(p),r:"Paciente",a:"Firmó el aviso de privacidad"}];
+  if(p.cons.length)p.log.push({at:cre,t:612,by:med,r:"Médico",a:miss?"Generó consentimiento informado de "+c.n+" (falta firma del testigo 2)":"Firmó consentimiento informado de "+c.n});
+  pk.sessions.forEach(function(s){p.log.push({at:s.d,t:s.t,by:s.by,r:"Aplicó",a:"Registró sesión "+s.n+" de "+c.s+(s.lote?" · lote "+s.lote:"")})});
+  pk.pays.forEach(function(x){p.log.push({at:x.d,t:700,by:x.by,r:"Recepción",a:"Registró pago de "+money(x.amt)+" ("+x.met.toLowerCase()+")"})});
+  return p}
+
+var S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||S.v!==2||!S.pts||Math.abs(Math.round((pd(TODAY)-pd(S.base))/864e5))>=4)S=seed();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("No se pudo guardar en este navegador; la demo sigue funcionando.")}}
+var V={v:"pts",id:null,tab:"res",f:"all",q:""};
+var me=function(){return STAFF[S.role]};
+function log(p,a,role){var n=new Date();p.log.push({at:TODAY,t:n.getHours()*60+n.getMinutes(),by:role==="pac"?full(p):me().n,r:role==="pac"?"Paciente":me().r,a:a})}
+function nowM(){var n=new Date();return n.getHours()*60+n.getMinutes()}
+
+/* ---------- reglas del expediente ---------- */
+function fichaOk(p){var a=p.ant;return [p.ap,p.am,p.nom,p.fn,p.tel,p.dir,p.ocup,a.enf,a.med,a.her,a.qui,a.ale,p.mot].every(function(x){return x&&String(x).trim()})}
+function consOk(c){return c&&c.sigs.pac&&c.sigs.med&&c.sigs.t1&&c.sigs.t2}
+function consFor(p,pk){var c=cat(pk.cat);return p.cons.filter(function(x){return x.tipos.trat===c.n||x.tipos.qui===c.n})}
+function status(p){var out=[];if(!fichaOk(p))out.push(["warn","Ficha incompleta"]);
+  p.pkgs.forEach(function(pk){var cs=consFor(p,pk);if(!cs.length)out.push(["bad","Sin consentimiento"]);else if(!cs.some(consOk))out.push(["warn","Faltan firmas"]);
+    if(pk.sessions.some(function(s){return !s.sig}))out.push(["warn","Sesión sin firma"])});
+  if(p.pkgs.some(function(pk){return pk.sessions.length})&&!p.photos.some(function(f){return f.kind==="antes"}))out.push(["warn","Sin foto de antes"]);
+  return out}
+function complete(p){return status(p).length===0}
+function lastVisit(p){var d=p.created;p.pkgs.forEach(function(pk){pk.sessions.forEach(function(s){if(s.d>d)d=s.d});pk.pays.forEach(function(x){if(x.d>d)d=x.d})});return d}
+function paidOf(pk){return pk.pays.reduce(function(a,x){return a+x.amt},0)}
+function visitedToday(p){return p.created===TODAY||p.pkgs.some(function(pk){return pk.sessions.some(function(s){return s.d===TODAY})})}
+function canClin(){return S.role!=="dir"}
+
+/* ---------- cabecera ---------- */
+var brs=document.getElementById("br");BR.forEach(function(b){brs.appendChild(h("option",{value:b.id},b.n))});
+brs.value=S.br;brs.onchange=function(){S.br=this.value;save();if(V.v==="exp")V.v="pts";render();toast("Sucursal "+br(S.br).n+": cada sucursal ve sus pacientes; Dirección ve todas.")};
+var roles=document.getElementById("roles");
+ROLES.forEach(function(r){roles.appendChild(h("button",{type:"button","data-r":r[0],"aria-pressed":String(S.role===r[0]),onclick:function(){S.role=r[0];save();
+  [].forEach.call(roles.children,function(b){b.setAttribute("aria-pressed",String(b.dataset.r===S.role))});
+  if(S.role==="dir"&&V.v!=="exp")V.v="dash";if(S.role!=="dir"&&V.v==="dash")V.v="pts";render();
+  toast(r[0]==="rec"?"Recepción: da de alta pacientes, consentimientos y pagos.":r[0]==="med"?"Médico: escribe diagnóstico y notas clínicas, registra sesiones y lotes.":"Dirección: ve todas las sucursales; la información clínica queda protegida.")}},r[1]))});
+var qi=document.getElementById("q");qi.oninput=function(){V.q=this.value.trim().toLowerCase();if(V.v!=="pts"){V.v="pts"}render()};
+document.getElementById("home").onclick=function(e){e.preventDefault();V.v=S.role==="dir"?"dash":"pts";render()};
+document.getElementById("reset").onclick=function(){var r=S.role,b=S.br;S=seed();S.role=r;S.br=b;save();V={v:r==="dir"?"dash":"pts",id:null,tab:"res",f:"all",q:""};qi.value="";render();toast("Demo reiniciada con pacientes de ejemplo.")};
+
+function nav(){var n=document.getElementById("nav");n.textContent="";
+  var items=[["pts","Pacientes","users"],["new","Nuevo paciente","plus"],["dash","Dirección","chart"]];
+  items.forEach(function(x){if(x[0]==="new"&&S.role==="dir")return;if(x[0]==="dash"&&S.role!=="dir")return;n.appendChild(h("button",{type:"button","aria-current":(V.v===x[0]||(x[0]==="pts"&&V.v==="exp"))?"page":null,onclick:function(){V.v=x[0];V.id=null;render();scrollTo(0,0)}},ic(x[2]),x[1]))});
+  var sheets=0;S.pts.forEach(function(p){sheets+=2+p.cons.length+p.pkgs.reduce(function(a,pk){return a+Math.ceil(pk.sessions.length/10)},0)});
+  n.appendChild(h("div.sep"));n.appendChild(h("div.paper",h("b.num",sheets.toLocaleString("es-MX")),"hojas que ya no se imprimieron en las 6 sucursales"))}
+
+/* ---------- vista: pacientes ---------- */
+function vPts(m){var b=br(S.br),L=S.pts.filter(function(p){return p.br===S.br});
+  var today=L.filter(visitedToday),nuevos=L.filter(function(p){return p.created===TODAY}),pend=L.filter(function(p){return !complete(p)});
+  var cobr=0;L.forEach(function(p){p.pkgs.forEach(function(pk){pk.pays.forEach(function(x){if(x.d===TODAY)cobr+=x.amt})})});
+  m.appendChild(h("div.ph",h("div",h("h1","Pacientes"),h("p","Sucursal "+b.n+" · "+cap(fDL(TODAY)))),h("div.act",S.role!=="dir"?h("button.btn.pri",{type:"button",onclick:function(){V.v="new";render();scrollTo(0,0)}},ic("plus"),"Nuevo paciente"):null)));
+  var k=h("div.kpis");[["Atendidos hoy",today.length,"en esta sucursal"],["Expedientes nuevos",nuevos.length,"llenados en tableta"],["Pendientes",pend.length,"con algo por completar"],[S.role==="med"?"Sesiones hoy":"Cobrado hoy",S.role==="med"?L.reduce(function(a,p){return a+p.pkgs.reduce(function(c,pk){return c+pk.sessions.filter(function(s){return s.d===TODAY}).length},0)},0):money(cobr),S.role==="med"?"registradas con lote y firma":"pagos registrados"]].forEach(function(x){k.appendChild(h("div.card.kpi",h("small",x[0]),h("b.num",x[1]),h("span",x[2])))});
+  m.appendChild(k);
+  var fl=h("div.fil",{role:"group","aria-label":"Filtro"});[["all","Todos ("+L.length+")"],["today","Hoy ("+today.length+")"],["pend","Pendientes ("+pend.length+")"]].forEach(function(x){fl.appendChild(h("button",{type:"button","aria-pressed":String(V.f===x[0]),onclick:function(){V.f=x[0];render()}},x[1]))});m.appendChild(fl);
+  var F=V.f==="today"?today:V.f==="pend"?pend:L;
+  if(V.q){var q=V.q.normalize("NFD").replace(/[̀-ͯ]/g,"");F=S.pts.filter(function(p){var s=(full(p)+" "+p.ficha+" "+p.tel.replace(/\s/g,"")).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");return s.indexOf(q)>-1||s.replace(/\s/g,"").indexOf(q.replace(/\s/g,""))>-1})}
+  F=F.slice().sort(function(a,b){var x=lastVisit(a),y=lastVisit(b);return x<y?1:x>y?-1:0});
+  if(V.q)m.appendChild(h("div.hint",{style:"margin-bottom:12px"},ic("users"),h("span","Búsqueda en las 6 sucursales: si una paciente va a otra sucursal, su expediente es el mismo.")));
+  var box=h("div.card.plist");box.appendChild(h("div.prow.hd",h("span","Paciente"),h("span.c2","Edad"),h("span.c3","Tratamiento"),h("span","Expediente"),h("span","Última visita")));
+  if(!F.length)box.appendChild(h("div.empty",V.q?"Ningún paciente coincide con “"+V.q+"”.":"Sin pacientes en este filtro."));
+  F.forEach(function(p){var st=status(p),pk=p.pkgs[0],c=pk&&cat(pk.cat);
+    box.appendChild(h("button.prow",{type:"button",onclick:function(){openExp(p.id)}},
+      h("span.who",h("span.av",ini(p)),h("span",{style:"min-width:0"},h("b",full(p)),h("small",p.ficha+(V.q&&p.br!==S.br?" · "+br(p.br).n:"")))),
+      h("span.tx.c2.num",age(p.fn)+" años"),
+      h("span.tx.c3",c?c.n+(c.s>1?" · "+pk.sessions.length+"/"+c.s:""):"Valoración"),
+      h("span.st",st.length?st.slice(0,2).map(function(s){return h("span.chip."+s[0],ic(s[0]==="bad"?"alert":"clock"),s[1])}):h("span.chip.ok",ic("check"),"Completo")),
+      h("span.tx",rel(lastVisit(p)))))});
+  m.appendChild(box)}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function openExp(id){V.v="exp";V.id=id;V.tab="res";render();scrollTo(0,0)}
+
+/* ---------- firma ---------- */
+function sigPad(){var wrap=h("div.sig"),cv=h("canvas"),ph=h("div.ph2","Firme aquí con el dedo o el mouse"),ln=h("div.ln"),clr=h("button.clr",{type:"button"},"Borrar");
+  wrap.appendChild(ln);wrap.appendChild(ph);wrap.appendChild(cv);wrap.appendChild(clr);
+  var ctx,dr=false,has=false,last=null,dpr=Math.max(1,window.devicePixelRatio||1);
+  function fit(){var r=wrap.getBoundingClientRect();if(!r.width)return;cv.width=r.width*dpr;cv.height=r.height*dpr;ctx=cv.getContext("2d");ctx.scale(dpr,dpr);ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#1b2b4b";ctx.lineWidth=2.4;has=false;ph.hidden=false}
+  function pt(e){var r=cv.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}}
+  cv.addEventListener("pointerdown",function(e){if(!ctx)fit();dr=true;last=pt(e);cv.setPointerCapture(e.pointerId);ph.hidden=true;wrap.classList.remove("err")});
+  cv.addEventListener("pointermove",function(e){if(!dr)return;var p=pt(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.quadraticCurveTo(last.x,last.y,(last.x+p.x)/2,(last.y+p.y)/2);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;has=true});
+  ["pointerup","pointercancel","pointerleave"].forEach(function(ev){cv.addEventListener(ev,function(){dr=false})});
+  clr.onclick=function(){fit()};
+  requestAnimationFrame(fit);
+  return {el:wrap,empty:function(){return !has},get:function(){var o=document.createElement("canvas");o.width=cv.width;o.height=cv.height;var c=o.getContext("2d");c.drawImage(cv,0,0);
+      /* recorta márgenes para que la firma ocupe poco espacio */
+      var d=c.getImageData(0,0,o.width,o.height).data,x0=o.width,y0=o.height,x1=0,y1=0;for(var y=0;y<o.height;y+=2)for(var x=0;x<o.width;x+=2){if(d[(y*o.width+x)*4+3]>10){if(x<x0)x0=x;if(y<y0)y0=y;if(x>x1)x1=x;if(y>y1)y1=y}}
+      if(x1<=x0)return null;var pad=8*dpr;x0=Math.max(0,x0-pad);y0=Math.max(0,y0-pad);x1=Math.min(o.width,x1+pad);y1=Math.min(o.height,y1+pad);
+      var t=document.createElement("canvas"),sc=Math.min(1,120/(y1-y0));t.width=(x1-x0)*sc;t.height=(y1-y0)*sc;t.getContext("2d").drawImage(o,x0,y0,x1-x0,y1-y0,0,0,t.width,t.height);return t.toDataURL("image/png")},
+    flag:function(){wrap.classList.add("err")},fake:function(){fit();var s=sigPath(Math.floor(Math.random()*1e6)),r=wrap.getBoundingClientRect(),k=Math.min((r.width-40)/s.w,(r.height-40)/50);ctx.save();ctx.translate(20,15);ctx.scale(k,k);ctx.lineWidth=2.4/k;ctx.stroke(new Path2D(s.p));ctx.restore();has=true;ph.hidden=true;wrap.classList.remove("err")}}}
+
+/* ---------- modal ---------- */
+function modal(title,build,opts){opts=opts||{};var sc=h("div.scrim",{role:"dialog","aria-modal":"true","aria-label":title}),md=h("div.modal"+(opts.sm?".sm":"")),mb=h("div.mb"),mf=h("div.mf");
+  function close(){sc.remove();document.removeEventListener("keydown",esc);document.body.style.overflow=""}
+  function esc(e){if(e.key==="Escape")close()}
+  md.appendChild(h("div.mh",h("h2",title),h("button.x",{type:"button","aria-label":"Cerrar",onclick:close},ic("x"))));md.appendChild(mb);md.appendChild(mf);sc.appendChild(md);
+  sc.addEventListener("click",function(e){if(e.target===sc)close()});document.addEventListener("keydown",esc);
+  document.body.appendChild(sc);document.body.style.overflow="hidden";build(mb,mf,close);return close}
+
+/* ---------- vista: nuevo paciente ---------- */
+var NP=null;
+function npReset(){NP={step:1,d:{ap:"",am:"",nom:"",sexo:"F",fn:"",tel:"",mail:"",dir:"",ocup:"",enf:"",med:"",her:"",qui:"",imp:"No",impT:"",ale:"",mot:"",trat:"rf",dx:""}}}
+npReset();
+var NSTEPS=["Datos personales","Antecedentes clínicos","Motivo de consulta","Aviso de privacidad"];
+function vNew(m){var d=NP.d;
+  m.appendChild(h("div.ph",h("div",h("h1","Nuevo paciente"),h("p","La paciente llena su ficha clínica en la tableta de recepción. Sucursal "+br(S.br).n+".")),h("div.act",h("button.btn.ghost",{type:"button",onclick:function(){var R=Math.random,fem=R()<.85;
+      d.nom=pick(R,fem?NOMF:NOMM);d.ap=pick(R,APS);d.am=pick(R,APS);d.sexo=fem?"F":"M";d.fn=addD(TODAY,-Math.floor((24+R()*30)*365.25));d.tel="81 "+(1000+Math.floor(R()*8999))+" "+(1000+Math.floor(R()*8999));
+      d.mail=(d.nom.split(" ")[0]+"."+d.ap).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\s/g,"")+"@correo.com";d.dir=pick(R,CALLES)+" "+(100+Math.floor(R()*2800))+", "+pick(R,COLS);d.ocup=pick(R,fem?OCUPF:OCUPM);
+      d.enf="Ninguno";d.med=fem?"Anticonceptivos orales":"Ninguno";d.her="Diabetes (madre)";d.qui="Ninguno";d.imp="No";d.ale="Penicilina";d.mot="Flacidez y líneas de expresión en rostro";d.trat="rf";render()}},"Llenar con datos de ejemplo"))));
+  var ol=h("ol.steps");NSTEPS.forEach(function(s,i){ol.appendChild(h("li"+(NP.step===i+1?".on":NP.step>i+1?".done":""),(i+1)+". "+s))});m.appendChild(ol);
+  var card=h("div.card"),fb=h("div.fbox");card.appendChild(fb);
+  function fld(key,label,o){o=o||{};var tag=o.ta?"textarea":"input",a={id:"np-"+key,value:d[key]||"",oninput:function(){d[key]=this.value;this.classList.remove("err");if(key==="fn")render()}};
+    if(o.type)a.type=o.type;if(o.ph)a.placeholder=o.ph;if(o.max)a.max=o.max;if(o.ro){a.readonly=true;a.tabindex="-1"}
+    var el=h(tag,a);if(o.ta)el.value=d[key]||"";
+    var lb=h("span.lb",o.pk?h("span.pk",label):label,o.ng?h("button.ng",{type:"button",onclick:function(){d[key]=o.ng;var t=document.getElementById("np-"+key);t.value=o.ng;t.classList.remove("err")}},o.ng):null);
+    return h("label.f"+(o.c?"."+o.c:""),lb,el)}
+  if(NP.step===1){fb.appendChild(h("h2","Antecedentes personales"));fb.appendChild(h("p.d","Los mismos datos de la ficha en papel, con la letra siempre legible."));
+    var g=h("div.fg");g.appendChild(fld("ap","Apellido paterno",{pk:1,c:"s2"}));g.appendChild(fld("am","Apellido materno",{pk:1,c:"s2"}));g.appendChild(fld("nom","Nombre(s)",{pk:1,c:"s2"}));
+    var sx=h("div.pills");[["F","Femenino"],["M","Masculino"]].forEach(function(x){sx.appendChild(h("button",{type:"button","aria-pressed":String(d.sexo===x[0]),onclick:function(){d.sexo=x[0];render()}},x[1]))});
+    g.appendChild(h("div.f.s2",h("span.lb","Sexo"),sx));
+    g.appendChild(fld("fn","Fecha de nacimiento",{type:"date",max:TODAY,c:"s2",pk:1}));
+    g.appendChild(h("label.f.s2",h("span.lb","Edad"),h("input.ro",{value:d.fn?age(d.fn)+" años":"Se calcula sola",readonly:true,tabindex:"-1"})));
+    g.appendChild(fld("tel","Teléfono de contacto",{type:"tel",ph:"81 0000 0000",pk:1}));g.appendChild(fld("mail","Email",{type:"email",ph:"nombre@correo.com"}));
+    g.appendChild(fld("dir","Dirección",{c:"s4",pk:1}));g.appendChild(fld("ocup","Ocupación u oficio",{c:"s2",pk:1}));
+    fb.appendChild(g);
+    if(d.fn&&age(d.fn)<18)fb.appendChild(h("div.hint",{style:"margin-top:14px"},ic("shield"),h("span","Paciente menor de edad: el consentimiento lo firmará su madre, padre o tutor.")))}
+  if(NP.step===2){fb.appendChild(h("h2","Antecedentes clínicos"));fb.appendChild(h("p.d","Si no aplica, la paciente toca “Ninguno” en lugar de dejarlo en blanco."));
+    fb.appendChild(h("div.rule",ic("alert"),h("span",h("b","Importante: no dejar espacios vacíos. "),"Igual que en su formato: el sistema no deja avanzar hasta que cada pregunta tenga respuesta.")));
+    var g2=h("div.fg");g2.appendChild(fld("enf","Enfermedades",{ta:1,ng:"Ninguno",pk:1}));g2.appendChild(fld("med","Medicamentos que toma actualmente",{ta:1,ng:"Ninguno",pk:1}));
+    g2.appendChild(fld("her","Antecedentes hereditarios",{ta:1,ng:"Niega",pk:1}));g2.appendChild(fld("qui","Antecedentes quirúrgicos",{ta:1,ng:"Ninguno",pk:1}));
+    var ip=h("div.pills");["No","Sí"].forEach(function(x){ip.appendChild(h("button",{type:"button","aria-pressed":String(d.imp===x),onclick:function(){d.imp=x;if(x==="No")d.impT="";render()}},x))});
+    g2.appendChild(h("div.f.s2",h("span.lb",h("span.pk","Uso de implantes o dispositivos")),ip));
+    g2.appendChild(d.imp==="Sí"?fld("impT","Tipo",{c:"s4",ph:"Ej. implantes mamarios, DIU, marcapasos"}):h("div.f.s4"));
+    g2.appendChild(fld("ale","Alergias",{ta:1,ng:"Ninguna",pk:1,c:"s6"}));fb.appendChild(g2)}
+  if(NP.step===3){fb.appendChild(h("h2","Motivo de consulta"));fb.appendChild(h("p.d","El diagnóstico lo escribe el médico en la consulta, desde su propia sesión."));
+    var g3=h("div.fg");g3.appendChild(fld("mot","Motivo de consulta",{ta:1,c:"s6",pk:1,ph:"¿Qué le gustaría tratar?"}));
+    var se=h("select",{id:"np-trat",onchange:function(){d.trat=this.value}});CAT.forEach(function(c){var o=h("option",{value:c.id},c.n+" · "+money(c.p)+(c.s>1?" ("+c.s+" sesiones)":""));if(d.trat===c.id)o.selected=true;se.appendChild(o)});
+    g3.appendChild(h("label.f.s4",h("span.lb","Tratamiento de interés"),se));
+    g3.appendChild(h("label.f.s6",h("span.lb","Diagnóstico",S.role==="rec"?h("span.chip.mut",{style:"margin-left:6px"},ic("lock"),"Solo médico"):null),h("textarea",{readonly:S.role==="rec"?true:null,placeholder:S.role==="rec"?"Lo llena el médico durante la valoración":"Escriba el diagnóstico",oninput:function(){d.dx=this.value},class:S.role==="rec"?"ro":null})));
+    fb.appendChild(g3)}
+  var pad=null;
+  if(NP.step===4){fb.appendChild(h("h2","Aviso de privacidad"));fb.appendChild(h("p.d","La paciente lo lee y firma en la misma tableta."));
+    fb.appendChild(h("div.legal",h("p","Lazer Medicina Estética es responsable del tratamiento de sus datos personales, incluidos datos de salud considerados sensibles, que se utilizarán para integrar su expediente clínico, brindarle atención médica, dar seguimiento a sus tratamientos y cumplir con la normativa sanitaria."),h("p","Sus datos se resguardan en un sistema con acceso por usuario y contraseña, conexión cifrada y respaldos. Solo el personal autorizado puede consultarlos y cada acceso queda registrado."),h("p","Puede ejercer sus derechos de acceso, rectificación, cancelación u oposición en recepción o por correo. (Texto de ejemplo: se sustituye por el aviso de privacidad oficial de la clínica.)")));
+    var ck=h("input",{type:"checkbox",id:"np-ok"});fb.appendChild(h("label.toggle",{style:"margin:14px 0"},ck,"He leído y acepto el aviso de privacidad"));
+    pad=sigPad();fb.appendChild(h("div.sigb",h("div.who2",h("span","Firma de "+(full(d)||"la paciente"))),pad.el,h("small","Fecha y hora se guardan solas: "+fDL(TODAY)+", "+fT(nowM())+".")));
+    fb.appendChild(h("button.btn.ghost.sm",{type:"button",style:"margin-top:8px",onclick:function(){pad.fake();ck.checked=true}},"Firmar con firma de ejemplo"))}
+  var fn=h("div.fnav");
+  if(NP.step>1)fn.appendChild(h("button.btn.l",{type:"button",onclick:function(){NP.step--;render()}},"Atrás"));
+  fn.appendChild(h("button.btn.pri",{type:"button",onclick:function(){
+    var req={1:["ap","am","nom","fn","tel","dir","ocup"],2:["enf","med","her","qui","ale"].concat(d.imp==="Sí"?["impT"]:[]),3:["mot"]}[NP.step]||[],bad=[];
+    req.forEach(function(k){if(!String(d[k]||"").trim()){bad.push(k);var el=document.getElementById("np-"+k);if(el)el.classList.add("err")}});
+    if(NP.step===1&&d.tel&&d.tel.replace(/\D/g,"").length!==10){bad.push("tel");document.getElementById("np-tel").classList.add("err")}
+    if(bad.length){var e0=document.getElementById("np-"+bad[0]);if(e0)e0.focus();toast(NP.step===2?"No se pueden dejar espacios vacíos. Use “Ninguno” si no aplica.":"Complete los campos marcados en rojo.");return}
+    if(NP.step<4){NP.step++;render();scrollTo(0,0);return}
+    if(!document.getElementById("np-ok").checked){toast("La paciente debe aceptar el aviso de privacidad.");return}
+    if(pad.empty()){pad.flag();toast("Falta la firma de la paciente.");return}
+    var b=br(S.br),p={id:S.br+"-n"+Date.now(),ficha:b.pf+"-00"+(S.seq[S.br]++),br:S.br,nom:d.nom.trim(),ap:d.ap.trim(),am:d.am.trim(),sexo:d.sexo,fn:d.fn,tel:d.tel.trim(),mail:d.mail.trim(),dir:d.dir.trim(),ocup:d.ocup.trim(),
+      ant:{enf:d.enf.trim(),med:d.med.trim(),her:d.her.trim(),qui:d.qui.trim(),imp:d.imp,impT:d.impT.trim(),ale:d.ale.trim()},mot:d.mot.trim(),dx:d.dx.trim(),created:TODAY,by:me().n,priv:{at:TODAY,sig:pad.get()},cons:[],pkgs:[],photos:[],notes:[],log:[],mine:true};
+    var c=cat(d.trat);p.pkgs.push({id:"pk"+Date.now(),cat:c.id,precio:c.p,ses:c.s,start:TODAY,sessions:[],pays:[]});
+    log(p,"Creó la ficha clínica "+p.ficha+" en tableta");log(p,"Firmó el aviso de privacidad","pac");
+    S.pts.push(p);save();npReset();openExp(p.id);toast("Expediente "+p.ficha+" creado. Ni una hoja impresa.")}},NP.step<4?"Continuar":"Crear expediente"));
+  card.appendChild(fn);m.appendChild(card)}
+
+/* ---------- vista: expediente ---------- */
+function vExp(m){var p=S.pts.filter(function(x){return x.id===V.id})[0];if(!p){V.v="pts";return vPts(m)}
+  var st=status(p),ale=p.ant.ale&&!/^ningun/i.test(p.ant.ale);
+  var head=h("div.card.xhead",h("span.av",ini(p)),h("div",h("h1",full(p)),
+    h("div.meta",h("span",h("b.mono",p.ficha)),h("span",age(p.fn)+" años · "+(p.sexo==="F"?"Femenino":"Masculino")),h("span",p.tel),h("span","Sucursal "+br(p.br).n),h("span","Alta: "+fD(p.created))),
+    h("div.tags",ale&&canClin()?h("span.chip.bad",ic("alert"),"Alergia: "+p.ant.ale):null,complete(p)?h("span.chip.ok",ic("check"),"Expediente completo"):st.slice(0,3).map(function(s){return h("span.chip."+s[0],ic(s[0]==="bad"?"alert":"clock"),s[1])}))),
+    h("div.xa",h("button.btn.sm",{type:"button",onclick:function(){V.v="pts";render()}},"Volver a pacientes")));
+  m.appendChild(head);
+  var g=h("div.xgrid"),left=h("div"),side=h("aside.xside");g.appendChild(left);g.appendChild(side);m.appendChild(g);
+  var T=[["res","Ficha clínica"],["con","Consentimientos",p.cons.length],["ses","Sesiones y pagos"],["fot","Fotos",p.photos.length],["not","Notas clínicas",p.notes.length],["log","Bitácora"]];
+  var tb=h("div.tabs",{role:"tablist"});T.forEach(function(t){tb.appendChild(h("button",{type:"button",role:"tab","aria-selected":String(V.tab===t[0]),onclick:function(){V.tab=t[0];render()}},t[1],t[2]!=null?h("i",t[2]):null))});left.appendChild(tb);requestAnimationFrame(function(){var a=tb.querySelector("[aria-selected=true]");if(a&&tb.scrollWidth>tb.clientWidth)tb.scrollLeft=Math.max(0,a.offsetLeft-tb.offsetLeft-40)});
+  ({res:tRes,con:tCon,ses:tSes,fot:tFot,not:tNot,log:tLog})[V.tab](left,p);
+  /* lista de verificación */
+  var ck=h("div.card.sec",h("h3","Expediente sin papel")),ul=h("ul.chk");
+  function it(ok,t,s,btn){ul.appendChild(h("li."+(ok?"y":"n"),h("span.ic",ic(ok?"check":"clock")),h("div",t,s?h("small",s):null,!ok&&btn?btn:null)))}
+  it(fichaOk(p),"Ficha clínica y estética",fichaOk(p)?"Sin espacios vacíos":"Faltan datos",null);
+  it(!!p.priv.sig,"Aviso de privacidad firmado",fD(p.priv.at));
+  p.pkgs.forEach(function(pk){var c=cat(pk.cat),cs=consFor(p,pk),ok=cs.some(consOk);
+    it(ok,"Consentimiento: "+c.n,ok?"4 de 4 firmas":cs.length?"Faltan firmas":"Sin firmar",S.role!=="dir"?h("button.btn.sm",{type:"button",onclick:function(){if(cs.length)openSign(p,cs[0]);else newCons(p,pk)}},ic("pen"),cs.length?"Completar":"Firmar"):null)});
+  var hasS=p.pkgs.some(function(pk){return pk.sessions.length});
+  it(!hasS||p.photos.some(function(f){return f.kind==="antes"}),"Foto de antes",hasS?(p.photos.length?p.photos.length+(p.photos.length===1?" foto":" fotos"):"Pendiente"):"Se toma en la primera sesión",S.role!=="dir"?h("button.btn.sm",{type:"button",onclick:function(){V.tab="fot";render()}},ic("cam"),"Tomar"):null);
+  var unsigned=0;p.pkgs.forEach(function(pk){pk.sessions.forEach(function(s){if(!s.sig)unsigned++})});
+  it(!unsigned,"Sesiones firmadas por la paciente",unsigned?unsigned+" sin firma":"Al día",S.role!=="dir"?h("button.btn.sm",{type:"button",onclick:function(){V.tab="ses";render()}},"Ver"):null);
+  ck.appendChild(ul);side.appendChild(ck);
+  side.appendChild(h("div.card.sec",h("h3","Seguridad"),h("div.hint",ic("shield"),h("span","Cada cambio queda en la bitácora con nombre, fecha y hora. Las notas firmadas no se borran: se corrigen agregando una nota nueva."))))}
+
+function tRes(m,p){var a=p.ant;
+  m.appendChild(h("div.card.sec",h("h3","Antecedentes personales"),kv([["Nombre",full(p)],["No. ficha",p.ficha],["Dirección",p.dir],["Teléfono de contacto",p.tel],["Email",p.mail||"No proporcionó"],["Fecha de nacimiento",fD(p.fn)+" · "+age(p.fn)+" años"],["Ocupación u oficio",p.ocup]])));
+  if(!canClin()){m.appendChild(h("div.card.sec",h("h3","Antecedentes clínicos y diagnóstico"),h("div.lock",ic("lock"),h("div",h("b","Información clínica protegida. "),"Dirección ve datos administrativos y reportes; los antecedentes, diagnósticos y notas solo los ve el personal médico."))));return}
+  m.appendChild(h("div.card.sec",h("h3","Antecedentes clínicos"),kv([["Enfermedades",a.enf],["Medicamentos actuales",a.med],["Antecedentes hereditarios",a.her],["Antecedentes quirúrgicos",a.qui],["Implantes o dispositivos",a.imp+(a.impT?" · "+a.impT:"")],["Alergias",a.ale,!/^ningun/i.test(a.ale)?"al":null]])));
+  var dxBox=h("div.card.sec",h("h3","Consulta",S.role==="med"?h("span.act",h("button.btn.sm",{type:"button",onclick:function(){editDx(p)}},ic("pen"),"Editar diagnóstico")):null));
+  dxBox.appendChild(kv([["Motivo de consulta",p.mot],["Diagnóstico",p.dx||(S.role==="med"?"Pendiente de escribir":"Lo escribe el médico en la valoración")],["Tratamiento",p.pkgs.map(function(pk){var c=cat(pk.cat);return c.n+(c.s>1?" ("+c.s+" sesiones)":"")}).join(", ")||"Por definir"]]));
+  m.appendChild(dxBox)}
+function kv(rows){var dl=h("dl.kv");rows.forEach(function(r){dl.appendChild(h("dt",r[0]));dl.appendChild(h("dd"+(r[2]?"."+r[2]:""),r[1]==null||r[1]===""?"—":r[1]))});return dl}
+function editDx(p){modal("Diagnóstico · "+full(p),function(mb,mf,close){var ta=h("textarea",{rows:"4",style:"width:100%;border:1px solid var(--line);border-radius:10px;padding:10px"});ta.value=p.dx||"";mb.appendChild(h("label.f.s6",h("span.lb","Diagnóstico"),ta));
+  mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){p.dx=ta.value.trim();log(p,"Actualizó el diagnóstico");save();close();render();toast("Diagnóstico guardado y registrado en la bitácora.")}},"Guardar"))},{sm:true})}
+
+/* consentimientos */
+function tCon(m,p){var box=h("div.card.sec",h("h3","Consentimiento informado",S.role!=="dir"?h("span.act",h("button.btn.sm.pri",{type:"button",onclick:function(){newCons(p,p.pkgs[0])}},ic("plus"),"Nuevo consentimiento")):null));
+  if(!p.cons.length)box.appendChild(h("div.empty","Aún no hay consentimientos firmados para esta paciente."));
+  p.cons.slice().reverse().forEach(function(c){var n=["pac","med","t1","t2"].filter(function(k){return c.sigs[k]}).length;
+    box.appendChild(h("div.doc",h("span.di",ic("doc")),h("div",h("b",c.tipos.trat||c.tipos.qui||"Procedimiento"),h("small",fD(c.at)+" · "+fT(c.t)+" · "+c.names.med+" · huella "+c.hash)),
+      h("div.r",n===4?h("span.chip.ok",ic("check"),"4 de 4 firmas"):h("span.chip.warn",ic("clock"),n+" de 4 firmas"),h("button.btn.sm",{type:"button",onclick:function(){viewCons(p,c)}},"Ver documento"),n<4&&S.role!=="dir"?h("button.btn.sm.pink",{type:"button",onclick:function(){openSign(p,c)}},ic("pen"),"Completar firmas"):null)))});
+  m.appendChild(box);
+  m.appendChild(h("div.hint",ic("shield"),h("span","El consentimiento usa el mismo texto de su formato en papel, con fecha y hora automáticas y las cuatro firmas: paciente o representante legal, médico y dos testigos (artículo 83).")))}
+function legal(){return [h("p","Para dar cumplimiento a las disposiciones vigentes, marcadas por la Ley General de Salud y en los artículos 80, 81, 82, 83 y otros relacionados al Reglamento de la Ley General de Salud en materia de prestaciones de servicios de atención médica."),
+  h("p","Doy mi consentimiento al médico tratante responsable de mi intervención, al (los) médicos interconsultantes que él decida involucrar en mi caso, para que se practique(n) el (los) procedimiento(s) médico quirúrgico(s) que está(n) indicados en el presente consentimiento."),
+  h("p","Acepto y reconozco que no habrá devoluciones y/o reembolsos de los pagos efectuados a la clínica para iniciar cualquier procedimiento. No habrá reembolso total y/o parcial cancelación bajo ninguna circunstancia."),
+  h("p","En base al artículo 83 de la Ley General de la Salud este procedimiento requiere de dos testigos. Todo lo anterior con fines diagnósticos y/o terapéuticos de los procedimientos que me afectan y el o los términos de los artículos 80, 81, 82 y 83 de la Ley General de Salud. Manifiesto (manifestamos) que he (hemos) sido informado(s) y que yo (nosotros) entendí (entendemos) claramente sobre:"),
+  h("ul",h("li","Los fines de este documento."),h("li","La naturaleza de (los) procedimiento(s) de diagnóstico y/o terapéutico-quirúrgico, que se me propone(n)."),h("li","Las alternativas posibles."),h("li","Los riesgos inherentes a los procedimientos (peligros, fracasos, complicaciones tales como: problema con el uso de anestesia, hemorragias, infecciones, problemas respiratorios, reacciones a las drogas, daño cerebral e incluso la muerte y lo que esto pudiera repercutir en lo económico), los riesgos que implica el no llevar a cabo el (los) procedimiento(s) que se me ha(n) indicado, así como los beneficios del mismo."),h("li","Comprendo lo anterior declarado mi conformidad y autorización para que se me practique(n) dicho(s) procedimiento(s).")),
+  h("p","En caso de incapacidad legal (menor de edad) o física del paciente, este consentimiento debe ser firmado por el familiar más cercano en vínculo que le acompañe o por un tutor o representante legal.")]}
+function newCons(p,pk){var c=pk?cat(pk.cat):null,minor=age(p.fn)<18,ty={qui:{on:false,v:""},anes:{on:!!(c&&c.lote),v:c&&c.lote?"Tópica (crema anestésica)":""},rad:{on:false,v:""},trat:{on:true,v:c?c.n:""}};
+  modal("Consentimiento informado · "+full(p),function(mb,mf,close){
+    mb.appendChild(h("div",{style:"display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px"},h("span.chip.mut","San Pedro Garza García, Nuevo León"),h("span.chip.mut","Fecha: "+fD(TODAY)),h("span.chip.mut","Hora: "+fT(nowM())),h("span.chip.mut","Sexo: "+p.sexo)));
+    mb.appendChild(h("p",{style:"margin:0 0 6px"},"Yo: ",h("b",p.ap+" "+p.am+" "+p.nom)," (apellido paterno, materno, nombre)"));
+    mb.appendChild(h("div.cap",{style:"margin:14px 0 8px"},"Procedimiento autorizado"));
+    var pt=h("div.ptypes");[["qui","Procedimiento quirúrgico (nombre)"],["anes","Anestesia (tipo)"],["rad","Estudio(s) radiológico(s)"],["trat","Tratamiento corporal o facial"]].forEach(function(x){var t=ty[x[0]],cb=h("input",{type:"checkbox"}),inp=h("input",{type:"text",value:t.v,placeholder:"Escriba el nombre",oninput:function(){t.v=this.value;if(this.value){t.on=true;cb.checked=true}}});cb.checked=t.on;cb.onchange=function(){t.on=this.checked};pt.appendChild(h("label.ptype",cb,h("span",x[1]),inp))});
+    mb.appendChild(pt);
+    mb.appendChild(h("div.cap",{style:"margin:18px 0 8px"},"Texto del consentimiento"));mb.appendChild(h("div.legal",legal()));
+    var rep=h("input",{type:"text",placeholder:"Nombre y parentesco",style:"border:1px solid var(--line);border-radius:8px;padding:8px 10px;flex:1;min-width:200px"}),rc=h("input",{type:"checkbox"});rc.checked=minor;
+    var rrow=h("div",{style:"display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0"},h("label.toggle",rc,"Firma un representante legal (menor de edad o incapacidad)"),rep);rep.hidden=!minor;rc.onchange=function(){rep.hidden=!this.checked};mb.appendChild(rrow);
+    var pads={},sel=h("select");MEDS.forEach(function(n){sel.appendChild(h("option",n))});if(pk&&pk.sessions[0])sel.value=pk.sessions[0].by.indexOf("Dr")===0?pk.sessions[0].by:MEDS[0];
+    var t1=h("input",{value:"Ana Treviño (Recepción)"}),t2=h("input",{value:"",placeholder:"Nombre del testigo 2"});
+    var sg=h("div.sigs");[["pac",h("span","Paciente o representante legal"),null],["med",h("span","Médico"),sel],["t1",h("span","Testigo 1"),t1],["t2",h("span","Testigo 2"),t2]].forEach(function(x){pads[x[0]]=sigPad();sg.appendChild(h("div.sigb",h("div.who2",x[1],x[2]),pads[x[0]].el))});
+    mb.appendChild(h("div.cap",{style:"margin:6px 0 8px"},"Firmas"));mb.appendChild(sg);
+    mb.appendChild(h("div",{style:"margin-top:10px"},h("button.btn.ghost.sm",{type:"button",onclick:function(){Object.keys(pads).forEach(function(k){pads[k].fake()});if(!t2.value)t2.value="Paola Ríos (Recepción)"}},"Firmar todo con firmas de ejemplo")));
+    mf.appendChild(h("span.l","Puede guardarse con firmas pendientes y completarse después."));
+    mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));
+    mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){
+      if(!Object.keys(ty).some(function(k){return ty[k].on&&ty[k].v.trim()})){toast("Marque y escriba al menos un procedimiento autorizado.");return}
+      if(pads.pac.empty()){pads.pac.flag();toast("Falta la firma de la paciente o su representante.");return}
+      if(rc.checked&&!rep.value.trim()){rep.focus();toast("Escriba el nombre y parentesco del representante legal.");return}
+      var cn={id:"c"+Date.now(),at:TODAY,t:nowM(),tipos:{qui:ty.qui.on?ty.qui.v.trim():"",anes:ty.anes.on?ty.anes.v.trim():"",rad:ty.rad.on?ty.rad.v.trim():"",trat:ty.trat.on?ty.trat.v.trim():""},rep:rc.checked?rep.value.trim():"",names:{med:sel.value,t1:t1.value.trim()||"Testigo 1",t2:t2.value.trim()||"Testigo 2"},sigs:{}};
+      ["pac","med","t1","t2"].forEach(function(k){cn.sigs[k]=pads[k].empty()?null:pads[k].get()});
+      cn.hash=hash(p.ficha+cn.at+cn.t+JSON.stringify(cn.tipos)+full(p));p.cons.push(cn);
+      log(p,"Generó consentimiento informado ("+(cn.tipos.trat||cn.tipos.qui)+") · huella "+cn.hash);
+      var n=["pac","med","t1","t2"].filter(function(k){return cn.sigs[k]}).length;save();close();V.tab="con";render();
+      toast(n===4?"Consentimiento firmado y guardado en el expediente.":"Guardado con "+n+" de 4 firmas. Queda marcado como pendiente.")}},ic("check"),"Guardar consentimiento"))})}
+function openSign(p,c){modal("Completar firmas",function(mb,mf,close){var pads={},sg=h("div.sigs"),lab={pac:"Paciente o representante",med:"Médico: "+c.names.med,t1:"Testigo 1: "+c.names.t1,t2:"Testigo 2: "+c.names.t2};
+  ["pac","med","t1","t2"].forEach(function(k){if(c.sigs[k]){sg.appendChild(h("div.sigb",h("div.who2",h("span",lab[k]),h("span.chip.ok",ic("check"),"Firmado")),h("div",{style:"height:150px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px"},sigEl(c.sigs[k]))));return}
+    pads[k]=sigPad();sg.appendChild(h("div.sigb",h("div.who2",h("span",lab[k]),h("span.chip.warn","Pendiente")),pads[k].el))});
+  mb.appendChild(h("p",{style:"margin:0 0 14px;color:var(--t2)"},(c.tipos.trat||c.tipos.qui)+" · "+fD(c.at)+". Las firmas ya registradas no se pueden modificar."));mb.appendChild(sg);
+  mb.appendChild(h("button.btn.ghost.sm",{type:"button",style:"margin-top:10px",onclick:function(){Object.keys(pads).forEach(function(k){pads[k].fake()})}},"Firmar con firmas de ejemplo"));
+  mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){var n=0;Object.keys(pads).forEach(function(k){if(!pads[k].empty()){c.sigs[k]=pads[k].get();n++}});if(!n){toast("Agregue al menos una firma.");return}
+    log(p,"Agregó "+n+" firma(s) al consentimiento "+c.hash);save();close();render();toast(consOk(c)?"Consentimiento completo: 4 de 4 firmas.":"Firmas guardadas.")}},"Guardar firmas"))})}
+function viewCons(p,c){modal("Consentimiento informado",function(mb,mf,close){var pp=h("div.paper.printme");
+  pp.appendChild(h("div.plogo",h("span.logo",{style:"pointer-events:none"},h("span.lz","LAZER"),h("span.me","Medicina",h("br"),"Estética"))));
+  pp.appendChild(h("h3","CONSENTIMIENTO INFORMADO"));pp.appendChild(h("h4","Para procedimientos quirúrgicos y no quirúrgicos"));
+  pp.appendChild(h("p","San Pedro Garza García, Nuevo León. Fecha: ",h("span.fld",fD(c.at))," Hora: ",h("span.fld",fT(c.t))," Sexo: ",h("span.fld",{style:"min-width:30px"},p.sexo)));
+  pp.appendChild(h("p","Yo: ",h("span.fld",p.ap)," ",h("span.fld",p.am)," ",h("span.fld",p.nom),c.rep?h("span"," · Representante legal: ",h("span.fld",c.rep)):null));
+  var pro=h("div.pro");[["qui","Procedimiento quirúrgico"],["anes","Anestesia tipo"],["rad","Estudio(s) radiológico(s)"],["trat","Tratamiento corporal o facial"]].forEach(function(x){pro.appendChild(h("div",h("b",c.tipos[x[0]]?"SÍ":"—"),h("span",x[1]+": "+(c.tipos[x[0]]||""))))});pp.appendChild(pro);
+  legal().forEach(function(e){pp.appendChild(e)});
+  var sg=h("div.sgrid");[["pac",c.rep?c.rep+" (representante legal)":full(p),"Nombre y firma del paciente o representante legal"],["med",c.names.med,"Nombre y firma del médico"],["t1",c.names.t1,"Nombre y firma del testigo 1"],["t2",c.names.t2,"Nombre y firma del testigo 2"]].forEach(function(x){sg.appendChild(h("div",c.sigs[x[0]]?sigEl(c.sigs[x[0]]):h("div",{style:"height:54px;display:grid;place-items:center"},h("span.chip.warn","Firma pendiente")),h("div.nm",x[1]),x[2]))});pp.appendChild(sg);
+  pp.appendChild(h("div.seal",h("span","Expediente "+p.ficha),h("span","Huella del documento: "+c.hash),h("span","Generado en sistema · sin papel")));
+  mb.appendChild(pp);
+  mf.appendChild(h("span.l","Documento de solo lectura."));mf.appendChild(h("button.btn",{type:"button",onclick:function(){window.print()}},ic("print"),"Imprimir o guardar PDF"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:close},"Cerrar"))})}
+
+/* sesiones y pagos */
+function tSes(m,p){if(S.role!=="dir")m.appendChild(h("div",{style:"display:flex;justify-content:flex-end;margin-bottom:12px"},h("button.btn.sm",{type:"button",onclick:function(){newPkg(p)}},ic("plus"),"Agregar tratamiento")));
+  p.pkgs.forEach(function(pk){var c=cat(pk.cat),paid=paidOf(pk),done=pk.sessions.length,box=h("div.card.pkg");
+    box.appendChild(h("div.ptop",h("div",h("h4",c.n),h("small",(c.s>1?c.s+" sesiones · ":"")+money(pk.precio)+" · inició "+fD(pk.start))),h("div",{style:"margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"},done>=c.s?h("span.chip.ok",ic("check"),"Tratamiento terminado"):h("span.chip.mut","Sesión "+Math.min(done+1,c.s)+" de "+c.s),paid>=pk.precio?h("span.chip.ok","Liquidado"):h("span.chip.pk","Saldo "+money(pk.precio-paid)))));
+    box.appendChild(h("div.bars",h("div.bar",h("small",h("span","Sesiones"),h("b.num",done+" de "+c.s)),h("div.tr",h("i",{style:"width:"+(done/c.s*100)+"%"}))),h("div.bar.p",h("small",h("span","Pagado"),h("b.num",money(paid)+" de "+money(pk.precio))),h("div.tr",h("i",{style:"width:"+Math.min(100,paid/pk.precio*100)+"%"})))));
+    var tw=h("div.two"),s1=h("div"),s2=h("div");tw.appendChild(s1);tw.appendChild(s2);box.appendChild(tw);
+    s1.appendChild(h("div.cap",{style:"margin-bottom:6px"},"Número de sesiones"));
+    var t=h("table.tbl"),th=h("tr",h("th",""),h("th","Fecha"),h("th","Aplicó"),c.lote?h("th","Lote"):null,h("th","Firma paciente"));t.appendChild(h("thead",th));var tbd=h("tbody");
+    for(var i=1;i<=c.s;i++){(function(i){var s=pk.sessions[i-1];
+      if(s)tbd.appendChild(h("tr",h("td.n",i),h("td.num",fD(s.d)),h("td",s.by.replace(" (cosmetóloga)","")),c.lote?h("td.mono",{style:"font-size:12px"},s.lote):null,h("td",s.sig?sigEl(s.sig):S.role!=="dir"?h("button.btn.sm.pink",{type:"button",onclick:function(){signSession(p,pk,s)}},ic("pen"),"Firmar"):h("span.chip.warn","Pendiente"))));
+      else if(i===done+1&&S.role!=="dir")tbd.appendChild(h("tr",h("td.n",i),h("td",{colspan:c.lote?4:3},h("button.btn.sm.pri",{type:"button",onclick:function(){newSession(p,pk)}},ic("plus"),"Registrar sesión "+i))));
+      else tbd.appendChild(h("tr.fut",h("td.n",i),h("td",{colspan:c.lote?4:3},"—")))})(i)}
+    t.appendChild(tbd);s1.appendChild(t);
+    s2.appendChild(h("div.cap",{style:"margin-bottom:6px"},"Pagos"));
+    var t2=h("table.tbl");t2.appendChild(h("thead",h("tr",h("th",""),h("th","Fecha"),h("th","Método"),h("th.r","Monto"))));var tb2=h("tbody");
+    pk.pays.forEach(function(x,j){tb2.appendChild(h("tr",h("td.n",j+1),h("td.num",fD(x.d)),h("td",x.met),h("td.r.num",money(x.amt))))});
+    if(!pk.pays.length)tb2.appendChild(h("tr.fut",h("td",{colspan:4},"Sin pagos registrados")));
+    t2.appendChild(tb2);s2.appendChild(t2);
+    s2.appendChild(h("div.saldo",h("span","Saldo"),h("span"+(pk.precio-paid>0?".b":""),money(Math.max(0,pk.precio-paid)))));
+    if(paid<pk.precio&&S.role!=="dir")s2.appendChild(h("button.btn.sm",{type:"button",style:"margin-top:10px",onclick:function(){newPay(p,pk)}},ic("cash"),"Registrar pago"));
+    m.appendChild(box)})}
+function newSession(p,pk){var c=cat(pk.cat),n=pk.sessions.length+1;
+  if(!consFor(p,pk).some(consOk)){toast("Antes de la primera sesión, el consentimiento debe tener sus 4 firmas.");V.tab="con";render();return}
+  modal("Registrar sesión "+n+" · "+c.n,function(mb,mf,close){var by=h("select");MEDS.concat(["Lic. Karla Rangel (cosmetóloga)"]).forEach(function(x){by.appendChild(h("option",x))});if(S.role==="med")by.value=STAFF.med.n;
+    var g=h("div.fg");g.appendChild(h("label.f",h("span.lb","Aplicó"),by));var lote=h("input",{placeholder:"Ej. TB2611-A"}),cad=h("input",{type:"date"});
+    if(c.lote){g.appendChild(h("label.f",h("span.lb",h("span.pk","Lote del producto")),lote));g.appendChild(h("label.f",h("span.lb","Caducidad"),cad))}
+    var nt=h("textarea",{rows:"2",placeholder:"Zona tratada, parámetros, reacción"});g.appendChild(h("label.f.s6",h("span.lb","Nota de la sesión (opcional)"),nt));mb.appendChild(g);
+    var pad=sigPad();mb.appendChild(h("div.sigb",{style:"margin-top:14px"},h("div.who2",h("span","Firma de "+full(p)),h("span",{style:"font-weight:500;color:var(--mut)"},fD(TODAY)+", "+fT(nowM()))),pad.el,h("small","Igual que la firma por sesión de su hoja de control. Si la paciente firma al salir, se guarda y queda pendiente.")));
+    mb.appendChild(h("button.btn.ghost.sm",{type:"button",style:"margin-top:8px",onclick:function(){pad.fake();if(c.lote&&!lote.value)lote.value="TB"+(2400+Math.floor(Math.random()*600))+"-A"}},"Firmar con firma de ejemplo"));
+    mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){
+      if(c.lote&&!lote.value.trim()){lote.focus();toast("En inyectables el lote es obligatorio, por trazabilidad.");return}
+      var s={n:n,d:TODAY,br:S.br,by:by.value,lote:lote.value.trim(),exp:cad.value,sig:pad.empty()?null:pad.get(),t:nowM()};pk.sessions.push(s);
+      if(nt.value.trim())p.notes.push({id:"n"+Date.now(),at:TODAY,t:nowM(),by:by.value,txt:"Sesión "+n+": "+nt.value.trim()});
+      log(p,"Registró sesión "+n+" de "+c.s+(s.lote?" · lote "+s.lote:""));save();close();render();toast(s.sig?"Sesión "+n+" registrada con firma de la paciente.":"Sesión "+n+" registrada. Queda pendiente la firma de la paciente.")}},ic("check"),"Guardar sesión"))})}
+function signSession(p,pk,s){modal("Firma de la sesión "+s.n,function(mb,mf,close){var pad=sigPad();mb.appendChild(h("div.sigb",h("div.who2",h("span","Firma de "+full(p))),pad.el));
+  mb.appendChild(h("button.btn.ghost.sm",{type:"button",style:"margin-top:8px",onclick:function(){pad.fake()}},"Firma de ejemplo"));
+  mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){if(pad.empty()){pad.flag();return}s.sig=pad.get();log(p,"Firmó la sesión "+s.n,"pac");save();close();render();toast("Firma guardada.")}},"Guardar firma"))},{sm:true})}
+function newPay(p,pk){var c=cat(pk.cat),bal=pk.precio-paidOf(pk);modal("Registrar pago · "+c.n,function(mb,mf,close){var amt=h("input",{type:"number",min:"1",max:String(bal),value:String(Math.min(bal,c.s>1?1500:bal)),inputmode:"numeric"}),met="Tarjeta",mp=h("div.pills");
+  ["Tarjeta","Efectivo","Transferencia"].forEach(function(x){mp.appendChild(h("button",{type:"button","aria-pressed":String(met===x),onclick:function(){met=x;[].forEach.call(mp.children,function(b){b.setAttribute("aria-pressed",String(b.textContent===met))})}},x))});
+  var g=h("div.fg");g.appendChild(h("label.f",h("span.lb","Monto"),amt));g.appendChild(h("div.f",h("span.lb","Método"),mp));mb.appendChild(g);mb.appendChild(h("p",{style:"color:var(--mut);font-size:13px;margin:12px 0 0"},"Saldo actual: "+money(bal)));
+  mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){var v=Math.round(+amt.value);if(!(v>0)||v>bal){amt.classList.add("err");toast("Escriba un monto entre $1 y "+money(bal)+".");return}
+    pk.pays.push({d:TODAY,amt:v,met:met,by:me().n});log(p,"Registró pago de "+money(v)+" ("+met.toLowerCase()+")");save();close();render();toast("Pago registrado. Saldo: "+money(bal-v)+".")}},ic("check"),"Registrar"))},{sm:true})}
+function newPkg(p){modal("Agregar tratamiento",function(mb,mf,close){var se=h("select");CAT.forEach(function(c){se.appendChild(h("option",{value:c.id},c.n+" · "+money(c.p)+(c.s>1?" ("+c.s+" sesiones)":"")))});
+  mb.appendChild(h("label.f.s6",h("span.lb","Tratamiento"),se));mb.appendChild(h("p",{style:"color:var(--mut);font-size:13px"},"Precios de ejemplo tomados de su catálogo público; se ajustan a su lista vigente."));
+  mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){var c=cat(se.value);p.pkgs.push({id:"pk"+Date.now(),cat:c.id,precio:c.p,ses:c.s,start:TODAY,sessions:[],pays:[]});log(p,"Agregó tratamiento: "+c.n);save();close();render();toast(c.n+" agregado. Falta su consentimiento firmado.")}},"Agregar"))},{sm:true})}
+
+/* fotos */
+function tFot(m,p){var box=h("div.card.sec",h("h3","Fotos de antes y después"));
+  if(S.role!=="dir"){var inp=h("input",{type:"file",accept:"image/*",capture:"environment",hidden:true}),kind="antes";
+    inp.onchange=function(){var f=this.files&&this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,700/Math.max(im.width,im.height)),cv=document.createElement("canvas");cv.width=im.width*k;cv.height=im.height*k;cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);
+      p.photos.push({id:"f"+Date.now(),d:TODAY,kind:kind,src:cv.toDataURL("image/jpeg",.78)});log(p,"Agregó foto de "+kind);save();render();toast("Foto guardada en el expediente, no en el celular de nadie.")};im.src=rd.result};rd.readAsDataURL(f)};
+    box.appendChild(h("div",{style:"display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"},h("button.btn.sm.pri",{type:"button",onclick:function(){kind="antes";inp.click()}},ic("cam"),"Tomar foto de antes"),h("button.btn.sm",{type:"button",onclick:function(){kind="después";inp.click()}},ic("cam"),"Tomar foto de después"),inp))}
+  if(!p.photos.length){box.appendChild(h("div.empty","Sin fotos todavía. En la tableta se toman con la cámara y se guardan directo en el expediente."));m.appendChild(box);return}
+  var a=p.photos.filter(function(f){return f.kind==="antes"})[0],d=p.photos.filter(function(f){return f.kind==="después"}).slice(-1)[0];
+  if(a&&d){var cmp=h("div.cmp",h("div.a",phImg(a)),h("div.b",phImg(d)),h("div.hd2"),h("span.chip.mut",{style:"position:absolute;left:10px;top:10px"},"Antes · "+fD(a.d)),h("span.chip.ok",{style:"position:absolute;right:10px;top:10px"},"Después · "+fD(d.d)));
+    function mv(e){var r=cmp.getBoundingClientRect(),x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));cmp.querySelector(".b").style.clipPath="inset(0 0 0 "+(x*100)+"%)";cmp.querySelector(".hd2").style.left=(x*100)+"%"}
+    cmp.addEventListener("pointerdown",function(e){cmp.setPointerCapture(e.pointerId);mv(e);cmp.onpointermove=mv});cmp.addEventListener("pointerup",function(){cmp.onpointermove=null});
+    box.appendChild(h("div",{style:"max-width:360px;margin-bottom:16px"},cmp,h("small",{style:"color:var(--mut);display:block;margin-top:6px"},"Deslice para comparar.")))}
+  var g=h("div.ph-grid");p.photos.slice().reverse().forEach(function(f){g.appendChild(h("div.pcard",h("div.im",phImg(f),h("span.tg.chip."+(f.kind==="antes"?"mut":"ok"),cap(f.kind))),h("div.ft",h("span",fD(f.d)),h("span",f.src?"Tomada en tableta":"Foto de ejemplo"))))});
+  box.appendChild(g);m.appendChild(box);
+  m.appendChild(h("div.hint",ic("lock"),h("span","Las fotos quedan dentro del expediente con acceso restringido, no en la galería del celular del personal.")))}
+function phImg(f){return f.src?h("img",{src:f.src,alt:"Foto "+f.kind}):(function(){var s=document.createElement("span");s.innerHTML=IC.face;return s.firstChild})()}
+
+/* notas */
+function tNot(m,p){if(!canClin()){m.appendChild(h("div.card.sec",h("div.lock",ic("lock"),h("div",h("b","Notas clínicas protegidas. "),"Solo las ve y escribe el personal médico."))));return}
+  var box=h("div.card.sec",h("h3","Notas clínicas"));
+  if(S.role==="med"){var ta=h("textarea",{rows:"3",placeholder:"Escriba la nota de evolución…",style:"width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px"});
+    box.appendChild(ta);box.appendChild(h("div",{style:"display:flex;justify-content:flex-end;margin-bottom:14px"},h("button.btn.sm.pri",{type:"button",onclick:function(){if(!ta.value.trim()){ta.focus();return}p.notes.push({id:"n"+Date.now(),at:TODAY,t:nowM(),by:STAFF.med.n,txt:ta.value.trim()});log(p,"Firmó nota clínica");save();render();toast("Nota firmada. Ya no se puede borrar, solo corregir.")}},ic("pen"),"Firmar nota")))}
+  else box.appendChild(h("div.hint",{style:"margin-bottom:14px"},ic("lock"),h("span","Recepción puede leer las notas; solo el médico las escribe.")));
+  p.notes.slice().reverse().forEach(function(n){var nt=h("div.note"+(n.fix?".fix":""),h("header",h("b",n.by),h("span",fD(n.at)+" · "+fT(n.t)),n.fix?h("span.chip.pk","Corrección"):h("span.chip.ok",ic("check"),"Firmada")),h("p",n.txt));
+    if(S.role==="med"&&!n.fix)nt.appendChild(h("button.btn.ghost.sm",{type:"button",style:"margin-top:4px;padding-left:0",onclick:function(){fixNote(p,n)}},"Agregar corrección"));box.appendChild(nt)});
+  m.appendChild(box)}
+function fixNote(p,n){modal("Corrección de nota",function(mb,mf,close){mb.appendChild(h("p",{style:"margin:0 0 10px;color:var(--t2)"},"La nota original se conserva tal cual. La corrección se agrega con su fecha y firma."));mb.appendChild(h("div.note",h("p",n.txt)));var ta=h("textarea",{rows:"3",style:"width:100%;border:1px solid var(--line);border-radius:10px;padding:10px"});mb.appendChild(ta);
+  mf.appendChild(h("button.btn",{type:"button",onclick:close},"Cancelar"));mf.appendChild(h("button.btn.pri",{type:"button",onclick:function(){if(!ta.value.trim())return;p.notes.push({id:"n"+Date.now(),at:TODAY,t:nowM(),by:STAFF.med.n,txt:"Corrige nota del "+fD(n.at)+": "+ta.value.trim(),fix:true});log(p,"Agregó corrección a nota clínica");save();close();render()}},"Firmar corrección"))},{sm:true})}
+
+/* bitácora */
+function tLog(m,p){var box=h("div.card.sec",h("h3","Bitácora del expediente")),ul=h("ul.log");
+  p.log.slice().sort(function(a,b){return a.at<b.at?1:a.at>b.at?-1:b.t-a.t}).forEach(function(l){ul.appendChild(h("li",h("time",fD(l.at)+" "+fT(l.t)),h("span",h("b",l.by)," · "+l.r+": "+l.a)))});
+  box.appendChild(ul);m.appendChild(box)}
+
+/* ---------- vista: dirección ---------- */
+function vDash(m){var range=V.r==="week"?7:1,since=addD(TODAY,-(range-1));function inR(d){return d>=since&&d<=TODAY}
+  m.appendChild(h("div.ph",h("div",h("h1","Dirección"),h("p","Las 6 sucursales · "+(range===1?cap(fDL(TODAY)):"Últimos 7 días"))),h("div.act",(function(){var sg=h("div.seg");[["day","Hoy"],["week","7 días"]].forEach(function(x){sg.appendChild(h("button",{type:"button","aria-pressed":String((V.r==="week")===(x[0]==="week")),onclick:function(){V.r=x[0];render()}},x[1]))});return sg})())));
+  var rows=BR.map(function(b){var L=S.pts.filter(function(p){return p.br===b.id}),at=0,nw=0,ses=0,cob=0,comp=0,saldo=0;
+    L.forEach(function(p){var vis=inR(p.created);p.pkgs.forEach(function(pk){pk.sessions.forEach(function(s){if(inR(s.d)){ses++;vis=true}});pk.pays.forEach(function(x){if(inR(x.d))cob+=x.amt});saldo+=Math.max(0,pk.precio-paidOf(pk))});if(vis)at++;if(inR(p.created))nw++;if(complete(p))comp++});
+    return {b:b,at:at,nw:nw,ses:ses,cob:cob,pct:L.length?Math.round(comp/L.length*100):0,saldo:saldo,n:L.length}});
+  var T=rows.reduce(function(a,r){a.at+=r.at;a.nw+=r.nw;a.ses+=r.ses;a.cob+=r.cob;a.saldo+=r.saldo;a.n+=r.n;a.c+=r.pct*r.n/100;return a},{at:0,nw:0,ses:0,cob:0,saldo:0,n:0,c:0});
+  var k=h("div.kpis");[["Pacientes atendidos",T.at,T.nw+" expedientes nuevos"],["Sesiones aplicadas",T.ses,"con firma de la paciente"],["Cobrado",money(T.cob),"pagos registrados en sistema"],["Expedientes completos",Math.round(T.c/T.n*100)+" %","del total de pacientes"]].forEach(function(x){k.appendChild(h("div.card.kpi",h("small",x[0]),h("b.num",x[1]),h("span",x[2])))});m.appendChild(k);
+  var mx=Math.max.apply(null,rows.map(function(r){return r.cob}))||1;
+  var t=h("table.brt");t.appendChild(h("thead",h("tr",h("th","Sucursal"),h("th.r","Atendidos"),h("th.r","Nuevos"),h("th.r","Sesiones"),h("th","Cobrado"),h("th.r","Exp. completos"),h("th.r","Saldo por cobrar"))));
+  var tb=h("tbody");rows.forEach(function(r){tb.appendChild(h("tr",h("td",h("b",r.b.n)),h("td.r.num",{"data-l":"Atendidos"},r.at),h("td.r.num",{"data-l":"Nuevos"},r.nw),h("td.r.num",{"data-l":"Sesiones"},r.ses),h("td",h("div.hb",h("i",{style:"--w:"+Math.round(r.cob/mx*100)}),h("span.num",money(r.cob)))),h("td.r",h("span.chip."+(r.pct>=85?"ok":r.pct>=70?"warn":"bad"),r.pct+" %")),h("td.r.num",{"data-l":"Saldo"},money(r.saldo))))});t.appendChild(tb);
+  m.appendChild(h("div.card.sec",{style:"overflow-x:auto"},h("h3","Por sucursal"),t,h("p",{style:"margin:10px 0 0;font-size:12.5px;color:var(--mut)"},"Nombres de sucursal y cifras de ejemplo. Con su operación real, este tablero se llena solo.")));
+  var al=[];S.pts.forEach(function(p){status(p).forEach(function(s){if(s[1]!=="Sin foto de antes")al.push({p:p,s:s})})});
+  al.sort(function(a,b){return (a.s[0]==="bad"?0:1)-(b.s[0]==="bad"?0:1)});
+  var ul=h("ul.alerts");al.slice(0,8).forEach(function(x){ul.appendChild(h("li",h("span.chip."+x.s[0],ic(x.s[0]==="bad"?"alert":"clock"),x.s[1]),h("span",h("b",full(x.p))," · "+x.p.ficha+" · "+br(x.p.br).n),h("button.btn.sm",{type:"button",onclick:function(){openExp(x.p.id)}},"Abrir")))});
+  m.appendChild(h("div.card.sec",h("h3","Pendientes que requieren atención",h("span.chip.mut",{style:"margin-left:6px"},al.length)),al.length?ul:h("div.empty","Todo al día.")));
+  m.appendChild(h("div.hint",ic("lock"),h("span","Dirección ve números y pendientes de todas las sucursales. Los antecedentes clínicos, diagnósticos y notas solo los ve el personal médico.")))}
+
+/* ---------- render ---------- */
+function render(){nav();var m=document.getElementById("main");m.textContent="";
+  if(V.v==="dash"&&S.role!=="dir")V.v="pts";
+  ({pts:vPts,new:vNew,exp:vExp,dash:vDash})[V.v](m)}
+var qs={};location.search.slice(1).split("&").forEach(function(x){var p=x.split("=");if(p[0])qs[p[0]]=decodeURIComponent(p[1]||"")});
+if(qs.rol&&STAFF.hasOwnProperty(qs.rol))S.role=qs.rol;
+[].forEach.call(roles.children,function(b){b.setAttribute("aria-pressed",String(b.dataset.r===S.role))});
+V.v=S.role==="dir"?"dash":"pts";
+if(qs.vista==="nuevo"&&S.role!=="dir")V.v="new";
+render();
+})();
+</script>
+</body>
+</html>
