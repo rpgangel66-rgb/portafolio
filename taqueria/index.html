@@ -1,590 +1,567 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tacos El Primo · Menú y pedidos</title>
-<meta name="description" content="Tacos de trompo, bistec, carne asada, gringas y quesadillas. Arma tu pedido y mándalo por WhatsApp.">
+<title>Tacos El Primo · Comanda y menú</title>
+<meta name="description" content="Tacos de trompo, bistec y carne asada al carbón. Arma tu comanda y pasa a recoger sin fila.">
 <style>
-  @font-face { font-family: 'Manrope'; src: url('../fonts/demos/manrope-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'Manrope'; src: url('../fonts/demos/manrope-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'Manrope'; src: url('../fonts/demos/manrope-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'Manrope'; src: url('../fonts/demos/manrope-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Fraunces'; src: url('../fonts/demos/fraunces-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Fraunces'; src: url('../fonts/demos/fraunces-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Fraunces'; src: url('../fonts/demos/fraunces-800.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Instrument Sans'; src: url('../fonts/demos/instrument-sans-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Instrument Sans'; src: url('../fonts/demos/instrument-sans-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Instrument Sans'; src: url('../fonts/demos/instrument-sans-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
 
   :root {
-    --bg: #FFFFFF;
-    --bg-alt: #F7F3EE;
-    --ink: #231A16;
-    --muted: #5F534C;
-    --line: #E3DBD2;
-    --accent: #9E2A1C;
-    --accent-dark: #7E1F13;
-    --topbar: #231A16;
-    --font: 'Manrope', system-ui, -apple-system, sans-serif;
+    --paper: #FBF7F0;
+    --paper-2: #F2EADE;
+    --pad: #FFFFFF;
+    --ink: #221814;
+    --muted: #66584E;
+    --rule: #DDD2C3;
+    --salsa: #B8291B;
+    --salsa-d: #931D11;
+    --cilantro: #24613B;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: var(--font);
+    background: var(--paper);
     color: var(--ink);
-    background: var(--bg);
-    font-size: 15px;
-    line-height: 1.55;
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  body.has-bar { padding-bottom: 78px; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; }
 
-  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(18px, 4vw, 44px); }
 
-  /* Topbar */
-  .topbar {
-    background: var(--topbar);
-    color: #EAE2DA;
-    font-size: 13px;
-    padding: 8px 0;
-  }
-  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .topbar-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .topbar-tel { font-weight: 700; color: #FFFFFF; }
-  .topbar-status { color: #D5C9BE; font-weight: 500; }
-  .topbar-status.open { color: #AEE8BC; }
-
-  /* Header */
+  /* Street-taqueria masthead: red rule + warm paper */
   header {
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    z-index: 40;
+    border-top: 5px solid var(--salsa);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
   }
-  .header-inner { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-  .brand-name { font-size: 18.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; }
-  .brand-sub { font-size: 12px; color: var(--muted); display: block; }
-  nav { display: flex; align-items: center; gap: 26px; font-size: 14px; font-weight: 600; color: var(--muted); }
-  nav a:hover { color: var(--ink); }
-  .header-tel { font-size: 14px; font-weight: 700; color: var(--accent); white-space: nowrap; }
-  .header-tel:hover { text-decoration: underline; }
-
-  /* Hero */
-  .hero {
-    position: relative;
-    min-height: 430px;
-    display: flex;
-    align-items: center;
-    background: #1E1410;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(95deg, rgba(24, 15, 11, 0.90) 0%, rgba(24, 15, 11, 0.72) 50%, rgba(24, 15, 11, 0.25) 100%);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 560px;
-    padding-block: 54px;
-    color: #FFFFFF;
-  }
-  .hero-kicker { font-size: 13px; font-weight: 600; color: #F0DCD1; margin-bottom: 10px; }
-  .hero h1 {
-    font-size: clamp(28px, 3.4vw, 38px);
-    font-weight: 700;
-    line-height: 1.16;
-    letter-spacing: -0.02em;
-    color: #FFFFFF;
-    margin-bottom: 14px;
-  }
-  .hero p { font-size: 15.5px; line-height: 1.55; color: #EDE4DD; margin-bottom: 24px; }
-  .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent);
-    color: #FFFFFF;
-    font-weight: 700;
-    font-size: 14.5px;
-    padding: 12px 22px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-  .btn-primary:hover { background: var(--accent-dark); }
-  .hero-link {
-    font-size: 14px;
-    font-weight: 600;
-    color: #FFFFFF;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
-    padding-bottom: 2px;
-  }
-  .hero-link:hover { border-color: #FFFFFF; }
-
-  /* Sections */
-  section { padding: 54px 0; border-bottom: 1px solid var(--line); }
-  .sec-alt { background: var(--bg-alt); }
-  .sec-head { margin-bottom: 26px; max-width: 620px; }
-  .sec-head h2 {
-    font-size: clamp(22px, 2.5vw, 26px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-  .sec-head p { color: var(--muted); font-size: 15px; }
-
-  /* Menu Grid */
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-  }
-  .dish {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 12px;
-  }
-  .dish.has-qty {
-    border-color: var(--accent);
-    background: #FFFBF9;
-  }
-  .dish-img {
-    width: 82px;
-    height: 82px;
-    border-radius: 4px;
-    object-fit: cover;
-    flex-shrink: 0;
-    background: #ECE4DC;
-  }
-  .dish-placeholder {
-    width: 82px;
-    height: 82px;
-    border-radius: 4px;
-    flex-shrink: 0;
-    background: #EFE7DF;
-    border: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--muted);
-    text-align: center;
-    padding: 6px;
-  }
-  .dish-info { flex: 1; min-width: 0; }
-  .dish-name { font-size: 15.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
-  .dish-desc { font-size: 13px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
-  .dish-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .dish-price { font-size: 15.5px; font-weight: 700; color: var(--accent); }
-
-  .qty-ctrl {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #CFC4B8;
-    border-radius: 5px;
-    overflow: hidden;
-    background: #FFFFFF;
-  }
-  .qty-btn {
-    width: 30px;
-    height: 30px;
-    border: none;
-    background: transparent;
-    color: var(--ink);
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    line-height: 1;
-  }
-  .qty-btn:hover { background: #F2EBE3; }
-  .qty-val {
-    min-width: 26px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  /* Inline summary box */
-  .order-panel {
-    margin-top: 24px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 18px 20px;
+  .hd-in {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 18px;
+    gap: 16px;
+    padding-block: 16px;
     flex-wrap: wrap;
   }
-  .order-panel strong { display: block; font-size: 16px; margin-bottom: 2px; }
-  .order-panel span { font-size: 14px; color: var(--muted); }
-  .order-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .btn-clear {
-    background: transparent;
-    border: 1px solid #CFC4B8;
-    color: var(--muted);
-    font: inherit;
-    font-size: 13.5px;
-    font-weight: 600;
-    padding: 10px 14px;
-    border-radius: 5px;
-    cursor: pointer;
+  .logo-wrap { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .logo-title {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
   }
-  .btn-clear:hover { color: var(--ink); border-color: var(--ink); }
+  .logo-addr { font-size: 13.5px; color: var(--muted); }
+  .hd-right { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+  .open-txt { font-weight: 600; color: var(--muted); }
+  .open-txt.on { color: var(--cilantro); }
+  .hd-phone { font-weight: 600; color: var(--salsa); }
 
-  /* Location */
-  .loc-grid {
+  /* Bright daylight food hero — zero dark overlay hiding the food */
+  .intro {
     display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(22px, 4vw, 48px);
+    padding-block: clamp(28px, 4vw, 48px);
+    border-bottom: 2px solid var(--ink);
+    align-items: center;
+  }
+  .intro h1 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .intro p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 42ch;
+    margin-bottom: 20px;
+  }
+  .intro-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .photo-pair {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 10px;
+  }
+  .photo-pair img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+  }
+
+  /* Two-column Menu + Physical Comanda Pad */
+  .order-sec {
+    padding-block: clamp(32px, 4.5vw, 56px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1.38fr) minmax(300px, 0.78fr);
+    gap: clamp(28px, 4vw, 48px);
     align-items: start;
   }
-  .night-photo {
-    width: 100%;
-    height: 205px;
+  .cat-block { margin-bottom: 32px; }
+  .cat-block:last-child { margin-bottom: 0; }
+  .cat-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 4px;
+  }
+  .cat-head h2 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+  }
+  .cat-head span { font-size: 13px; color: var(--muted); }
+
+  .dish-row {
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    padding: 13px 4px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dish-row.active { background: #F5ECDF; padding-inline: 10px; margin-inline: -6px; }
+  .dish-row img {
+    width: 68px;
+    height: 68px;
     object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid var(--line);
-    margin-bottom: 18px;
+    background: var(--paper-2);
   }
-  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
-  .info-table th, .info-table td {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
+  .dish-nopic {
+    width: 68px;
+    height: 68px;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    display: grid;
+    place-items: center;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--muted);
+    text-align: center;
+    padding: 4px;
   }
-  .info-table th { width: 112px; color: var(--muted); font-weight: 600; }
-  .info-table td { color: var(--ink); font-weight: 500; }
-  .map-frame {
-    width: 100%;
-    height: 360px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--bg-alt);
+  .dish-name { font-weight: 600; font-size: 16px; color: var(--ink); }
+  .dish-desc { font-size: 13.5px; color: var(--muted); }
+  .dish-act {
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
-  .map-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--accent); }
-  .map-link:hover { text-decoration: underline; }
+  .dish-price { font-weight: 600; font-size: 15.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid var(--ink);
+    background: var(--pad);
+  }
+  .stepper button {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .stepper button:hover { background: var(--paper-2); }
+  .stepper span {
+    min-width: 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
 
-  /* Sticky bottom order bar (shown when cart has items) */
-  .sticky-bar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #231A16;
+  /* Physical Comanda Pad */
+  .comanda {
+    position: sticky;
+    top: 20px;
+    background: var(--pad);
+    border: 1px solid #CBBCA8;
+    border-top: 5px solid var(--salsa);
+    box-shadow: 0 12px 28px -18px rgba(34, 24, 20, 0.25);
+  }
+  .com-head {
+    padding: 16px 20px 12px;
+    border-bottom: 1.5px dashed var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .com-head strong { font-family: var(--serif); font-size: 20px; font-weight: 800; }
+  .com-clear {
+    background: none;
+    border: 0;
+    font-size: 12.5px;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .com-body { padding: 16px 20px 20px; }
+  .com-empty { font-size: 14px; color: var(--muted); padding: 10px 0 16px; }
+  .com-lines { list-style: none; margin-bottom: 14px; }
+  .com-lines li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 14.5px;
+    border-bottom: 1px dotted var(--rule);
+    font-variant-numeric: tabular-nums;
+  }
+  .com-opts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 14px 0 16px;
+  }
+  .opt-chip {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 5px 10px;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .opt-chip.on {
+    background: var(--ink);
+    border-color: var(--ink);
     color: #FFFFFF;
-    border-top: 1px solid #3C2F29;
-    z-index: 50;
-    padding: 12px 0;
-    display: none;
   }
-  .sticky-bar.visible { display: block; }
-  .sticky-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-  .sticky-info { min-width: 0; font-size: 14px; }
-  .sticky-info strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sticky-info span { color: #D4C8BF; font-size: 12.5px; }
+  .com-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0 16px;
+    border-top: 1.5px dashed var(--rule);
+    font-size: 16px;
+  }
+  .com-total strong { font-family: var(--serif); font-size: 24px; font-weight: 800; color: var(--salsa); font-variant-numeric: tabular-nums; }
+  .btn-wa {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--salsa);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px 18px;
+    transition: background 0.15s ease;
+  }
+  .btn-wa:hover { background: var(--salsa-d); }
+  .com-foot { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
 
-  /* Footer */
+  /* Bottom corner info */
+  .corner {
+    padding-block: clamp(32px, 4.5vw, 52px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+  }
+  .corner img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+  .corner h2 { font-family: var(--serif); font-size: 26px; font-weight: 800; margin-bottom: 14px; }
+  .corner-list { border-top: 1.5px solid var(--ink); }
+  .corner-row {
+    display: grid;
+    grid-template-columns: 106px minmax(0, 1fr);
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14.5px;
+  }
+  .corner-row dt { color: var(--muted); font-weight: 600; }
+  .corner-links { margin-top: 18px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .corner-links a { font-weight: 600; color: var(--salsa); border-bottom: 1.5px solid var(--salsa); padding-bottom: 2px; font-size: 14px; }
+
   footer {
-    background: var(--bg-alt);
-    padding: 28px 0;
-    font-size: 13px;
+    border-top: 1px solid var(--rule);
+    padding-block: 22px;
+    font-size: 12.5px;
     color: var(--muted);
   }
-  .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .footer-credits {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-    font-size: 12px;
-    color: #7D7068;
-  }
-  .footer-credits a { text-decoration: underline; }
+  .ft-top { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+  .ft-cred { font-size: 11.5px; color: #86776B; }
+  .ft-cred a { text-decoration: underline; }
 
-  @media (max-width: 820px) {
-    nav { display: none; }
-    .menu-grid, .loc-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 380px; }
-    .hero::after {
-      background: linear-gradient(180deg, rgba(24, 15, 11, 0.72) 0%, rgba(24, 15, 11, 0.90) 100%);
-    }
-    .map-frame { height: 280px; }
+  @media (max-width: 900px) {
+    .intro, .workspace, .corner { grid-template-columns: 1fr; }
+    .comanda { position: static; }
+    .photo-pair img { height: 220px; }
   }
-  @media (max-width: 520px) {
-    .wrap { padding: 0 18px; }
-    .topbar-tel { display: none; }
-    .dish-img, .dish-placeholder { width: 70px; height: 70px; }
-    .btn-primary { padding: 11px 16px; font-size: 14px; }
+  @media (max-width: 540px) {
+    .dish-row { grid-template-columns: 56px minmax(0, 1fr); gap: 10px 12px; }
+    .dish-row img, .dish-nopic { width: 56px; height: 56px; }
+    .dish-act { grid-column: 2; justify-content: space-between; }
+    .photo-pair { grid-template-columns: 1fr; }
+    .photo-pair img:last-child { display: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="wrap topbar-inner">
-    <div class="topbar-left">
-      <a class="topbar-tel" id="top-tel" href="tel:8123256381">Tel. 81 2325 6381</a>
-      <span id="top-hours">Mar a dom 19:00 a 01:00 · Dom barbacoa 8:00 a 14:00</span>
-    </div>
-    <span class="topbar-status" id="live-status">Servicio nocturno</span>
-  </div>
-</div>
-
 <header>
-  <div class="wrap header-inner">
-    <a href="#" class="brand">
-      <span class="brand-name" data-brand>Tacos El Primo</span>
-      <span class="brand-sub">Trompo, bistec y carne asada</span>
-    </a>
-    <nav aria-label="Navegación principal">
-      <a href="#menu">Menú</a>
-      <a href="#ubicacion">Horarios</a>
-      <a href="#ubicacion">Ubicación</a>
-    </nav>
-    <a class="header-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
+  <div class="wrap hd-in">
+    <div class="logo-wrap">
+      <span class="logo-title" data-brand>Tacos El Primo</span>
+      <span class="logo-addr" data-address>Calle Hidalgo #45, Centro</span>
+    </div>
+    <div class="hd-right">
+      <span class="open-txt" id="live-status">Servicio nocturno</span>
+      <a class="hd-phone" id="head-tel" href="tel:8123256381">81 2325 6381</a>
+    </div>
   </div>
 </header>
 
 <main>
-  <section class="hero" style="padding:0; border-bottom:none;">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1600473763749-5e4212ea0e69?auto=format&fit=crop&w=1500&q=82" alt="Tacos servidos con cilantro, cebolla y limón">
-    <div class="wrap">
-      <div class="hero-content">
-        <div class="hero-kicker" data-address>Calle Hidalgo #45, Centro</div>
-        <h1>Tacos de trompo, bistec y asada en <span data-brand>Tacos El Primo</span></h1>
-        <p>Arma tu pedido aquí abajo y mándalo directo por WhatsApp para pasar a recoger sin esperar o consultar envío en la zona.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#menu">Armar pedido</a>
-          <a class="hero-link" href="#ubicacion">Ver horarios y mapa</a>
+  <div class="wrap">
+    <section class="intro">
+      <div>
+        <h1>El trompo y la parrilla prendidos todas las noches.</h1>
+        <p>Arma tu comanda aquí abajo y mándala directo al WhatsApp del puesto para recoger tu pedido caliente sin esperar.</p>
+        <div class="intro-meta">
+          <span data-hours>Mar a dom 19:00 a 01:00</span>
+          <span>Domingos barbacoa 8:00 a 14:00</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="menu" class="sec-alt">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Menú y precios</h2>
-        <p>Agrega las piezas que quieres con los botones de cantidad y envía tu orden en un toque.</p>
+      <div class="photo-pair">
+        <img src="https://images.unsplash.com/photo-1600473763749-5e4212ea0e69?auto=format&fit=crop&w=900&q=82" alt="Tacos recién preparados con cebolla y cilantro">
+        <img src="https://images.unsplash.com/photo-1657770651689-c948d7eed8f1?auto=format&fit=crop&w=600&q=82" alt="Orden de tacos al pastor">
       </div>
+    </section>
 
-      <div class="menu-grid" id="menu-grid"></div>
+    <section class="order-sec" id="menu">
+      <div class="workspace">
+        <div id="menu-root"></div>
 
-      <div class="order-panel">
-        <div>
-          <strong id="panel-total">Tu pedido: $0</strong>
-          <span id="panel-detail">Todavía no agregas platillos. Usa el botón + en el menú.</span>
-        </div>
-        <div class="order-actions">
-          <button type="button" class="btn-clear" id="clear-btn">Limpiar</button>
-          <a class="btn-primary" id="inline-wa" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+        <aside class="comanda" aria-label="Comanda de pedido">
+          <div class="com-head">
+            <strong>Tu comanda</strong>
+            <button type="button" class="com-clear" id="clear-btn">Vaciar</button>
+          </div>
+          <div class="com-body">
+            <div id="com-content"></div>
+
+            <div class="com-opts" id="com-opts">
+              <button type="button" class="opt-chip on" data-opt="Con todo (cebolla y cilantro)">Con todo</button>
+              <button type="button" class="opt-chip on" data-opt="Salsa verde">Salsa verde</button>
+              <button type="button" class="opt-chip" data-opt="Salsa roja picosa">Salsa roja</button>
+              <button type="button" class="opt-chip on" data-opt="Paso a recoger">Paso a recoger</button>
+            </div>
+
+            <div class="com-total">
+              <span>Total estimado</span>
+              <strong id="com-total">$0</strong>
+            </div>
+
+            <a class="btn-wa" id="wa-btn" href="#" target="_blank" rel="noopener">Mandar comanda por WhatsApp</a>
+            <p class="com-foot">Todos los pedidos llevan limones, cebolla asada y salsas aparte.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="corner" id="ubicacion">
+      <img src="https://images.unsplash.com/photo-1546853846-53490ede35b4?auto=format&fit=crop&w=900&q=80" alt="Taquería sirviendo de noche">
+      <div>
+        <h2>Dónde pasar por tu pedido</h2>
+        <dl class="corner-list">
+          <div class="corner-row"><dt>Dirección</dt><dd data-address>Calle Hidalgo #45, Centro</dd></div>
+          <div class="corner-row"><dt>Noches</dt><dd data-hours>Mar a dom 19:00 a 01:00</dd></div>
+          <div class="corner-row"><dt>Domingos</dt><dd>Barbacoa en la mañana de 8:00 a 14:00</dd></div>
+          <div class="corner-row"><dt>Teléfono</dt><dd><a id="fact-tel" href="tel:8123256381">81 2325 6381</a></dd></div>
+          <div class="corner-row"><dt>Pago</dt><dd>Efectivo y transferencia</dd></div>
+        </dl>
+        <div class="corner-links">
+          <a id="map-open" href="https://maps.google.com/?q=Monterrey+Centro" target="_blank" rel="noopener">Cómo llegar en Google Maps</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="ubicacion">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Ubicación y horarios</h2>
-        <p>Todos los pedidos incluyen salsa verde, salsa roja, cilantro, cebolla y limones.</p>
-      </div>
-      <div class="loc-grid">
-        <div>
-          <img class="night-photo" src="https://images.unsplash.com/photo-1546853846-53490ede35b4?auto=format&fit=crop&w=900&q=80" alt="Taquería atendiendo de noche" loading="lazy">
-          <table class="info-table">
-            <tr><th>Dirección</th><td data-address>Calle Hidalgo #45, Centro</td></tr>
-            <tr><th>Noches</th><td data-hours>Mar a dom 19:00 a 01:00</td></tr>
-            <tr><th>Domingos</th><td>Barbacoa en la mañana de 8:00 a 14:00</td></tr>
-            <tr><th>Teléfono</th><td><a id="table-tel" href="tel:8123256381">81 2325 6381</a></td></tr>
-            <tr><th>Pagos</th><td>Efectivo y transferencia</td></tr>
-          </table>
-        </div>
-        <div>
-          <iframe class="map-frame" id="map-embed" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Monterrey%20Centro&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
-          <a class="map-link" id="map-open" href="https://maps.google.com/?q=Monterrey+Centro" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<div class="sticky-bar" role="region" aria-label="Resumen de pedido">
-  <div class="wrap sticky-inner">
-    <div class="sticky-info">
-      <strong id="sticky-total">Pedido · $0</strong>
-      <span id="sticky-sub">Agrega tus tacos y manda directo por WhatsApp</span>
-    </div>
-    <a class="btn-primary" id="sticky-wa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+    </section>
   </div>
-</div>
+</main>
 
 <footer>
   <div class="wrap">
-    <div class="footer-inner">
-      <div><strong data-brand>Tacos El Primo</strong> · <span data-address>Calle Hidalgo #45, Centro</span></div>
-      <div>Sitio de muestra creado por <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></div>
+    <div class="ft-top">
+      <span><strong data-brand>Tacos El Primo</strong> · <span data-address>Calle Hidalgo #45, Centro</span></span>
+      <span>Demo de <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></span>
     </div>
-    <div class="footer-credits">
-      Fotografías de muestra vía Unsplash:
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Daniel Lloyd Blunk-Fernández</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Braulio Gómez</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Tai's Captures</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Alma Agencia D</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Robby McCullough</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Fernando Andrade</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Abdullah Guc</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Doris Morgan</a> y
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Dennis Schrader</a>.
+    <div class="ft-cred">
+      Fotos vía Unsplash: Daniel Lloyd Blunk-Fernández, Braulio Gómez, Tai's Captures, Alma Agencia D, Robby McCullough, Fernando Andrade, Abdullah Guc, Doris Morgan y Dennis Schrader.
     </div>
   </div>
 </footer>
 
 <script>
   (function () {
-    const params = new URLSearchParams(window.location.search);
-    const brand = (params.get('n') || 'Tacos El Primo').trim();
-    const address = (params.get('d') || 'Calle Hidalgo #45, Centro').trim();
-    const hours = (params.get('h') || 'Mar a dom 19:00 a 01:00 · Dom barbacoa 8:00 a 14:00').trim();
-    const rawTel = (params.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
+    const q = new URLSearchParams(location.search);
+    const brand = (q.get('n') || 'Tacos El Primo').trim();
+    const address = (q.get('d') || 'Calle Hidalgo #45, Centro').trim();
+    const hours = (q.get('h') || 'Mar a dom 19:00 a 01:00').trim();
+    const rawTel = (q.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
     const waPhone = rawTel.length === 10 ? '521' + rawTel : rawTel;
     const fmtTel = rawTel.length === 10 ? rawTel.slice(0,2) + ' ' + rawTel.slice(2,6) + ' ' + rawTel.slice(6) : rawTel;
 
-    document.title = brand + ' · Menú y pedidos';
+    document.title = brand + ' · Comanda y menú';
     document.querySelectorAll('[data-brand]').forEach(el => el.textContent = brand);
     document.querySelectorAll('[data-address]').forEach(el => el.textContent = address);
     document.querySelectorAll('[data-hours]').forEach(el => el.textContent = hours);
-    document.getElementById('top-hours').textContent = hours;
-    document.getElementById('top-tel').textContent = 'Tel. ' + fmtTel;
-    document.getElementById('top-tel').href = 'tel:' + rawTel;
-    document.getElementById('head-tel').textContent = fmtTel;
-    document.getElementById('head-tel').href = 'tel:' + rawTel;
-    document.getElementById('table-tel').textContent = fmtTel;
-    document.getElementById('table-tel').href = 'tel:' + rawTel;
+    ['head-tel', 'fact-tel'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = fmtTel;
+      el.href = 'tel:' + rawTel;
+    });
+    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + encodeURIComponent(address + ', Monterrey, Nuevo León');
 
-    const mapQ = encodeURIComponent(address + ', Monterrey, Nuevo León');
-    document.getElementById('map-embed').src = 'https://maps.google.com/maps?q=' + mapQ + '&t=&z=14&ie=UTF8&iwloc=&output=embed';
-    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + mapQ;
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Monterrey', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date());
+    const m = Object.fromEntries(parts.map(p => [p.type, p.value]));
+    const hr = parseInt(m.hour, 10) + parseInt(m.minute, 10) / 60;
+    const night = (m.weekday !== 'Mon' && hr >= 19) || (m.weekday !== 'Tue' && hr < 1);
+    const barb = m.weekday === 'Sun' && hr >= 8 && hr < 14;
+    const st = document.getElementById('live-status');
+    st.textContent = barb ? 'Abierto · Barbacoa' : (night ? 'Abierto ahora' : 'Abrimos a las 19:00');
+    st.classList.toggle('on', night || barb);
 
-    function updateStatus() {
-      const parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/Monterrey',
-        weekday: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      }).formatToParts(new Date());
-      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
-      const h = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
-      const day = map.weekday;
-      const nightOpen = (day !== 'Mon' && h >= 19) || (day !== 'Tue' && h < 1);
-      const sunBarbacoa = day === 'Sun' && h >= 8 && h < 14;
-      const isOpen = nightOpen || sunBarbacoa;
-      const st = document.getElementById('live-status');
-      st.textContent = sunBarbacoa ? 'Abierto · Barbacoa hoy' : (nightOpen ? 'Abierto ahora' : 'Cerrado · Abrimos a las 19:00');
-      st.classList.toggle('open', isOpen);
-    }
-    updateStatus();
-
-    const MENU = [
-      { id: 'trompo', name: 'Taco de trompo', price: 22, desc: 'Tortilla de maíz recién hecha con piña y verdura.', img: 'https://images.unsplash.com/photo-1657770651689-c948d7eed8f1?auto=format&fit=crop&w=260&q=80' },
-      { id: 'bistec', name: 'Taco de bistec', price: 25, desc: 'Bistec a la plancha picado al momento.', img: 'https://images.unsplash.com/photo-1613409385222-3d0decb6742a?auto=format&fit=crop&w=260&q=80' },
-      { id: 'asada', name: 'Taco de carne asada', price: 28, desc: 'Asada al carbón en tortilla de maíz o harina.', img: 'https://images.unsplash.com/photo-1644085128237-9ba593123ac3?auto=format&fit=crop&w=260&q=80' },
-      { id: 'orden', name: 'Orden de 5 tacos', price: 100, desc: 'Cinco tacos a elegir (trompo o bistec) con frijoles.', img: 'https://images.unsplash.com/photo-1687881063470-a78e6ea2590e?auto=format&fit=crop&w=260&q=80' },
-      { id: 'gringa', name: 'Gringa', price: 60, desc: 'Tortilla de harina grande con queso derretido y trompo.', img: 'https://images.unsplash.com/photo-1628838233717-be047a0b54fb?auto=format&fit=crop&w=260&q=80' },
-      { id: 'quesadilla', name: 'Quesadilla', price: 45, desc: 'Queso fundido en tortilla de harina o maíz.', img: 'https://images.unsplash.com/photo-1719957770167-bb66133ba808?auto=format&fit=crop&w=260&q=80' },
-      { id: 'agua', name: 'Agua fresca', price: 35, desc: 'Vaso de litro: horchata, jamaica o limón.', img: 'https://images.unsplash.com/photo-1622268348720-507f204d29b4?auto=format&fit=crop&w=260&q=80' },
-      { id: 'refresco', name: 'Refresco', price: 25, desc: 'Vidrio o lata bien frío, varios sabores.', img: '' }
+    const SECTIONS = [
+      {
+        title: 'Tacos y órdenes', note: 'Maíz o harina recién calentada',
+        items: [
+          { id: 'trompo', name: 'Taco de trompo', price: 22, desc: 'Carne adobada al trompo con piña asada.', img: 'https://images.unsplash.com/photo-1657770651689-c948d7eed8f1?auto=format&fit=crop&w=220&q=80' },
+          { id: 'bistec', name: 'Taco de bistec', price: 25, desc: 'Bistec de res picado al momento en plancha.', img: 'https://images.unsplash.com/photo-1613409385222-3d0decb6742a?auto=format&fit=crop&w=220&q=80' },
+          { id: 'asada', name: 'Taco de carne asada', price: 28, desc: 'Asada al carbón, bien doradita.', img: 'https://images.unsplash.com/photo-1644085128237-9ba593123ac3?auto=format&fit=crop&w=220&q=80' },
+          { id: 'orden', name: 'Orden de 5 tacos', price: 100, desc: 'Combina trompo y bistec; incluye frijoles charros.', img: 'https://images.unsplash.com/photo-1687881063470-a78e6ea2590e?auto=format&fit=crop&w=220&q=80' }
+        ]
+      },
+      {
+        title: 'Gringas y quesadillas', note: 'Queso derretido a la plancha',
+        items: [
+          { id: 'gringa', name: 'Gringa', price: 60, desc: 'Harina grande con queso y trompo bien servido.', img: 'https://images.unsplash.com/photo-1628838233717-be047a0b54fb?auto=format&fit=crop&w=220&q=80' },
+          { id: 'quesadilla', name: 'Quesadilla', price: 45, desc: 'Queso fundido en tortilla de harina o maíz.', img: 'https://images.unsplash.com/photo-1719957770167-bb66133ba808?auto=format&fit=crop&w=220&q=80' }
+        ]
+      },
+      {
+        title: 'Bebidas', note: 'Bien frías',
+        items: [
+          { id: 'agua', name: 'Agua fresca (1 L)', price: 35, desc: 'Horchata, jamaica o limón natural.', img: 'https://images.unsplash.com/photo-1622268348720-507f204d29b4?auto=format&fit=crop&w=220&q=80' },
+          { id: 'refresco', name: 'Refresco', price: 25, desc: 'Vidrio o lata, pregunta sabores disponibles.', img: '' }
+        ]
+      }
     ];
 
-    const cart = {};
-    const grid = document.getElementById('menu-grid');
-
-    function waUrl(msg) {
-      return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
-    }
+    const ALL = SECTIONS.flatMap(s => s.items);
+    const cart = { orden: 1 };
+    const extras = new Set(['Con todo (cebolla y cilantro)', 'Salsa verde', 'Paso a recoger']);
+    const root = document.getElementById('menu-root');
 
     function renderMenu() {
-      grid.innerHTML = MENU.map(item => {
-        const qty = cart[item.id] || 0;
-        const thumb = item.img
-          ? '<img class="dish-img" src="' + item.img + '" alt="' + item.name + '" loading="lazy">'
-          : '<div class="dish-placeholder">Bebida fría</div>';
-        return '<article class="dish' + (qty > 0 ? ' has-qty' : '') + '" data-id="' + item.id + '">' +
-          thumb +
-          '<div class="dish-info">' +
-            '<div class="dish-name">' + item.name + '</div>' +
-            '<div class="dish-desc">' + item.desc + '</div>' +
-            '<div class="dish-bottom">' +
-              '<span class="dish-price">$' + item.price + '</span>' +
-              '<div class="qty-ctrl">' +
-                '<button type="button" class="qty-btn" data-act="dec" data-id="' + item.id + '" aria-label="Quitar ' + item.name + '">-</button>' +
-                '<span class="qty-val">' + qty + '</span>' +
-                '<button type="button" class="qty-btn" data-act="inc" data-id="' + item.id + '" aria-label="Agregar ' + item.name + '">+</button>' +
+      root.innerHTML = SECTIONS.map(sec => (
+        '<div class="cat-block">' +
+          '<div class="cat-head"><h2>' + sec.title + '</h2><span>' + sec.note + '</span></div>' +
+          sec.items.map(it => {
+            const c = cart[it.id] || 0;
+            const media = it.img
+              ? '<img src="' + it.img + '" alt="' + it.name + '">'
+              : '<div class="dish-nopic">Frío</div>';
+            return '<div class="dish-row' + (c > 0 ? ' active' : '') + '">' +
+              media +
+              '<div><div class="dish-name">' + it.name + '</div><div class="dish-desc">' + it.desc + '</div></div>' +
+              '<div class="dish-act">' +
+                '<span class="dish-price">$' + it.price + '</span>' +
+                '<div class="stepper">' +
+                  '<button type="button" data-a="d" data-id="' + it.id + '" aria-label="Quitar">−</button>' +
+                  '<span>' + c + '</span>' +
+                  '<button type="button" data-a="i" data-id="' + it.id + '" aria-label="Agregar">+</button>' +
+                '</div>' +
               '</div>' +
-            '</div>' +
-          '</div>' +
-        '</article>';
-      }).join('');
-      syncOrder();
+            '</div>';
+          }).join('') +
+        '</div>'
+      )).join('');
+      syncComanda();
     }
 
-    function syncOrder() {
+    function syncComanda() {
       let total = 0;
-      let count = 0;
       const lines = [];
-      MENU.forEach(item => {
-        const q = cart[item.id] || 0;
-        if (q > 0) {
-          total += q * item.price;
-          count += q;
-          lines.push(q + 'x ' + item.name + ' ($' + (q * item.price) + ')');
+      ALL.forEach(it => {
+        const c = cart[it.id] || 0;
+        if (c > 0) {
+          total += c * it.price;
+          lines.push({ label: c + ' × ' + it.name, sub: c * it.price });
         }
       });
 
-      const summary = lines.length ? lines.join(', ') : 'Todavía no agregas platillos. Usa el botón + en el menú.';
-      const msg = lines.length
-        ? 'Hola ' + brand + ', quiero hacer este pedido:\n- ' + lines.join('\n- ') + '\nTotal estimado: $' + total + '\n¿En cuánto tiempo queda listo?'
-        : 'Hola ' + brand + ', quiero hacer un pedido para hoy.';
-      const url = waUrl(msg);
+      const content = document.getElementById('com-content');
+      if (!lines.length) {
+        content.innerHTML = '<p class="com-empty">Agrega tacos o bebidas con el botón + para llenar tu comanda.</p>';
+      } else {
+        content.innerHTML = '<ul class="com-lines">' +
+          lines.map(l => '<li><span>' + l.label + '</span><strong>$' + l.sub + '</strong></li>').join('') +
+        '</ul>';
+      }
+      document.getElementById('com-total').textContent = '$' + total;
 
-      document.getElementById('panel-total').textContent = 'Tu pedido: $' + total;
-      document.getElementById('panel-detail').textContent = summary;
-      document.getElementById('sticky-total').textContent = count > 0 ? count + (count === 1 ? ' artículo' : ' artículos') + ' · $' + total : 'Pedido · $0';
-      document.getElementById('sticky-sub').textContent = lines.length ? lines.join(' · ') : 'Agrega tus tacos y manda directo por WhatsApp';
-      document.getElementById('inline-wa').href = url;
-      document.getElementById('sticky-wa').href = url;
-      document.querySelector('.sticky-bar').classList.toggle('visible', count > 0);
-      document.body.classList.toggle('has-bar', count > 0);
+      const noteArr = Array.from(extras);
+      const msg = lines.length
+        ? 'Hola ' + brand + ', te mando mi comanda:\n' +
+          lines.map(l => '- ' + l.label + ' ($' + l.sub + ')').join('\n') +
+          (noteArr.length ? '\nNotas: ' + noteArr.join(', ') : '') +
+          '\nTotal estimado: $' + total + '\n¿En cuánto tiempo queda listo?'
+        : 'Hola ' + brand + ', quiero hacer un pedido para hoy.';
+      document.getElementById('wa-btn').href = 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
     }
 
-    grid.addEventListener('click', (e) => {
-      const btn = e.target.closest('.qty-btn');
-      if (!btn) return;
-      const id = btn.dataset.id;
+    root.addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-id]');
+      if (!b) return;
+      const id = b.dataset.id;
       const cur = cart[id] || 0;
-      cart[id] = btn.dataset.act === 'inc' ? cur + 1 : Math.max(0, cur - 1);
+      cart[id] = b.dataset.a === 'i' ? cur + 1 : Math.max(0, cur - 1);
       renderMenu();
+    });
+
+    document.getElementById('com-opts').addEventListener('click', (e) => {
+      const b = e.target.closest('.opt-chip');
+      if (!b) return;
+      const val = b.dataset.opt;
+      if (extras.has(val)) { extras.delete(val); b.classList.remove('on'); }
+      else { extras.add(val); b.classList.add('on'); }
+      syncComanda();
     });
 
     document.getElementById('clear-btn').addEventListener('click', () => {

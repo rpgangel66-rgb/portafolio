@@ -1,521 +1,401 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estética Aurora · Cabello, cejas y pestañas</title>
-<meta name="description" content="Corte, peinado, tinte, balayage, keratina, diseño de ceja y extensiones de pestañas con cita previa.">
+<meta name="description" content="Corte, balayage, tinte, keratina, laminado de ceja y extensiones de pestañas con cita previa.">
 <style>
+  @font-face { font-family: 'Cormorant Garamond'; src: url('../fonts/demos/cormorant-garamond-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Cormorant Garamond'; src: url('../fonts/demos/cormorant-garamond-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Cormorant Garamond'; src: url('../fonts/demos/cormorant-garamond-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Jost'; src: url('../fonts/demos/jost-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Jost'; src: url('../fonts/demos/jost-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Jost'; src: url('../fonts/demos/jost-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
 
   :root {
-    --bg: #FFFFFF;
-    --bg-alt: #F7F4F5;
-    --ink: #1E1B1D;
-    --muted: #5C5559;
-    --line: #E4DDE0;
-    --accent: #4A273D;
-    --accent-dark: #361A2C;
-    --font: 'Jost', system-ui, -apple-system, sans-serif;
+    --linen: #F6F1EA;
+    --paper: #FBF9F5;
+    --ink: #201A17;
+    --muted: #6C615A;
+    --rule: #DCD2C6;
+    --plum: #5A3142;
+    --plum-d: #3F1F2D;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: var(--font);
+    background: var(--linen);
     color: var(--ink);
-    background: var(--bg);
-    font-size: 15.5px;
+    font-family: var(--sans);
+    font-size: 15px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
-  body.has-bar { padding-bottom: 76px; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; }
 
-  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding-inline: clamp(18px, 4vw, 44px); }
 
-  /* Topbar */
-  .topbar {
-    background: var(--accent);
-    color: #EFE8EC;
-    font-size: 13px;
-    padding: 8px 0;
+  /* Centered quiet editorial salon masthead */
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding-block: 18px;
   }
-  .topbar-inner {
-    display: flex;
+  .mast {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    gap: 16px;
+  }
+  .mast-nav { display: flex; gap: 22px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .mast-nav a:hover { color: var(--ink); }
+  .mast-brand {
+    text-align: center;
+    font-family: var(--serif);
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .mast-right {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+  }
+  .mast-tel { color: var(--ink); font-weight: 500; letter-spacing: 0.04em; }
+
+  /* Clean typography band + daylight 3-photo triptych (NO dark scrim!) */
+  .hero-band {
+    padding-block: clamp(32px, 4.5vw, 52px) clamp(26px, 3vw, 36px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 28px;
+    align-items: end;
+  }
+  .hero-band h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 4vw, 46px);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    max-width: 16ch;
+  }
+  .hero-side { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+  .hero-side p { color: var(--muted); font-size: 15.5px; max-width: 40ch; }
+  .btn-sharp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--plum);
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 13px 26px;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-sharp:hover { background: var(--plum-d); }
+
+  .triptych {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr 0.95fr;
+    gap: 12px;
+    padding-bottom: clamp(40px, 5vw, 64px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .triptych img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+  }
+
+  /* Printed Salon Menu — sharp 0px ruled columns, no boxes or checkboxes */
+  .menu-sec {
+    background: var(--paper);
+    padding-block: clamp(42px, 5.5vw, 68px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .sec-top {
+    display: flex;
     justify-content: space-between;
+    align-items: baseline;
     gap: 16px;
     flex-wrap: wrap;
+    margin-bottom: 30px;
   }
-  .topbar-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .topbar-tel { font-weight: 600; color: #FFFFFF; }
-  .topbar-status { color: #DFD2DA; font-weight: 500; }
-  .topbar-status.open { color: #BCEAC9; }
+  .sec-top h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 34px);
+    font-weight: 500;
+  }
+  .sec-top p { font-size: 14px; color: var(--muted); }
 
-  /* Header */
-  header {
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    z-index: 40;
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 5vw, 64px);
   }
-  .header-inner {
-    height: 66px;
+  .menu-col h3 {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--plum);
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .svc-list { list-style: none; }
+  .svc-item {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 6px;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.14s ease, padding-left 0.14s ease;
+  }
+  .svc-item:hover { background: var(--linen); padding-left: 12px; }
+  .svc-item.on { background: #EFE6EA; padding-left: 14px; }
+  .svc-name { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 500; }
+  .svc-mark {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid var(--muted);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .svc-item.on .svc-mark { background: var(--plum); border-color: var(--plum); }
+  .svc-price { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .svc-item.on .svc-price { color: var(--plum); font-weight: 600; }
+
+  .cita-bar {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1.5px solid var(--ink);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-  }
-  .brand-name {
-    font-size: 19px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    line-height: 1.15;
-  }
-  .brand-sub { font-size: 12.5px; color: var(--muted); display: block; }
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 26px;
-    font-size: 14.5px;
-    font-weight: 500;
-    color: var(--muted);
-  }
-  nav a:hover { color: var(--ink); }
-  .header-tel { font-size: 14.5px; font-weight: 600; color: var(--accent); white-space: nowrap; }
-  .header-tel:hover { text-decoration: underline; }
-
-  /* Hero */
-  .hero {
-    position: relative;
-    min-height: 440px;
-    display: flex;
-    align-items: center;
-    background: #23181F;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 25%;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(95deg, rgba(28, 17, 24, 0.88) 0%, rgba(28, 17, 24, 0.68) 48%, rgba(28, 17, 24, 0.22) 100%);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 560px;
-    padding-block: 56px;
-    color: #FFFFFF;
-  }
-  .hero-kicker { font-size: 13.5px; font-weight: 500; color: #E8DCE3; margin-bottom: 10px; }
-  .hero h1 {
-    font-size: clamp(28px, 3.4vw, 38px);
-    font-weight: 600;
-    line-height: 1.16;
-    letter-spacing: -0.015em;
-    color: #FFFFFF;
-    margin-bottom: 14px;
-  }
-  .hero p { font-size: 16px; line-height: 1.55; color: #EBE4E8; margin-bottom: 24px; }
-  .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent);
-    color: #FFFFFF;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 12px 22px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-  .btn-primary:hover { background: var(--accent-dark); }
-  .hero-link {
-    font-size: 14.5px;
-    font-weight: 500;
-    color: #FFFFFF;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
-    padding-bottom: 2px;
-  }
-  .hero-link:hover { border-color: #FFFFFF; }
-
-  /* Sections */
-  section { padding: 54px 0; border-bottom: 1px solid var(--line); }
-  .sec-alt { background: var(--bg-alt); }
-  .sec-head { margin-bottom: 28px; max-width: 620px; }
-  .sec-head h2 {
-    font-size: clamp(22px, 2.5vw, 26px);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-  .sec-head p { color: var(--muted); font-size: 15px; }
-
-  /* Two-column selectable menu */
-  .menu-cols {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px;
-  }
-  .menu-col h3 {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--accent);
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--accent);
-    margin-bottom: 8px;
-  }
-  .svc-list { list-style: none; }
-  .svc-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 13px 12px;
-    border: none;
-    border-bottom: 1px solid var(--line);
-    background: transparent;
-    text-align: left;
-    font: inherit;
-    color: var(--ink);
-    cursor: pointer;
-    transition: background 0.14s ease;
-  }
-  .svc-btn:hover { background: #FAF7F9; }
-  .svc-btn.selected { background: #F3E9EF; }
-  .svc-left { display: flex; align-items: center; gap: 10px; }
-  .svc-check {
-    width: 17px;
-    height: 17px;
-    border-radius: 3px;
-    border: 1.5px solid #B5A8B0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    color: #FFFFFF;
-    flex-shrink: 0;
-  }
-  .svc-btn.selected .svc-check { background: var(--accent); border-color: var(--accent); }
-  .svc-name { font-weight: 500; font-size: 15.5px; }
-  .svc-price { font-weight: 600; color: var(--accent); white-space: nowrap; font-size: 15px; }
-
-  .booking-strip {
-    margin-top: 24px;
-    background: var(--bg-alt);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 18px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
     flex-wrap: wrap;
   }
-  .booking-strip strong { display: block; font-size: 15.5px; margin-bottom: 2px; }
-  .booking-strip span { font-size: 14px; color: var(--muted); }
+  .cita-bar strong { display: block; font-size: 16px; font-weight: 500; margin-bottom: 2px; }
+  .cita-bar span { font-size: 13.5px; color: var(--muted); }
 
-  /* Gallery */
-  .gallery-grid {
+  /* Studio lookbook + Visit split */
+  .visit-sec {
+    padding-block: clamp(42px, 5.5vw, 68px);
+  }
+  .visit-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 14px;
-  }
-  .gallery-item img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid var(--line);
-    background: #EAE5E7;
-  }
-  .gallery-cap {
-    margin-top: 7px;
-    font-size: 13.5px;
-    color: var(--muted);
-    font-weight: 500;
-  }
-
-  /* Location */
-  .loc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(28px, 5vw, 60px);
     align-items: start;
   }
-  .info-table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  .info-table th, .info-table td {
-    padding: 11px 0;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
+  .work-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
-  .info-table th { width: 116px; color: var(--muted); font-weight: 500; }
-  .info-table td { color: var(--ink); font-weight: 500; }
-  .map-frame {
-    width: 100%;
-    height: 310px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--bg-alt);
-  }
-  .map-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-  .map-link:hover { text-decoration: underline; }
+  .work-pair figure { margin: 0; }
+  .work-pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .work-pair figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
 
-  /* Sticky bottom bar (shown after interaction) */
-  .sticky-bar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #23141E;
-    color: #FFFFFF;
-    border-top: 1px solid #3D2334;
-    z-index: 50;
+  .visit-info h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 34px);
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .info-dl { border-top: 1.5px solid var(--ink); }
+  .info-row {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 12px;
     padding: 12px 0;
-    display: none;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14.5px;
   }
-  .sticky-bar.visible { display: block; }
-  .sticky-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-  .sticky-info { min-width: 0; font-size: 14px; }
-  .sticky-info strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sticky-info span { color: #D7C7D1; font-size: 12.5px; }
-  .sticky-bar .btn-primary { background: #FFFFFF; color: var(--accent); font-weight: 600; }
-  .sticky-bar .btn-primary:hover { background: #F1E8ED; }
+  .info-row dt { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  .visit-links { margin-top: 22px; display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+  .uline {
+    font-size: 13.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--plum);
+    border-bottom: 1px solid var(--plum);
+    padding-bottom: 2px;
+  }
 
-  /* Footer */
   footer {
-    background: var(--bg-alt);
-    padding: 28px 0;
-    font-size: 13px;
+    border-top: 1px solid var(--rule);
+    padding-block: 24px;
+    font-size: 12.5px;
     color: var(--muted);
   }
-  .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .footer-credits {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-    font-size: 12px;
-    color: #797075;
-  }
-  .footer-credits a { text-decoration: underline; }
+  .ft-in { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+  .ft-cred { font-size: 11.5px; color: #8A7F76; }
+  .ft-cred a { text-decoration: underline; }
 
-  @media (max-width: 900px) {
-    .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
-  @media (max-width: 820px) {
-    nav { display: none; }
-    .menu-cols, .loc-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 390px; }
-    .hero::after {
-      background: linear-gradient(180deg, rgba(28, 17, 24, 0.7) 0%, rgba(28, 17, 24, 0.88) 100%);
-    }
+  @media (max-width: 860px) {
+    .mast { grid-template-columns: 1fr; text-align: center; gap: 10px; }
+    .mast-nav, .mast-right { justify-content: center; }
+    .hero-band, .menu-grid, .visit-grid { grid-template-columns: 1fr; }
+    .triptych { grid-template-columns: 1fr 1fr; }
+    .triptych img { height: 250px; }
+    .triptych img:last-child { grid-column: 1 / -1; height: 220px; }
   }
   @media (max-width: 520px) {
-    .wrap { padding: 0 18px; }
-    .topbar-tel { display: none; }
-    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .btn-primary { padding: 11px 16px; font-size: 14px; }
+    .mast-nav { gap: 14px; font-size: 12px; }
+    .triptych { grid-template-columns: 1fr; }
+    .triptych img:nth-child(2) { display: none; }
+    .work-pair { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="wrap topbar-inner">
-    <div class="topbar-left">
-      <a class="topbar-tel" id="top-tel" href="tel:8123256381">Tel. 81 2325 6381</a>
-      <span id="top-hours">Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</span>
-    </div>
-    <span class="topbar-status" id="live-status">Abierto hoy</span>
-  </div>
-</div>
-
 <header>
-  <div class="wrap header-inner">
-    <a href="#" class="brand">
-      <span class="brand-name" data-brand>Estética Aurora</span>
-      <span class="brand-sub">Cabello, cejas y pestañas</span>
-    </a>
-    <nav aria-label="Navegación principal">
-      <a href="#servicios">Servicios y precios</a>
-      <a href="#trabajos">Trabajos</a>
-      <a href="#ubicacion">Ubicación</a>
+  <div class="wrap mast">
+    <nav class="mast-nav" aria-label="Secciones">
+      <a href="#menu">Menú</a>
+      <a href="#visita">Trabajos</a>
+      <a href="#visita">Ubicación</a>
     </nav>
-    <a class="header-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
+    <a href="#" class="mast-brand" data-brand>Estética Aurora</a>
+    <div class="mast-right">
+      <span id="live-status">Cita previa</span>
+      <a class="mast-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
+    </div>
   </div>
 </header>
 
 <main>
-  <section class="hero" style="padding:0; border-bottom:none;">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1500&q=82" alt="Interior del salón de belleza">
-    <div class="wrap">
-      <div class="hero-content">
-        <div class="hero-kicker" data-address>Av. Las Torres #210, local 3</div>
-        <h1>Salón de cabello, cejas y pestañas en <span data-brand>Estética Aurora</span></h1>
-        <p>Corte, colorimetría, balayage, keratina, diseño de ceja y extensiones de pestañas. Agenda directo por WhatsApp y confirma tu horario.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" id="hero-wa" href="https://api.whatsapp.com/send?phone=5218123256381&text=Hola%2C%20quiero%20agendar%20cita%20en%20Est%C3%A9tica%20Aurora." target="_blank" rel="noopener">Agendar cita</a>
-          <a class="hero-link" href="#servicios">Ver lista de precios</a>
-        </div>
+  <div class="wrap">
+    <section class="hero-band">
+      <h1>Cabello, cejas y pestañas con cita previa.</h1>
+      <div class="hero-side">
+        <p>Corte, balayage, keratina, diseño de ceja y extensiones en <span data-address>Av. Las Torres #210, local 3</span>. Elige abajo lo que te gustaría hacerte y confirmamos horario directo por WhatsApp.</p>
+        <a class="btn-sharp" href="#menu">Ver menú de servicios</a>
       </div>
+    </section>
+
+    <div class="triptych">
+      <img src="https://images.unsplash.com/photo-1695527081728-e3a42f0ce261?auto=format&fit=crop&w=900&q=82" alt="Interior luminoso del salón de belleza">
+      <img src="https://images.unsplash.com/photo-1605980625458-21e4d9c29c4c?auto=format&fit=crop&w=800&q=82" alt="Balayage con ondas suaves">
+      <img src="https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?auto=format&fit=crop&w=800&q=82" alt="Aplicación y diseño de pestañas y cejas">
     </div>
-  </section>
+  </div>
 
-  <section id="servicios">
+  <section class="menu-sec" id="menu">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-top">
         <h2>Servicios y precios</h2>
-        <p>Puedes marcar uno o varios servicios para enviar tu consulta lista por WhatsApp.</p>
+        <p>Toca uno o varios servicios para preparar tu mensaje de cita.</p>
       </div>
 
-      <div class="menu-cols">
+      <div class="menu-grid">
         <div class="menu-col">
           <h3>Cabello</h3>
           <ul class="svc-list">
-            <li><button type="button" class="svc-btn selected" data-item="Corte ($180)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Corte</span></span><span class="svc-price">$180</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Peinado ($250)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Peinado</span></span><span class="svc-price">$250</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Tinte (desde $450)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Tinte</span></span><span class="svc-price">desde $450</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Mechas / balayage (desde $1,200)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Mechas / balayage</span></span><span class="svc-price">desde $1,200</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Keratina (desde $900)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Keratina</span></span><span class="svc-price">desde $900</span></button></li>
+            <li><button type="button" class="svc-item on" data-item="Corte ($180)"><span class="svc-name"><i class="svc-mark"></i>Corte</span><span class="svc-price">$180</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Peinado ($250)"><span class="svc-name"><i class="svc-mark"></i>Peinado</span><span class="svc-price">$250</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Tinte (desde $450)"><span class="svc-name"><i class="svc-mark"></i>Tinte</span><span class="svc-price">desde $450</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Mechas / balayage (desde $1,200)"><span class="svc-name"><i class="svc-mark"></i>Mechas / balayage</span><span class="svc-price">desde $1,200</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Keratina (desde $900)"><span class="svc-name"><i class="svc-mark"></i>Keratina</span><span class="svc-price">desde $900</span></button></li>
           </ul>
         </div>
 
         <div class="menu-col">
           <h3>Cejas y pestañas</h3>
           <ul class="svc-list">
-            <li><button type="button" class="svc-btn" data-item="Diseño de ceja ($100)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Diseño de ceja</span></span><span class="svc-price">$100</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Laminado de ceja ($350)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Laminado de ceja</span></span><span class="svc-price">$350</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Lifting de pestañas ($400)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Lifting de pestañas</span></span><span class="svc-price">$400</span></button></li>
-            <li><button type="button" class="svc-btn" data-item="Extensiones de pestañas ($550)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Extensiones de pestañas</span></span><span class="svc-price">$550</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Diseño de ceja ($100)"><span class="svc-name"><i class="svc-mark"></i>Diseño de ceja</span><span class="svc-price">$100</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Laminado de ceja ($350)"><span class="svc-name"><i class="svc-mark"></i>Laminado de ceja</span><span class="svc-price">$350</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Lifting de pestañas ($400)"><span class="svc-name"><i class="svc-mark"></i>Lifting de pestañas</span><span class="svc-price">$400</span></button></li>
+            <li><button type="button" class="svc-item" data-item="Extensiones de pestañas ($550)"><span class="svc-name"><i class="svc-mark"></i>Extensiones de pestañas</span><span class="svc-price">$550</span></button></li>
           </ul>
         </div>
       </div>
 
-      <div class="booking-strip">
+      <div class="cita-bar">
         <div>
-          <strong id="sel-summary">Seleccionado: Corte ($180)</strong>
-          <span>Los precios de color y keratina se confirman según largo y volumen del cabello.</span>
+          <strong id="sel-text">Tu cita: Corte ($180)</strong>
+          <span>En tinte, balayage y keratina confirmamos precio exacto según largo y abundancia.</span>
         </div>
-        <a class="btn-primary" id="inline-wa" href="#" target="_blank" rel="noopener">Cotizar o agendar por WhatsApp</a>
+        <a class="btn-sharp" id="wa-btn" href="#" target="_blank" rel="noopener">Agendar por WhatsApp</a>
       </div>
     </div>
   </section>
 
-  <section id="trabajos" class="sec-alt">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Trabajos del salón</h2>
-        <p>Resultados recientes en corte, color, peinado y arreglo de cejas.</p>
-      </div>
-      <div class="gallery-grid">
-        <figure class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1701978224283-65a54a3d01fc?auto=format&fit=crop&w=480&q=80" alt="Balayage y ondas suaves" loading="lazy">
-          <figcaption class="gallery-cap">Balayage y ondas</figcaption>
+  <section class="visit-sec" id="visita">
+    <div class="wrap visit-grid">
+      <div class="work-pair">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1701978224283-65a54a3d01fc?auto=format&fit=crop&w=640&q=80" alt="Colorimetría y estilizado en salón">
+          <figcaption>Colorimetría y estilizado</figcaption>
         </figure>
-        <figure class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1605980625458-21e4d9c29c4c?auto=format&fit=crop&w=480&q=80" alt="Corte en capas y peinado" loading="lazy">
-          <figcaption class="gallery-cap">Corte en capas</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1616105950717-8102cc4afbd7?auto=format&fit=crop&w=480&q=80" alt="Peinado para evento" loading="lazy">
-          <figcaption class="gallery-cap">Peinado de evento</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?auto=format&fit=crop&w=480&q=80" alt="Diseño y perfilado de ceja" loading="lazy">
-          <figcaption class="gallery-cap">Diseño de ceja</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1695527081728-e3a42f0ce261?auto=format&fit=crop&w=480&q=80" alt="Alaciado y brillo de keratina" loading="lazy">
-          <figcaption class="gallery-cap">Tratamiento keratina</figcaption>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1616105950717-8102cc4afbd7?auto=format&fit=crop&w=640&q=80" alt="Peinado y ondas de evento">
+          <figcaption>Peinado de evento</figcaption>
         </figure>
       </div>
-    </div>
-  </section>
 
-  <section id="ubicacion">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Ubicación y horarios</h2>
-        <p>Atendemos de martes a domingo con cita previa por WhatsApp.</p>
-      </div>
-      <div class="loc-grid">
-        <table class="info-table">
-          <tr><th>Dirección</th><td data-address>Av. Las Torres #210, local 3</td></tr>
-          <tr><th>Horario</th><td data-hours>Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</td></tr>
-          <tr><th>Descanso</th><td>Lunes cerrado</td></tr>
-          <tr><th>Teléfono</th><td><a id="table-tel" href="tel:8123256381">81 2325 6381</a></td></tr>
-          <tr><th>Pagos</th><td>Efectivo, transferencia y tarjeta</td></tr>
-        </table>
-        <div>
-          <iframe class="map-frame" id="map-embed" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Monterrey%20Nuevo%20Leon&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
-          <a class="map-link" id="map-open" href="https://maps.google.com/?q=Monterrey+Nuevo+Leon" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
+      <div class="visit-info">
+        <h2>Visítanos</h2>
+        <dl class="info-dl">
+          <div class="info-row"><dt>Dirección</dt><dd data-address>Av. Las Torres #210, local 3</dd></div>
+          <div class="info-row"><dt>Horario</dt><dd data-hours>Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</dd></div>
+          <div class="info-row"><dt>Descanso</dt><dd>Lunes cerrado</dd></div>
+          <div class="info-row"><dt>Teléfono</dt><dd><a id="fact-tel" href="tel:8123256381">81 2325 6381</a></dd></div>
+          <div class="info-row"><dt>Pagos</dt><dd>Efectivo, transferencia y tarjeta</dd></div>
+        </dl>
+        <div class="visit-links">
+          <a class="uline" id="map-open" href="https://maps.google.com/?q=Monterrey+Nuevo+Leon" target="_blank" rel="noopener">Abrir en Google Maps</a>
+          <a class="uline" id="wa-direct" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<div class="sticky-bar" role="region" aria-label="Resumen de cita">
-  <div class="wrap sticky-inner">
-    <div class="sticky-info">
-      <strong id="sticky-title">1 servicio seleccionado</strong>
-      <span id="sticky-sub">Corte ($180)</span>
-    </div>
-    <a class="btn-primary" id="sticky-wa" href="#" target="_blank" rel="noopener">Agendar por WhatsApp</a>
-  </div>
-</div>
-
 <footer>
   <div class="wrap">
-    <div class="footer-inner">
-      <div><strong data-brand>Estética Aurora</strong> · <span data-address>Av. Las Torres #210, local 3</span></div>
-      <div>Sitio de muestra creado por <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></div>
+    <div class="ft-in">
+      <span><strong data-brand>Estética Aurora</strong> · <span data-address>Av. Las Torres #210, local 3</span></span>
+      <span>Demo de <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></span>
     </div>
-    <div class="footer-credits">
-      Fotografías de muestra vía Unsplash:
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Baylee Gramling</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Zoe Applbaum</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Lera Kogan</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Giorgio Trovato</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Hayley Kim Studios</a> y
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Daniel</a>.
+    <div class="ft-cred">
+      Fotos vía Unsplash: Daniel, Lera Kogan, Hayley Kim Studios, Zoe Applbaum y Giorgio Trovato.
     </div>
   </div>
 </footer>
 
 <script>
   (function () {
-    const params = new URLSearchParams(window.location.search);
-    const brand = (params.get('n') || 'Estética Aurora').trim();
-    const address = (params.get('d') || 'Av. Las Torres #210, local 3').trim();
-    const hours = (params.get('h') || 'Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00').trim();
-    const rawTel = (params.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
+    const q = new URLSearchParams(location.search);
+    const brand = (q.get('n') || 'Estética Aurora').trim();
+    const address = (q.get('d') || 'Av. Las Torres #210, local 3').trim();
+    const hours = (q.get('h') || 'Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00').trim();
+    const rawTel = (q.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
     const waPhone = rawTel.length === 10 ? '521' + rawTel : rawTel;
     const fmtTel = rawTel.length === 10 ? rawTel.slice(0,2) + ' ' + rawTel.slice(2,6) + ' ' + rawTel.slice(6) : rawTel;
 
@@ -523,74 +403,39 @@
     document.querySelectorAll('[data-brand]').forEach(el => el.textContent = brand);
     document.querySelectorAll('[data-address]').forEach(el => el.textContent = address);
     document.querySelectorAll('[data-hours]').forEach(el => el.textContent = hours);
-    document.getElementById('top-hours').textContent = hours;
-    document.getElementById('top-tel').textContent = 'Tel. ' + fmtTel;
-    document.getElementById('top-tel').href = 'tel:' + rawTel;
-    document.getElementById('head-tel').textContent = fmtTel;
-    document.getElementById('head-tel').href = 'tel:' + rawTel;
-    document.getElementById('table-tel').textContent = fmtTel;
-    document.getElementById('table-tel').href = 'tel:' + rawTel;
+    ['head-tel', 'fact-tel'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = fmtTel;
+      el.href = 'tel:' + rawTel;
+    });
+    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + encodeURIComponent(address + ', Monterrey, Nuevo León');
 
-    const mapQ = encodeURIComponent(address + ', Monterrey, Nuevo León');
-    document.getElementById('map-embed').src = 'https://maps.google.com/maps?q=' + mapQ + '&t=&z=14&ie=UTF8&iwloc=&output=embed';
-    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + mapQ;
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Monterrey', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date());
+    const m = Object.fromEntries(parts.map(p => [p.type, p.value]));
+    const hr = parseInt(m.hour, 10) + parseInt(m.minute, 10) / 60;
+    const open = m.weekday !== 'Mon' && (m.weekday === 'Sun' ? (hr >= 10 && hr < 15) : (hr >= 10 && hr < 20));
+    document.getElementById('live-status').textContent = open ? 'Abierto ahora' : (m.weekday === 'Mon' ? 'Lunes cerrado' : 'Abre a las 10:00');
 
-    function updateStatus() {
-      const parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/Monterrey',
-        weekday: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      }).formatToParts(new Date());
-      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
-      const h = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
-      const isMon = map.weekday === 'Mon';
-      const isSun = map.weekday === 'Sun';
-      const isOpen = !isMon && (isSun ? (h >= 10 && h < 15) : (h >= 10 && h < 20));
-      const st = document.getElementById('live-status');
-      st.textContent = isOpen ? 'Abierto ahora' : (isMon ? 'Cerrado los lunes' : 'Cerrado · Abre a las 10:00');
-      st.classList.toggle('open', isOpen);
-    }
-    updateStatus();
-
-    const selected = new Set(['Corte ($180)']);
-    function waUrl(msg) {
-      return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
-    }
+    const picked = new Set(['Corte ($180)']);
+    function wa(msg) { return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg); }
 
     function sync() {
-      const items = Array.from(selected);
-      const listText = items.length ? items.join(', ') : 'información de servicios';
-      const msg = items.length
-        ? 'Hola, quiero agendar en ' + brand + ' para: ' + listText + '. ¿Qué horarios tienen disponibles?'
-        : 'Hola, quiero información y horarios disponibles en ' + brand + '.';
-      const url = waUrl(msg);
-      document.getElementById('sel-summary').textContent = items.length
-        ? 'Seleccionado: ' + listText
-        : 'Marca uno o más servicios arriba o manda mensaje directo.';
-      document.getElementById('sticky-title').textContent = items.length
-        ? items.length + (items.length === 1 ? ' servicio seleccionado' : ' servicios seleccionados')
-        : 'Agendar cita en ' + brand;
-      document.getElementById('sticky-sub').textContent = items.length ? listText : 'Consulta horarios disponibles';
-      document.getElementById('inline-wa').href = url;
-      document.getElementById('sticky-wa').href = url;
-      document.getElementById('hero-wa').href = waUrl('Hola, quiero agendar una cita en ' + brand + '.');
+      const arr = Array.from(picked);
+      document.getElementById('sel-text').textContent = arr.length ? 'Tu cita: ' + arr.join(' + ') : 'Elige uno o más servicios arriba';
+      const msg = arr.length
+        ? 'Hola ' + brand + ', me gustaría agendar cita para: ' + arr.join(', ') + '. ¿Qué horarios tienen libres?'
+        : 'Hola ' + brand + ', quiero consultar horarios disponibles.';
+      document.getElementById('wa-btn').href = wa(msg);
+      document.getElementById('wa-direct').href = wa('Hola ' + brand + ', quiero pedir información de una cita.');
     }
 
-    document.querySelectorAll('.svc-btn').forEach(btn => {
+    document.querySelectorAll('.svc-item').forEach(btn => {
       btn.addEventListener('click', () => {
-        const key = btn.dataset.item;
-        if (selected.has(key)) {
-          selected.delete(key);
-          btn.classList.remove('selected');
-        } else {
-          selected.add(key);
-          btn.classList.add('selected');
-        }
-        const showBar = selected.size > 0;
-        document.querySelector('.sticky-bar').classList.toggle('visible', showBar);
-        document.body.classList.toggle('has-bar', showBar);
+        const k = btn.dataset.item;
+        if (picked.has(k)) { picked.delete(k); btn.classList.remove('on'); }
+        else { picked.add(k); btn.classList.add('on'); }
         sync();
       });
     });

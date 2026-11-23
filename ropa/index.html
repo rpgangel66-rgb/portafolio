@@ -1,618 +1,469 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Percha · Ropa seleccionada de segunda mano</title>
-<meta name="description" content="Catálogo de ropa de paca y segunda mano para mujer, hombre y niños. Aparta piezas únicas por WhatsApp.">
+<title>La Percha · Paca seleccionada y segunda mano</title>
+<meta name="description" content="Piezas únicas lavadas y revisadas para mujer, hombre y niños. Aparta por WhatsApp y recoge en tienda.">
 <style>
   @font-face { font-family: 'Schibsted Grotesk'; src: url('../fonts/demos/schibsted-grotesk-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Schibsted Grotesk'; src: url('../fonts/demos/schibsted-grotesk-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Schibsted Grotesk'; src: url('../fonts/demos/schibsted-grotesk-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schibsted Grotesk'; src: url('../fonts/demos/schibsted-grotesk-800.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Courier Prime'; src: url('../fonts/demos/courier-prime-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Courier Prime'; src: url('../fonts/demos/courier-prime-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 
   :root {
-    --bg: #FFFFFF;
-    --bg-alt: #F4F4F2;
-    --ink: #171717;
-    --muted: #5A5A56;
-    --line: #E0E0DC;
-    --accent: #B53D1E;
-    --accent-dark: #932E14;
-    --font: 'Schibsted Grotesk', system-ui, -apple-system, sans-serif;
+    --paper: #F4F1EA;
+    --kraft: #E8DFCE;
+    --ink: #151412;
+    --muted: #615C54;
+    --rule: #D4CEC2;
+    --rust: #C23B1B;
+    --rust-d: #9D2A0F;
+    --sans: 'Schibsted Grotesk', system-ui, sans-serif;
+    --tag: 'Courier Prime', ui-monospace, monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: var(--font);
+    background: var(--paper);
     color: var(--ink);
-    background: var(--bg);
+    font-family: var(--sans);
     font-size: 15px;
-    line-height: 1.55;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  body.has-bar { padding-bottom: 78px; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; }
 
-  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(18px, 4vw, 44px); }
 
-  /* Topbar */
-  .topbar {
-    background: #171717;
-    color: #E5E5E1;
-    font-size: 13px;
-    padding: 8px 0;
-  }
-  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .topbar-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .topbar-tel { font-weight: 700; color: #FFFFFF; }
-  .topbar-status { color: #D1D1CC; font-weight: 500; }
-  .topbar-status.open { color: #AEE8BC; }
-
-  /* Header */
+  /* Retail indie shop header with live Bolsa button */
   header {
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
     z-index: 40;
+    background: var(--paper);
+    border-bottom: 1.5px solid var(--ink);
   }
-  .header-inner { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-  .brand-name { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; }
-  .brand-sub { font-size: 12px; color: var(--muted); display: block; }
-  nav { display: flex; align-items: center; gap: 26px; font-size: 14px; font-weight: 500; color: var(--muted); }
-  nav a:hover { color: var(--ink); }
-  .header-tel { font-size: 14px; font-weight: 700; color: var(--accent); white-space: nowrap; }
-  .header-tel:hover { text-decoration: underline; }
-
-  /* Hero */
-  .hero {
-    position: relative;
-    min-height: 430px;
-    display: flex;
-    align-items: center;
-    background: #1B1917;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(95deg, rgba(20, 18, 17, 0.88) 0%, rgba(20, 18, 17, 0.70) 48%, rgba(20, 18, 17, 0.22) 100%);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 560px;
-    padding-block: 54px;
-    color: #FFFFFF;
-  }
-  .hero-kicker { font-size: 13px; font-weight: 500; color: #E8DFDB; margin-bottom: 10px; }
-  .hero h1 {
-    font-size: clamp(28px, 3.4vw, 38px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: #FFFFFF;
-    margin-bottom: 14px;
-  }
-  .hero p { font-size: 15.5px; line-height: 1.55; color: #EAE6E2; margin-bottom: 24px; }
-  .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent);
-    color: #FFFFFF;
-    font-weight: 700;
-    font-size: 14.5px;
-    padding: 12px 22px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-  .btn-primary:hover { background: var(--accent-dark); }
-  .hero-link {
-    font-size: 14px;
-    font-weight: 600;
-    color: #FFFFFF;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
-    padding-bottom: 2px;
-  }
-  .hero-link:hover { border-color: #FFFFFF; }
-
-  /* Sections */
-  section { padding: 54px 0; border-bottom: 1px solid var(--line); }
-  .sec-alt { background: var(--bg-alt); }
-  .sec-top {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-  }
-  .sec-head { max-width: 560px; }
-  .sec-head h2 {
-    font-size: clamp(22px, 2.5vw, 26px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-  .sec-head p { color: var(--muted); font-size: 15px; }
-
-  /* Filter tabs */
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
-  .filter-btn {
-    border: 1px solid #CECECA;
-    background: #FFFFFF;
-    color: var(--muted);
-    font: inherit;
-    font-size: 13.5px;
-    font-weight: 600;
-    padding: 7px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .filter-btn.active { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
-
-  /* Catalog grid */
-  .catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-  }
-  .piece {
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    transition: border-color 0.15s ease;
-  }
-  .piece:hover:not(.sold) { border-color: #A6A6A1; }
-  .piece.selected {
-    border-color: var(--accent);
-    box-shadow: inset 0 0 0 1px var(--accent);
-    background: #FFF9F7;
-  }
-  .piece.sold { opacity: 0.62; cursor: not-allowed; }
-  .piece-media { position: relative; }
-  .piece-media img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    background: #E9E9E5;
-  }
-  .piece-flag {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #171717;
-    color: #FFFFFF;
-    font-size: 11.5px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-  .piece.selected .piece-flag { background: var(--accent); }
-  .piece-body { padding: 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
-  .piece-name { font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-  .piece-sub { font-size: 13px; color: var(--muted); }
-  .piece-price { margin-top: auto; padding-top: 6px; font-size: 15px; font-weight: 700; color: var(--accent); }
-  .piece.sold .piece-price { color: var(--muted); text-decoration: line-through; }
-
-  .bag-panel {
-    margin-top: 24px;
-    background: #FFFFFF;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 18px 20px;
+  .hd-in {
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    flex-wrap: wrap;
   }
-  .bag-panel strong { display: block; font-size: 15.5px; margin-bottom: 2px; }
-  .bag-panel span { font-size: 14px; color: var(--muted); }
+  .brand { font-size: 21px; font-weight: 800; letter-spacing: -0.03em; }
+  .hd-mid { display: flex; gap: 22px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .hd-mid a:hover { color: var(--ink); }
+  .bag-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: #FFFFFF;
+    font: 700 13px var(--tag);
+    padding: 9px 14px;
+    letter-spacing: 0.02em;
+  }
+  .bag-btn:hover { background: var(--rust); }
 
-  /* Store info split */
-  .split-grid {
+  /* Immediate vintage drop banner — straight into shopping */
+  .drop-top {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(20px, 4vw, 48px);
+    padding-block: clamp(24px, 3.5vw, 40px);
+    border-bottom: 1px solid var(--rule);
     align-items: center;
   }
-  .store-list { list-style: none; border-top: 1px solid var(--line); }
-  .store-list li {
-    padding: 13px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 15px;
+  .drop-meta {
+    font: 700 12px var(--tag);
+    color: var(--rust);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
   }
-  .store-list strong { display: block; font-size: 15px; color: var(--ink); margin-bottom: 2px; }
-  .store-list span { color: var(--muted); font-size: 14.5px; }
-  .lot-photo {
+  .drop-top h1 {
+    font-size: clamp(30px, 3.8vw, 44px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    margin-bottom: 12px;
+  }
+  .drop-top p { font-size: 15.5px; color: var(--muted); max-width: 44ch; margin-bottom: 18px; }
+  .drop-photo img {
     width: 100%;
-    height: 310px;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid var(--line);
   }
 
-  /* Location */
-  .loc-grid {
+  /* Filter bar right over borderless lookbook grid */
+  .shop-sec {
+    padding-block: clamp(28px, 4vw, 48px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 24px;
+  }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tab {
+    border: 1.5px solid transparent;
+    background: transparent;
+    padding: 6px 13px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.on { border-color: var(--ink); background: var(--ink); color: #FFFFFF; }
+  .stock-count { font: 400 13px var(--tag); color: var(--muted); }
+
+  /* Borderless 4-column garment grid with physical kraft price tags */
+  .rack {
     display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 32px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px 16px;
+  }
+  .garment {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .garment.sold { opacity: 0.55; cursor: not-allowed; }
+  .g-media {
+    position: relative;
+    overflow: hidden;
+    background: var(--kraft);
+  }
+  .g-media img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+  .garment:hover:not(.sold) .g-media img { transform: scale(1.03); }
+  .garment.on .g-media { outline: 2.5px solid var(--rust); outline-offset: 3px; }
+  .hang-tag {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background: var(--kraft);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 3px 8px;
+    font: 700 12px var(--tag);
+    letter-spacing: 0.02em;
+  }
+  .garment.sold .hang-tag { background: var(--ink); color: #FFFFFF; }
+  .garment.on .hang-tag { background: var(--rust); border-color: var(--rust); color: #FFFFFF; }
+  .g-meta {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .g-name { display: block; font-size: 14.5px; font-weight: 700; line-height: 1.3; }
+  .g-size { display: block; font: 400 12.5px var(--tag); color: var(--muted); margin-top: 2px; }
+  .g-price { font: 700 14.5px var(--tag); color: var(--ink); white-space: nowrap; }
+  .garment.sold .g-price { text-decoration: line-through; color: var(--muted); }
+
+  /* Physical boutique receipt / Apartado panel */
+  .apartado-sec {
+    padding-block: clamp(32px, 4.5vw, 52px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .ap-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(24px, 4vw, 52px);
     align-items: start;
   }
-  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
-  .info-table th, .info-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    vertical-align: top;
+  .ticket {
+    background: #FFFFFF;
+    border: 1.5px solid var(--ink);
+    padding: 22px 24px;
   }
-  .info-table tr:last-child th, .info-table tr:last-child td { border-bottom: none; }
-  .info-table th { width: 112px; color: var(--muted); font-weight: 500; }
-  .info-table td { color: var(--ink); font-weight: 500; }
-  .map-frame {
+  .ticket-hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 12px;
+    border-bottom: 1.5px dashed var(--rule);
+    margin-bottom: 14px;
+  }
+  .ticket-hd strong { font-size: 18px; font-weight: 800; }
+  .ticket-hd span { font: 400 12px var(--tag); color: var(--muted); }
+  .ticket-list { list-style: none; margin-bottom: 14px; }
+  .ticket-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--rule);
+    font: 400 13.5px var(--tag);
+  }
+  .ticket-empty { font-size: 14px; color: var(--muted); padding: 8px 0 16px; }
+  .ticket-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0 16px;
+    border-top: 1.5px dashed var(--rule);
+  }
+  .ticket-total b { font: 700 20px var(--tag); color: var(--rust); }
+  .btn-rust {
+    display: block;
     width: 100%;
-    height: 290px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: #FFFFFF;
-  }
-  .map-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--accent); }
-  .map-link:hover { text-decoration: underline; }
-
-  /* Sticky bag bar (shown when at least 1 piece is selected) */
-  .sticky-bar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #171717;
+    text-align: center;
+    background: var(--rust);
     color: #FFFFFF;
-    border-top: 1px solid #2E2E2E;
-    z-index: 50;
-    padding: 12px 0;
-    display: none;
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 13px 18px;
+    transition: background 0.15s ease;
   }
-  .sticky-bar.visible { display: block; }
-  .sticky-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-  .sticky-info { min-width: 0; font-size: 14px; }
-  .sticky-info strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sticky-info span { color: #CFCFCA; font-size: 12.5px; }
+  .btn-rust:hover { background: var(--rust-d); }
 
-  /* Footer */
+  .store-col img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 18px; }
+  .rules-dl { border-top: 1.5px solid var(--ink); }
+  .rules-row {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14.5px;
+  }
+  .rules-row dt { font: 700 12px var(--tag); color: var(--muted); text-transform: uppercase; padding-top: 2px; }
+  .store-links { margin-top: 16px; display: flex; gap: 20px; flex-wrap: wrap; }
+  .store-links a { font-size: 14px; font-weight: 700; color: var(--rust); border-bottom: 1.5px solid var(--rust); padding-bottom: 1px; }
+
   footer {
-    background: #FFFFFF;
-    padding: 28px 0;
-    font-size: 13px;
+    padding-block: 24px;
+    font-size: 12.5px;
     color: var(--muted);
   }
-  .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .footer-credits {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-    font-size: 12px;
-    color: #777773;
-  }
-  .footer-credits a { text-decoration: underline; }
+  .ft-in { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+  .ft-cred { font-size: 11.5px; color: #7F796F; }
+  .ft-cred a { text-decoration: underline; }
 
-  @media (max-width: 900px) {
-    .catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 920px) {
+    .drop-top, .ap-grid { grid-template-columns: 1fr; }
+    .rack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
-  @media (max-width: 820px) {
-    nav { display: none; }
-    .split-grid, .loc-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 380px; }
-    .hero::after {
-      background: linear-gradient(180deg, rgba(20, 18, 17, 0.72) 0%, rgba(20, 18, 17, 0.90) 100%);
-    }
-  }
-  @media (max-width: 560px) {
-    .wrap { padding: 0 18px; }
-    .topbar-tel { display: none; }
-    .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .btn-primary { padding: 11px 16px; font-size: 14px; }
+  @media (max-width: 600px) {
+    .hd-mid { display: none; }
+    .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 10px; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="wrap topbar-inner">
-    <div class="topbar-left">
-      <a class="topbar-tel" id="top-tel" href="tel:8123256381">Tel. 81 2325 6381</a>
-      <span id="top-hours">Lun a sáb 11:00 a 19:00 · Dom cerrado</span>
-    </div>
-    <span class="topbar-status" id="live-status">Abierto hoy</span>
-  </div>
-</div>
-
 <header>
-  <div class="wrap header-inner">
-    <a href="#" class="brand">
-      <span class="brand-name" data-brand>La Percha</span>
-      <span class="brand-sub">Ropa de paca y segunda mano</span>
-    </a>
-    <nav aria-label="Navegación principal">
+  <div class="wrap hd-in">
+    <a href="#" class="brand" data-brand>La Percha</a>
+    <nav class="hd-mid" aria-label="Navegación">
       <a href="#catalogo">Catálogo</a>
-      <a href="#como-apartar">Cómo apartar</a>
-      <a href="#ubicacion">Ubicación</a>
+      <a href="#apartado">Tienda y horarios</a>
+      <a id="head-tel" href="tel:8123256381">81 2325 6381</a>
     </nav>
-    <a class="header-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
+    <a href="#apartado" class="bag-btn" id="bag-pill">Bolsa (0)</a>
   </div>
 </header>
 
 <main>
-  <section class="hero" style="padding:0; border-bottom:none;">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1619161519929-befcb28d6384?auto=format&fit=crop&w=1500&q=82" alt="Perchero con prendas seleccionadas">
-    <div class="wrap">
-      <div class="hero-content">
-        <div class="hero-kicker" data-address>Av. Madero #210, Centro</div>
-        <h1>Prendas únicas revisadas en <span data-brand>La Percha</span></h1>
-        <p>Ropa seleccionada para mujer, hombre y niños. Marca las piezas que te gusten y apártalas por WhatsApp para pasar a recogerlas.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#catalogo">Explorar catálogo</a>
-          <a class="hero-link" href="#ubicacion">Ver ubicación</a>
+  <div class="wrap">
+    <section class="drop-top">
+      <div>
+        <div class="drop-meta">Paca nueva martes y viernes · <span id="live-status">Abierto hoy</span></div>
+        <h1>Piezas únicas, lavadas y listas para apartar.</h1>
+        <p>Toca cualquier prenda disponible para juntar tu bolsa y mándala por WhatsApp. Te la guardamos 24 horas para que te la pruebes en <span data-address>Av. Madero #210, Centro</span>.</p>
+      </div>
+      <div class="drop-photo">
+        <img src="https://images.unsplash.com/photo-1619161519929-befcb28d6384?auto=format&fit=crop&w=1000&q=82" alt="Perchero de prendas seleccionadas en tienda">
+      </div>
+    </section>
+
+    <section class="shop-sec" id="catalogo">
+      <div class="filter-bar">
+        <div class="tabs" id="cat-tabs">
+          <button type="button" class="tab on" data-c="todo">Todo</button>
+          <button type="button" class="tab" data-c="mujer">Mujer</button>
+          <button type="button" class="tab" data-c="hombre">Hombre</button>
+          <button type="button" class="tab" data-c="ninos">Niños</button>
+        </div>
+        <span class="stock-count" id="stock-count">8 disponibles</span>
+      </div>
+
+      <div class="rack" id="rack"></div>
+    </section>
+
+    <section class="apartado-sec" id="apartado">
+      <div class="ap-grid">
+        <div class="ticket">
+          <div class="ticket-hd">
+            <strong>Tu apartado</strong>
+            <span>Se guarda 24 hrs</span>
+          </div>
+          <div id="ticket-body"></div>
+          <div class="ticket-total">
+            <span>Total en bolsa</span>
+            <b id="ticket-total">$0</b>
+          </div>
+          <a class="btn-rust" id="wa-btn" href="#" target="_blank" rel="noopener">Apartar estas prendas por WhatsApp</a>
+        </div>
+
+        <div class="store-col">
+          <img src="https://images.unsplash.com/photo-1601379327928-bedfaf9da2d0?auto=format&fit=crop&w=900&q=80" alt="Pila de suéteres doblados de temporada">
+          <dl class="rules-dl">
+            <div class="rules-row"><dt>Dirección</dt><dd data-address>Av. Madero #210, Centro</dd></div>
+            <div class="rules-row"><dt>Horario</dt><dd data-hours>Lun a sáb 11:00 a 19:00 · Dom cerrado</dd></div>
+            <div class="rules-row"><dt>Probador</dt><dd>Te pruebas todo en tienda antes de pagar</dd></div>
+            <div class="rules-row"><dt>Lotes</dt><dd>También armamos paquetes para revendedoras</dd></div>
+            <div class="rules-row"><dt>Teléfono</dt><dd><a id="fact-tel" href="tel:8123256381">81 2325 6381</a></dd></div>
+          </dl>
+          <div class="store-links">
+            <a id="map-open" href="https://maps.google.com/?q=Monterrey+Centro" target="_blank" rel="noopener">Abrir tienda en Google Maps</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="catalogo" class="sec-alt">
-    <div class="wrap">
-      <div class="sec-top">
-        <div class="sec-head">
-          <h2>Catálogo de la semana</h2>
-          <p>Cada prenda es pieza única. Toca las disponibles para juntar tu apartado.</p>
-        </div>
-        <div class="filters" id="filters" role="tablist" aria-label="Filtrar prendas">
-          <button type="button" class="filter-btn active" data-cat="todo">Todo</button>
-          <button type="button" class="filter-btn" data-cat="mujer">Mujer</button>
-          <button type="button" class="filter-btn" data-cat="hombre">Hombre</button>
-          <button type="button" class="filter-btn" data-cat="ninos">Niños</button>
-        </div>
-      </div>
-
-      <div class="catalog-grid" id="catalog-grid"></div>
-
-      <div class="bag-panel">
-        <div>
-          <strong id="bag-title">Sin prendas seleccionadas</strong>
-          <span id="bag-detail">Toca cualquier prenda disponible arriba para apartarla por WhatsApp.</span>
-        </div>
-        <a class="btn-primary" id="inline-wa" href="#" target="_blank" rel="noopener">Apartar por WhatsApp</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="como-apartar">
-    <div class="wrap">
-      <div class="sec-head" style="margin-bottom:24px;">
-        <h2>Cómo funciona el apartado</h2>
-        <p>Sencillo y sin complicaciones para que no te ganen tu talla.</p>
-      </div>
-      <div class="split-grid">
-        <ul class="store-list">
-          <li>
-            <strong>Apartado por 24 horas</strong>
-            <span>Al confirmar por WhatsApp te guardamos tus prendas hasta el día siguiente al cierre.</span>
-          </li>
-          <li>
-            <strong>Revisión en tienda y probador</strong>
-            <span>Puedes probarte todo antes de pagar. Todas las prendas están lavadas y revisadas.</span>
-          </li>
-          <li>
-            <strong>Mercancía nueva cada semana</strong>
-            <span>Abrimos paca nueva los martes y viernes; también manejamos lotes para revendedoras.</span>
-          </li>
-        </ul>
-        <img class="lot-photo" src="https://images.unsplash.com/photo-1601379327928-bedfaf9da2d0?auto=format&fit=crop&w=900&q=80" alt="Selección doblada de ropa de temporada" loading="lazy">
-      </div>
-    </div>
-  </section>
-
-  <section id="ubicacion" class="sec-alt">
-    <div class="wrap">
-      <div class="sec-head" style="margin-bottom:24px;">
-        <h2>Ubicación y horarios</h2>
-        <p>Visítanos en tienda o pregunta por envíos locales.</p>
-      </div>
-      <div class="loc-grid">
-        <table class="info-table">
-          <tr><th>Dirección</th><td data-address>Av. Madero #210, Centro</td></tr>
-          <tr><th>Horario</th><td data-hours>Lun a sáb 11:00 a 19:00 · Dom cerrado</td></tr>
-          <tr><th>Teléfono</th><td><a id="table-tel" href="tel:8123256381">81 2325 6381</a></td></tr>
-          <tr><th>Pagos</th><td>Efectivo y transferencia</td></tr>
-        </table>
-        <div>
-          <iframe class="map-frame" id="map-embed" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Monterrey%20Centro&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
-          <a class="map-link" id="map-open" href="https://maps.google.com/?q=Monterrey+Centro" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<div class="sticky-bar" role="region" aria-label="Resumen de apartado">
-  <div class="wrap sticky-inner">
-    <div class="sticky-info">
-      <strong id="sticky-title">Apartado · $0</strong>
-      <span id="sticky-sub">Elige prendas del catálogo para apartar por WhatsApp</span>
-    </div>
-    <a class="btn-primary" id="sticky-wa" href="#" target="_blank" rel="noopener">Apartar por WhatsApp</a>
+    </section>
   </div>
-</div>
+</main>
 
 <footer>
   <div class="wrap">
-    <div class="footer-inner">
-      <div><strong data-brand>La Percha</strong> · <span data-address>Av. Madero #210, Centro</span></div>
-      <div>Sitio de muestra creado por <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></div>
+    <div class="ft-in">
+      <span><strong data-brand>La Percha</strong> · <span data-address>Av. Madero #210, Centro</span></span>
+      <span>Demo de <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></span>
     </div>
-    <div class="footer-credits">
-      Fotografías de muestra vía Unsplash:
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Noémie Roussel</a>,
-      <a href="https://unsplash.com" target="_blank" rel="noopener">Tijana Drndarski</a> y colaboradores de Unsplash.
+    <div class="ft-cred">
+      Fotos vía Unsplash: Noémie Roussel, Tijana Drndarski y colaboradores de Unsplash.
     </div>
   </div>
 </footer>
 
 <script>
   (function () {
-    const params = new URLSearchParams(window.location.search);
-    const brand = (params.get('n') || 'La Percha').trim();
-    const address = (params.get('d') || 'Av. Madero #210, Centro').trim();
-    const hours = (params.get('h') || 'Lun a sáb 11:00 a 19:00 · Dom cerrado').trim();
-    const rawTel = (params.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
+    const q = new URLSearchParams(location.search);
+    const brand = (q.get('n') || 'La Percha').trim();
+    const address = (q.get('d') || 'Av. Madero #210, Centro').trim();
+    const hours = (q.get('h') || 'Lun a sáb 11:00 a 19:00 · Dom cerrado').trim();
+    const rawTel = (q.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
     const waPhone = rawTel.length === 10 ? '521' + rawTel : rawTel;
     const fmtTel = rawTel.length === 10 ? rawTel.slice(0,2) + ' ' + rawTel.slice(2,6) + ' ' + rawTel.slice(6) : rawTel;
 
-    document.title = brand + ' · Ropa seleccionada de segunda mano';
+    document.title = brand + ' · Paca seleccionada y segunda mano';
     document.querySelectorAll('[data-brand]').forEach(el => el.textContent = brand);
     document.querySelectorAll('[data-address]').forEach(el => el.textContent = address);
     document.querySelectorAll('[data-hours]').forEach(el => el.textContent = hours);
-    document.getElementById('top-hours').textContent = hours;
-    document.getElementById('top-tel').textContent = 'Tel. ' + fmtTel;
-    document.getElementById('top-tel').href = 'tel:' + rawTel;
-    document.getElementById('head-tel').textContent = fmtTel;
-    document.getElementById('head-tel').href = 'tel:' + rawTel;
-    document.getElementById('table-tel').textContent = fmtTel;
-    document.getElementById('table-tel').href = 'tel:' + rawTel;
+    ['head-tel', 'fact-tel'].forEach(id => {
+      const el = document.getElementById(id);
+      el.textContent = fmtTel;
+      el.href = 'tel:' + rawTel;
+    });
+    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + encodeURIComponent(address + ', Monterrey, Nuevo León');
 
-    const mapQ = encodeURIComponent(address + ', Monterrey, Nuevo León');
-    document.getElementById('map-embed').src = 'https://maps.google.com/maps?q=' + mapQ + '&t=&z=14&ie=UTF8&iwloc=&output=embed';
-    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + mapQ;
-
-    function updateStatus() {
-      const parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/Monterrey',
-        weekday: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      }).formatToParts(new Date());
-      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
-      const h = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
-      const isSun = map.weekday === 'Sun';
-      const isOpen = !isSun && h >= 11 && h < 19;
-      const st = document.getElementById('live-status');
-      st.textContent = isOpen ? 'Abierto ahora' : (isSun ? 'Domingos cerrado' : 'Cerrado · Abre a las 11:00');
-      st.classList.toggle('open', isOpen);
-    }
-    updateStatus();
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Monterrey', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+    }).formatToParts(new Date());
+    const m = Object.fromEntries(parts.map(p => [p.type, p.value]));
+    const hr = parseInt(m.hour, 10) + parseInt(m.minute, 10) / 60;
+    const open = m.weekday !== 'Sun' && hr >= 11 && hr < 19;
+    document.getElementById('live-status').textContent = open ? 'Abierto ahora' : (m.weekday === 'Sun' ? 'Domingos cerrado' : 'Abre a las 11:00');
 
     const ITEMS = [
-      { id: 'chamarra', name: 'Chamarra de mezclilla', size: 'Talla M', price: 350, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&w=420&q=80' },
-      { id: 'sueter-crema', name: 'Suéter tejido crema', size: 'Talla CH', price: 180, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1574201635302-388dd92a4c3f?auto=format&fit=crop&w=420&q=80' },
-      { id: 'blusa-encaje', name: 'Blusa de encaje', size: 'Talla M', price: 220, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1604531825858-a8e24ed6b43d?auto=format&fit=crop&w=420&q=80' },
-      { id: 'camisa-franela', name: 'Camisa de franela', size: 'Talla G', price: 190, cat: 'hombre', sold: false, img: 'https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?auto=format&fit=crop&w=420&q=80' },
-      { id: 'vestido-nina', name: 'Vestido de niña', size: '6 años', price: 150, cat: 'ninos', sold: false, img: 'https://images.unsplash.com/photo-1544586947-3e09d1a036f1?auto=format&fit=crop&w=420&q=80' },
-      { id: 'sudadera', name: 'Sudadera estampada', size: 'Talla M', price: 200, cat: 'hombre', sold: true, img: 'https://images.unsplash.com/photo-1680292783974-a9a336c10366?auto=format&fit=crop&w=420&q=80' },
-      { id: 'camisa-floral', name: 'Camisa floral', size: 'Talla M', price: 170, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1682802739047-24fa5d983e71?auto=format&fit=crop&w=420&q=80' },
-      { id: 'jeans-rectos', name: 'Jeans rectos', size: 'Talla 32', price: 240, cat: 'hombre', sold: false, img: 'https://images.unsplash.com/photo-1754555009601-498e9873197e?auto=format&fit=crop&w=420&q=80' },
-      { id: 'sueter-cafe', name: 'Suéter café oversize', size: 'Talla G', price: 160, cat: 'mujer', sold: true, img: 'https://images.unsplash.com/photo-1631541909061-71e349d1f203?auto=format&fit=crop&w=420&q=80' },
-      { id: 'paquete-playeras', name: 'Paquete de playeras', size: '4 a 6 años', price: 120, cat: 'ninos', sold: false, img: 'https://images.unsplash.com/photo-1630329273801-8f629dba0a72?auto=format&fit=crop&w=420&q=80' }
+      { id: 'chamarra', name: 'Chamarra de mezclilla', size: 'Talla M', price: 350, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&w=440&q=80' },
+      { id: 'sueter-crema', name: 'Suéter tejido crema', size: 'Talla CH', price: 180, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1574201635302-388dd92a4c3f?auto=format&fit=crop&w=440&q=80' },
+      { id: 'blusa-encaje', name: 'Blusa de encaje', size: 'Talla M', price: 220, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1604531825858-a8e24ed6b43d?auto=format&fit=crop&w=440&q=80' },
+      { id: 'camisa-franela', name: 'Camisa de franela', size: 'Talla G', price: 190, cat: 'hombre', sold: false, img: 'https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?auto=format&fit=crop&w=440&q=80' },
+      { id: 'vestido-nina', name: 'Vestido de niña', size: '6 años', price: 150, cat: 'ninos', sold: false, img: 'https://images.unsplash.com/photo-1544586947-3e09d1a036f1?auto=format&fit=crop&w=440&q=80' },
+      { id: 'sudadera', name: 'Sudadera estampada', size: 'Talla M', price: 200, cat: 'hombre', sold: true, img: 'https://images.unsplash.com/photo-1680292783974-a9a336c10366?auto=format&fit=crop&w=440&q=80' },
+      { id: 'camisa-floral', name: 'Camisa floral', size: 'Talla M', price: 170, cat: 'mujer', sold: false, img: 'https://images.unsplash.com/photo-1682802739047-24fa5d983e71?auto=format&fit=crop&w=440&q=80' },
+      { id: 'jeans-rectos', name: 'Jeans rectos', size: 'Talla 32', price: 240, cat: 'hombre', sold: false, img: 'https://images.unsplash.com/photo-1754555009601-498e9873197e?auto=format&fit=crop&w=440&q=80' },
+      { id: 'sueter-cafe', name: 'Suéter café oversize', size: 'Talla G', price: 160, cat: 'mujer', sold: true, img: 'https://images.unsplash.com/photo-1631541909061-71e349d1f203?auto=format&fit=crop&w=440&q=80' },
+      { id: 'paquete-playeras', name: 'Paquete de playeras', size: '4 a 6 años', price: 120, cat: 'ninos', sold: false, img: 'https://images.unsplash.com/photo-1630329273801-8f629dba0a72?auto=format&fit=crop&w=440&q=80' }
     ];
 
-    let currentCat = 'todo';
-    const bag = new Set();
-    const grid = document.getElementById('catalog-grid');
+    let cat = 'todo';
+    const bag = new Set(['chamarra']);
+    const rack = document.getElementById('rack');
 
-    function waUrl(msg) {
-      return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
-    }
+    function render() {
+      const list = cat === 'todo' ? ITEMS : ITEMS.filter(i => i.cat === cat);
+      const avail = list.filter(i => !i.sold).length;
+      document.getElementById('stock-count').textContent = avail + (avail === 1 ? ' pieza disponible' : ' piezas disponibles');
 
-    function renderGrid() {
-      const list = currentCat === 'todo' ? ITEMS : ITEMS.filter(i => i.cat === currentCat);
-      grid.innerHTML = list.map(item => {
-        const isSel = bag.has(item.id);
-        const flag = item.sold
-          ? '<span class="piece-flag">Agotada</span>'
-          : (isSel ? '<span class="piece-flag">En tu apartado</span>' : '');
-        return '<button type="button" class="piece' + (item.sold ? ' sold' : '') + (isSel ? ' selected' : '') + '" data-id="' + item.id + '"' + (item.sold ? ' disabled' : '') + '>' +
-          '<span class="piece-media">' +
-            '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy">' +
-            flag +
-          '</span>' +
-          '<span class="piece-body">' +
-            '<span class="piece-name">' + item.name + '</span>' +
-            '<span class="piece-sub">' + item.size + '</span>' +
-            '<span class="piece-price">$' + item.price + '</span>' +
-          '</span>' +
+      rack.innerHTML = list.map(i => {
+        const on = bag.has(i.id);
+        const tag = i.sold ? 'AGOTADA' : (on ? 'EN BOLSA' : i.size.toUpperCase());
+        return '<button type="button" class="garment' + (i.sold ? ' sold' : '') + (on ? ' on' : '') + '" data-id="' + i.id + '"' + (i.sold ? ' disabled' : '') + '>' +
+          '<span class="g-media"><img src="' + i.img + '" alt="' + i.name + '"><span class="hang-tag">' + tag + '</span></span>' +
+          '<span class="g-meta"><span><span class="g-name">' + i.name + '</span><span class="g-size">' + i.size + '</span></span><span class="g-price">$' + i.price + '</span></span>' +
         '</button>';
       }).join('');
-      syncBag();
+      sync();
     }
 
-    function syncBag() {
+    function sync() {
       const picked = ITEMS.filter(i => bag.has(i.id));
-      const total = picked.reduce((acc, i) => acc + i.price, 0);
-      const listText = picked.map(i => i.name + ' (' + i.size + ', $' + i.price + ')').join(', ');
-      const msg = picked.length
-        ? 'Hola ' + brand + ', quiero apartar estas prendas:\n- ' + picked.map(i => i.name + ' (' + i.size + ') $' + i.price).join('\n- ') + '\nTotal: $' + total + '\n¿Siguen disponibles?'
-        : 'Hola ' + brand + ', quiero preguntar por las prendas disponibles de esta semana.';
-      const url = waUrl(msg);
+      const total = picked.reduce((s, i) => s + i.price, 0);
+      document.getElementById('bag-pill').textContent = 'Bolsa (' + picked.length + ')';
+      document.getElementById('ticket-total').textContent = '$' + total;
 
-      document.getElementById('bag-title').textContent = picked.length
-        ? picked.length + (picked.length === 1 ? ' prenda seleccionada' : ' prendas seleccionadas') + ' · $' + total
-        : 'Sin prendas seleccionadas';
-      document.getElementById('bag-detail').textContent = picked.length
-        ? listText
-        : 'Toca cualquier prenda disponible arriba para apartarla por WhatsApp.';
-      document.getElementById('sticky-title').textContent = picked.length
-        ? picked.length + (picked.length === 1 ? ' prenda' : ' prendas') + ' · $' + total
-        : 'Apartado · $0';
-      document.getElementById('sticky-sub').textContent = picked.length
-        ? listText
-        : 'Elige prendas del catálogo para apartar por WhatsApp';
-      document.getElementById('inline-wa').href = url;
-      document.getElementById('sticky-wa').href = url;
-      document.querySelector('.sticky-bar').classList.toggle('visible', picked.length > 0);
-      document.body.classList.toggle('has-bar', picked.length > 0);
+      const body = document.getElementById('ticket-body');
+      if (!picked.length) {
+        body.innerHTML = '<p class="ticket-empty">Toca las prendas disponibles arriba para agregarlas a tu apartado.</p>';
+      } else {
+        body.innerHTML = '<ul class="ticket-list">' +
+          picked.map(i => '<li><span>' + i.name + ' (' + i.size + ')</span><strong>$' + i.price + '</strong></li>').join('') +
+        '</ul>';
+      }
+
+      const msg = picked.length
+        ? 'Hola ' + brand + ', quiero apartar estas prendas:\n' +
+          picked.map(i => '- ' + i.name + ' (' + i.size + ') $' + i.price).join('\n') +
+          '\nTotal: $' + total + '\n¿Siguen disponibles?'
+        : 'Hola ' + brand + ', ¿qué prendas nuevas llegaron esta semana?';
+      document.getElementById('wa-btn').href = 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
     }
 
-    document.getElementById('filters').addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCat = btn.dataset.cat;
-      renderGrid();
+    document.getElementById('cat-tabs').addEventListener('click', (e) => {
+      const b = e.target.closest('.tab');
+      if (!b) return;
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      cat = b.dataset.c;
+      render();
     });
 
-    grid.addEventListener('click', (e) => {
-      const card = e.target.closest('.piece');
+    rack.addEventListener('click', (e) => {
+      const card = e.target.closest('.garment');
       if (!card || card.classList.contains('sold')) return;
       const id = card.dataset.id;
       if (bag.has(id)) bag.delete(id);
       else bag.add(id);
-      renderGrid();
+      render();
     });
 
-    renderGrid();
+    render();
   })();
 </script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
