@@ -494,7 +494,7 @@ footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3p
             <div><dt>Nombre</dt><dd id="sCli">—</dd></div>
           </dl>
           <p class="sum-note">La disponibilidad se confirma directamente por WhatsApp.</p>
-          <button type="button" class="btn btn-pri" id="sendBtn" style="width:100%">Confirmar por WhatsApp</button>
+          <a class="btn btn-pri" id="sendBtn" href="#" target="_blank" rel="noopener" style="width:100%">Confirmar por WhatsApp</a>
         </aside>
       </div>
     </div>
@@ -538,7 +538,7 @@ footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3p
       <strong id="mSrv">Servicio</strong>
       <small id="mWhen">Día · Hora</small>
     </div>
-    <button type="button" class="btn btn-pri" id="mSendBtn" style="padding:9px 15px;font-size:13.5px">Confirmar</button>
+    <a class="btn btn-pri" id="mSendBtn" href="#" target="_blank" rel="noopener" style="padding:9px 15px;font-size:13.5px">Confirmar</a>
   </div>
 
 <script>
@@ -860,7 +860,8 @@ function renderAll() {
     slotsGrid.appendChild(b);
   });
 
-  // Resumen y barra móvil
+  // Resumen, enlaces reales de WhatsApp (nunca bloqueados por popup blocker) y barra móvil
+  const waHref = `https://api.whatsapp.com/send?phone=521${tel10}&text=${encodeURIComponent(buildWaText())}`;
   document.getElementById('sSrv').textContent = srv.name;
   document.getElementById('sDay').textContent = day.label;
   document.getElementById('sTime').textContent = state.slot;
@@ -868,23 +869,12 @@ function renderAll() {
   document.getElementById('sCli').textContent = state.name || '—';
   document.getElementById('mSrv').textContent = srv.name;
   document.getElementById('mWhen').textContent = `${day.label} · ${state.slot}`;
+  document.getElementById('sendBtn').href = waHref;
+  document.getElementById('mSendBtn').href = waHref;
 }
 
 document.getElementById('inName').addEventListener('input', (e) => { state.name = e.target.value.trim(); renderAll(); });
 document.getElementById('inNote').addEventListener('input', (e) => { state.note = e.target.value.trim(); renderAll(); });
-
-function sendWhatsApp() {
-  window.open(`https://wa.me/521${tel10}?text=${encodeURIComponent(buildWaText())}`, '_blank', 'noopener');
-}
-document.getElementById('sendBtn').addEventListener('click', sendWhatsApp);
-document.getElementById('mSendBtn').addEventListener('click', () => {
-  if (!state.name) {
-    document.getElementById('inName').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    document.getElementById('inName').focus();
-    return;
-  }
-  sendWhatsApp();
-});
 
 renderAll();
 </script>

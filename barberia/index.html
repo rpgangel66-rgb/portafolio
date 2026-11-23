@@ -1,262 +1,643 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Barbería Los Compas</title>
-<meta name="description" content="Barbería Los Compas. Cortes, fades y barba. Aparta tu corte por WhatsApp.">
-<meta name="theme-color" content="#0E0F12">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbería Los Compas · Cortes y barba</title>
+<meta name="description" content="Fade, corte clásico y arreglo de barba con navaja. Agenda tu cita por WhatsApp o ven directo.">
 <style>
-:root{
-  color-scheme: dark;
-  --bg:#0E0F12; --bg-2:#16181D; --ink:#F2EEE6; --muted:#A09B92; --line:rgba(242,238,230,.12);
-  --red:#C8372D; --navy:#1F3C74; --paper:#F2EEE6;
-  --display:"Anton", Impact, "Arial Narrow", sans-serif;
-  --body:"Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:96px;overflow-x:hidden}
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:3px solid var(--red);outline-offset:3px}
-img{display:block;max-width:100%}
+  @font-face { font-family: 'Public Sans'; src: url('../fonts/demos/public-sans-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Public Sans'; src: url('../fonts/demos/public-sans-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Public Sans'; src: url('../fonts/demos/public-sans-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Public Sans'; src: url('../fonts/demos/public-sans-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 
-/* poste de barbero animado */
-.pole{background:repeating-linear-gradient(-45deg,var(--red) 0 10px,var(--paper) 10px 20px,var(--navy) 20px 30px,var(--paper) 30px 40px);background-size:56.57px 56.57px;animation:spin 1.6s linear infinite}
-@keyframes spin{to{background-position:0 56.57px}}
+  :root {
+    --bg: #FFFFFF;
+    --bg-alt: #F4F4F2;
+    --ink: #1A1A1A;
+    --muted: #595956;
+    --line: #DFDFDC;
+    --accent: #8C2323;
+    --accent-dark: #6E1A1A;
+    --topbar: #171717;
+    --font: 'Public Sans', system-ui, -apple-system, sans-serif;
+  }
 
-/* portada */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
-.hero .ph{position:absolute;inset:0;z-index:-2;background:#1a1b20}
-.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;transform:scale(1.08);animation:zoom 14s ease-out forwards}
-@keyframes zoom{to{transform:scale(1)}}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,18,.55) 0%,rgba(14,15,18,.15) 35%,rgba(14,15,18,.85) 78%,var(--bg) 100%)}
-.top{display:flex;justify-content:space-between;align-items:center;padding:20px 20px 0;max-width:1180px;width:100%;margin-inline:auto}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:20px;letter-spacing:.06em;text-transform:uppercase}
-.brand .pole{width:12px;height:30px;border-radius:6px;box-shadow:0 0 0 2px rgba(242,238,230,.9)}
-.status{font-size:13px;font-weight:600;padding:7px 13px;border-radius:999px;background:rgba(14,15,18,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line)}
-.status::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px}
-.status.open{color:#6FD39A}.status.closed{color:#FF8A7E}
-.hero .txt{margin-top:auto;padding:0 20px 56px;max-width:1180px;width:100%;margin-inline:auto}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--paper);opacity:.8}
-.hero h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(80px,24vw,260px);line-height:.84;letter-spacing:-.005em;margin:10px 0 0}
-.hero h1 span{display:block;overflow:hidden}
-.hero h1 span b{display:block;font-weight:400;transform:translateY(105%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
-.hero h1 span:nth-child(2) b{animation-delay:.12s;color:var(--red)}
-@keyframes up{to{transform:none}}
-.hero p{margin:18px 0 0;font-size:19px;max-width:28ch;color:#DAD5CC}
-.cta{display:inline-flex;align-items:center;gap:10px;margin-top:24px;background:var(--paper);color:var(--bg);text-decoration:none;font-weight:700;font-size:16px;padding:15px 24px;border-radius:999px}
-.cta svg{width:20px;height:20px}
-.credit{position:absolute;right:14px;bottom:12px;font-size:11px;color:rgba(242,238,230,.55);text-decoration:none}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.has-bar { padding-bottom: 76px; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
 
-/* cinta */
-.tapewrap{overflow:hidden;padding:12px 0;margin-top:-2px}
-.tape{background:var(--red);color:var(--paper);overflow:hidden;white-space:nowrap;border-block:2px solid var(--paper);transform:rotate(-2deg);margin:0 -14px;position:relative;z-index:2}
-.tape div{display:inline-block;font-family:var(--display);font-size:30px;letter-spacing:.04em;text-transform:uppercase;padding:10px 0;animation:tape 18s linear infinite}
-.tape i{font-style:normal;opacity:.55;margin:0 18px}
-@keyframes tape{to{transform:translateX(-50%)}}
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-section{max-width:1180px;margin-inline:auto;padding:84px 20px 0}
-.kicker{font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
-h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(52px,13vw,120px);line-height:.9;margin:8px 0 0}
-.sub{color:var(--muted);margin:12px 0 0;max-width:40ch}
+  /* Utility topbar */
+  .topbar {
+    background: var(--topbar);
+    color: #E6E6E3;
+    font-size: 13px;
+    padding: 8px 0;
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .topbar-tel { font-weight: 600; color: #FFFFFF; }
+  .topbar-status { color: #D4D4CF; font-weight: 500; }
+  .topbar-status.open { color: #A6E3B7; }
 
-/* carrusel de cortes */
-.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px 20px 8px;margin:0 -20px;scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.cut{flex:0 0 78%;max-width:360px;scroll-snap-align:center;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:3/4;background:var(--bg-2);border:0;padding:0;color:inherit;font:inherit;text-align:left;cursor:pointer;isolation:isolate}
-.cut img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s}
-.cut::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,18,0) 40%,rgba(14,15,18,.92) 100%)}
-.cut .in{position:absolute;left:18px;right:18px;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
-.cut .n{font-family:var(--display);font-size:40px;line-height:.95;text-transform:uppercase}
-.cut .p{font-weight:700;font-size:18px;background:var(--paper);color:var(--bg);padding:6px 12px;border-radius:999px;white-space:nowrap}
-.cut .tick{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(14,15,18,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:2px solid var(--paper);display:grid;place-items:center;transition:background .25s}
-.cut .tick svg{width:16px;height:16px;opacity:0;transition:opacity .25s}
-.cut[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--red)}
-.cut[aria-pressed="true"] .tick{background:var(--red)}
-.cut[aria-pressed="true"] .tick svg{opacity:1}
-.cut:hover img{transform:scale(1.04)}
-.hint{font-size:14px;color:var(--muted);margin-top:10px}
+  /* Header */
+  header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .header-inner {
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .brand-sub {
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+    margin-top: 1px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  nav a:hover { color: var(--ink); }
+  .header-tel {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .header-tel:hover { text-decoration: underline; }
 
-/* horario sobre foto */
-.shop{position:relative;margin-top:84px;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:#1a1b20}
-.shop>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.shop::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,15,18,.1),rgba(14,15,18,.75))}
-.shop .box{max-width:1180px;width:100%;margin-inline:auto;padding:0 20px 40px;display:grid;gap:14px}
-.card{background:rgba(14,15,18,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:22px;max-width:460px}
-.card h3{font-family:var(--display);font-weight:400;font-size:34px;text-transform:uppercase;margin:0 0 10px}
-.hrow{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)}
-.hrow span:last-child{font-weight:600;text-align:right}
-.card a{display:inline-block;margin-top:12px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--red)}
+  /* Full-bleed photographic hero */
+  .hero {
+    position: relative;
+    min-height: 440px;
+    display: flex;
+    align-items: center;
+    background: #1B1B1B;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(95deg, rgba(18, 18, 18, 0.88) 0%, rgba(18, 18, 18, 0.72) 48%, rgba(18, 18, 18, 0.25) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    padding-block: 56px;
+    color: #FFFFFF;
+  }
+  .hero-kicker {
+    font-size: 13px;
+    font-weight: 600;
+    color: #E2D9D9;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 3.4vw, 38px);
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin-bottom: 14px;
+  }
+  .hero p {
+    font-size: 16px;
+    line-height: 1.55;
+    color: #E3E3DF;
+    margin-bottom: 24px;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 22px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .hero-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    padding-bottom: 2px;
+  }
+  .hero-link:hover { border-color: #FFFFFF; }
 
-footer{max-width:1180px;margin-inline:auto;padding:56px 20px 20px;font-size:13px;color:var(--muted)}
-footer p{margin:6px 0}
-footer .by a{color:var(--ink)}
+  /* Sections */
+  section { padding: 54px 0; border-bottom: 1px solid var(--line); }
+  .sec-alt { background: var(--bg-alt); }
+  .sec-head { margin-bottom: 28px; max-width: 600px; }
+  .sec-head h2 {
+    font-size: clamp(22px, 2.5vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .sec-head p { color: var(--muted); font-size: 15px; }
 
-/* barra fija */
-.dock{position:fixed;left:12px;right:12px;bottom:12px;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 14px;border-radius:20px;background:rgba(22,24,29,.82);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--line);max-width:620px;margin-inline:auto}
-.dock .pole{width:10px;height:36px;border-radius:5px;flex:none}
-.dock .what{flex:1;min-width:0;line-height:1.2}
-.dock small{display:block;font-size:12px;color:var(--muted)}
-.dock b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dock a{flex:none;display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font-weight:700;padding:13px 18px;border-radius:14px}
-.dock a svg{width:18px;height:18px}
-.bump{animation:bump .4s}
-@keyframes bump{40%{transform:scale(1.04)}}
+  /* Cuts list */
+  .cuts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .cut-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .cut-item:hover { border-color: #B4B4AE; }
+  .cut-item.selected {
+    border-color: var(--accent);
+    background: #FDF7F7;
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .cut-thumb {
+    width: 82px;
+    height: 82px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #E5E5E1;
+  }
+  .cut-body { flex: 1; min-width: 0; }
+  .cut-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .cut-name { font-size: 16px; font-weight: 600; color: var(--ink); }
+  .cut-price { font-size: 16px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .cut-desc { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
 
-.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
-.rv.on{opacity:1;transform:none}
+  /* Inline booking panel */
+  .booking-box {
+    margin-top: 24px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .booking-summary strong { display: block; font-size: 16px; margin-bottom: 2px; }
+  .booking-summary span { font-size: 14px; color: var(--muted); }
+  .booking-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .booking-controls select {
+    font: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid #C9C9C4;
+    border-radius: 5px;
+    background: #FFFFFF;
+    color: var(--ink);
+  }
 
-@media (min-width:860px){
-  .cut{flex-basis:31%}
-  .shop .box{grid-template-columns:1fr 1fr;align-items:end}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .hero h1 span b{transform:none}
-  .rv{opacity:1;transform:none}
-}
+  /* Location & Hours */
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .shop-photo {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    border: 1px solid var(--line);
+  }
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  .info-table th,
+  .info-table td {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .info-table th {
+    width: 112px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .info-table td { color: var(--ink); font-weight: 500; }
+  .map-frame {
+    width: 100%;
+    height: 360px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg-alt);
+  }
+  .map-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .map-link:hover { text-decoration: underline; }
+
+  /* Sticky compact summary bar (shown after interaction) */
+  .sticky-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #171717;
+    color: #FFFFFF;
+    border-top: 1px solid #2D2D2D;
+    z-index: 50;
+    padding: 12px 0;
+    display: none;
+  }
+  .sticky-bar.visible { display: block; }
+  .sticky-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .sticky-info { font-size: 14px; min-width: 0; }
+  .sticky-info strong { display: block; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sticky-info span { color: #C5C5C0; font-size: 12.5px; }
+
+  /* Footer */
+  footer {
+    background: var(--bg-alt);
+    padding: 28px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-credits {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: #777773;
+  }
+  .footer-credits a { text-decoration: underline; }
+
+  @media (max-width: 820px) {
+    nav { display: none; }
+    .cuts-grid,
+    .loc-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 390px; }
+    .hero::after {
+      background: linear-gradient(180deg, rgba(18, 18, 18, 0.72) 0%, rgba(18, 18, 18, 0.88) 100%);
+    }
+    .map-frame { height: 280px; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 18px; }
+    .topbar-tel { display: none; }
+    .topbar-left { gap: 10px; }
+    .cut-thumb { width: 70px; height: 70px; }
+    .sticky-inner { gap: 10px; }
+    .btn-primary { padding: 11px 16px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="ph"><img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1400&q=75" alt="Barbero cortando el cabello con navaja" fetchpriority="high"></div>
-  <div class="top">
-    <div class="brand"><span class="pole" aria-hidden="true"></span>Los Compas</div>
-    <span class="status" id="status">Horario</span>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="topbar-left">
+      <a class="topbar-tel" id="top-tel" href="tel:8123256381">Tel. 81 2325 6381</a>
+      <span id="top-hours">Lun a sáb 10:00 a 21:00 · Dom 10:00 a 15:00</span>
+    </div>
+    <span class="topbar-status" id="live-status">Abierto hoy</span>
   </div>
-  <div class="txt">
-    <div class="eyebrow">Barbería</div>
-    <h1><span><b>Los</b></span><span><b>Compas</b></span></h1>
-    <p>Cortes, fades y barba. Escoge tu corte y apártalo por WhatsApp.</p>
-    <a class="cta" href="#cortes">Ver cortes
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+</div>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="#" class="brand">
+      <span class="brand-name" data-brand>Barbería Los Compas</span>
+      <span class="brand-sub">Barbería y arreglo de barba</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#cortes">Cortes y precios</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#ubicacion">Horarios</a>
+    </nav>
+    <a class="header-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
   </div>
-  <a class="credit" href="https://unsplash.com/@agustinfernandez?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Foto: Agustin Fernandez / Unsplash</a>
 </header>
 
-<div class="tapewrap" aria-hidden="true"><div class="tape"><div id="tape"></div></div></div>
-
-<section id="cortes">
-  <div class="kicker rv">Precios</div>
-  <h2 class="rv">Elige tu corte</h2>
-  <p class="sub rv">Toca el que quieras y abajo te aparece listo para apartar.</p>
-  <div class="rail" id="rail" role="group" aria-label="Cortes"></div>
-  <div class="hint">Desliza para ver más →</div>
-</section>
-
-<div class="shop">
-  <img src="https://images.unsplash.com/photo-1781455793310-8427c96454c7?auto=format&fit=crop&w=1600&q=70" alt="Interior de barbería con sillones" loading="lazy">
-  <div class="box">
-    <div class="card rv" id="hcard">
-      <h3>Horario</h3>
-      <div class="hrow"><span>Lunes a sábado</span><span>10:00 am – 9:00 pm</span></div>
-      <div class="hrow"><span>Domingo</span><span>10:00 am – 3:00 pm</span></div>
+<main>
+  <section class="hero" style="padding:0; border-bottom:none;">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1500&q=82" alt="Barbero realizando corte de cabello con máquina">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="hero-kicker" data-address>Av. Principal #123, Centro</div>
+        <h1>Corte clásico, fade y barba en <span data-brand>Barbería Los Compas</span></h1>
+        <p>Atención puntual con cita por WhatsApp o por orden de llegada. Terminado con navaja y toalla caliente en cada servicio.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" id="hero-wa" href="https://api.whatsapp.com/send?phone=5218123256381&text=Hola%2C%20quiero%20agendar%20cita%20en%20Barber%C3%ADa%20Los%20Compas." target="_blank" rel="noopener">Agendar por WhatsApp</a>
+          <a class="hero-link" href="#cortes">Ver precios</a>
+        </div>
+      </div>
     </div>
-    <div class="card rv">
-      <h3>Dónde estamos</h3>
-      <div id="dir">Av. Principal #123, Centro</div>
-      <a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a>
+  </section>
+
+  <section id="cortes" class="sec-alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Cortes y precios</h2>
+        <p>Selecciona el servicio que buscas para mandar tu solicitud con el precio listo por WhatsApp.</p>
+      </div>
+
+      <div class="cuts-grid" id="cuts-grid">
+        <button type="button" class="cut-item selected" data-service="Fade" data-price="$150">
+          <img class="cut-thumb" src="https://images.unsplash.com/photo-1647140655214-e4a2d914971f?auto=format&fit=crop&w=320&q=80" alt="Corte fade" loading="lazy">
+          <span class="cut-body">
+            <span class="cut-top"><span class="cut-name">Fade</span><span class="cut-price">$150</span></span>
+            <span class="cut-desc">Degradado bajo, medio o alto con terminación a navaja y lavado rápido.</span>
+          </span>
+        </button>
+
+        <button type="button" class="cut-item" data-service="Corte clásico" data-price="$120">
+          <img class="cut-thumb" src="https://images.unsplash.com/photo-1635273051937-a0ddef9573b6?auto=format&fit=crop&w=320&q=80" alt="Corte clásico" loading="lazy">
+          <span class="cut-body">
+            <span class="cut-top"><span class="cut-name">Corte</span><span class="cut-price">$120</span></span>
+            <span class="cut-desc">Corte tradicional con tijera y máquina, delineado en patillas y nuca.</span>
+          </span>
+        </button>
+
+        <button type="button" class="cut-item" data-service="Corte y barba" data-price="$200">
+          <img class="cut-thumb" src="https://images.unsplash.com/photo-1657105052497-f996284ffff8?auto=format&fit=crop&w=320&q=80" alt="Corte y barba" loading="lazy">
+          <span class="cut-body">
+            <span class="cut-top"><span class="cut-name">Corte y barba</span><span class="cut-price">$200</span></span>
+            <span class="cut-desc">Paquete completo: corte o fade más perfilado de barba con toalla caliente.</span>
+          </span>
+        </button>
+
+        <button type="button" class="cut-item" data-service="Barba" data-price="$90">
+          <img class="cut-thumb" src="https://images.unsplash.com/photo-1599011176306-4a96f1516d4d?auto=format&fit=crop&w=320&q=80" alt="Arreglo de barba" loading="lazy">
+          <span class="cut-body">
+            <span class="cut-top"><span class="cut-name">Barba</span><span class="cut-price">$90</span></span>
+            <span class="cut-desc">Rebaje, simetría, delineado con navaja y bálsamo hidratante.</span>
+          </span>
+        </button>
+
+        <button type="button" class="cut-item" data-service="Corte de niños" data-price="$100">
+          <img class="cut-thumb" src="https://images.unsplash.com/photo-1788930045572-5be1e03c1433?auto=format&fit=crop&w=320&q=80" alt="Corte de niños" loading="lazy">
+          <span class="cut-body">
+            <span class="cut-top"><span class="cut-name">Niños</span><span class="cut-price">$100</span></span>
+            <span class="cut-desc">Para menores de 12 años, escolar o moderno con paciencia y cuidado.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="booking-box">
+        <div class="booking-summary">
+          <strong id="sel-title">Fade · $150</strong>
+          <span>Elige un horario aproximado y confirma directo por WhatsApp.</span>
+        </div>
+        <div class="booking-controls">
+          <select id="time-slot" aria-label="Horario preferido">
+            <option value="hoy en la mañana">Hoy en la mañana</option>
+            <option value="hoy en la tarde" selected>Hoy en la tarde</option>
+            <option value="mañana">Mañana</option>
+            <option value="este fin de semana">Este fin de semana</option>
+          </select>
+          <a class="btn-primary" id="inline-wa" href="#" target="_blank" rel="noopener">Apartar cita por WhatsApp</a>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section id="ubicacion">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Ubicación y horarios</h2>
+        <p>Puedes llegar sin cita o apartar tu lugar antes de salir.</p>
+      </div>
+      <div class="loc-grid">
+        <div>
+          <img class="shop-photo" src="https://images.unsplash.com/photo-1781455793310-8427c96454c7?auto=format&fit=crop&w=900&q=80" alt="Interior de la barbería" loading="lazy">
+          <table class="info-table">
+            <tr><th>Dirección</th><td data-address>Av. Principal #123, Centro</td></tr>
+            <tr><th>Horario</th><td data-hours>Lun a sáb 10:00 a 21:00 · Dom 10:00 a 15:00</td></tr>
+            <tr><th>Teléfono</th><td><a id="table-tel" href="tel:8123256381">81 2325 6381</a></td></tr>
+            <tr><th>Pagos</th><td>Efectivo y transferencia</td></tr>
+          </table>
+        </div>
+        <div>
+          <iframe class="map-frame" id="map-embed" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Monterrey%20Centro&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+          <a class="map-link" id="map-open" href="https://maps.google.com/?q=Monterrey+Centro" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sticky-bar" role="region" aria-label="Resumen de cita">
+  <div class="wrap sticky-inner">
+    <div class="sticky-info">
+      <strong id="sticky-title">Fade · $150</strong>
+      <span id="sticky-sub">Confirmación directa por WhatsApp</span>
+    </div>
+    <a class="btn-primary" id="sticky-wa" href="#" target="_blank" rel="noopener">Agendar por WhatsApp</a>
   </div>
 </div>
 
 <footer>
-  <p>Barbería Los Compas · negocio de ejemplo</p>
-  <p id="credits"></p>
-  <p class="by">Página demo hecha por <a href="../">crusol · ver más trabajos</a></p>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div><strong data-brand>Barbería Los Compas</strong> · <span data-address>Av. Principal #123, Centro</span></div>
+      <div>Sitio de muestra creado por <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></div>
+    </div>
+    <div class="footer-credits">
+      Fotografías de muestra vía Unsplash:
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Agustin Fernandez</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Nate Johnston</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Salah Regouane</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Gulom Nazarov</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Mr Shave</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">John Rodriguez</a> y
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Barney Goodman</a>.
+    </div>
+  </div>
 </footer>
 
-<div class="dock" id="dock">
-  <span class="pole" aria-hidden="true"></span>
-  <div class="what"><small>Tu corte</small><b id="pick">Fade · $150</b></div>
-  <a id="wa" data-goatcounter-click="barberia-whatsapp" href="https://wa.me/528123256381?text=Hola%2C%20quiero%20apartar%20un%20corte" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
-    Apartar</a>
-</div>
-
 <script>
-(function(){
-  var TEL="528123256381";
-  function img(id,w){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&q=72";}
-  var CUTS=[
-    {n:"Fade",p:150,img:"1647140655214-e4a2d914971f",by:"Nate Johnston",u:"natejohnston"},
-    {n:"Corte",p:120,img:"1635273051937-a0ddef9573b6",by:"Salah Regouane",u:"salaheregouane"},
-    {n:"Corte y barba",p:200,img:"1657105052497-f996284ffff8",by:"Gulom Nazarov",u:"modelyano"},
-    {n:"Barba",p:90,img:"1599011176306-4a96f1516d4d",by:"Mr Shave",u:"mrshave"},
-    {n:"Niños",p:100,img:"1788930045572-5be1e03c1433",by:"John Rodriguez",u:"firephotos"}
-  ];
-  var rail=document.getElementById("rail"),pick=document.getElementById("pick"),wa=document.getElementById("wa"),dock=document.getElementById("dock");
-  var chk='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
-  CUTS.forEach(function(c,i){
-    var b=document.createElement("button");
-    b.className="cut";b.type="button";b.setAttribute("aria-pressed","false");
-    b.innerHTML='<img src="'+img(c.img,700)+'" alt="'+c.n+'" loading="lazy"><span class="tick">'+chk+'</span><span class="in"><span class="n">'+c.n+'</span><span class="p">$'+c.p+'</span></span>';
-    b.addEventListener("click",function(){select(i,true)});
-    rail.appendChild(b);
-  });
-  function select(i,anim){
-    [].forEach.call(rail.children,function(el,j){el.setAttribute("aria-pressed",j===i?"true":"false")});
-    var c=CUTS[i];
-    pick.textContent=c.n+" · $"+c.p;
-    if(anim){dock.classList.remove("bump");void dock.offsetWidth;dock.classList.add("bump");}
-    wa.href="https://wa.me/"+TEL+"?text="+encodeURIComponent("Hola, quiero apartar un corte: "+c.n+" ($"+c.p+"). ¿Qué horarios tienen?");
-  }
-  select(0,false);
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const brand = (params.get('n') || 'Barbería Los Compas').trim();
+    const address = (params.get('d') || 'Av. Principal #123, Centro').trim();
+    const hours = (params.get('h') || 'Lun a sáb 10:00 a 21:00 · Dom 10:00 a 15:00').trim();
+    const rawTel = (params.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
+    const waPhone = rawTel.length === 10 ? '521' + rawTel : rawTel;
+    const fmtTel = rawTel.length === 10 ? rawTel.slice(0,2) + ' ' + rawTel.slice(2,6) + ' ' + rawTel.slice(6) : rawTel;
 
-  var seen={},cr=[];
-  CUTS.concat([{by:"Agustin Fernandez",u:"agustinfernandez"},{by:"Barney Goodman",u:"bgoodpic"}]).forEach(function(c){
-    if(seen[c.u])return;seen[c.u]=1;
-    cr.push('<a href="https://unsplash.com/@'+c.u+'?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">'+c.by+'</a>');
-  });
-  document.getElementById("credits").innerHTML="Fotos: "+cr.join(", ")+' en <a href="https://unsplash.com/?utm_source=crusol&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a>';
+    document.title = brand + ' · Cortes y barba';
+    document.querySelectorAll('[data-brand]').forEach(el => el.textContent = brand);
+    document.querySelectorAll('[data-address]').forEach(el => el.textContent = address);
+    document.querySelectorAll('[data-hours]').forEach(el => el.textContent = hours);
+    document.getElementById('top-hours').textContent = hours;
+    document.getElementById('top-tel').textContent = 'Tel. ' + fmtTel;
+    document.getElementById('top-tel').href = 'tel:' + rawTel;
+    document.getElementById('head-tel').textContent = fmtTel;
+    document.getElementById('head-tel').href = 'tel:' + rawTel;
+    document.getElementById('table-tel').textContent = fmtTel;
+    document.getElementById('table-tel').href = 'tel:' + rawTel;
 
-  var words=["Corte","Fade","Barba","Niños","Corte y barba"],t="";
-  for(var k=0;k<2;k++)words.forEach(function(w){t+=w+"<i>✦</i>"});
-  document.getElementById("tape").innerHTML=t+t;
+    const mapQ = encodeURIComponent(address + ', Monterrey, Nuevo León');
+    document.getElementById('map-embed').src = 'https://maps.google.com/maps?q=' + mapQ + '&t=&z=14&ie=UTF8&iwloc=&output=embed';
+    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + mapQ;
 
-  var sched={0:[10,15],1:[10,21],2:[10,21],3:[10,21],4:[10,21],5:[10,21],6:[10,21]};
-  var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
-  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
-  parts.forEach(function(p){if(p.type==="weekday")d=map[p.value];if(p.type==="hour")h=parseInt(p.value,10)%24;if(p.type==="minute")m=parseInt(p.value,10);});
-  var tt=h+m/60,s=sched[d],el=document.getElementById("status");
-  if(tt>=s[0]&&tt<s[1]){el.textContent="Abierto ahora";el.classList.add("open");}else{el.textContent="Cerrado ahora";el.classList.add("closed");}
+    function updateOpenStatus() {
+      const now = new Date();
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Monterrey',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).formatToParts(now);
+      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
+      const h = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
+      const isSun = map.weekday === 'Sun';
+      const isOpen = isSun ? (h >= 10 && h < 15) : (h >= 10 && h < 21);
+      const st = document.getElementById('live-status');
+      st.textContent = isOpen ? 'Abierto ahora' : 'Cerrado · Abre a las 10:00';
+      st.classList.toggle('open', isOpen);
+    }
+    updateOpenStatus();
 
-  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}})},{threshold:.15}):null;
-  [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
-})();
+    let selectedService = 'Fade';
+    let selectedPrice = '$150';
+    const slotEl = document.getElementById('time-slot');
+
+    function waUrl(msg) {
+      return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
+    }
+
+    function syncLinks() {
+      const slot = slotEl.value;
+      const msg = 'Hola, quiero agendar "' + selectedService + '" (' + selectedPrice + ') en ' + brand + ' para ' + slot + '.';
+      const url = waUrl(msg);
+      document.getElementById('sel-title').textContent = selectedService + ' · ' + selectedPrice;
+      document.getElementById('sticky-title').textContent = selectedService + ' · ' + selectedPrice;
+      document.getElementById('sticky-sub').textContent = 'Horario: ' + slot;
+      document.getElementById('inline-wa').href = url;
+      document.getElementById('sticky-wa').href = url;
+      document.getElementById('hero-wa').href = waUrl('Hola, quiero agendar una cita en ' + brand + '.');
+    }
+
+    document.querySelectorAll('.cut-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cut-item').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedService = btn.dataset.service;
+        selectedPrice = btn.dataset.price;
+        document.querySelector('.sticky-bar').classList.add('visible');
+        document.body.classList.add('has-bar');
+        syncLinks();
+      });
+    });
+
+    slotEl.addEventListener('change', syncLinks);
+    syncLinks();
+  })();
 </script>
-<script>
-/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
-(function(){
-var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
-if(!N&&!D&&!H)return;
-function $(s){return document.querySelector(s)}
-function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
-function rows(){return H.split("·").map(function(x){x=x.trim();var m=x.match(/^(.*?)\s*((\d|cerrad).*)$/i);return m?[m[1],m[2].charAt(0).toUpperCase()+m[2].slice(1)]:[x,""]}).filter(function(r){return r[0]||r[1]})}
-function slug(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().split(/\s+/).join(".")}
-if(N)document.title=N;
-
-if(N){var b=$(".brand");b.lastChild.nodeValue=N;
- var w=N.split(/\s+/),h1=$(".hero h1");h1.textContent="";
- var l1=w.length>1?w.slice(0,-1).join(" "):"",l2=w[w.length-1];
- [l1,l2].forEach(function(t){if(!t)return;var s=el("span"),bb=el("b",null,t);s.appendChild(bb);h1.appendChild(s)});
- if(!l1)h1.firstChild.firstChild.style.color="var(--red)";
- var fit=function(){h1.style.fontSize="";for(var i=0;i<40;i++){var over=[].some.call(h1.querySelectorAll("b"),function(x){return x.scrollWidth>x.clientWidth+1});if(!over)break;h1.style.fontSize=(parseFloat(getComputedStyle(h1).fontSize)*0.95)+"px";}};
- fit();if(document.fonts)document.fonts.ready.then(fit);addEventListener("resize",fit);
- $("footer p").textContent="Muestra para "+N;}
-if(D)$("#dir").textContent=D;
-if(H){var c=$("#hcard");[].forEach.call(c.querySelectorAll(".hrow"),function(r){r.remove()});
- rows().forEach(function(r){var d=el("div","hrow");d.appendChild(el("span",null,r[0]));d.appendChild(el("span",null,r[1]));c.appendChild(d)});
- $("#status").style.display="none";}
-})();
-</script>
-<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

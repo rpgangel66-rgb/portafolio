@@ -1,282 +1,603 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Estética Aurora</title>
-<meta name="description" content="Estética Aurora. Corte, color, keratina, cejas y pestañas. Pide tu cita por WhatsApp.">
-<meta name="theme-color" content="#1B1219">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estética Aurora · Cabello, cejas y pestañas</title>
+<meta name="description" content="Corte, peinado, tinte, balayage, keratina, diseño de ceja y extensiones de pestañas con cita previa.">
 <style>
-:root{
-  color-scheme: light;
-  --bg:#FBF7F5; --white:#FFFFFF; --ink:#2A1E26; --muted:#7D6E76; --line:#EADFE0;
-  --plum:#5E3A55; --rose:#C98A9E; --blush:#F4E4E8; --night:#1B1219;
-  --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --body:"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  --dur:5.5s;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
-img{display:block;max-width:100%}
+  @font-face { font-family: 'Jost'; src: url('../fonts/demos/jost-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Jost'; src: url('../fonts/demos/jost-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Jost'; src: url('../fonts/demos/jost-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
 
-/* ===== historias ===== */
-.stage{position:relative;background:var(--night);overflow:hidden;isolation:isolate}
-.stage .blur{position:absolute;inset:-40px;z-index:-1;background-size:cover;background-position:center;filter:blur(40px) brightness(.55) saturate(1.2);transition:background-image .6s}
-.stories{position:relative;height:100svh;max-height:920px;width:100%;margin-inline:auto;overflow:hidden;color:#fff;touch-action:manipulation;user-select:none;-webkit-user-select:none}
-.slide{position:absolute;inset:0;opacity:0;transition:opacity .5s;background:#3a2733}
-.slide.on{opacity:1}
-.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.slide.on img{animation:kb var(--dur) linear forwards}
-@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.12)}}
-.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 45%,rgba(27,18,25,.88) 100%)}
-.slide .say{position:absolute;left:22px;right:22px;bottom:118px;z-index:2}
-.slide .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px}
-.slide h2{font-family:var(--serif);font-weight:500;font-size:clamp(50px,13vw,74px);line-height:.95;margin:12px 0 0;letter-spacing:-.01em}
-.slide h2 i{color:#F6C9D6}
-.slide .rows{margin-top:14px;display:grid;gap:4px;max-width:340px}
-.slide .rows div{display:flex;justify-content:space-between;gap:12px;font-size:16px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.2)}
-.slide .rows b{font-weight:700}
-.slide.on .say>*{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
-.slide.on .say>*:nth-child(2){animation-delay:.08s}
-.slide.on .say>*:nth-child(3){animation-delay:.16s}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}}
-.slide .cr{position:absolute;right:12px;bottom:96px;z-index:2;font-size:10px;color:rgba(255,255,255,.6);text-decoration:none}
+  :root {
+    --bg: #FFFFFF;
+    --bg-alt: #F7F4F5;
+    --ink: #1E1B1D;
+    --muted: #5C5559;
+    --line: #E4DDE0;
+    --accent: #4A273D;
+    --accent-dark: #361A2C;
+    --font: 'Jost', system-ui, -apple-system, sans-serif;
+  }
 
-.bars{position:absolute;top:10px;left:10px;right:10px;z-index:5;display:flex;gap:4px}
-.bars span{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}
-.bars i{display:block;height:100%;width:0;background:#fff}
-.bars span.done i{width:100%}
-.bars span.run i{animation:fill var(--dur) linear forwards}
-.paused .bars span.run i,.paused .slide.on img{animation-play-state:paused}
-@keyframes fill{to{width:100%}}
-.who{position:absolute;top:24px;left:14px;right:14px;z-index:5;display:flex;align-items:center;gap:8px;font-size:14px;white-space:nowrap}
-.av{width:38px;height:38px;border-radius:50%;padding:2px;background:conic-gradient(#F6C9D6,#C98A9E,#5E3A55,#F6C9D6)}
-.av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--plum);border:2px solid #fff;font-family:var(--serif);font-size:20px;font-style:italic}
-.who b{font-weight:700}
-.who .dot{opacity:.7}
-.who .st{margin-left:auto;white-space:nowrap;font-size:12px;font-weight:600;background:rgba(0,0,0,.3);padding:5px 10px;border-radius:999px}
-.tap{position:absolute;top:70px;bottom:96px;z-index:3;width:35%;background:transparent;border:0;padding:0;cursor:pointer}
-.tap.prev{left:0}.tap.next{right:0;width:65%}
-.reply{position:absolute;left:12px;right:12px;bottom:16px;z-index:6;display:flex;gap:10px;align-items:center}
-.reply a{flex:1;display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;color:#fff;font-weight:600;font-size:15px;padding:15px 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.75);background:rgba(0,0,0,.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);min-width:0}
-.reply a span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.reply a svg{width:18px;height:18px;flex:none}
-.heart{width:52px;height:52px;flex:none;border-radius:50%;border:0;background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer}
-.heart svg{width:30px;height:30px;transition:transform .2s}
-.heart.on svg{fill:#FF5A7A;stroke:#FF5A7A;animation:pop .45s}
-@keyframes pop{40%{transform:scale(1.35)}}
-.more{position:absolute;left:0;right:0;bottom:78px;z-index:6;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 15.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.has-bar { padding-bottom: 76px; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
 
-/* ===== precios ===== */
-.wrap{max-width:1080px;margin-inline:auto;padding:72px 22px 120px}
-.kicker{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
-h3.big{font-family:var(--serif);font-weight:500;font-size:clamp(46px,10vw,84px);line-height:.95;margin:10px 0 0}
-h3.big i{color:var(--plum)}
-.lead{color:var(--muted);margin:12px 0 0;max-width:40ch}
-.menu{display:grid;gap:22px;margin-top:34px}
-.group{background:var(--white);border-radius:26px;padding:10px 22px 16px;box-shadow:0 1px 2px rgba(42,30,38,.04),0 14px 34px rgba(42,30,38,.06)}
-.group h4{font-family:var(--serif);font-weight:600;font-size:30px;margin:14px 0 4px}
-.svc{display:flex;width:100%;align-items:baseline;gap:10px;padding:14px 0;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;color:inherit;text-align:left;cursor:pointer}
-.svc:last-child{border-bottom:0}
-.svc .dots{flex:1;border-bottom:1px dotted #D9C9CD;transform:translateY(-4px)}
-.svc .pr{font-weight:700;color:var(--plum)}
-.svc .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid #D9C9CD;flex:none;align-self:center;display:grid;place-items:center;transition:background .2s,border-color .2s}
-.svc[aria-pressed="true"] .ck{background:var(--plum);border-color:var(--plum)}
-.svc[aria-pressed="true"] .ck::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
-.info{display:grid;gap:22px;margin-top:22px}
-.info .group p{margin:6px 0}
-.info a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--rose)}
-footer{margin-top:40px;font-size:13px;color:var(--muted)}
-footer p{margin:6px 0}
-footer .by a{color:var(--ink)}
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-.bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:20;max-width:620px;margin-inline:auto;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 18px;border-radius:22px;background:rgba(255,255,255,.82);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 40px rgba(42,30,38,.16);transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.bar.show{transform:none}
-.bar .t{flex:1;min-width:0;line-height:1.2}
-.bar small{display:block;font-size:12px;color:var(--muted)}
-.bar b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar a{flex:none;background:var(--plum);color:#fff;text-decoration:none;font-weight:700;padding:13px 18px;border-radius:14px}
+  /* Topbar */
+  .topbar {
+    background: var(--accent);
+    color: #EFE8EC;
+    font-size: 13px;
+    padding: 8px 0;
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .topbar-tel { font-weight: 600; color: #FFFFFF; }
+  .topbar-status { color: #DFD2DA; font-weight: 500; }
+  .topbar-status.open { color: #BCEAC9; }
 
-@media (min-width:820px){
-  .stories{width:min(440px,100%);height:min(88svh,860px);margin:5svh auto;border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-  .stage{padding:1px 0}
-  .menu,.info{grid-template-columns:1fr 1fr}
-}
-@media (prefers-reduced-motion:reduce){
-  .slide.on img,.slide.on .say>*{animation:none}
-  .slide{transition:none}
-}
+  /* Header */
+  header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .header-inner {
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand-name {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .brand-sub { font-size: 12.5px; color: var(--muted); display: block; }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  nav a:hover { color: var(--ink); }
+  .header-tel { font-size: 14.5px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .header-tel:hover { text-decoration: underline; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 440px;
+    display: flex;
+    align-items: center;
+    background: #23181F;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(95deg, rgba(28, 17, 24, 0.88) 0%, rgba(28, 17, 24, 0.68) 48%, rgba(28, 17, 24, 0.22) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    padding-block: 56px;
+    color: #FFFFFF;
+  }
+  .hero-kicker { font-size: 13.5px; font-weight: 500; color: #E8DCE3; margin-bottom: 10px; }
+  .hero h1 {
+    font-size: clamp(28px, 3.4vw, 38px);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    margin-bottom: 14px;
+  }
+  .hero p { font-size: 16px; line-height: 1.55; color: #EBE4E8; margin-bottom: 24px; }
+  .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 12px 22px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .hero-link {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    padding-bottom: 2px;
+  }
+  .hero-link:hover { border-color: #FFFFFF; }
+
+  /* Sections */
+  section { padding: 54px 0; border-bottom: 1px solid var(--line); }
+  .sec-alt { background: var(--bg-alt); }
+  .sec-head { margin-bottom: 28px; max-width: 620px; }
+  .sec-head h2 {
+    font-size: clamp(22px, 2.5vw, 26px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .sec-head p { color: var(--muted); font-size: 15px; }
+
+  /* Two-column selectable menu */
+  .menu-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .menu-col h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--accent);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 8px;
+  }
+  .svc-list { list-style: none; }
+  .svc-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 13px 12px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.14s ease;
+  }
+  .svc-btn:hover { background: #FAF7F9; }
+  .svc-btn.selected { background: #F3E9EF; }
+  .svc-left { display: flex; align-items: center; gap: 10px; }
+  .svc-check {
+    width: 17px;
+    height: 17px;
+    border-radius: 3px;
+    border: 1.5px solid #B5A8B0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #FFFFFF;
+    flex-shrink: 0;
+  }
+  .svc-btn.selected .svc-check { background: var(--accent); border-color: var(--accent); }
+  .svc-name { font-weight: 500; font-size: 15.5px; }
+  .svc-price { font-weight: 600; color: var(--accent); white-space: nowrap; font-size: 15px; }
+
+  .booking-strip {
+    margin-top: 24px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .booking-strip strong { display: block; font-size: 15.5px; margin-bottom: 2px; }
+  .booking-strip span { font-size: 14px; color: var(--muted); }
+
+  /* Gallery */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .gallery-item img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    background: #EAE5E7;
+  }
+  .gallery-cap {
+    margin-top: 7px;
+    font-size: 13.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* Location */
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .info-table th, .info-table td {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .info-table th { width: 116px; color: var(--muted); font-weight: 500; }
+  .info-table td { color: var(--ink); font-weight: 500; }
+  .map-frame {
+    width: 100%;
+    height: 310px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg-alt);
+  }
+  .map-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .map-link:hover { text-decoration: underline; }
+
+  /* Sticky bottom bar (shown after interaction) */
+  .sticky-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #23141E;
+    color: #FFFFFF;
+    border-top: 1px solid #3D2334;
+    z-index: 50;
+    padding: 12px 0;
+    display: none;
+  }
+  .sticky-bar.visible { display: block; }
+  .sticky-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .sticky-info { min-width: 0; font-size: 14px; }
+  .sticky-info strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sticky-info span { color: #D7C7D1; font-size: 12.5px; }
+  .sticky-bar .btn-primary { background: #FFFFFF; color: var(--accent); font-weight: 600; }
+  .sticky-bar .btn-primary:hover { background: #F1E8ED; }
+
+  /* Footer */
+  footer {
+    background: var(--bg-alt);
+    padding: 28px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .footer-credits {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: #797075;
+  }
+  .footer-credits a { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 820px) {
+    nav { display: none; }
+    .menu-cols, .loc-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 390px; }
+    .hero::after {
+      background: linear-gradient(180deg, rgba(28, 17, 24, 0.7) 0%, rgba(28, 17, 24, 0.88) 100%);
+    }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 18px; }
+    .topbar-tel { display: none; }
+    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .btn-primary { padding: 11px 16px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="stage" id="stage">
-  <div class="blur" id="blur" aria-hidden="true"></div>
-  <div class="stories" id="stories" aria-roledescription="historias" aria-label="Estética Aurora">
-    <div class="bars" id="bars"></div>
-    <div class="who">
-      <span class="av"><span>A</span></span>
-      <b>aurora.estetica</b><span class="dot">·</span><span>Estética</span>
-      <span class="st" id="status">Horario</span>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="topbar-left">
+      <a class="topbar-tel" id="top-tel" href="tel:8123256381">Tel. 81 2325 6381</a>
+      <span id="top-hours">Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</span>
     </div>
-    <div id="slides"></div>
-    <button class="tap prev" id="prev" type="button" aria-label="Historia anterior"></button>
-    <button class="tap next" id="next" type="button" aria-label="Siguiente historia"></button>
-    <a class="more" href="#precios">Ver todos los precios ↓</a>
-    <div class="reply">
-      <a id="ask" data-goatcounter-click="estetica-historia-whatsapp" href="#" target="_blank" rel="noopener"><span id="askt">Pedir cita</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
-      <button class="heart" id="heart" type="button" aria-label="Me gusta" aria-pressed="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.4 2.3 4 6.4 4c2.3 0 3.8 1.3 5.6 3.4C13.8 5.3 15.3 4 17.6 4 21.7 4 23.6 8.4 22 11.7 19.5 16.4 12 21 12 21z"/></svg>
-      </button>
-    </div>
+    <span class="topbar-status" id="live-status">Abierto hoy</span>
   </div>
 </div>
 
-<div class="wrap" id="precios">
-  <div class="kicker">Precios</div>
-  <h3 class="big">Elige tu <i>servicio</i></h3>
-  <p class="lead">Toca uno y te lo dejamos listo para pedir tu cita por WhatsApp.</p>
-  <div class="menu">
-    <div class="group" id="g1"><h4>Cabello</h4></div>
-    <div class="group" id="g2"><h4>Cejas y pestañas</h4></div>
+<header>
+  <div class="wrap header-inner">
+    <a href="#" class="brand">
+      <span class="brand-name" data-brand>Estética Aurora</span>
+      <span class="brand-sub">Cabello, cejas y pestañas</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#servicios">Servicios y precios</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+    <a class="header-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
   </div>
-  <div class="info">
-    <div class="group" id="hgroup">
-      <h4>Horario</h4>
-      <p>Martes a sábado, 10 am a 8 pm</p>
-      <p>Domingo, 10 am a 3 pm</p>
+</header>
+
+<main>
+  <section class="hero" style="padding:0; border-bottom:none;">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1500&q=82" alt="Interior del salón de belleza">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="hero-kicker" data-address>Av. Las Torres #210, local 3</div>
+        <h1>Salón de cabello, cejas y pestañas en <span data-brand>Estética Aurora</span></h1>
+        <p>Corte, colorimetría, balayage, keratina, diseño de ceja y extensiones de pestañas. Agenda directo por WhatsApp y confirma tu horario.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" id="hero-wa" href="https://api.whatsapp.com/send?phone=5218123256381&text=Hola%2C%20quiero%20agendar%20cita%20en%20Est%C3%A9tica%20Aurora." target="_blank" rel="noopener">Agendar cita</a>
+          <a class="hero-link" href="#servicios">Ver lista de precios</a>
+        </div>
+      </div>
     </div>
-    <div class="group">
-      <h4>Dónde estamos</h4>
-      <p id="dir">Av. Las Torres #210, local 3</p>
-      <p><a href="https://www.google.com/maps/search/?api=1&query=Nuevo%20Le%C3%B3n" target="_blank" rel="noopener">Ver en el mapa →</a></p>
+  </section>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Servicios y precios</h2>
+        <p>Puedes marcar uno o varios servicios para enviar tu consulta lista por WhatsApp.</p>
+      </div>
+
+      <div class="menu-cols">
+        <div class="menu-col">
+          <h3>Cabello</h3>
+          <ul class="svc-list">
+            <li><button type="button" class="svc-btn selected" data-item="Corte ($180)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Corte</span></span><span class="svc-price">$180</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Peinado ($250)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Peinado</span></span><span class="svc-price">$250</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Tinte (desde $450)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Tinte</span></span><span class="svc-price">desde $450</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Mechas / balayage (desde $1,200)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Mechas / balayage</span></span><span class="svc-price">desde $1,200</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Keratina (desde $900)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Keratina</span></span><span class="svc-price">desde $900</span></button></li>
+          </ul>
+        </div>
+
+        <div class="menu-col">
+          <h3>Cejas y pestañas</h3>
+          <ul class="svc-list">
+            <li><button type="button" class="svc-btn" data-item="Diseño de ceja ($100)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Diseño de ceja</span></span><span class="svc-price">$100</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Laminado de ceja ($350)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Laminado de ceja</span></span><span class="svc-price">$350</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Lifting de pestañas ($400)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Lifting de pestañas</span></span><span class="svc-price">$400</span></button></li>
+            <li><button type="button" class="svc-btn" data-item="Extensiones de pestañas ($550)"><span class="svc-left"><span class="svc-check">&#10003;</span><span class="svc-name">Extensiones de pestañas</span></span><span class="svc-price">$550</span></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="booking-strip">
+        <div>
+          <strong id="sel-summary">Seleccionado: Corte ($180)</strong>
+          <span>Los precios de color y keratina se confirman según largo y volumen del cabello.</span>
+        </div>
+        <a class="btn-primary" id="inline-wa" href="#" target="_blank" rel="noopener">Cotizar o agendar por WhatsApp</a>
+      </div>
     </div>
+  </section>
+
+  <section id="trabajos" class="sec-alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Trabajos del salón</h2>
+        <p>Resultados recientes en corte, color, peinado y arreglo de cejas.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1701978224283-65a54a3d01fc?auto=format&fit=crop&w=480&q=80" alt="Balayage y ondas suaves" loading="lazy">
+          <figcaption class="gallery-cap">Balayage y ondas</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1605980625458-21e4d9c29c4c?auto=format&fit=crop&w=480&q=80" alt="Corte en capas y peinado" loading="lazy">
+          <figcaption class="gallery-cap">Corte en capas</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1616105950717-8102cc4afbd7?auto=format&fit=crop&w=480&q=80" alt="Peinado para evento" loading="lazy">
+          <figcaption class="gallery-cap">Peinado de evento</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?auto=format&fit=crop&w=480&q=80" alt="Diseño y perfilado de ceja" loading="lazy">
+          <figcaption class="gallery-cap">Diseño de ceja</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1695527081728-e3a42f0ce261?auto=format&fit=crop&w=480&q=80" alt="Alaciado y brillo de keratina" loading="lazy">
+          <figcaption class="gallery-cap">Tratamiento keratina</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Ubicación y horarios</h2>
+        <p>Atendemos de martes a domingo con cita previa por WhatsApp.</p>
+      </div>
+      <div class="loc-grid">
+        <table class="info-table">
+          <tr><th>Dirección</th><td data-address>Av. Las Torres #210, local 3</td></tr>
+          <tr><th>Horario</th><td data-hours>Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</td></tr>
+          <tr><th>Descanso</th><td>Lunes cerrado</td></tr>
+          <tr><th>Teléfono</th><td><a id="table-tel" href="tel:8123256381">81 2325 6381</a></td></tr>
+          <tr><th>Pagos</th><td>Efectivo, transferencia y tarjeta</td></tr>
+        </table>
+        <div>
+          <iframe class="map-frame" id="map-embed" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Monterrey%20Nuevo%20Leon&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+          <a class="map-link" id="map-open" href="https://maps.google.com/?q=Monterrey+Nuevo+Leon" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sticky-bar" role="region" aria-label="Resumen de cita">
+  <div class="wrap sticky-inner">
+    <div class="sticky-info">
+      <strong id="sticky-title">1 servicio seleccionado</strong>
+      <span id="sticky-sub">Corte ($180)</span>
+    </div>
+    <a class="btn-primary" id="sticky-wa" href="#" target="_blank" rel="noopener">Agendar por WhatsApp</a>
   </div>
-  <footer>
-    <p>Estética Aurora · negocio de ejemplo</p>
-    <p id="credits"></p>
-    <p class="by">Página demo hecha por <a href="../">crusol · ver más trabajos</a></p>
-  </footer>
 </div>
 
-<div class="bar" id="bar">
-  <div class="t"><small>Tu servicio</small><b id="pick">Elige uno arriba</b></div>
-  <a id="send" data-goatcounter-click="estetica-cita-whatsapp" href="#" target="_blank" rel="noopener">Pedir cita</a>
-</div>
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div><strong data-brand>Estética Aurora</strong> · <span data-address>Av. Las Torres #210, local 3</span></div>
+      <div>Sitio de muestra creado por <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></div>
+    </div>
+    <div class="footer-credits">
+      Fotografías de muestra vía Unsplash:
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Baylee Gramling</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Zoe Applbaum</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Lera Kogan</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Giorgio Trovato</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Hayley Kim Studios</a> y
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Daniel</a>.
+    </div>
+  </div>
+</footer>
 
 <script>
-(function(){
-  var TEL="528123256381";
-  function wa(t){return "https://wa.me/"+TEL+"?text="+encodeURIComponent(t);}
-  function img(id,w){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&q=72";}
-  var U="?utm_source=crusol&utm_medium=referral";
-  var S=[
-    {tag:"Estética Aurora",h:"Tu mejor <i>versión</i> empieza aquí.",rows:[],img:"1560869713-7d0a29430803",by:"Baylee Gramling",u:"bayleejadegramling",ask:"Pedir cita",msg:"Hola, quiero pedir una cita. ¿Qué horarios tienen?"},
-    {tag:"Corte y peinado",h:"Corte <i>a tu gusto</i>",rows:[["Corte","$180"],["Peinado","$250"]],img:"1701978224283-65a54a3d01fc",by:"Zoe Applbaum",u:"cutlersalon",ask:"Pedir cita: Corte",msg:"Hola, quiero pedir una cita para: Corte ($180). ¿Qué horarios tienen?"},
-    {tag:"Color",h:"Color que <i>se nota</i>",rows:[["Tinte","desde $450"],["Mechas / balayage","desde $1,200"]],img:"1605980625458-21e4d9c29c4c",by:"Lera Kogan",u:"newyork_creator",ask:"Pedir cita: Color",msg:"Hola, quiero pedir una cita para color (tinte o mechas). ¿Qué horarios tienen?"},
-    {tag:"Keratina",h:"Liso y con <i>brillo</i>",rows:[["Keratina","desde $900"]],img:"1616105950717-8102cc4afbd7",by:"Giorgio Trovato",u:"giorgiotrovato",ask:"Pedir cita: Keratina",msg:"Hola, quiero pedir una cita para: Keratina (desde $900). ¿Qué horarios tienen?"},
-    {tag:"Cejas y pestañas",h:"Mirada <i>lista</i>",rows:[["Diseño de ceja","$100"],["Laminado de ceja","$350"],["Lifting de pestañas","$400"],["Extensiones","$550"]],img:"1589710751893-f9a6770ad71b",by:"Hayley Kim Studios",u:"hayleykimstudios",ask:"Pedir cita: Cejas y pestañas",msg:"Hola, quiero pedir una cita para cejas o pestañas. ¿Qué horarios tienen?"},
-    {tag:"Te esperamos",h:"Martes a <i>domingo</i>",rows:[["Martes a sábado","10 am – 8 pm"],["Domingo","10 am – 3 pm"],["Av. Las Torres #210","local 3"]],img:"1695527081728-e3a42f0ce261",by:"Daniel",u:"unsplashbydan",ask:"Pedir cita",msg:"Hola, quiero pedir una cita. ¿Qué horarios tienen?"}
-  ];
-  var slides=document.getElementById("slides"),bars=document.getElementById("bars"),box=document.getElementById("stories"),blur=document.getElementById("blur");
-  S.forEach(function(s,i){
-    var d=document.createElement("div");d.className="slide";
-    var rows=s.rows.map(function(r){return "<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("");
-    d.innerHTML='<img src="'+img(s.img,900)+'" alt="" '+(i?'loading="lazy"':'fetchpriority="high"')+'><div class="say"><span class="tag">'+s.tag+'</span><h2>'+s.h+'</h2>'+(rows?'<div class="rows">'+rows+'</div>':'')+'</div>'+
-      '<a class="cr" href="https://unsplash.com/@'+s.u+U+'" target="_blank" rel="noopener">Foto: '+s.by+' / Unsplash</a>';
-    slides.appendChild(d);
-    var b=document.createElement("span");b.innerHTML="<i></i>";bars.appendChild(b);
-  });
-  var cur=0,still=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches,timer=null;
-  function show(i){
-    cur=(i+S.length)%S.length;
-    [].forEach.call(slides.children,function(el,j){el.classList.toggle("on",j===cur)});
-    [].forEach.call(bars.children,function(el,j){el.className=j<cur?"done":(j===cur?"run":"");});
-    blur.style.backgroundImage="url("+img(S[cur].img,200)+")";
-    document.getElementById("askt").textContent=S[cur].ask;
-    document.getElementById("ask").href=wa(S[cur].msg);
-    if(still){clearTimeout(timer);timer=setTimeout(function(){show(cur+1)},7000);}
-  }
-  bars.addEventListener("animationend",function(e){if(e.target.parentNode.className==="run")show(cur+1)});
-  document.getElementById("next").addEventListener("click",function(){show(cur+1)});
-  document.getElementById("prev").addEventListener("click",function(){show(cur-1)});
-  ["pointerdown"].forEach(function(ev){box.addEventListener(ev,function(e){if(e.target.classList.contains("tap"))box.classList.add("paused")})});
-  ["pointerup","pointercancel","pointerleave"].forEach(function(ev){box.addEventListener(ev,function(){box.classList.remove("paused")})});
-  document.addEventListener("keydown",function(e){if(e.key==="ArrowRight")show(cur+1);if(e.key==="ArrowLeft")show(cur-1);});
-  var heart=document.getElementById("heart");
-  heart.addEventListener("click",function(){var on=heart.classList.toggle("on");heart.setAttribute("aria-pressed",on?"true":"false")});
-  show(0);
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const brand = (params.get('n') || 'Estética Aurora').trim();
+    const address = (params.get('d') || 'Av. Las Torres #210, local 3').trim();
+    const hours = (params.get('h') || 'Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00').trim();
+    const rawTel = (params.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
+    const waPhone = rawTel.length === 10 ? '521' + rawTel : rawTel;
+    const fmtTel = rawTel.length === 10 ? rawTel.slice(0,2) + ' ' + rawTel.slice(2,6) + ' ' + rawTel.slice(6) : rawTel;
 
-  // pausar cuando no se ve
-  var bar=document.getElementById("bar");
-  if("IntersectionObserver" in window){
-    new IntersectionObserver(function(es){es.forEach(function(e){
-      box.classList.toggle("paused",!e.isIntersecting);
-      bar.classList.toggle("show",!e.isIntersecting);
-    })},{threshold:.35}).observe(box);
-  } else bar.classList.add("show");
+    document.title = brand + ' · Cabello, cejas y pestañas';
+    document.querySelectorAll('[data-brand]').forEach(el => el.textContent = brand);
+    document.querySelectorAll('[data-address]').forEach(el => el.textContent = address);
+    document.querySelectorAll('[data-hours]').forEach(el => el.textContent = hours);
+    document.getElementById('top-hours').textContent = hours;
+    document.getElementById('top-tel').textContent = 'Tel. ' + fmtTel;
+    document.getElementById('top-tel').href = 'tel:' + rawTel;
+    document.getElementById('head-tel').textContent = fmtTel;
+    document.getElementById('head-tel').href = 'tel:' + rawTel;
+    document.getElementById('table-tel').textContent = fmtTel;
+    document.getElementById('table-tel').href = 'tel:' + rawTel;
 
-  // lista de precios
-  var G1=[{n:"Corte",p:"180"},{n:"Peinado",p:"250"},{n:"Tinte",p:"desde 450"},{n:"Mechas / balayage",p:"desde 1,200"},{n:"Keratina",p:"desde 900"}];
-  var G2=[{n:"Diseño de ceja",p:"100"},{n:"Laminado de ceja",p:"350"},{n:"Lifting de pestañas",p:"400"},{n:"Extensiones",p:"550"}];
-  var all=[];
-  function fill(id,arr){var g=document.getElementById(id);arr.forEach(function(s){
-    var b=document.createElement("button");b.type="button";b.className="svc";b.setAttribute("aria-pressed","false");
-    var price=s.p.indexOf("desde")===0?"desde $"+s.p.slice(6):"$"+s.p;
-    b.innerHTML='<span class="ck" aria-hidden="true"></span><span>'+s.n+'</span><span class="dots"></span><span class="pr">'+price+'</span>';
-    b.addEventListener("click",function(){
-      all.forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");
-      document.getElementById("pick").textContent=s.n+" · "+price;
-      document.getElementById("send").href=wa("Hola, quiero pedir una cita para: "+s.n+" ("+price+"). ¿Qué horarios tienen?");
+    const mapQ = encodeURIComponent(address + ', Monterrey, Nuevo León');
+    document.getElementById('map-embed').src = 'https://maps.google.com/maps?q=' + mapQ + '&t=&z=14&ie=UTF8&iwloc=&output=embed';
+    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + mapQ;
+
+    function updateStatus() {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Monterrey',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).formatToParts(new Date());
+      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
+      const h = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
+      const isMon = map.weekday === 'Mon';
+      const isSun = map.weekday === 'Sun';
+      const isOpen = !isMon && (isSun ? (h >= 10 && h < 15) : (h >= 10 && h < 20));
+      const st = document.getElementById('live-status');
+      st.textContent = isOpen ? 'Abierto ahora' : (isMon ? 'Cerrado los lunes' : 'Cerrado · Abre a las 10:00');
+      st.classList.toggle('open', isOpen);
+    }
+    updateStatus();
+
+    const selected = new Set(['Corte ($180)']);
+    function waUrl(msg) {
+      return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
+    }
+
+    function sync() {
+      const items = Array.from(selected);
+      const listText = items.length ? items.join(', ') : 'información de servicios';
+      const msg = items.length
+        ? 'Hola, quiero agendar en ' + brand + ' para: ' + listText + '. ¿Qué horarios tienen disponibles?'
+        : 'Hola, quiero información y horarios disponibles en ' + brand + '.';
+      const url = waUrl(msg);
+      document.getElementById('sel-summary').textContent = items.length
+        ? 'Seleccionado: ' + listText
+        : 'Marca uno o más servicios arriba o manda mensaje directo.';
+      document.getElementById('sticky-title').textContent = items.length
+        ? items.length + (items.length === 1 ? ' servicio seleccionado' : ' servicios seleccionados')
+        : 'Agendar cita en ' + brand;
+      document.getElementById('sticky-sub').textContent = items.length ? listText : 'Consulta horarios disponibles';
+      document.getElementById('inline-wa').href = url;
+      document.getElementById('sticky-wa').href = url;
+      document.getElementById('hero-wa').href = waUrl('Hola, quiero agendar una cita en ' + brand + '.');
+    }
+
+    document.querySelectorAll('.svc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.item;
+        if (selected.has(key)) {
+          selected.delete(key);
+          btn.classList.remove('selected');
+        } else {
+          selected.add(key);
+          btn.classList.add('selected');
+        }
+        const showBar = selected.size > 0;
+        document.querySelector('.sticky-bar').classList.toggle('visible', showBar);
+        document.body.classList.toggle('has-bar', showBar);
+        sync();
+      });
     });
-    g.appendChild(b);all.push(b);
-  });}
-  fill("g1",G1);fill("g2",G2);
-  document.getElementById("send").href=wa("Hola, quiero pedir una cita. ¿Qué horarios tienen?");
 
-  var seen={},cr=[];
-  S.forEach(function(s){if(seen[s.u])return;seen[s.u]=1;cr.push('<a href="https://unsplash.com/@'+s.u+U+'" target="_blank" rel="noopener">'+s.by+'</a>');});
-  document.getElementById("credits").innerHTML="Fotos: "+cr.join(", ")+' en <a href="https://unsplash.com/'+U+'" target="_blank" rel="noopener">Unsplash</a>';
-
-  var sched={0:[10,15],1:null,2:[10,20],3:[10,20],4:[10,20],5:[10,20],6:[10,20]};
-  var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
-  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
-  parts.forEach(function(p){if(p.type==="weekday")d=map[p.value];if(p.type==="hour")h=parseInt(p.value,10)%24;if(p.type==="minute")m=parseInt(p.value,10);});
-  var t=h+m/60,s=sched[d],open=!!(s&&t>=s[0]&&t<s[1]);
-  document.getElementById("status").textContent=open?"Abierto ahora":"Cerrado ahora";
-})();
+    sync();
+  })();
 </script>
-<script>
-/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
-(function(){
-var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
-if(!N&&!D&&!H)return;
-function $(s){return document.querySelector(s)}
-function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
-function rows(){return H.split("·").map(function(x){x=x.trim();var m=x.match(/^(.*?)\s*((\d|cerrad).*)$/i);return m?[m[1],m[2].charAt(0).toUpperCase()+m[2].slice(1)]:[x,""]}).filter(function(r){return r[0]||r[1]})}
-function slug(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").trim().split(/\s+/).join(".")}
-if(N)document.title=N;
-
-if(N){$(".who b").textContent=slug(N);var ws=N.split(/\s+/);$(".av span").textContent=ws[ws.length-1].charAt(0).toUpperCase();var t=$(".slide .tag");if(t)t.textContent=N;
- $("#stories").setAttribute("aria-label",N);$("footer p").textContent="Muestra para "+N;}
-var last=document.querySelectorAll(".slide")[5],box=last&&last.querySelector(".rows");
-if(D){$("#dir").textContent=D;}
-if(box&&(D||H)){var keep=[].slice.call(box.children).map(function(d){return [d.children[0].textContent,d.children[1].textContent]});
- var hr=H?rows():keep.slice(0,2),ad=D?[D,""]:keep[2];box.textContent="";
- hr.concat([ad]).forEach(function(r){var d=el("div");d.appendChild(el("span",null,r[0]));d.appendChild(el("b",null,r[1]));box.appendChild(d)});
- if(H){last.querySelector("h2").innerHTML="Aquí te <i>esperamos</i>";last.querySelector(".tag").textContent="Horario";}}
-if(H){var g=$("#hgroup");[].forEach.call(g.querySelectorAll("p"),function(p){p.remove()});
- H.split("·").forEach(function(x){x=x.trim();if(x)g.appendChild(el("p",null,x))});$("#status").style.display="none";}
-})();
-</script>
-<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

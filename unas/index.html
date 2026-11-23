@@ -1,279 +1,603 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nails by Karla</title>
-<meta name="description" content="Nails by Karla. Escoge tu diseño del catálogo y aparta tu cita por WhatsApp.">
-<meta name="theme-color" content="#F7F2EE">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nails by Karla · Gel, acrílico y diseño</title>
+<meta name="description" content="Catálogo de diseños en gel, acrílico, manicure y pedicure spa. Elige tu estilo y agenda por WhatsApp.">
 <style>
-:root{
-  color-scheme: light;
-  --bg:#F7F2EE; --paper:#FFFFFF; --ink:#2A211F; --muted:#7D706B; --line:#E7DDD7;
-  --rose:#B8685C; --rose-2:#9E5448; --blush:#EFDFD8;
-  --serif:"Bodoni Moda", "Didot", Georgia, serif;
-  --body:"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:100px;overflow-x:hidden}
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
-img{display:block;max-width:100%}
-.wrap{max-width:1100px;margin-inline:auto;padding:0 18px}
+  @font-face { font-family: 'DM Sans'; src: url('../fonts/demos/dm-sans-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'DM Sans'; src: url('../fonts/demos/dm-sans-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'DM Sans'; src: url('../fonts/demos/dm-sans-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'DM Sans'; src: url('../fonts/demos/dm-sans-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0}
-.logo{font-family:var(--serif);font-style:italic;font-size:24px;letter-spacing:-.01em}
-.logo span{color:var(--rose);margin:0 2px;font-style:normal}
-.open{font-size:12px;font-weight:600;color:var(--muted);background:var(--paper);border:1px solid var(--line);padding:6px 11px;border-radius:999px;white-space:nowrap}
-.open i{display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px}
-.open.yes{color:#3F7A55}.open.no{color:var(--rose-2)}
+  :root {
+    --bg: #FFFFFF;
+    --bg-alt: #F6F2F0;
+    --ink: #1D1918;
+    --muted: #5F5653;
+    --line: #E3DAD6;
+    --accent: #6B3630;
+    --accent-dark: #522722;
+    --font: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
 
-/* portada */
-.hero{display:grid;gap:34px;padding:18px 0 10px}
-.kicker{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(46px,12vw,96px);line-height:.98;letter-spacing:-.02em;margin:12px 0 0}
-.hero h1 em{font-style:italic;color:var(--rose)}
-.hero p{margin:16px 0 0;font-size:18px;color:var(--muted);max-width:34ch}
-.cta{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:15px 24px;border-radius:999px}
-.collage{position:relative;height:clamp(380px,100vw,560px);max-width:520px;width:100%;justify-self:center}
-.collage figure{position:absolute;margin:0;border-radius:999px 999px 18px 18px;overflow:hidden;background:var(--blush);box-shadow:0 30px 60px rgba(42,33,31,.16)}
-.collage img{width:100%;height:100%;object-fit:cover}
-.collage .a{left:12%;right:12%;top:0;bottom:8%;border-radius:999px 999px 24px 24px;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
-.collage .b{left:0;bottom:0;width:38%;aspect-ratio:3/4;border-radius:18px;animation:rise .9s .15s cubic-bezier(.2,.8,.2,1) both,bob 7s 1.2s ease-in-out infinite}
-.collage .c{right:0;top:14%;width:34%;aspect-ratio:3/4;border-radius:18px;animation:rise .9s .3s cubic-bezier(.2,.8,.2,1) both,bob 8s 1.4s ease-in-out infinite reverse}
-@keyframes rise{from{opacity:0;transform:translateY(30px)}}
-@keyframes bob{50%{transform:translateY(-10px)}}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.has-bar { padding-bottom: 76px; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
 
-/* línea */
-.line{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);margin-top:40px}
-.line div{display:inline-block;padding:14px 0;font-family:var(--serif);font-style:italic;font-size:22px;animation:tape 32s linear infinite}
-.line i{font-style:normal;color:var(--rose);margin:0 18px;font-size:14px;vertical-align:3px}
-@keyframes tape{to{transform:translateX(-50%)}}
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-section{padding-top:60px}
-h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,9vw,72px);line-height:1;letter-spacing:-.02em;margin:0}
-h2 em{font-style:italic;color:var(--rose)}
-.sub{margin:10px 0 0;color:var(--muted);max-width:44ch}
+  /* Topbar */
+  .topbar {
+    background: var(--accent);
+    color: #F2E9E7;
+    font-size: 13px;
+    padding: 8px 0;
+  }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .topbar-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .topbar-tel { font-weight: 600; color: #FFFFFF; }
+  .topbar-status { color: #E2D1CE; font-weight: 500; }
+  .topbar-status.open { color: #BCEAC9; }
 
-/* catálogo */
-.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:24px -18px 0;padding:0 18px}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:600 14px var(--body);padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.cat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px;margin-top:22px}
-.d{border:0;background:transparent;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:10px}
-.d.hide{display:none}
-.d .ph{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--blush);transition:box-shadow .25s}
-.d .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.d:hover .ph img{transform:scale(1.05)}
-.d .ck{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;transition:background .2s}
-.d .ck svg{width:14px;height:14px;opacity:0;transition:opacity .2s}
-.d[aria-pressed="true"] .ph{box-shadow:0 0 0 3px var(--rose)}
-.d[aria-pressed="true"] .ck{background:var(--rose)}
-.d[aria-pressed="true"] .ck svg{opacity:1}
-.d .nm{font-family:var(--serif);font-size:21px;line-height:1.1}
-.d .pr{font-size:14px;color:var(--muted)}
-.own .ph{display:grid;place-items:center;text-align:center;padding:18px;background:transparent;border:1.5px dashed #D7C6BE}
-.own .ph span{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.2;color:var(--rose-2)}
+  /* Header */
+  header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .header-inner { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .brand-name { font-size: 18.5px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; }
+  .brand-sub { font-size: 12px; color: var(--muted); display: block; }
+  nav { display: flex; align-items: center; gap: 26px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  nav a:hover { color: var(--ink); }
+  .header-tel { font-size: 14px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .header-tel:hover { text-decoration: underline; }
 
-/* precios */
-.menu{margin-top:22px;background:var(--paper);border-radius:24px;padding:6px 20px;border:1px solid var(--line)}
-.row{display:flex;align-items:baseline;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
-.row:last-child{border-bottom:0}
-.row b{font-weight:600}
-.row small{display:block;color:var(--muted);font-size:13px;font-weight:400}
-.row .dots{flex:1;border-bottom:1px dotted #D7C6BE;transform:translateY(-4px)}
-.row strong{font-family:var(--serif);font-weight:500;font-size:20px;white-space:nowrap}
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    background: #241917;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(95deg, rgba(29, 20, 18, 0.88) 0%, rgba(29, 20, 18, 0.68) 48%, rgba(29, 20, 18, 0.24) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    padding-block: 54px;
+    color: #FFFFFF;
+  }
+  .hero-kicker { font-size: 13px; font-weight: 600; color: #ECDAD6; margin-bottom: 10px; }
+  .hero h1 {
+    font-size: clamp(28px, 3.4vw, 38px);
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin-bottom: 14px;
+  }
+  .hero p { font-size: 15.5px; line-height: 1.55; color: #EFE6E4; margin-bottom: 24px; }
+  .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 12px 22px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .hero-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    padding-bottom: 2px;
+  }
+  .hero-link:hover { border-color: #FFFFFF; }
 
-/* estudio */
-.studio{position:relative;margin-top:60px;border-radius:28px;overflow:hidden;min-height:420px;display:flex;align-items:flex-end;isolation:isolate;background:var(--blush)}
-.studio>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.studio::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(42,33,31,0) 30%,rgba(42,33,31,.7))}
-.info{display:grid;gap:10px;padding:18px;width:100%}
-.info div{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;padding:16px 18px}
-.info b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:2px}
+  /* Sections */
+  section { padding: 54px 0; border-bottom: 1px solid var(--line); }
+  .sec-alt { background: var(--bg-alt); }
+  .sec-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .sec-head { max-width: 540px; }
+  .sec-head h2 {
+    font-size: clamp(22px, 2.5vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .sec-head p { color: var(--muted); font-size: 15px; }
 
-footer{padding:40px 0 20px;font-size:13px;color:var(--muted);display:grid;gap:6px}
-footer a{color:var(--ink)}
+  /* Filter tabs */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn {
+    border: 1px solid #CFC3BE;
+    background: #FFFFFF;
+    color: var(--muted);
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
 
-/* barra */
-.bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;max-width:620px;margin-inline:auto;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 18px;border-radius:22px;background:rgba(255,255,255,.86);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 12px 40px rgba(42,33,31,.16)}
-.bar .t{flex:1;min-width:0;line-height:1.2}
-.bar small{display:block;font-size:12px;color:var(--muted)}
-.bar b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar a{flex:none;background:var(--rose);color:#fff;text-decoration:none;font-weight:700;padding:13px 18px;border-radius:14px}
-.bar.pop{animation:pop .4s}
-@keyframes pop{40%{transform:scale(1.03)}}
+  /* Design grid */
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .design-card {
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s ease;
+  }
+  .design-card:hover { border-color: #B4A5A0; }
+  .design-card.selected {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+    background: #FCF7F6;
+  }
+  .design-card img {
+    width: 100%;
+    aspect-ratio: 4 / 4;
+    object-fit: cover;
+    background: #EFE9E7;
+  }
+  .design-custom-box {
+    width: 100%;
+    aspect-ratio: 4 / 4;
+    background: var(--bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    text-align: center;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .design-meta {
+    padding: 11px 12px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .design-name { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+  .design-price { font-size: 14.5px; font-weight: 700; color: var(--accent); white-space: nowrap; }
 
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
-.rv.on{opacity:1;transform:none}
+  .sel-banner {
+    margin-top: 22px;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .sel-banner strong { display: block; font-size: 15.5px; }
+  .sel-banner span { font-size: 13.5px; color: var(--muted); }
 
-@media (min-width:820px){
-  .hero{grid-template-columns:1.05fr .95fr;align-items:center;padding-top:40px}
-  .cat{grid-template-columns:repeat(4,minmax(0,1fr));gap:26px 18px}
-  .info{grid-template-columns:1fr 1fr;padding:26px}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .rv{opacity:1;transform:none}
-}
+  /* Prices + studio */
+  .prices-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .price-table { width: 100%; border-collapse: collapse; background: #FFFFFF; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .price-table tr { border-bottom: 1px solid var(--line); }
+  .price-table tr:last-child { border-bottom: none; }
+  .price-table td { padding: 13px 16px; font-size: 15px; }
+  .price-table td:first-child { font-weight: 500; color: var(--ink); }
+  .price-table td:last-child { text-align: right; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .studio-photo {
+    width: 100%;
+    height: 310px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+  }
+
+  /* Location */
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .info-table th, .info-table td {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .info-table th { width: 112px; color: var(--muted); font-weight: 500; }
+  .info-table td { color: var(--ink); font-weight: 500; }
+  .map-frame {
+    width: 100%;
+    height: 300px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg-alt);
+  }
+  .map-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--accent); }
+  .map-link:hover { text-decoration: underline; }
+
+  /* Sticky bar (shown after selecting a design) */
+  .sticky-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #231816;
+    color: #FFFFFF;
+    border-top: 1px solid #3E2A27;
+    z-index: 50;
+    padding: 12px 0;
+    display: none;
+  }
+  .sticky-bar.visible { display: block; }
+  .sticky-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .sticky-info { min-width: 0; font-size: 14px; }
+  .sticky-info strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sticky-info span { color: #D8C7C4; font-size: 12.5px; }
+  .sticky-bar .btn-primary { background: #FFFFFF; color: var(--accent); }
+  .sticky-bar .btn-primary:hover { background: #F2E9E7; }
+
+  /* Footer */
+  footer {
+    background: var(--bg-alt);
+    padding: 28px 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .footer-credits {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: #7D716E;
+  }
+  .footer-credits a { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .design-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 820px) {
+    nav { display: none; }
+    .prices-grid, .loc-grid { grid-template-columns: 1fr; }
+    .hero { min-height: 380px; }
+    .hero::after {
+      background: linear-gradient(180deg, rgba(29, 20, 18, 0.72) 0%, rgba(29, 20, 18, 0.90) 100%);
+    }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 18px; }
+    .topbar-tel { display: none; }
+    .design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .design-meta { padding: 9px 10px; flex-direction: column; gap: 2px; }
+    .btn-primary { padding: 11px 16px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header class="top">
-    <span class="logo">nails<span>·</span>karla</span>
-    <span class="open" id="open"><i></i>Horario</span>
-  </header>
-
-  <section class="hero" style="padding-top:18px">
-    <div>
-      <div class="kicker">Estudio de uñas</div>
-      <h1>Escoge tu <em>diseño</em>, nosotras lo hacemos.</h1>
-      <p>Mira el catálogo, toca el que te guste y aparta tu cita por WhatsApp.</p>
-      <a class="cta" href="#catalogo">Ver catálogo ↓</a>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="topbar-left">
+      <a class="topbar-tel" id="top-tel" href="tel:8123256381">Tel. 81 2325 6381</a>
+      <span id="top-hours">Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</span>
     </div>
-    <div class="collage" aria-hidden="true">
-      <figure class="a"><img src="https://images.unsplash.com/photo-1735264143075-9694eb02ad86?auto=format&fit=crop&w=900&q=75" alt="" fetchpriority="high"></figure>
-      <figure class="b"><img src="https://images.unsplash.com/photo-1648844421753-351afd50486a?auto=format&fit=crop&w=400&h=530&q=70" alt=""></figure>
-      <figure class="c"><img src="https://images.unsplash.com/photo-1754799670312-8e7da8e40ad7?auto=format&fit=crop&w=400&h=530&q=70" alt=""></figure>
-    </div>
-  </section>
+    <span class="topbar-status" id="live-status">Abierto hoy</span>
+  </div>
 </div>
 
-<div class="line" aria-hidden="true"><div id="line"></div></div>
+<header>
+  <div class="wrap header-inner">
+    <a href="#" class="brand">
+      <span class="brand-name" data-brand>Nails by Karla</span>
+      <span class="brand-sub">Gel, acrílico y manicure</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#precios">Precios</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+    <a class="header-tel" id="head-tel" href="tel:8123256381">81 2325 6381</a>
+  </div>
+</header>
 
-<div class="wrap">
+<main>
+  <section class="hero" style="padding:0; border-bottom:none;">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1735264143075-9694eb02ad86?auto=format&fit=crop&w=1500&q=82" alt="Aplicación profesional de uñas">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="hero-kicker" data-address>Calle Morelos #88, Centro</div>
+        <h1>Gel, acrílico y diseño de uñas en <span data-brand>Nails by Karla</span></h1>
+        <p>Elige un estilo del catálogo o envíanos tu foto de referencia por WhatsApp para cotizar largo, forma y horario disponible.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#catalogo">Ver catálogo de diseños</a>
+          <a class="hero-link" href="#precios">Lista de precios</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="catalogo">
-    <h2 class="rv">El <em>catálogo</em></h2>
-    <p class="sub rv">Toca el diseño que quieres. Si tienes tu propia idea, mándanos la foto.</p>
-    <div class="chips" role="group" aria-label="Filtrar diseños">
-      <button class="chip" type="button" data-f="todo" aria-pressed="true">Todos</button>
-      <button class="chip" type="button" data-f="frances" aria-pressed="false">Francés</button>
-      <button class="chip" type="button" data-f="natural" aria-pressed="false">Natural</button>
-      <button class="chip" type="button" data-f="color" aria-pressed="false">Color</button>
-      <button class="chip" type="button" data-f="arte" aria-pressed="false">Arte</button>
+    <div class="wrap">
+      <div class="sec-top">
+        <div class="sec-head">
+          <h2>Catálogo de diseños</h2>
+          <p>Filtra por estilo y toca el diseño que te guste para apartar tu cita.</p>
+        </div>
+        <div class="filters" id="filters" role="tablist" aria-label="Filtrar diseños">
+          <button type="button" class="filter-btn active" data-cat="todo">Todos</button>
+          <button type="button" class="filter-btn" data-cat="frances">Francés</button>
+          <button type="button" class="filter-btn" data-cat="natural">Natural</button>
+          <button type="button" class="filter-btn" data-cat="color">Color</button>
+          <button type="button" class="filter-btn" data-cat="arte">Arte</button>
+        </div>
+      </div>
+
+      <div class="design-grid" id="design-grid"></div>
+
+      <div class="sel-banner">
+        <div>
+          <strong id="sel-title">French glitter · $320</strong>
+          <span>Puedes cambiar tono o forma (almendra, cuadrada o coffin) el día de tu cita.</span>
+        </div>
+        <a class="btn-primary" id="inline-wa" href="#" target="_blank" rel="noopener">Apartar este diseño por WhatsApp</a>
+      </div>
     </div>
-    <div class="cat" id="cat"></div>
   </section>
 
-  <section>
-    <h2 class="rv">Precios</h2>
-    <div class="menu rv">
-      <div class="row"><span><b>Gel</b><small>En uña natural, dura 2–3 semanas</small></span><span class="dots"></span><strong>$250</strong></div>
-      <div class="row"><span><b>Acrílico</b><small>Largo 1 a 3</small></span><span class="dots"></span><strong>desde $350</strong></div>
-      <div class="row"><span><b>Manicure</b><small>Limpieza, forma y esmalte</small></span><span class="dots"></span><strong>$180</strong></div>
-      <div class="row"><span><b>Pedicure spa</b><small>Exfoliación y masaje</small></span><span class="dots"></span><strong>$280</strong></div>
-      <div class="row"><span><b>Retoque</b><small>De acrílico o gel</small></span><span class="dots"></span><strong>$250</strong></div>
-      <div class="row"><span><b>Diseño</b><small>Por uña</small></span><span class="dots"></span><strong>+$15</strong></div>
+  <section id="precios" class="sec-alt">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:24px;">
+        <h2>Precios base</h2>
+        <p>Trabajamos con material esterilizado y productos de larga duración.</p>
+      </div>
+      <div class="prices-grid">
+        <table class="price-table">
+          <tr><td>Gel en uña natural</td><td>$250</td></tr>
+          <tr><td>Uñas acrílicas (según largo)</td><td>desde $350</td></tr>
+          <tr><td>Manicure clásico</td><td>$180</td></tr>
+          <tr><td>Pedicure spa</td><td>$280</td></tr>
+          <tr><td>Retoque de acrílico</td><td>$250</td></tr>
+          <tr><td>Diseño a mano alzada</td><td>+$15 por uña</td></tr>
+        </table>
+        <img class="studio-photo" src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=900&q=80" alt="Mesa de trabajo y esmaltes del estudio" loading="lazy">
+      </div>
     </div>
   </section>
 
-  <div class="studio rv">
-    <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1400&q=70" alt="Manicurista trabajando en el estudio" loading="lazy">
-    <div class="info">
-      <div><b>Horario</b>Martes a sábado 10 am – 8 pm · Domingo 10 am – 3 pm</div>
-      <div><b>Dónde</b>Calle Morelos #88, Centro</div>
+  <section id="ubicacion">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:24px;">
+        <h2>Ubicación y horarios</h2>
+        <p>Atención únicamente con cita previa para dedicarte el tiempo completo.</p>
+      </div>
+      <div class="loc-grid">
+        <table class="info-table">
+          <tr><th>Dirección</th><td data-address>Calle Morelos #88, Centro</td></tr>
+          <tr><th>Horario</th><td data-hours>Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00</td></tr>
+          <tr><th>Descanso</th><td>Lunes cerrado</td></tr>
+          <tr><th>Teléfono</th><td><a id="table-tel" href="tel:8123256381">81 2325 6381</a></td></tr>
+          <tr><th>Pagos</th><td>Efectivo y transferencia</td></tr>
+        </table>
+        <div>
+          <iframe class="map-frame" id="map-embed" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Monterrey%20Centro&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+          <a class="map-link" id="map-open" href="https://maps.google.com/?q=Monterrey+Centro" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sticky-bar" role="region" aria-label="Diseño seleccionado">
+  <div class="wrap sticky-inner">
+    <div class="sticky-info">
+      <strong id="sticky-title">French glitter · $320</strong>
+      <span>Agenda y confirma disponibilidad por WhatsApp</span>
+    </div>
+    <a class="btn-primary" id="sticky-wa" href="#" target="_blank" rel="noopener">Agendar por WhatsApp</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div><strong data-brand>Nails by Karla</strong> · <span data-address>Calle Morelos #88, Centro</span></div>
+      <div>Sitio de muestra creado por <a href="https://crusol.com.mx" style="text-decoration:underline;">crusol.com.mx</a></div>
+    </div>
+    <div class="footer-credits">
+      Fotografías de muestra vía Unsplash:
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Daria Dvoryanskaya</a>,
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Giorgio Trovato</a> y colaboradores de Unsplash.
     </div>
   </div>
-
-  <footer>
-    <span>Nails by Karla · negocio de ejemplo</span>
-    <span id="credits"></span>
-    <a href="../">Página demo hecha por crusol · ver más trabajos</a>
-  </footer>
-</div>
-
-<div class="bar" id="bar">
-  <div class="t"><small>Tu diseño</small><b id="pick">Elige uno del catálogo</b></div>
-  <a id="send" data-goatcounter-click="unas-cita-whatsapp" href="#" target="_blank" rel="noopener">Agendar</a>
-</div>
+</footer>
 
 <script>
-(function(){
-  var TEL="528123256381",U="?utm_source=crusol&utm_medium=referral";
-  function wa(t){return "https://wa.me/"+TEL+"?text="+encodeURIComponent(t);}
-  function img(id,w){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+w+"&h="+Math.round(w*1.25)+"&q=72";}
-  var D=[
-    {n:"French glitter",p:320,c:"frances",img:"1772322586754-34c9e6f5be6f",by:"Margarita Yutsaytis",u:"marsnails"},
-    {n:"Nude natural",p:250,c:"natural",img:"1610992015762-45dca7fa3a85",by:"Chelson Tamares",u:"jd_chon"},
-    {n:"Rojo almendra",p:280,c:"color",img:"1645566372784-7d017ad7643b",by:"Felicia Montenegro",u:"feliciamontenegro"},
-    {n:"Mármol lila",p:380,c:"arte",img:"1772322586785-3a34772cbc61",by:"Margarita Yutsaytis",u:"marsnails"},
-    {n:"French azul",p:350,c:"frances",img:"1772322586634-9867476143b9",by:"Margarita Yutsaytis",u:"marsnails"},
-    {n:"Verde bosque",p:250,c:"color",img:"1587393794661-ef05657e10b9",by:"allison christine",u:"happpyal"},
-    {n:"Arte a mano",p:400,c:"arte",img:"1571290274554-6a2eaa771e5f",by:"Budka Damdinsuren",u:"buudkaanaa"},
-    {n:"Abstracto",p:380,c:"arte",img:"1754951661104-2a13d50d4741",by:"Kambria Trout",u:"kambriatrout"}
-  ];
-  var cat=document.getElementById("cat"),bar=document.getElementById("bar"),pick=document.getElementById("pick"),send=document.getElementById("send");
-  var chk='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
-  D.forEach(function(x,i){
-    var b=document.createElement("button");b.type="button";b.className="d rv";b.dataset.c=x.c;b.setAttribute("aria-pressed","false");
-    b.innerHTML='<span class="ph"><img src="'+img(x.img,500)+'" alt="Diseño '+x.n+'" loading="lazy"><span class="ck">'+chk+'</span></span><span><span class="nm">'+x.n+'</span><br><span class="pr">desde $'+x.p+'</span></span>';
-    b.addEventListener("click",function(){select(b,x.n+" · desde $"+x.p,"Hola, quiero agendar una cita para el diseño "+x.n+" (desde $"+x.p+"). ¿Qué horarios tienen?")});
-    cat.appendChild(b);
-  });
-  var own=document.createElement("button");own.type="button";own.className="d own rv";own.dataset.c="todo";own.setAttribute("aria-pressed","false");
-  own.innerHTML='<span class="ph"><span>¿Traes tu idea?<br>Mándanos tu foto</span></span><span><span class="nm">Tu diseño</span><br><span class="pr">Te decimos el precio</span></span>';
-  own.addEventListener("click",function(){select(own,"Mi propio diseño","Hola, quiero agendar una cita. Tengo una foto del diseño que quiero, ¿se las mando por aquí?")});
-  cat.appendChild(own);
-  function select(b,label,msg){
-    [].forEach.call(cat.children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
-    pick.textContent=label;send.href=wa(msg);
-    bar.classList.remove("pop");void bar.offsetWidth;bar.classList.add("pop");
-  }
-  send.href=wa("Hola, quiero agendar una cita. ¿Qué horarios tienen?");
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const brand = (params.get('n') || 'Nails by Karla').trim();
+    const address = (params.get('d') || 'Calle Morelos #88, Centro').trim();
+    const hours = (params.get('h') || 'Mar a sáb 10:00 a 20:00 · Dom 10:00 a 15:00').trim();
+    const rawTel = (params.get('tel') || '8123256381').replace(/\D/g, '') || '8123256381';
+    const waPhone = rawTel.length === 10 ? '521' + rawTel : rawTel;
+    const fmtTel = rawTel.length === 10 ? rawTel.slice(0,2) + ' ' + rawTel.slice(2,6) + ' ' + rawTel.slice(6) : rawTel;
 
-  [].forEach.call(document.querySelectorAll(".chip"),function(c){
-    c.addEventListener("click",function(){
-      [].forEach.call(document.querySelectorAll(".chip"),function(o){o.setAttribute("aria-pressed",o===c?"true":"false")});
-      var f=c.dataset.f;
-      [].forEach.call(cat.children,function(it){it.classList.toggle("hide",f!=="todo"&&it.dataset.c!==f&&it.dataset.c!=="todo")});
+    document.title = brand + ' · Gel, acrílico y diseño';
+    document.querySelectorAll('[data-brand]').forEach(el => el.textContent = brand);
+    document.querySelectorAll('[data-address]').forEach(el => el.textContent = address);
+    document.querySelectorAll('[data-hours]').forEach(el => el.textContent = hours);
+    document.getElementById('top-hours').textContent = hours;
+    document.getElementById('top-tel').textContent = 'Tel. ' + fmtTel;
+    document.getElementById('top-tel').href = 'tel:' + rawTel;
+    document.getElementById('head-tel').textContent = fmtTel;
+    document.getElementById('head-tel').href = 'tel:' + rawTel;
+    document.getElementById('table-tel').textContent = fmtTel;
+    document.getElementById('table-tel').href = 'tel:' + rawTel;
+
+    const mapQ = encodeURIComponent(address + ', Monterrey, Nuevo León');
+    document.getElementById('map-embed').src = 'https://maps.google.com/maps?q=' + mapQ + '&t=&z=14&ie=UTF8&iwloc=&output=embed';
+    document.getElementById('map-open').href = 'https://maps.google.com/?q=' + mapQ;
+
+    function updateStatus() {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Monterrey',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).formatToParts(new Date());
+      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
+      const h = parseInt(map.hour, 10) + parseInt(map.minute, 10) / 60;
+      const isMon = map.weekday === 'Mon';
+      const isSun = map.weekday === 'Sun';
+      const isOpen = !isMon && (isSun ? (h >= 10 && h < 15) : (h >= 10 && h < 20));
+      const st = document.getElementById('live-status');
+      st.textContent = isOpen ? 'Abierto ahora' : (isMon ? 'Cerrado los lunes' : 'Cerrado · Abre a las 10:00');
+      st.classList.toggle('open', isOpen);
+    }
+    updateStatus();
+
+    const DESIGNS = [
+      { id: 'french-glitter', name: 'French glitter', price: '$320', cat: 'frances', img: 'https://images.unsplash.com/photo-1772322586754-34c9e6f5be6f?auto=format&fit=crop&w=420&q=80' },
+      { id: 'nude-natural', name: 'Nude natural', price: '$250', cat: 'natural', img: 'https://images.unsplash.com/photo-1610992015762-45dca7fa3a85?auto=format&fit=crop&w=420&q=80' },
+      { id: 'rojo-almendra', name: 'Rojo almendra', price: '$280', cat: 'color', img: 'https://images.unsplash.com/photo-1645566372784-7d017ad7643b?auto=format&fit=crop&w=420&q=80' },
+      { id: 'marmol-lila', name: 'Mármol lila', price: '$380', cat: 'arte', img: 'https://images.unsplash.com/photo-1772322586785-3a34772cbc61?auto=format&fit=crop&w=420&q=80' },
+      { id: 'french-azul', name: 'French azul', price: '$350', cat: 'frances', img: 'https://images.unsplash.com/photo-1772322586634-9867476143b9?auto=format&fit=crop&w=420&q=80' },
+      { id: 'verde-bosque', name: 'Verde bosque', price: '$250', cat: 'color', img: 'https://images.unsplash.com/photo-1587393794661-ef05657e10b9?auto=format&fit=crop&w=420&q=80' },
+      { id: 'arte-mano', name: 'Arte a mano', price: '$400', cat: 'arte', img: 'https://images.unsplash.com/photo-1571290274554-6a2eaa771e5f?auto=format&fit=crop&w=420&q=80' },
+      { id: 'abstracto', name: 'Abstracto', price: '$380', cat: 'arte', img: 'https://images.unsplash.com/photo-1754951661104-2a13d50d4741?auto=format&fit=crop&w=420&q=80' },
+      { id: 'custom', name: 'Tu diseño', price: 'Cotizar', cat: 'todo', img: '' }
+    ];
+
+    let currentCat = 'todo';
+    let selectedId = 'french-glitter';
+    const grid = document.getElementById('design-grid');
+
+    function waUrl(msg) {
+      return 'https://api.whatsapp.com/send?phone=' + waPhone + '&text=' + encodeURIComponent(msg);
+    }
+
+    function renderGrid() {
+      const list = currentCat === 'todo'
+        ? DESIGNS
+        : DESIGNS.filter(d => d.cat === currentCat || d.id === 'custom');
+
+      grid.innerHTML = list.map(d => {
+        const media = d.img
+          ? '<img src="' + d.img + '" alt="' + d.name + '" loading="lazy">'
+          : '<div class="design-custom-box">Envía tu foto de referencia por WhatsApp</div>';
+        return '<button type="button" class="design-card' + (d.id === selectedId ? ' selected' : '') + '" data-id="' + d.id + '">' +
+          media +
+          '<span class="design-meta">' +
+            '<span class="design-name">' + d.name + '</span>' +
+            '<span class="design-price">' + d.price + '</span>' +
+          '</span>' +
+        '</button>';
+      }).join('');
+      syncSelected();
+    }
+
+    function syncSelected() {
+      const item = DESIGNS.find(d => d.id === selectedId) || DESIGNS[0];
+      const msg = item.id === 'custom'
+        ? 'Hola ' + brand + ', tengo una foto de referencia para cotizar un diseño de uñas y ver horarios disponibles.'
+        : 'Hola ' + brand + ', me interesa el diseño "' + item.name + '" (' + item.price + '). ¿Qué horarios tienen disponibles?';
+      const url = waUrl(msg);
+      document.getElementById('sel-title').textContent = item.name + ' · ' + item.price;
+      document.getElementById('sticky-title').textContent = item.name + ' · ' + item.price;
+      document.getElementById('inline-wa').href = url;
+      document.getElementById('sticky-wa').href = url;
+    }
+
+    document.getElementById('filters').addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.dataset.cat;
+      renderGrid();
     });
-  });
 
-  var W=["Gel","Acrílico","French","Nude","Arte a mano","Pedicure spa"],s="";
-  for(var k=0;k<3;k++)W.forEach(function(w){s+=w+"<i>✦</i>"});
-  document.getElementById("line").innerHTML=s+s;
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.design-card');
+      if (!card) return;
+      selectedId = card.dataset.id;
+      document.querySelector('.sticky-bar').classList.add('visible');
+      document.body.classList.add('has-bar');
+      renderGrid();
+    });
 
-  var seen={},cr=[];
-  D.concat([{by:"Daria Dvoryanskaya",u:"ddarinaaa"},{by:"Yukon Haughton",u:"ydlh"},{by:"Ari Kurniawan",u:"arikurniawan"},{by:"Giorgio Trovato",u:"giorgiotrovato"}]).forEach(function(x){
-    if(seen[x.u])return;seen[x.u]=1;cr.push('<a href="https://unsplash.com/@'+x.u+U+'" target="_blank" rel="noopener">'+x.by+'</a>');
-  });
-  document.getElementById("credits").innerHTML="Fotos: "+cr.join(", ")+' en <a href="https://unsplash.com/'+U+'" target="_blank" rel="noopener">Unsplash</a>';
-
-  var sched={0:[10,15],1:null,2:[10,20],3:[10,20],4:[10,20],5:[10,20],6:[10,20]};
-  var parts=new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",weekday:"short",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
-  var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6},d=0,h=0,m=0;
-  parts.forEach(function(p){if(p.type==="weekday")d=map[p.value];if(p.type==="hour")h=parseInt(p.value,10)%24;if(p.type==="minute")m=parseInt(p.value,10);});
-  var tt=h+m/60,sc=sched[d],op=!!(sc&&tt>=sc[0]&&tt<sc[1]),o=document.getElementById("open");
-  o.lastChild.nodeValue=op?"Abierto ahora":"Cerrado ahora";o.classList.add(op?"yes":"no");
-
-  var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target);}})},{threshold:.12}):null;
-  [].forEach.call(document.querySelectorAll(".rv"),function(el){io?io.observe(el):el.classList.add("on")});
-})();
+    renderGrid();
+  })();
 </script>
-<script>
-/* Muestra personalizada: ?n=Nombre&d=Dirección&h=Horario (separa días con ·) */
-(function(){
-var q=new URLSearchParams(location.search),N=(q.get("n")||"").trim().slice(0,40),D=(q.get("d")||"").trim().slice(0,90),H=(q.get("h")||"").trim().slice(0,140);
-if(!N&&!D&&!H)return;
-function $(s){return document.querySelector(s)}
-function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
-if(N){document.title=N;var lg=$(".logo"),w=N.toLowerCase().split(/\s+/);lg.textContent="";
- w.forEach(function(x,i){if(i)lg.appendChild(el("span",null,"·"));lg.appendChild(document.createTextNode(x))});
- $("footer span").textContent="Muestra para "+N;}
-var inf=document.querySelectorAll(".info div");
-if(H&&inf[0]){inf[0].lastChild.nodeValue=H;var op=$(".open");if(op)op.style.display="none";}
-if(D&&inf[1])inf[1].lastChild.nodeValue=D;
-})();
-</script>
-<script>if(window.self!==window.top)window.goatcounter={no_onload:true};</script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
