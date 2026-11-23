@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sitio Oficial | Monterrey, N.L.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --paper: #FFFFFF;
+      --ink: #111110;
+      --muted: #6C6C66;
+      --gray: #A3A39C;
+      --line: #E6E6E0;
+      --soft: #F1F1ED;
+      --accent: #0F3D2E;
+      --accent-hover: #0B2A20;
+      --accent-soft: #E9F0EC;
+      --accent-ink: #FFFFFF;
+      --amber: #C97A12;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 84px;
+    }
+
+    /* Crusol preview strip */
+    .crusol-bar {
+      background: var(--ink);
+      color: #F6F5F0;
+      font-size: 12.5px;
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .crusol-bar span { color: rgba(246, 245, 240, 0.78); }
+    .crusol-bar strong { color: #FFFFFF; font-weight: 600; }
+    .crusol-bar a {
+      color: #A9C4B6;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      border-bottom: 1px solid rgba(169, 196, 182, 0.45);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 clamp(18px, 4vw, 40px);
+    }
+
+    /* Editorial Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      gap: 14px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 14px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .brand-name { font-weight: 700; font-size: 16.5px; letter-spacing: -0.2px; line-height: 1.2; }
+    .brand-meta { font-size: 12.5px; color: var(--muted); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .btn-outline-sm {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .btn-solid-sm {
+      background: var(--accent);
+      color: var(--accent-ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .btn-solid-sm:hover { background: var(--accent-hover); }
+
+    /* Hero */
+    .hero {
+      padding: clamp(40px, 7vw, 76px) 0 44px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 36px;
+      align-items: end;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -1.2px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .hero-sub {
+      font-size: 16.5px;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 26px;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+    .hero-card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13.5px;
+    }
+    .hero-card-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .hero-card-label { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-transform: uppercase; }
+    .hero-card-val { font-weight: 600; text-align: right; }
+
+    /* Sections */
+    section.block {
+      padding: 52px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-size: clamp(24px, 3.2vw, 32px);
+      letter-spacing: -0.6px;
+      line-height: 1.15;
+    }
+    .sec-note { color: var(--muted); font-size: 14.5px; max-width: 400px; }
+
+    /* Interactive Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .service-card {
+      background: var(--paper);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .service-card:hover { border-color: var(--ink); }
+    .service-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .service-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .service-card p { font-size: 13.5px; color: var(--muted); }
+    .service-price {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--soft);
+      padding: 5px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+    .service-card.selected .service-price {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Interactive Booking / Quote Card */
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .booking-info {
+      display: grid;
+      gap: 14px;
+    }
+    .step-item {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .step-item span {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .step-item strong { display: block; margin: 4px 0 2px; font-size: 15px; }
+    .step-item p { font-size: 13.5px; color: var(--muted); }
+
+    .form-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(17, 17, 16, 0.05);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    input, textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 14.5px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      background: var(--paper);
+    }
+
+    /* Location */
+    .location-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 28px 0 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
+
+    /* Sticky mobile bar */
+    .sticky {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 250, 248, 0.94);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--line);
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      z-index: 40;
+    }
+    .sticky strong { font-size: 14px; display: block; line-height: 1.2; }
+    .sticky span { font-size: 12px; color: var(--muted); }
+
+    @media (max-width: 820px) {
+      .hero, .booking-grid, .services-grid, .form-grid { grid-template-columns: 1fr; }
+      .btn-outline-sm { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="crusol-bar" id="previewRibbon">
+    <span>Muestra interactiva preparada para <strong id="ribbonName">tu negocio</strong></span>
+    <a href="https://crusol.com.mx" target="_blank" rel="noopener">Diseñado por crusol.com.mx ↗</a>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="mark" id="brandAvatar">CR</div>
+        <div>
+          <div class="brand-name" id="brandName">Negocio Local Monterrey</div>
+          <div class="brand-meta" id="brandLoc">Monterrey, Nuevo León</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a class="btn-outline-sm" href="#servicios">Servicios</a>
+        <a class="btn-solid-sm" href="#agendar" id="headerCta">WhatsApp →</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-dot"></span><span id="heroPill">Monterrey, Nuevo León · Atención directa</span></div>
+        <h1 id="heroTitle">Atención profesional con citas y cotizaciones en segundos.</h1>
+        <p class="hero-sub" id="heroSub">Consulta servicios, elige lo que necesitas y confirma directamente por WhatsApp sin llamadas ni esperas.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="#agendar" id="heroCta">Solicitar por WhatsApp →</a>
+          <a class="btn-secondary" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-row">
+          <span class="hero-card-label">Ubicación</span>
+          <span class="hero-card-val" id="cardZone">Monterrey, N.L.</span>
+        </div>
+        <div class="hero-card-row">
+          <span class="hero-card-label">WhatsApp directo</span>
+          <span class="hero-card-val" id="cardPhone">81 0000 0000</span>
+        </div>
+        <div class="hero-card-row">
+          <span class="hero-card-label">Disponibilidad</span>
+          <span class="hero-card-val" style="color:var(--accent);">● Agenda abierta</span>
+        </div>
+        <div class="hero-card-row">
+          <span class="hero-card-label">Respuesta</span>
+          <span class="hero-card-val">Directo con el equipo</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="servicios">
+      <div class="sec-head">
+        <div>
+          <span class="sec-num">01 / SERVICIOS</span>
+          <h2>Servicios principales</h2>
+        </div>
+        <p class="sec-note">Selecciona un servicio para precargarlo automáticamente en tu solicitud de WhatsApp.</p>
+      </div>
+      <div class="services-grid" id="servicesGrid"></div>
+    </section>
+
+    <section class="block" id="agendar">
+      <div class="sec-head">
+        <div>
+          <span class="sec-num">02 / SOLICITUD DIRECTA</span>
+          <h2 id="formHeading">Agenda o cotiza por WhatsApp</h2>
+        </div>
+        <p class="sec-note">Sin formularios eternos: llenas 3 datos y se abre tu mensaje ya estructurado en WhatsApp.</p>
+      </div>
+
+      <div class="booking-grid">
+        <div class="booking-info">
+          <div class="step-item">
+            <span>PASO 01</span>
+            <strong>Elige tu servicio</strong>
+            <p>Toca cualquiera de las opciones arriba o escribe exactamente lo que necesitas.</p>
+          </div>
+          <div class="step-item">
+            <span>PASO 02</span>
+            <strong>Indica día y horario</strong>
+            <p>Te confirmamos disponibilidad real o cotización clara directo en tu WhatsApp.</p>
+          </div>
+          <div class="step-item">
+            <span>PASO 03</span>
+            <strong>Confirmación inmediata</strong>
+            <p>Sin intermediarios ni comisiones de plataformas externas.</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="waForm">
+            <div class="form-grid">
+              <div class="field full">
+                <label for="cliName">Tu nombre *</label>
+                <input id="cliName" required placeholder="Ej. Roberto Garza" />
+              </div>
+              <div class="field full">
+                <label for="cliService">Servicio o solicitud *</label>
+                <input id="cliService" required />
+              </div>
+              <div class="field">
+                <label for="cliDate">Día / Horario preferido *</label>
+                <input id="cliDate" required placeholder="Ej. Mañana 4:00 pm" />
+              </div>
+              <div class="field">
+                <label for="cliNotes">Detalle adicional (opcional)</label>
+                <input id="cliNotes" placeholder="Ej. Modelo, personas o duda" />
+              </div>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">
+              Enviar solicitud por WhatsApp →
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" style="border-bottom:none;">
+      <span class="sec-num">03 / UBICACIÓN Y CONTACTO</span>
+      <div class="location-card">
+        <div>
+          <strong style="font-size:18px; display:block;" id="locName">Negocio Local</strong>
+          <p style="color:var(--muted); font-size:14px; margin-top:4px;" id="locAddr">Monterrey, Nuevo León</p>
+          <p style="color:var(--muted); font-size:13.5px; margin-top:2px; font-family:var(--mono);" id="locPhone">81 0000 0000</p>
+        </div>
+        <a class="btn-secondary" id="mapsLink" href="#" target="_blank" rel="noopener">Abrir en Google Maps ↗</a>
+      </div>
+    </section>
+
+    <footer>
+      <span id="footerCopy">© 2026 Negocio Local · Monterrey, N.L.</span>
+      <span id="crusolCredit">Muestra diseñada por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol.com.mx</a></span>
+    </footer>
+  </div>
+
+  <div class="sticky">
+    <div>
+      <strong id="stickyName">Negocio Monterrey</strong>
+      <span>Atención directa por WhatsApp</span>
+    </div>
+    <a class="btn-solid-sm" href="#agendar">Agendar / Cotizar →</a>
+  </div>
+
+  <script>
+    const PRESETS = {
+      dentist: {
+        accent: '#0F3D2E', hover: '#0B2A20', soft: '#E9F0EC',
+        pill: 'Salud Dental · Monterrey, N.L.',
+        title: 'Atención dental moderna, clara y sin filas de espera.',
+        sub: 'Agenda tu valoración, limpieza ultrasónica o tratamiento directamente por WhatsApp en menos de un minuto.',
+        cta: 'Agendar valoración →',
+        services: [
+          { name: 'Consulta de Valoración', desc: 'Diagnóstico integral y plan de tratamiento claro', price: 'Agendar' },
+          { name: 'Limpieza Dental Ultrasónica', desc: 'Profilaxis profesional y pulido dental', price: 'Disponible' },
+          { name: 'Blanqueamiento Dental', desc: 'Resultados visibles desde la primera cita', price: 'Cotizar' },
+          { name: 'Ortodoncia y Estética Dental', desc: 'Alineadores, resinas y carillas', price: 'Cotizar' },
+        ],
+      },
+      hairdresser: {
+        accent: '#18181B', hover: '#09090B', soft: '#F1F1ED',
+        pill: 'Barbería & Peluquería · Monterrey, N.L.',
+        title: 'Tu corte impecable sin esperar turno — agenda en 30 segundos.',
+        sub: 'Elige tu servicio y aparta tu lugar directo por WhatsApp. Ideal para cerrar el año con el mejor estilo.',
+        cta: 'Apartar mi cita →',
+        services: [
+          { name: 'Corte Clásico / Fade', desc: 'Asesoría de imagen, desvanecido preciso y peinado', price: 'Agendar' },
+          { name: 'Corte + Diseño de Barba', desc: 'Perfilado con navaja y ritual de toalla caliente', price: 'Popular' },
+          { name: 'Perfilado y Cuidado de Barba', desc: 'Bálsamo hidratante y acabado limpio', price: 'Agendar' },
+          { name: 'Paquete Evento / Posada', desc: 'Servicio completo para tu evento', price: 'Consultar' },
+        ],
+      },
+      beauty: {
+        accent: '#6B2141', hover: '#4C142D', soft: '#F9EEF3',
+        pill: 'Estudio de Belleza · Monterrey, N.L.',
+        title: 'Agenda tu cita de belleza sin llamadas y asegura tu horario.',
+        sub: 'Consulta servicios disponibles y reserva directamente por WhatsApp antes de que se llene la agenda de temporada.',
+        cta: 'Reservar cita →',
+        services: [
+          { name: 'Color, Balayage y Tratamiento', desc: 'Diagnóstico capilar y acabado profesional', price: 'Cotizar' },
+          { name: 'Peinado y Maquillaje de Evento', desc: 'Larga duración para cenas, bodas y posadas', price: 'Temporada' },
+          { name: 'Uñas / Gelish / Manicure', desc: 'Diseño personalizado y productos premium', price: 'Agendar' },
+          { name: 'Cuidado Facial y Pestañas', desc: 'Hidratación profunda, lash lifting y ceja', price: 'Agendar' },
+        ],
+      },
+      veterinary: {
+        accent: '#0F3D2E', hover: '#0B2A20', soft: '#E9F0EC',
+        pill: 'Clínica Veterinaria · Monterrey, N.L.',
+        title: 'Cuidado profesional para tu mascota, con citas rápidas por WhatsApp.',
+        sub: 'Agenda consulta general, vacunación o baño y estética canina directamente con nuestro equipo.',
+        cta: 'Agendar consulta →',
+        services: [
+          { name: 'Consulta General', desc: 'Revisión física completa y seguimiento', price: 'Agendar' },
+          { name: 'Vacunación y Desparasitación', desc: 'Esquema preventivo para perros y gatos', price: 'Consultar' },
+          { name: 'Baño y Estética Canina', desc: 'Corte de pelo, uñas y limpieza de oídos', price: 'Agendar' },
+          { name: 'Atención Prioritaria', desc: 'Escríbenos directo para revisar disponibilidad hoy', price: 'Prioridad' },
+        ],
+      },
+      car_repair: {
+        accent: '#1E293B', hover: '#0F172A', soft: '#EEF2F6',
+        pill: 'Servicio Automotriz · Monterrey, N.L.',
+        title: 'Diagnóstico honesto y cotización rápida para tu vehículo.',
+        sub: 'Envíanos marca, modelo y el servicio que necesitas para cotizar hoy mismo por WhatsApp.',
+        cta: 'Cotizar servicio →',
+        services: [
+          { name: 'Afinación Mayor / Menor', desc: 'Cambio de aceite, filtros y revisión de puntos de seguridad', price: 'Cotizar' },
+          { name: 'Frenos y Suspensión', desc: 'Diagnóstico y reemplazo con garantía', price: 'Cotizar' },
+          { name: 'Escaneo Computarizado', desc: 'Detección precisa de códigos y testigos', price: 'Agendar' },
+          { name: 'Revisión Pre-Viaje', desc: 'Deja tu auto listo para carretera', price: 'Disponible' },
+        ],
+      },
+      florist: {
+        accent: '#0F3D2E', hover: '#0B2A20', soft: '#E9F0EC',
+        pill: 'Florería & Diseños · Monterrey, N.L.',
+        title: 'Arreglos florales y detalles de temporada con entrega en Monterrey.',
+        sub: 'Elige tu diseño o cotiza un arreglo personalizado directo por WhatsApp para entrega el mismo día.',
+        cta: 'Cotizar arreglo →',
+        services: [
+          { name: 'Ramos y Bouquets de Temporada', desc: 'Flores frescas seleccionadas del día', price: 'Cotizar' },
+          { name: 'Arreglos para Eventos y Centros de Mesa', desc: 'Cenas, posadas y eventos corporativos', price: 'Temporada' },
+          { name: 'Cajas de Regalo y Detalles', desc: 'Con tarjeta personalizada', price: 'Cotizar' },
+          { name: 'Entrega a Domicilio en MTY', desc: 'Cobertura en Monterrey y área metropolitana', price: 'Consultar' },
+        ],
+      },
+      restaurant: {
+        accent: '#7C2D12', hover: '#5A1F0B', soft: '#FBF0EB',
+        pill: 'Gastronomía Local · Monterrey, N.L.',
+        title: 'Consulta nuestras especialidades y pide directo por WhatsApp.',
+        sub: 'Ordena para recoger, pregunta por envíos en tu zona o cotiza paquetes para tus posadas y reuniones.',
+        cta: 'Hacer pedido / Cotizar →',
+        services: [
+          { name: 'Especialidades de la Casa', desc: 'Preparadas al momento con ingredientes frescos', price: 'Ver menú' },
+          { name: 'Pedido para Recoger / Domicilio', desc: 'Atención directa sin comisiones extra de apps', price: 'Ordenar' },
+          { name: 'Paquetes para Posadas y Eventos', desc: 'Cotización rápida para grupos y oficinas', price: 'Temporada' },
+          { name: 'Reservación de Mesa', desc: 'Asegura tu lugar directo por WhatsApp', price: 'Reservar' },
+        ],
+      },
+      b2b: {
+        accent: '#0F3D2E', hover: '#0B2A20', soft: '#E9F0EC',
+        pill: 'Servicios Empresariales · Monterrey, N.L.',
+        title: 'Cotizaciones claras y atención directa para tu empresa.',
+        sub: 'Selecciona la línea de servicio o producto que requieres y recibe respuesta directa de un asesor por WhatsApp.',
+        cta: 'Solicitar cotización →',
+        services: [
+          { name: 'Cotización por Volumen / Proyecto', desc: 'Respuesta rápida con tiempos de entrega claros', price: 'Cotizar' },
+          { name: 'Atención a Empresas y Facturación', desc: 'Servicio formal en Monterrey y área metropolitana', price: 'B2B' },
+          { name: 'Soporte y Mantenimiento', desc: 'Seguimiento puntual de tus órdenes', price: 'Consultar' },
+          { name: 'Visita / Diagnóstico Técnico', desc: 'Agenda directamente con nuestro equipo', price: 'Agendar' },
+        ],
+      },
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('negocio') || 'Sleepadent';
+    const rawGiro = (params.get('giro') || 'dentist').toLowerCase();
+    const tel10 = (params.get('tel') || '8125579107').replace(/\D/g, '').slice(-10);
+    const zona = params.get('zona') || 'San Pedro Garza García, N.L.';
+    const isLive = params.get('live') === '1';
+
+    const giroMap = {
+      dentist: 'dentist', clinic: 'dentist', doctors: 'dentist', dentista: 'dentist',
+      hairdresser: 'hairdresser', barberia: 'hairdresser',
+      beauty: 'beauty', estetica: 'beauty', massage: 'beauty',
+      veterinary: 'veterinary', veterinaria: 'veterinary', pet: 'veterinary',
+      car_repair: 'car_repair', taller: 'car_repair',
+      florist: 'florist', bakery: 'florist', pastry: 'florist', gift: 'florist',
+      restaurant: 'restaurant', cafe: 'restaurant', fast_food: 'restaurant', comida: 'restaurant',
+      b2b: 'b2b', empresa: 'b2b',
+    };
+    const preset = PRESETS[giroMap[rawGiro] || 'b2b'];
+
+    document.documentElement.style.setProperty('--accent', preset.accent);
+    document.documentElement.style.setProperty('--accent-hover', preset.hover);
+    document.documentElement.style.setProperty('--accent-soft', preset.soft);
+
+    if (isLive) {
+      document.getElementById('previewRibbon').style.display = 'none';
+      document.getElementById('crusolCredit').innerHTML = 'Desarrollado por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol.com.mx</a>';
+    }
+
+    const formattedPhone = tel10.replace(/(\d{2})(\d{4})(\d{4})/, '$1 $2 $3');
+    const initials = name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || 'CR';
+
+    document.title = `${name} · ${zona}`;
+    document.getElementById('brandAvatar').textContent = initials;
+    document.getElementById('brandName').textContent = name;
+    document.getElementById('ribbonName').textContent = name;
+    document.getElementById('stickyName').textContent = name;
+    document.getElementById('locName').textContent = name;
+    document.getElementById('footerCopy').textContent = `© 2026 ${name} · ${zona}`;
+    document.getElementById('brandLoc').textContent = zona;
+    document.getElementById('cardZone').textContent = zona;
+    document.getElementById('cardPhone').textContent = formattedPhone;
+    document.getElementById('locAddr').textContent = zona;
+    document.getElementById('locPhone').textContent = `WhatsApp / Tel: ${formattedPhone}`;
+    document.getElementById('mapsLink').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name + ' ' + zona)}`;
+
+    document.getElementById('heroPill').textContent = preset.pill;
+    document.getElementById('heroTitle').textContent = preset.title;
+    document.getElementById('heroSub').textContent = preset.sub;
+    document.getElementById('heroCta').textContent = preset.cta;
+
+    const servicesGrid = document.getElementById('servicesGrid');
+    const cliService = document.getElementById('cliService');
+    cliService.value = preset.services[0].name;
+
+    preset.services.forEach((srv, idx) => {
+      const card = document.createElement('div');
+      card.className = 'service-card' + (idx === 0 ? ' selected' : '');
+      card.innerHTML = `<div><h3>${srv.name}</h3><p>${srv.desc}</p></div><div class="service-price">${srv.price}</div>`;
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.service-card').forEach((c) => c.classList.remove('selected'));
+        card.classList.add('selected');
+        cliService.value = srv.name;
+        document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+      });
+      servicesGrid.appendChild(card);
+    });
+
+    document.getElementById('waForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = [
+        `Hola ${name}, vi su sitio web y me gustaría información:`,
+        `Nombre: ${document.getElementById('cliName').value}`,
+        `Servicio: ${cliService.value}`,
+        `Día / Horario: ${document.getElementById('cliDate').value}`,
+        document.getElementById('cliNotes').value ? `Detalle: ${document.getElementById('cliNotes').value}` : '',
+      ].filter(Boolean).join('\n');
+      window.open(`https://wa.me/521${tel10}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    });
+  </script>
+</body>
+</html>
