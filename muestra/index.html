@@ -4,772 +4,685 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Muestra · crusol</title>
+<title>Sitio Web · Monterrey, N.L.</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
-/* ===== Tipografías locales del repositorio ===== */
-@font-face{font-family:"Geist";src:url("../fonts/Geist-Variable.woff2") format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"Geist Mono";src:url("../fonts/GeistMono-Variable.woff2") format("woff2");font-weight:100 900;font-display:swap}
-@font-face{font-family:"Cormorant Garamond";src:url("../fonts/demos/cormorant-garamond-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Cormorant Garamond";src:url("../fonts/demos/cormorant-garamond-400i.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"Cormorant Garamond";src:url("../fonts/demos/cormorant-garamond-600.woff2") format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Jost";src:url("../fonts/demos/jost-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Jost";src:url("../fonts/demos/jost-500.woff2") format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Jost";src:url("../fonts/demos/jost-600.woff2") format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Fraunces";src:url("../fonts/demos/fraunces-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Fraunces";src:url("../fonts/demos/fraunces-400i.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"Fraunces";src:url("../fonts/demos/fraunces-600.woff2") format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Instrument Sans";src:url("../fonts/demos/instrument-sans-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Instrument Sans";src:url("../fonts/demos/instrument-sans-500.woff2") format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Instrument Sans";src:url("../fonts/demos/instrument-sans-600.woff2") format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Newsreader";src:url("../fonts/demos/newsreader-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Newsreader";src:url("../fonts/demos/newsreader-400i.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"Newsreader";src:url("../fonts/demos/newsreader-600.woff2") format("woff2");font-weight:600;font-display:swap}
+/* Tipografía limpia local del repo (una sola familia sobria, sin mezcla artificial de 3 fuentes) */
 @font-face{font-family:"Public Sans";src:url("../fonts/demos/public-sans-400.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Public Sans";src:url("../fonts/demos/public-sans-500.woff2") format("woff2");font-weight:500;font-display:swap}
 @font-face{font-family:"Public Sans";src:url("../fonts/demos/public-sans-600.woff2") format("woff2");font-weight:600;font-display:swap}
-@font-face{font-family:"Schibsted Grotesk";src:url("../fonts/demos/schibsted-grotesk-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Schibsted Grotesk";src:url("../fonts/demos/schibsted-grotesk-500.woff2") format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Schibsted Grotesk";src:url("../fonts/demos/schibsted-grotesk-700.woff2") format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:"DM Mono";src:url("../fonts/demos/dm-mono-400.woff2") format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"DM Mono";src:url("../fonts/demos/dm-mono-500.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Public Sans";src:url("../fonts/demos/public-sans-700.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"DM Sans";src:url("../fonts/demos/dm-sans-400.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"DM Sans";src:url("../fonts/demos/dm-sans-500.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"DM Sans";src:url("../fonts/demos/dm-sans-600.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"DM Sans";src:url("../fonts/demos/dm-sans-700.woff2") format("woff2");font-weight:700;font-display:swap}
 
-/* ===== Disciplina cromática por industria (4–5 tokens, neutros cálidos) ===== */
+/* Paletas comerciales reales por giro (cero morado SaaS, cero crema-pergamino Claude) */
 :root{
   color-scheme:light;
-  --ease:cubic-bezier(.7,0,.2,1);
-  --out:cubic-bezier(.16,1,.3,1);
-  --pad:clamp(20px,4.5vw,56px);
-  --max:1280px;
+  --font:"Public Sans","DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --white:#FFFFFF;
+  --ink:#161C24;
+  --ink2:#454F5B;
+  --mut:#637381;
+  --line:#DDE3EA;
+  --line-strong:#C4CDD5;
+  --radius:6px;
 }
 
-/* 1. Clínica Dental / Salud (estilo editorial cálido tipo Grand Street / LAVA Dental) */
 html[data-theme="dental"]{
-  --paper:#F6F4EF; --white:#FFFFFF; --stone:#EAE6DC; --ink:#141E1D; --ink2:#3D4A48; --mut:#737D7A; --line:#D9D4C9;
-  --desk:#102322; --desk-ink:#F4F2EC; --desk-mut:#9AB0AD; --desk-line:rgba(244,242,236,.15);
-  --acc:#0F5A54; --acc-ink:#FFFFFF;
-  --fh:"Newsreader",Georgia,serif; --fb:"Public Sans","Geist",system-ui,sans-serif; --fm:"DM Mono",ui-monospace,monospace;
-  --fhw:400; --hls:-.03em; --hlh:.98;
+  --tint:#F4F7FA; --bar:#0E2A47; --bar-ink:#EBF2F7;
+  --brand:#124E78; --brand-h:#0D3A5A; --brand-soft:#E8F1F8; --brand-ink:#FFFFFF;
 }
-
-/* 2. Salón / Barbería (monografía de arquitectura y moda, esquinas vivas) */
 html[data-theme="salon"]{
-  --paper:#F3EDE4; --white:#FCF9F4; --stone:#E5DBCD; --ink:#171310; --ink2:#453C34; --mut:#83776B; --line:#D5C9B8;
-  --desk:#171310; --desk-ink:#F5EFE6; --desk-mut:#A89C8E; --desk-line:rgba(245,239,230,.15);
-  --acc:#9E4E34; --acc-ink:#FFFFFF;
-  --fh:"Cormorant Garamond",Georgia,serif; --fb:"Jost","Geist",system-ui,sans-serif; --fm:"DM Mono",ui-monospace,monospace;
-  --fhw:400; --hls:-.02em; --hlh:.94;
+  --tint:#F5F5F3; --bar:#1C1B1A; --bar-ink:#F2F2F0;
+  --brand:#22201E; --brand-h:#000000; --brand-soft:#EAE8E4; --brand-ink:#FFFFFF;
 }
-
-/* 3. Gastronomía / Café / Florería (carta impresa de bistró) */
 html[data-theme="food"]{
-  --paper:#F5EFE4; --white:#FBF8F2; --stone:#E7DCCB; --ink:#211610; --ink2:#513D31; --mut:#836C5D; --line:#D7C7B2;
-  --desk:#211610; --desk-ink:#F7F0E4; --desk-mut:#BFA998; --desk-line:rgba(247,240,228,.15);
-  --acc:#9A3412; --acc-ink:#FFFFFF;
-  --fh:"Fraunces",Georgia,serif; --fb:"Instrument Sans","Geist",system-ui,sans-serif; --fm:"DM Mono",ui-monospace,monospace;
-  --fhw:400; --hls:-.035em; --hlh:.96;
+  --tint:#F7F4F1; --bar:#2B191B; --bar-ink:#F7F0F0;
+  --brand:#7A232D; --brand-h:#5E1921; --brand-soft:#F7EAEC; --brand-ink:#FFFFFF;
 }
-
-/* 4. Veterinaria (editorial cercano, terracota y pino) */
 html[data-theme="vet"]{
-  --paper:#F7F2E7; --white:#FFFDF8; --stone:#EAE0CC; --ink:#20271F; --ink2:#4A5348; --mut:#7C8277; --line:#D9CEB8;
-  --desk:#1E3327; --desk-ink:#F7F2E7; --desk-mut:#A7BCAE; --desk-line:rgba(247,242,231,.16);
-  --acc:#B84C24; --acc-ink:#FFFFFF;
-  --fh:"Fraunces",Georgia,serif; --fb:"Public Sans","Geist",system-ui,sans-serif; --fm:"DM Mono",ui-monospace,monospace;
-  --fhw:600; --hls:-.03em; --hlh:.98;
+  --tint:#F3F7F5; --bar:#1A352A; --bar-ink:#EEF5F1;
+  --brand:#1F6E4E; --brand-h:#16543B; --brand-soft:#E5F3EC; --brand-ink:#FFFFFF;
 }
-
-/* 5. Taller / Empresas B2B (precisión industrial tipo Suministros Arce) */
 html[data-theme="b2b"]{
-  --paper:#F3F1EC; --white:#FFFFFF; --stone:#E5E1D8; --ink:#141413; --ink2:#3D3C38; --mut:#75726A; --line:#D4CFC4;
-  --desk:#141413; --desk-ink:#F3F1EC; --desk-mut:#9F9C94; --desk-line:rgba(243,241,236,.15);
-  --acc:#C8281E; --acc-ink:#FFFFFF;
-  --fh:"Schibsted Grotesk","Geist",system-ui,sans-serif; --fb:"Schibsted Grotesk","Geist",system-ui,sans-serif; --fm:"DM Mono",ui-monospace,monospace;
-  --fhw:700; --hls:-.045em; --hlh:.92;
+  --tint:#F2F4F7; --bar:#162336; --bar-ink:#EEF2F6;
+  --brand:#1C4373; --brand-h:#143154; --brand-soft:#E8EEF6; --brand-ink:#FFFFFF;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:86px;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
 body{
-  background:var(--paper);color:var(--ink);
-  font:15.5px/1.6 var(--fb);
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font:15px/1.6 var(--font);
+  color:var(--ink);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-::selection{background:var(--acc);color:var(--acc-ink)}
 img{display:block;max-width:100%}
-button,input,textarea{font:inherit;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 a{color:inherit}
-.mono{font-family:var(--fm);font-size:12px;letter-spacing:.03em;font-variant-numeric:tabular-nums}
-.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
-/* ===== Franja discreta de crusol ===== */
-.cbar{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  background:#0b2a20;color:#f6f5f0;
-  font:400 11.5px/1.3 "Geist Mono",ui-monospace,monospace;
-  padding:8px var(--pad);
+/* 1. Barra utilitaria real (teléfono + horario + ubicación — lo que sí tienen sitios reales) */
+.topbar{
+  background:var(--bar);
+  color:var(--bar-ink);
+  font-size:12.5px;
+  padding:8px 0;
 }
-.cbar-l{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-.cbar-l svg{width:14px;height:14px;flex:none}
-.cbar b{color:#a9c4b6;font-weight:500}
-.cbar-r{margin-left:auto;color:rgba(246,245,240,.72)}
-.cbar-r a{color:#a9c4b6;text-decoration:none;border-bottom:1px solid rgba(169,196,182,.4)}
+.topbar-in{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.topbar-left{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.topbar-left span,.topbar a{
+  color:var(--bar-ink);text-decoration:none;opacity:.92;
+}
+.topbar a:hover{text-decoration:underline;opacity:1}
+.topbar-note{opacity:.72;font-size:12px}
 
-/* ===== Encabezado arquitectónico (sin sombras, línea inferior precisa) ===== */
+/* 2. Header sobrio y real */
 .hd{
-  position:sticky;top:0;z-index:40;
-  background:color-mix(in srgb,var(--paper) 92%,transparent);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:30;
+  background:var(--white);
   border-bottom:1px solid var(--line);
 }
 .hd-in{
-  display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  height:66px;
 }
 .brand{
-  display:flex;align-items:baseline;gap:12px;text-decoration:none;min-width:0;
+  display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;
 }
-.brand strong{
-  font:700 20px/1 var(--fh);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+.brand-sq{
+  width:34px;height:34px;border-radius:var(--radius);
+  background:var(--brand);color:var(--brand-ink);
+  display:grid;place-items:center;font-weight:700;font-size:13px;flex:none;
 }
-.brand span{
-  color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+.brand-name{
+  font-weight:700;font-size:17px;letter-spacing:-.015em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.nav{display:flex;align-items:center;gap:26px}
+.nav{display:flex;align-items:center;gap:24px}
 .nav a{
-  text-decoration:none;font-size:14px;font-weight:500;color:var(--ink2);position:relative;padding:4px 0;
-}
-.nav a::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--acc);
-  transform:scaleX(0);transform-origin:0 50%;transition:transform .4s var(--ease);
+  text-decoration:none;font-size:14px;font-weight:500;color:var(--ink2);
 }
 .nav a:hover{color:var(--ink)}
-.nav a:hover::after{transform:scaleX(1)}
-.nav-cta{
-  background:var(--ink);color:var(--paper)!important;padding:10px 18px!important;
-  font-weight:600!important;transition:background .25s;
+.nav-btn{
+  background:var(--brand);color:var(--brand-ink)!important;
+  padding:9px 16px;border-radius:var(--radius);font-weight:600!important;
 }
-.nav-cta::after{display:none!important}
-.nav-cta:hover{background:var(--acc)}
+.nav-btn:hover{background:var(--brand-h)}
 
-/* ===== Botón con relleno animado tipo cortina (estilo crusol / arce, CERO pills genéricas) ===== */
+/* Botones sobrios (escala real, sin trucos) */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  height:52px;padding:0 26px;border:0;text-decoration:none;
-  font-weight:600;font-size:15px;position:relative;overflow:hidden;isolation:isolate;
-  transition:color .3s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 20px;border-radius:var(--radius);
+  font-size:14.5px;font-weight:600;text-decoration:none;
+  border:1px solid var(--line-strong);background:var(--white);color:var(--ink);
+  transition:background .15s,border-color .15s;
 }
-.btn-fill{background:var(--acc);color:var(--acc-ink)}
-.btn-fill::before{
-  content:"";position:absolute;inset:0;background:var(--ink);
-  transform:translateY(101%);transition:transform .45s var(--ease);z-index:-1;
+.btn:hover{background:var(--tint);border-color:var(--ink)}
+.btn-pri{
+  background:var(--brand);border-color:var(--brand);color:var(--brand-ink);
 }
-.btn-fill:hover::before{transform:none}
-.btn-line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
-.btn-line::before{
-  content:"";position:absolute;inset:0;background:var(--ink);
-  transform:translateY(101%);transition:transform .45s var(--ease);z-index:-1;
-}
-.btn-line:hover{color:var(--paper)}
-.btn-line:hover::before{transform:none}
+.btn-pri:hover{background:var(--brand-h);border-color:var(--brand-h)}
 
-/* ===== BANDA 1: PORTADA EDITORIAL ASIMÉTRICA (SIN CAJITAS NI BADGES FLOTANTES) ===== */
-.hero{padding:clamp(34px,5vw,64px) 0 clamp(44px,6vw,84px)}
-.hero-top{
-  display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  padding-bottom:18px;border-bottom:1.5px solid var(--ink);
+/* 3. Portada proporcionada (escala real 38px, NUNCA 90px gigante; todo útil arriba del pliegue) */
+.hero{
+  background:var(--tint);
+  border-bottom:1px solid var(--line);
+  padding:42px 0;
 }
-.hero-top .mono{color:var(--ink2);text-transform:uppercase}
-.hero-top .loc{color:var(--mut)}
-
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:40px;
+  align-items:center;
+}
+.hero-loc{
+  font-size:13px;font-weight:600;color:var(--brand);margin-bottom:8px;
+}
 .hero h1{
-  margin:clamp(24px,3.6vw,44px) 0 0;
-  font-family:var(--fh);font-weight:var(--fhw);
-  font-size:clamp(42px,6.8vw,96px);
-  line-height:var(--hlh);letter-spacing:var(--hls);
-  max-width:17ch;
+  font-size:clamp(28px,3.2vw,38px);
+  line-height:1.18;
+  letter-spacing:-.02em;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:14px;
 }
-.hero h1 em{font-style:italic;color:var(--acc);font-weight:400}
+.hero p{
+  font-size:15.5px;
+  color:var(--ink2);
+  max-width:48ch;
+  margin-bottom:22px;
+}
+.hero-btns{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.hero-list{
+  list-style:none;
+  display:grid;gap:6px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  font-size:13.5px;color:var(--ink2);
+}
+.hero-list li{display:flex;align-items:center;gap:8px}
+.hero-list li::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);flex:none;
+}
+.hero-img{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  aspect-ratio:16/11;
+  background:#E2E8F0;
+}
+.hero-img img{width:100%;height:100%;object-fit:cover}
 
-.hero-stage{
-  margin-top:clamp(28px,4vw,52px);
-  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
-  gap:clamp(24px,4vw,56px);align-items:stretch;
-}
-.hero-photo{
-  position:relative;min-height:420px;background:var(--stone);overflow:hidden;
-}
-.hero-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--out)}
-.hero-photo:hover img{transform:scale(1.03)}
-.hero-photo figcaption{
-  position:absolute;left:0;right:0;bottom:0;
-  padding:14px 18px;display:flex;justify-content:space-between;gap:12px;
-  background:linear-gradient(180deg,transparent,rgba(15,14,12,.72));
-  color:#F6F4EF;font:11.5px var(--fm);letter-spacing:.04em;
-}
-
-.hero-aside{
-  display:flex;flex-direction:column;justify-content:space-between;gap:28px;
-  border-top:1px solid var(--line);padding-top:22px;
-}
-.hero-lead{font-size:clamp(16px,1.3vw,18px);color:var(--ink2);max-width:38ch;line-height:1.55}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-
-/* Ficha técnica sin cajas (solo reglas arquitectónicas) */
-.facts{border-top:1.5px solid var(--ink)}
-.fact-row{
-  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
-  padding:13px 0;border-bottom:1px solid var(--line);font-size:14px;
-}
-.fact-row dt{font-family:var(--fm);font-size:11.5px;text-transform:uppercase;color:var(--mut)}
-.fact-row dd{font-weight:600;text-align:right}
-
-/* ===== BANDA 2: ÍNDICE DE SERVICIOS SIN CAJAS (100% EDITORIAL, CERO CARDITIS) ===== */
-.sec-services{
+/* 4. Sección Servicios (fondo blanco puro — contraste limpio respecto a portada tintada) */
+.sec-white{
   background:var(--white);
-  border-top:1.5px solid var(--ink);
-  border-bottom:1.5px solid var(--ink);
-  padding:clamp(60px,8vw,108px) 0;
+  padding:52px 0;
+  border-bottom:1px solid var(--line);
 }
-.sec-hd{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.65fr);
-  gap:24px;align-items:end;margin-bottom:clamp(32px,4vw,52px);
+.sec-tint{
+  background:var(--tint);
+  padding:52px 0;
+  border-bottom:1px solid var(--line);
 }
-.sec-kicker{
-  display:inline-flex;align-items:center;gap:12px;
-  font:500 12px var(--fm);text-transform:uppercase;color:var(--acc);margin-bottom:14px;
+.sec-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  margin-bottom:24px;
 }
-.sec-kicker::after{content:"";width:40px;height:1px;background:var(--acc)}
-.sec-hd h2{
-  font-family:var(--fh);font-weight:var(--fhw);
-  font-size:clamp(34px,4.8vw,64px);line-height:.98;letter-spacing:var(--hls);
+.sec-head h2{
+  font-size:clamp(22px,2.2vw,27px);
+  line-height:1.25;
+  letter-spacing:-.015em;
+  font-weight:700;
 }
-.sec-hd p{color:var(--ink2);font-size:15.5px;max-width:40ch}
-
-.idx{list-style:none;border-top:1.5px solid var(--ink)}
-.idx li{border-bottom:1px solid var(--line)}
-.idx button{
-  all:unset;box-sizing:border-box;width:100%;cursor:pointer;
-  display:grid;grid-template-columns:56px minmax(0,1.2fr) minmax(0,1fr) auto;
-  gap:16px 24px;align-items:center;
-  padding:24px 10px;position:relative;isolation:isolate;
-  transition:color .3s,padding-left .45s var(--out);
-}
-.idx button::before{
-  content:"";position:absolute;inset:0;background:var(--ink);
-  transform:scaleY(0);transform-origin:50% 100%;
-  transition:transform .45s var(--ease);z-index:-1;
-}
-.idx button:hover,.idx button:focus-visible{color:var(--paper);padding-left:22px}
-.idx button:hover::before,.idx button:focus-visible::before{transform:none}
-.idx button[aria-pressed="true"]{background:var(--stone);padding-left:22px;box-shadow:inset 4px 0 0 var(--acc)}
-.idx button[aria-pressed="true"]:hover{color:var(--paper)}
-.idx .n{font:12.5px var(--fm);color:var(--mut);transition:color .3s}
-.idx button:hover .n{color:rgba(246,244,239,.65)}
-.idx .t{font-family:var(--fh);font-weight:600;font-size:clamp(22px,2.6vw,34px);line-height:1.08;letter-spacing:-.02em}
-.idx .d{font-size:14px;color:var(--ink2);transition:color .3s}
-.idx button:hover .d{color:rgba(246,244,239,.82)}
-.idx .m{font:500 12.5px var(--fm);color:var(--acc);text-align:right;white-space:nowrap;transition:color .3s}
-.idx button:hover .m{color:var(--paper)}
-
-/* ===== BANDA 3: ESCRITORIO OSCURO + HOJA DE PASE EN PAPEL CLARO ===== */
-.sec-desk{
-  background:var(--desk);color:var(--desk-ink);
-  padding:clamp(64px,8vw,112px) 0;
-  position:relative;
-}
-.sec-desk .sec-kicker{color:var(--desk-mut)}
-.sec-desk .sec-kicker::after{background:var(--desk-mut)}
-.sec-desk .sec-hd p{color:var(--desk-mut)}
-
-.desk-grid{
-  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
-  gap:clamp(28px,4.5vw,60px);align-items:start;
+.sec-head p{
+  font-size:14.5px;color:var(--mut);max-width:46ch;
 }
 
-.desk-step{
-  padding:26px 0;border-top:1px solid var(--desk-line);
+/* Tabla / rejilla limpia de servicios (escanear en 3 segundos, sin carditis ni números 01) */
+.srv-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
 }
-.desk-step:first-child{padding-top:0;border-top:0}
-.step-label{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:16px;
+.srv-item{
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:20px 22px;
+  background:var(--white);
+  display:flex;flex-direction:column;justify-content:space-between;gap:14px;
+  transition:background .15s;
 }
-.step-label strong{font-family:var(--fh);font-size:24px;font-weight:500;letter-spacing:-.01em}
-.step-label span{font:12px var(--fm);color:var(--desk-mut)}
+.srv-item.active{
+  background:var(--brand-soft);
+  box-shadow:inset 3px 0 0 var(--brand);
+}
+.srv-top{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px;
+}
+.srv-item h3{font-size:16px;font-weight:700;color:var(--ink)}
+.srv-dur{font-size:12.5px;color:var(--mut);white-space:nowrap;font-weight:500}
+.srv-item p{font-size:14px;color:var(--ink2)}
+.srv-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-top:10px;border-top:1px solid var(--line);
+}
+.srv-tag{font-size:12.5px;color:var(--mut)}
+.srv-pick{
+  background:none;border:0;padding:0;
+  color:var(--brand);font-size:13.5px;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;
+}
+.srv-item.active .srv-pick{text-decoration:none}
 
-/* Días y horarios sobre escritorio oscuro (líneas limpias, cero sombras) */
+/* 5. Sección Agendar (fondo tintado — separación clara con panel práctico de 2 columnas) */
+.book-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr);
+  gap:28px;
+  align-items:start;
+}
+.book-form{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  display:grid;gap:20px;
+}
+.fgrp label{
+  display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px;
+}
+.fgrp select,.fgrp input{
+  width:100%;padding:10px 12px;
+  border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:var(--white);font-size:14.5px;color:var(--ink);
+}
+.fgrp select:focus,.fgrp input:focus{
+  outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft);
+}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
 .days{
-  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;
-  background:var(--desk-line);border:1px solid var(--desk-line);margin-bottom:18px;
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;
 }
 .day{
-  background:var(--desk);border:0;padding:14px 6px;text-align:center;
-  color:var(--desk-ink);display:grid;gap:2px;transition:background .2s,color .2s;
+  padding:8px 4px;border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:var(--white);text-align:center;display:grid;gap:1px;
 }
-.day small{font:11px var(--fm);text-transform:uppercase;color:var(--desk-mut)}
-.day b{font:600 22px/1.1 var(--fh)}
-.day em{font-style:normal;font:10.5px var(--fm);color:var(--desk-mut)}
-.day:hover{background:rgba(255,255,255,.06)}
-.day[aria-pressed="true"]{background:var(--acc);color:var(--acc-ink)}
-.day[aria-pressed="true"] small,.day[aria-pressed="true"] em{color:var(--acc-ink);opacity:.85}
+.day small{font-size:11px;color:var(--mut);font-weight:600}
+.day b{font-size:16px;font-weight:700;line-height:1.2}
+.day:hover{border-color:var(--brand)}
+.day[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.day[aria-pressed="true"] small{color:var(--brand-ink);opacity:.88}
 
 .slots{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px;
 }
 .slot{
-  padding:13px 10px;border:1px solid var(--desk-line);background:transparent;
-  color:var(--desk-ink);font:500 14px var(--fm);text-align:center;
-  transition:border-color .15s,background .15s;
+  padding:9px 6px;border:1px solid var(--line-strong);border-radius:var(--radius);
+  background:var(--white);font-size:13.5px;font-weight:600;text-align:center;
 }
-.slot:hover:not(:disabled){border-color:var(--desk-ink)}
-.slot[aria-pressed="true"]{background:var(--desk-ink);color:var(--desk);border-color:var(--desk-ink);font-weight:700}
+.slot:hover:not(:disabled){border-color:var(--brand);color:var(--brand)}
+.slot[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
 .slot:disabled{
-  opacity:.35;text-decoration:line-through;cursor:not-allowed;
-  background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 4px,transparent 4px 10px);
+  background:var(--tint);color:#9BA6B2;border-color:var(--line);
+  text-decoration:line-through;cursor:not-allowed;
 }
 
-.desk-inputs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.dfield{display:grid;gap:7px}
-.dfield label{font:11.5px var(--fm);text-transform:uppercase;color:var(--desk-mut)}
-.dfield input{
-  width:100%;padding:13px 14px;background:rgba(255,255,255,.05);
-  border:1px solid var(--desk-line);color:var(--desk-ink);font-size:15px;
+/* Resumen lateral sobrio (sin teatro ni folios falsos) */
+.summary{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  position:sticky;top:86px;
 }
-.dfield input::placeholder{color:rgba(244,242,236,.38)}
-.dfield input:focus{outline:none;border-color:var(--desk-ink);background:rgba(255,255,255,.09)}
+.summary h3{
+  font-size:16px;font-weight:700;
+  padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px;
+}
+.sum-dl{display:grid;gap:10px;font-size:14px;margin-bottom:18px}
+.sum-dl div{display:flex;justify-content:space-between;gap:12px}
+.sum-dl dt{color:var(--mut)}
+.sum-dl dd{font-weight:600;text-align:right;overflow-wrap:anywhere}
+.sum-note{
+  font-size:12.5px;color:var(--mut);
+  padding:10px 12px;background:var(--tint);border-radius:var(--radius);
+  margin-bottom:16px;line-height:1.45;
+}
 
-/* Hoja física de pase sobre escritorio oscuro (estética impresa real) */
-.sheet-pass{
-  background:var(--paper);color:var(--ink);
-  padding:28px 28px 26px;position:sticky;top:90px;
-  box-shadow:0 36px 70px -28px rgba(0,0,0,.65);
+/* 6. Ubicación con Google Maps REAL embebido + preguntas frecuentes */
+.loc-grid{
+  display:grid;
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  gap:32px;
+  align-items:start;
 }
-.sheet-top{
-  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
-  padding-bottom:16px;border-bottom:1.5px solid var(--ink);
+.info-table{
+  border-top:1px solid var(--line);
+  margin:18px 0 22px;
 }
-.sheet-top small{display:block;font:11px var(--fm);text-transform:uppercase;color:var(--mut)}
-.sheet-top strong{display:block;font:600 22px/1.1 var(--fh);margin-top:4px}
-.sheet-folio{
-  font:500 12px var(--fm);border:1px solid var(--ink);padding:4px 9px;white-space:nowrap;
+.info-row{
+  display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;
+  padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;
 }
-.sheet-kv{margin:18px 0;display:grid}
-.sheet-kv div{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-  padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;
+.info-row dt{color:var(--mut);font-weight:500}
+.info-row dd{font-weight:600}
+.map-frame{
+  width:100%;height:320px;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--tint);
 }
-.sheet-kv dt{font:11.5px var(--fm);text-transform:uppercase;color:var(--mut)}
-.sheet-kv dd{font-weight:600;text-align:right}
-.sheet-msg{
-  margin:18px 0 22px;padding:14px 16px;background:var(--white);
-  border-left:3px solid var(--acc);font-size:13px;color:var(--ink2);
-}
-.sheet-msg small{
-  display:block;font:500 10.5px var(--fm);text-transform:uppercase;
-  color:var(--acc);margin-bottom:6px;
-}
-.sheet-msg p{white-space:pre-line;line-height:1.5}
 
-/* ===== BANDA 4: PREGUNTAS Y UBICACIÓN EN PAPEL (RITMO CLARO SIN CAJAS) ===== */
-.sec-end{padding:clamp(60px,8vw,104px) 0 clamp(44px,6vw,72px)}
-.end-grid{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
-  gap:clamp(32px,5vw,72px);align-items:start;
-}
-.faq{border-top:1.5px solid var(--ink)}
-.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq{margin-top:28px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:13px 0}
 .faq summary{
-  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
-  font-weight:600;font-size:16px;
+  list-style:none;cursor:pointer;font-weight:600;font-size:14.5px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
 }
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font:400 22px/1 var(--fm);color:var(--acc)}
+.faq summary::after{content:"+";font-size:18px;color:var(--brand);line-height:1}
 .faq details[open] summary::after{content:"−"}
-.faq p{margin-top:10px;color:var(--ink2);font-size:14.5px;max-width:52ch}
+.faq p{margin-top:8px;font-size:14px;color:var(--ink2)}
 
-.addr-block{border-top:1.5px solid var(--ink);padding-top:22px}
-.addr-block h3{font-family:var(--fh);font-size:clamp(26px,3vw,38px);line-height:1.05;margin:10px 0 12px}
-.addr-block p{color:var(--ink2);font-size:15px;margin-bottom:8px}
-.addr-tel{font:500 22px var(--fm);display:block;margin:16px 0 22px;color:var(--ink);text-decoration:none}
-
-/* Pie editorial */
+/* 7. Pie de página real y discreto */
 footer{
-  border-top:1px solid var(--line);padding:26px 0 40px;
-  font-size:13px;color:var(--mut);
+  background:var(--bar);color:var(--bar-ink);
+  padding:22px 0;font-size:13px;
 }
-.foot-in{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-footer a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+.foot-in{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+}
+footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3px}
 
-/* Barra móvil fija minimalista */
+/* Barra móvil fija */
 .mbar{
   position:fixed;left:0;right:0;bottom:0;z-index:35;
-  background:var(--ink);color:var(--paper);
-  padding:10px 18px;display:none;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--white);border-top:1px solid var(--line-strong);
+  padding:10px 16px;display:none;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:0 -4px 16px rgba(0,0,0,.07);
 }
-.mbar-t{min-width:0}
-.mbar-t strong{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mbar-t small{display:block;font:11.5px var(--fm);color:rgba(246,244,239,.68)}
-.mbar button{
-  background:var(--acc);color:var(--acc-ink);border:0;padding:11px 16px;
-  font-weight:600;font-size:13.5px;white-space:nowrap;
-}
+.mbar-txt{min-width:0}
+.mbar-txt strong{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mbar-txt small{display:block;font-size:12px;color:var(--mut)}
 
-@media (max-width:920px){
-  .hero-stage,.sec-hd,.desk-grid,.end-grid{grid-template-columns:1fr}
-  .hero-photo{min-height:290px}
-  .sheet-pass{position:static}
-  .idx button{grid-template-columns:32px minmax(0,1fr) auto;gap:6px 12px;align-items:baseline}
-  .idx .m{grid-column:3;grid-row:1}
-  .idx .d{grid-column:2 / 4}
-  .nav a:not(.nav-cta){display:none}
+@media (max-width:860px){
+  .hero-grid,.srv-grid,.book-grid,.loc-grid{grid-template-columns:1fr}
+  .summary{position:static}
+  .nav a:not(.nav-btn){display:none}
   .mbar{display:flex}
-  body{padding-bottom:66px}
+  body{padding-bottom:68px}
 }
-@media (max-width:560px){
+@media (max-width:540px){
+  .wrap{padding:0 16px}
+  .hero{padding:28px 0}
+  .sec-white,.sec-tint{padding:36px 0}
+  .f-row{grid-template-columns:1fr}
   .days{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .desk-inputs{grid-template-columns:1fr}
-  .sheet-pass{padding:22px 18px}
-  .brand span{display:none}
+  .topbar-note{display:none}
 }
 </style>
 </head>
 <body>
-  <div class="cbar" id="cbar">
-    <a class="cbar-l" href="https://crusol.com.mx" target="_blank" rel="noopener">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <path fill="#f6f5f0" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/>
-        <path fill="#a9c4b6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/>
-      </svg>
-      <span><b>Muestra</b> preparada para <span id="barName">tu empresa</span></span>
-    </a>
-    <span class="cbar-r">Estudio <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol.com.mx</a></span>
+  <!-- Barra utilitaria real -->
+  <div class="topbar">
+    <div class="wrap topbar-in">
+      <div class="topbar-left">
+        <a id="topTel" class="num" href="#">Tel. 81 2557 9107</a>
+        <span id="topHours">Lun a vie 9:00 a 19:00 · Sáb 9:00 a 14:00</span>
+      </div>
+      <span class="topbar-note" id="previewTag">Muestra preparada por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol.com.mx</a></span>
+    </div>
   </div>
 
+  <!-- Encabezado -->
   <header class="hd">
     <div class="wrap hd-in">
       <a class="brand" href="#">
-        <strong id="navName">Sleepadent</strong>
-        <span class="mono" id="navZone">San Pedro Garza García</span>
+        <span class="brand-sq" id="brandSq">SL</span>
+        <span class="brand-name" id="brandName">Sleepadent</span>
       </a>
-      <nav class="nav" aria-label="Principal">
-        <a href="#servicios">Servicios</a>
-        <a href="#agenda">Horarios</a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#servicios" id="navSrv">Tratamientos</a>
+        <a href="#agendar">Agendar</a>
         <a href="#ubicacion">Ubicación</a>
-        <a class="nav-cta" href="#agenda" id="navCta">Reservar</a>
+        <a class="nav-btn" href="#agendar" id="navBtn">Agendar cita</a>
       </nav>
     </div>
   </header>
 
-  <!-- BANDA 1: PORTADA EDITORIAL -->
+  <!-- Portada proporcionada (tamaño humano real, sin exageraciones) -->
   <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-loc" id="heroLoc">San Pedro Garza García, N.L.</div>
+        <h1 id="heroH1">Clínica dental en San Pedro con citas directas por WhatsApp</h1>
+        <p id="heroSub">Odontología general, limpiezas y tratamientos estéticos con atención puntual. Consulta horarios disponibles y confirma tu cita sin llamadas.</p>
+        <div class="hero-btns">
+          <a class="btn btn-pri" href="#agendar" id="heroCta">Agendar cita</a>
+          <a class="btn" href="#servicios" id="heroSec">Ver tratamientos</a>
+        </div>
+        <ul class="hero-list" id="heroList"></ul>
+      </div>
+      <div class="hero-img">
+        <img id="heroImg" src="" alt="Instalaciones">
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios (fondo blanco puro) -->
+  <section class="sec-white" id="servicios">
     <div class="wrap">
-      <div class="hero-top">
-        <span class="mono" id="heroKick">Odontología general y estética</span>
-        <span class="mono loc" id="heroLoc">San Pedro Garza García</span>
+      <div class="sec-head">
+        <div>
+          <h2 id="srvH2">Tratamientos y servicios</h2>
+          <p id="srvP">Selecciona el servicio que necesitas para ver horarios disponibles y confirmar por WhatsApp.</p>
+        </div>
+      </div>
+      <div class="srv-grid" id="srvGrid"></div>
+    </div>
+  </section>
+
+  <!-- Agendar (fondo tintado — división visual clara) -->
+  <section class="sec-tint" id="agendar">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 id="bookH2">Agenda tu cita</h2>
+          <p id="bookP">Elige servicio, día y horario. Al confirmar se abre WhatsApp con tu solicitud lista para enviar.</p>
+        </div>
       </div>
 
-      <h1 id="heroTitle">Atención dental <em>sin prisas</em> ni salas de espera.</h1>
-
-      <div class="hero-stage">
-        <figure class="hero-photo">
-          <img id="heroImg" src="" alt="Espacio de atención">
-          <figcaption>
-            <span id="capLeft">CONSULTORIO EN MONTERREY</span>
-            <span id="capRight">CITA DIRECTA</span>
-          </figcaption>
-        </figure>
-
-        <div class="hero-aside">
-          <div>
-            <p class="hero-lead" id="heroLead">Elige tu tratamiento, selecciona el horario disponible y recibe confirmación directa del equipo por WhatsApp.</p>
-            <div class="hero-ctas">
-              <a class="btn btn-fill" href="#agenda" id="heroBtn">Ver horarios disponibles</a>
-              <a class="btn btn-line" href="#servicios">Consultar servicios</a>
-            </div>
+      <div class="book-grid">
+        <div class="book-form">
+          <div class="fgrp">
+            <label for="selSrv">Servicio</label>
+            <select id="selSrv"></select>
           </div>
 
-          <dl class="facts" id="heroFacts"></dl>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BANDA 2: ÍNDICE DE SERVICIOS SIN CAJAS -->
-  <section class="sec-services" id="servicios">
-    <div class="wrap">
-      <div class="sec-hd">
-        <div>
-          <span class="sec-kicker">01 · Carta de servicios</span>
-          <h2 id="srvHeading">Selecciona el motivo de tu visita</h2>
-        </div>
-        <p id="srvNote">Toca cualquier fila para elegir el servicio y pasar directo al calendario de horarios disponibles.</p>
-      </div>
-      <ul class="idx" id="srvIdx"></ul>
-    </div>
-  </section>
-
-  <!-- BANDA 3: ESCRITORIO OSCURO + HOJA DE PASE EN PAPEL CLARO -->
-  <section class="sec-desk" id="agenda">
-    <div class="wrap">
-      <div class="sec-hd">
-        <div>
-          <span class="sec-kicker">02 · Disponibilidad real</span>
-          <h2 id="deskHeading">Aparta tu espacio en menos de un minuto</h2>
-        </div>
-        <p id="deskNote">El horario se actualiza en tu pase a la derecha. Al confirmar se abre WhatsApp con todos los datos listos.</p>
-      </div>
-
-      <div class="desk-grid">
-        <div>
-          <div class="desk-step">
-            <div class="step-label">
-              <strong>Día de atención</strong>
-              <span id="freeLabel">Espacios abiertos</span>
-            </div>
+          <div class="fgrp">
+            <label>Día y horario preferido</label>
             <div class="days" id="daysRow"></div>
             <div class="slots" id="slotsGrid"></div>
           </div>
 
-          <div class="desk-step">
-            <div class="step-label">
-              <strong>Tus datos</strong>
-              <span>Solo lo indispensable</span>
+          <div class="f-row">
+            <div class="fgrp">
+              <label for="inName">Tu nombre</label>
+              <input id="inName" type="text" placeholder="Ej. Mariana Garza" autocomplete="name">
             </div>
-            <div class="desk-inputs">
-              <div class="dfield">
-                <label for="inName">Nombre completo</label>
-                <input id="inName" type="text" placeholder="Ej. Sofía Villarreal" autocomplete="name">
-              </div>
-              <div class="dfield">
-                <label for="inNote" id="noteLbl">Comentario opcional</label>
-                <input id="inNote" type="text" placeholder="Primera visita o detalle">
-              </div>
+            <div class="fgrp">
+              <label for="inNote" id="noteLbl">Nota adicional (opcional)</label>
+              <input id="inNote" type="text" placeholder="Ej. Primera visita">
             </div>
           </div>
         </div>
 
-        <aside class="sheet-pass" aria-label="Resumen de solicitud">
-          <div class="sheet-top">
-            <div>
-              <small>Pase de solicitud</small>
-              <strong id="tBiz">Sleepadent</strong>
-            </div>
-            <span class="sheet-folio" id="tFolio">SL-249</span>
-          </div>
-
-          <dl class="sheet-kv">
-            <div><dt>Servicio</dt><dd id="tSrv"></dd></div>
-            <div><dt>Fecha</dt><dd id="tDay"></dd></div>
-            <div><dt>Horario</dt><dd class="mono" id="tTime"></dd></div>
-            <div><dt>Duración</dt><dd id="tDur"></dd></div>
-            <div><dt>A nombre de</dt><dd id="tCli">Pendiente</dd></div>
+        <aside class="summary">
+          <h3>Resumen de tu solicitud</h3>
+          <dl class="sum-dl">
+            <div><dt>Negocio</dt><dd id="sBiz">Sleepadent</dd></div>
+            <div><dt>Servicio</dt><dd id="sSrv"></dd></div>
+            <div><dt>Fecha</dt><dd id="sDay"></dd></div>
+            <div><dt>Horario</dt><dd class="num" id="sTime"></dd></div>
+            <div><dt>Duración aprox.</dt><dd id="sDur"></dd></div>
+            <div><dt>Nombre</dt><dd id="sCli">Por capturar</dd></div>
           </dl>
-
-          <div class="sheet-msg">
-            <small>Mensaje listo para WhatsApp</small>
-            <p id="waPreviewText"></p>
-          </div>
-
-          <button type="button" class="btn btn-fill" id="sendBtn" style="width:100%">Confirmar por WhatsApp</button>
+          <p class="sum-note">No requiere tarjeta ni registro. La disponibilidad se confirma directamente por WhatsApp con el equipo.</p>
+          <button type="button" class="btn btn-pri" id="sendBtn" style="width:100%">Confirmar por WhatsApp</button>
         </aside>
       </div>
     </div>
   </section>
 
-  <!-- BANDA 4: PREGUNTAS REALES Y UBICACIÓN -->
-  <section class="sec-end" id="ubicacion">
-    <div class="wrap end-grid">
-      <div>
-        <span class="sec-kicker">03 · Antes de venir</span>
-        <div class="faq" id="faqList"></div>
-      </div>
+  <!-- Ubicación real con Google Maps + Preguntas frecuentes (fondo blanco puro) -->
+  <section class="sec-white" id="ubicacion">
+    <div class="wrap">
+      <div class="loc-grid">
+        <div>
+          <h2 style="font-size:24px;margin-bottom:6px">Ubicación y horarios</h2>
+          <p style="color:var(--mut);font-size:14.5px">Atención en sitio con cita previa o consulta directa por teléfono y WhatsApp.</p>
 
-      <div class="addr-block">
-        <span class="mono" style="color:var(--acc);text-transform:uppercase">Ubicación y contacto</span>
-        <h3 id="locName">Sleepadent</h3>
-        <p id="locAddr">Av. José Vasconcelos, San Pedro Garza García</p>
-        <p id="locHours" style="color:var(--mut);font-size:14px"></p>
-        <a class="addr-tel" id="telLink" href="#">81 2557 9107</a>
-        <a class="btn btn-line" id="mapsBtn" href="#" target="_blank" rel="noopener">Abrir ruta en Google Maps</a>
+          <dl class="info-table">
+            <div class="info-row"><dt>Dirección</dt><dd id="locAddr">Av. José Vasconcelos, San Pedro Garza García</dd></div>
+            <div class="info-row"><dt>Teléfono</dt><dd><a id="locTel" class="num" href="#" style="text-decoration:none;color:var(--brand)">81 2557 9107</a></dd></div>
+            <div class="info-row"><dt>Horarios</dt><dd id="locHours">Lun a vie 9:00 a 19:00 · Sáb 9:00 a 14:00</dd></div>
+          </dl>
+
+          <a class="btn" id="mapsLink" href="#" target="_blank" rel="noopener">Abrir en Google Maps</a>
+
+          <div class="faq" id="faqList"></div>
+        </div>
+
+        <div>
+          <iframe class="map-frame" id="mapFrame" title="Mapa de ubicación" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="wrap foot-in">
-      <span id="footBrand">Sleepadent</span>
-      <span id="footCredit">Muestra diseñada a mano por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol</a></span>
+      <span id="footLeft">Sleepadent · San Pedro Garza García, N.L.</span>
+      <span id="footRight">Sitio de muestra preparado por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol.com.mx</a></span>
     </div>
   </footer>
 
   <div class="mbar">
-    <div class="mbar-t">
+    <div class="mbar-txt">
       <strong id="mSrv">Servicio</strong>
       <small id="mWhen">Día · Hora</small>
     </div>
-    <button type="button" id="mSendBtn">Confirmar</button>
+    <button type="button" class="btn btn-pri" id="mSendBtn" style="padding:9px 15px;font-size:13.5px">Confirmar</button>
   </div>
 
 <script>
 const CATALOG = {
   dental: {
     theme: 'dental',
-    kick: 'Odontología general, ortodoncia y estética',
-    titleHtml: 'Atención dental <em>sin prisas</em> ni salas de espera.',
-    lead: 'Elige tu tratamiento, selecciona el horario que mejor te acomode y recibe confirmación directa del consultorio por WhatsApp.',
-    cta: 'Ver horarios disponibles',
-    capLeft: 'CONSULTORIO DENTAL',
-    capRight: 'ATENCIÓN CON CITA',
-    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1400&q=75',
-    imgAlt: 'Consultorio dental con iluminación natural',
+    navSrv: 'Tratamientos',
+    navBtn: 'Agendar cita',
+    h1: (name, zone) => `${name}: clínica dental en ${zone}`,
+    sub: 'Valoración dental, limpiezas ultrasónicas y tratamientos estéticos con atención puntual. Elige tu horario y confirma directo por WhatsApp.',
+    cta: 'Agendar cita',
+    sec: 'Ver tratamientos',
     hours: 'Lun a vie 9:00 a 19:00 · Sáb 9:00 a 14:00',
-    facts: [
-      ['Horario', 'Lun a sáb'],
-      ['Confirmación', 'Directo por WhatsApp'],
-      ['Valoración inicial', '40 minutos'],
-    ],
+    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=75',
+    bullets: ['Confirmación directa por WhatsApp sin intermediarios', 'Diagnóstico y presupuesto claro antes de iniciar', 'Horarios entre semana y sábados por la mañana'],
+    srvH2: 'Tratamientos principales',
+    bookH2: 'Agenda tu consulta',
     services: [
-      { name: 'Consulta de valoración', desc: 'Revisión clínica completa y plan de tratamiento por etapas', meta: '40 min' },
-      { name: 'Limpieza ultrasónica', desc: 'Profilaxis profunda, pulido y evaluación de encías', meta: '45 min' },
-      { name: 'Blanqueamiento clínico', desc: 'Valoración de sensibilidad y aclaramiento supervisado', meta: '60 min' },
-      { name: 'Ortodoncia o urgencia', desc: 'Seguimiento de alineadores o atención por dolor agudo', meta: '30 min' },
+      { name: 'Consulta de valoración', desc: 'Revisión dental completa, diagnóstico y plan de tratamiento por etapas.', meta: '40 min', tag: 'Primera visita' },
+      { name: 'Limpieza dental ultrasónica', desc: 'Remoción de sarro, pulido y evaluación preventiva de encías.', meta: '45 min', tag: 'Preventivo' },
+      { name: 'Blanqueamiento dental', desc: 'Valoración previa de sensibilidad y aclaramiento clínico supervisado.', meta: '60 min', tag: 'Estética dental' },
+      { name: 'Ortodoncia o urgencia', desc: 'Seguimiento de alineadores/brackets o atención prioritaria por dolor.', meta: '30 min', tag: 'Prioridad' },
     ],
     slots: ['09:30','10:30','11:30','13:00','16:00','17:30'],
     busyIdx: [1, 4],
-    noteLbl: '¿Primera vez o molestia?',
-    notePh: 'Ej. Limpieza semestral',
+    noteLbl: 'Motivo o comentario (opcional)',
+    notePh: 'Ej. Limpieza o dolor en muela',
     faqs: [
-      ['¿Necesito pagar anticipo para agendar?', 'No. Tu horario se confirma directamente por WhatsApp y el pago se realiza al terminar tu consulta en clínica.'],
-      ['¿Puedo reprogramar si surge un imprevisto?', 'Sí, solo avísanos por el mismo chat de WhatsApp con al menos unas horas de anticipación para mover tu espacio.'],
-      ['¿Atienden urgencias el mismo día?', 'Siempre reservamos espacios prioritarios para molestias agudas. Selecciona "Ortodoncia o urgencia" para revisarlo de inmediato.'],
+      ['¿Se cobra anticipo para apartar cita?', 'No. Tu cita se confirma por WhatsApp y el pago se realiza directamente en consultorio.'],
+      ['¿Puedo cambiar mi horario si tengo un imprevisto?', 'Sí, solo avísanos por el mismo chat de WhatsApp con unas horas de anticipación.'],
     ],
   },
   salon: {
     theme: 'salon',
-    kick: 'Corte · Color · Estilismo y Barbería',
-    titleHtml: 'Tu lugar reservado, <em>sin filas</em> ni improvisaciones.',
-    lead: 'Consulta los servicios del estudio, elige el horario libre de hoy o esta semana y aparta tu turno directo con el equipo.',
-    cta: 'Elegir espacio',
-    capLeft: 'ESTUDIO DE IMAGEN',
-    capRight: 'RESERVA DIRECTA',
-    img: 'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1400&q=75',
-    imgAlt: 'Interior editorial de salón con espejos y luz cálida',
+    navSrv: 'Servicios',
+    navBtn: 'Reservar',
+    h1: (name, zone) => `${name} en ${zone}`,
+    sub: 'Corte, barbería, color y estilismo con cita programada para que no hagas fila. Consulta disponibilidad y aparta tu turno por WhatsApp.',
+    cta: 'Reservar turno',
+    sec: 'Ver servicios',
     hours: 'Mar a sáb 10:00 a 20:00 · Dom 10:00 a 16:00',
-    facts: [
-      ['Horario', 'Mar a dom'],
-      ['Tiempo promedio', '40 a 120 min'],
-      ['Reserva', 'Sin apps externas'],
-    ],
+    img: 'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1200&q=75',
+    bullets: ['Reserva directa sin descargar aplicaciones', 'Atención puntual en horarios de alta demanda', 'Puedes enviar referencia de corte o color por WhatsApp'],
+    srvH2: 'Servicios del salón',
+    bookH2: 'Reserva tu turno',
     services: [
-      { name: 'Corte y estilizado', desc: 'Diagnóstico previo, lavado y terminado personalizado', meta: '45 min' },
-      { name: 'Barbería y diseño de barba', desc: 'Desvanecido limpio, perfilado a navaja y toalla caliente', meta: '40 min' },
-      { name: 'Color, balayage o retoque', desc: 'Evaluación capilar y formulación a medida', meta: '120 min' },
-      { name: 'Peinado o maquillaje de evento', desc: 'Preparación de larga duración para cenas y eventos', meta: '75 min' },
+      { name: 'Corte y estilizado', desc: 'Asesoría de imagen, lavado y acabado limpio.', meta: '45 min', tag: 'Cabello' },
+      { name: 'Barbería y perfilado de barba', desc: 'Desvanecido, perfilado con navaja y toalla caliente.', meta: '40 min', tag: 'Barbería' },
+      { name: 'Color, balayage o retoque', desc: 'Diagnóstico capilar y aplicación personalizada.', meta: '120 min', tag: 'Colorimetría' },
+      { name: 'Peinado o maquillaje de evento', desc: 'Preparación de larga duración para cenas y eventos.', meta: '75 min', tag: 'Eventos' },
     ],
     slots: ['10:00','11:30','13:00','15:00','16:30','18:30'],
     busyIdx: [0, 3],
-    noteLbl: 'Estilista o referencia',
-    notePh: 'Ej. Corte clásico o tono cálido',
+    noteLbl: 'Estilista o referencia (opcional)',
+    notePh: 'Ej. Corte clásico o retoque',
     faqs: [
-      ['¿Con cuánta anticipación conviene reservar?', 'Entre semana suele haber espacio el mismo día; para viernes y sábado conviene apartar con uno o dos días de margen.'],
-      ['¿Qué pasa si quiero cambiar mi horario?', 'Solo responde en el mismo chat de WhatsApp y ajustamos tu turno según disponibilidad.'],
-      ['¿Puedo enviar foto de referencia antes de ir?', 'Sí, al abrirse WhatsApp puedes adjuntar tu referencia para confirmar el tiempo exacto de tu servicio.'],
+      ['¿Necesito cita previa?', 'Te recomendamos apartar horario especialmente de jueves a sábado para evitar tiempos de espera.'],
+      ['¿Puedo mandar foto de referencia?', 'Sí, al confirmar en WhatsApp puedes adjuntar tu foto de referencia para confirmar duración y costo.'],
     ],
   },
   food: {
     theme: 'food',
-    kick: 'Cocina local · Mesas y pedidos directos',
-    titleHtml: 'Sabor recién hecho, <em>directo</em> de nuestra cocina.',
-    lead: 'Aparta tu mesa, ordena para recoger sin cargos de aplicaciones o cotiza paquetes para tus reuniones de temporada.',
-    cta: 'Ordenar o reservar',
-    capLeft: 'COCINA Y COMEDOR',
-    capRight: 'SIN COMISIONES DE APPS',
-    img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=75',
-    imgAlt: 'Comedor cálido de restaurante local',
+    navSrv: 'Opciones',
+    navBtn: 'Ordenar / Reservar',
+    h1: (name, zone) => `${name} · Pedidos directos y mesas en ${zone}`,
+    sub: 'Ordena para recoger al mismo precio de carta sin comisiones de apps, aparta tu mesa o cotiza paquetes para reuniones.',
+    cta: 'Hacer pedido o reserva',
+    sec: 'Ver opciones',
     hours: 'Lun a dom 13:00 a 22:00',
-    facts: [
-      ['Precios', 'Directos de carta'],
-      ['Para recoger', 'Listo en ~20 min'],
-      ['Grupos y eventos', 'Cotización directa'],
-    ],
+    img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=75',
+    bullets: ['Mismo precio que en sucursal, sin cargos de apps', 'Pedidos para recoger listos al llegar', 'Paquetes para reuniones de oficina y eventos'],
+    srvH2: 'Pedidos, mesas y eventos',
+    bookH2: 'Haz tu pedido o reservación',
     services: [
-      { name: 'Pedido para recoger', desc: 'Ordena directo y pasa sin hacer fila al mismo precio de carta', meta: '20 min' },
-      { name: 'Reservación de mesa', desc: 'Asegura tu lugar para comida, cena o reunión familiar', meta: 'Confirmar' },
-      { name: 'Paquete para posada o junta', desc: 'Charolas y menús completos para 10 a 50 personas', meta: 'A medida' },
-      { name: 'Menú y especialidades de hoy', desc: 'Consulta platillos del día y disponibilidad en cocina', meta: 'Hoy' },
+      { name: 'Pedido para recoger', desc: 'Ordena directo por WhatsApp y pasa sin hacer fila.', meta: '20 min', tag: 'Sin comisión' },
+      { name: 'Reservación de mesa', desc: 'Asegura tu lugar para comida, cena o reunión familiar.', meta: 'Confirmar', tag: 'Comedor' },
+      { name: 'Paquetes para posadas y grupos', desc: 'Charolas y menús completos para 10 a 50 personas.', meta: 'A medida', tag: 'Eventos' },
+      { name: 'Especialidades del día', desc: 'Consulta platillos disponibles hoy directo en cocina.', meta: 'Hoy', tag: 'Menú' },
     ],
     slots: ['13:00','14:00','15:00','18:30','19:30','20:30'],
     busyIdx: [2, 5],
-    noteLbl: 'Personas o platillos',
+    noteLbl: 'Número de personas o platillos',
     notePh: 'Ej. Mesa para 4 personas',
     faqs: [
-      ['¿Tiene el mismo precio que en el local?', 'Sí. Al pedir directo por aquí evitas el sobreprecio y comisiones de las plataformas de reparto.'],
-      ['¿Cuánto antes aparto si es para un grupo grande?', 'Para más de 10 personas o paquetes de oficina te recomendamos confirmar al menos un día antes.'],
-      ['¿Tienen facturación?', 'Sí, puedes solicitar tu factura el mismo día de tu consumo enviando tus datos fiscales por WhatsApp.'],
+      ['¿Tienen el mismo precio que en mesa?', 'Sí, pedir directo evita los sobreprecios de las plataformas de envío.'],
+      ['¿Manejan facturación?', 'Sí, puedes solicitar tu factura el mismo día de tu consumo enviando tus datos por WhatsApp.'],
     ],
   },
   vet: {
     theme: 'vet',
-    kick: 'Clínica veterinaria y estética canina',
-    titleHtml: 'Cuidado cercano para tu mascota, <em>sin estrés</em> en sala.',
-    lead: 'Programa consulta general, vacunas o sesión de baño y estética eligiendo el horario más tranquilo para tu compañero.',
+    navSrv: 'Servicios',
+    navBtn: 'Agendar cita',
+    h1: (name, zone) => `${name} · Veterinaria en ${zone}`,
+    sub: 'Consultas médicas, vacunación y estética canina con citas organizadas para reducir el estrés de tu mascota.',
     cta: 'Agendar cita',
-    capLeft: 'CLÍNICA VETERINARIA',
-    capRight: 'CONSULTA Y ESTÉTICA',
-    img: 'https://images.unsplash.com/photo-1630438994394-3deff7a591bf?auto=format&fit=crop&w=1400&q=75',
-    imgAlt: 'Perro en consulta veterinaria',
+    sec: 'Ver servicios',
     hours: 'Lun a sáb 9:00 a 19:00',
-    facts: [
-      ['Consultas', 'Con cita puntual'],
-      ['Baño y estética', 'Por tamaño y raza'],
-      ['Seguimiento', 'Directo por WhatsApp'],
-    ],
+    img: 'https://images.unsplash.com/photo-1630438994394-3deff7a591bf?auto=format&fit=crop&w=1200&q=75',
+    bullets: ['Citas puntuales para perros y gatos', 'Baño dermatológico y estética canina', 'Seguimiento directo por WhatsApp'],
+    srvH2: 'Servicios veterinarios',
+    bookH2: 'Agenda para tu mascota',
     services: [
-      { name: 'Consulta médica general', desc: 'Exploración física completa y plan de cuidados', meta: '35 min' },
-      { name: 'Vacunación y desparasitación', desc: 'Actualización de cartilla para perros y gatos', meta: '20 min' },
-      { name: 'Baño y estética canina', desc: 'Baño dermatológico, corte, uñas y limpieza de oídos', meta: '90 min' },
-      { name: 'Revisión prioritaria hoy', desc: 'Consulta inmediata de disponibilidad médica', meta: 'Prioridad' },
+      { name: 'Consulta médica general', desc: 'Exploración física completa y seguimiento de salud.', meta: '35 min', tag: 'Clínica' },
+      { name: 'Vacunación y desparasitación', desc: 'Esquema preventivo y actualización de cartilla.', meta: '20 min', tag: 'Prevención' },
+      { name: 'Baño y estética canina', desc: 'Baño, corte de pelo, uñas y limpieza de oídos.', meta: '90 min', tag: 'Estética' },
+      { name: 'Revisión prioritaria hoy', desc: 'Consulta inmediata de disponibilidad médica.', meta: 'Prioridad', tag: 'Urgente' },
     ],
     slots: ['09:30','10:30','12:00','13:30','16:00','17:30'],
     busyIdx: [1, 3],
-    noteLbl: 'Nombre y raza',
-    notePh: 'Ej. Luna, mestiza 3 años',
+    noteLbl: 'Nombre y raza de tu mascota',
+    notePh: 'Ej. Max, golden 2 años',
     faqs: [
-      ['¿Qué debo llevar a la primera consulta?', 'Si cuentas con su cartilla de vacunación previa o estudios anteriores, tráelos o envíanos foto por WhatsApp.'],
-      ['¿Cuánto tarda el servicio de estética?', 'Depende del tamaño y tipo de pelaje, normalmente entre 60 y 90 minutos. Te avisamos por mensaje en cuanto esté listo.'],
-      ['¿Atienden gatos y perros?', 'Sí, contamos con horarios organizados para minimizar el estrés entre pacientes.'],
+      ['¿Qué debo llevar a consulta?', 'Si tienes su cartilla de vacunación o recetas anteriores, tráelas o mándanos foto por WhatsApp.'],
+      ['¿Cuánto tarda el baño y estética?', 'Entre 60 y 90 minutos según tamaño y pelaje; te avisamos por WhatsApp en cuanto esté listo.'],
     ],
   },
   b2b: {
     theme: 'b2b',
-    kick: 'Servicio técnico y atención a empresas',
-    titleHtml: 'Diagnóstico claro y <em>entrega</em> en fecha acordada.',
-    lead: 'Indica el servicio o cotización que necesitas y programa recepción sin vueltas innecesarias.',
+    navSrv: 'Servicios',
+    navBtn: 'Cotizar',
+    h1: (name, zone) => `${name} · Servicio especializado en ${zone}`,
+    sub: 'Diagnóstico claro, presupuesto previo por escrito y horarios programados para recepción o atención a empresas.',
     cta: 'Solicitar cotización',
-    capLeft: 'SERVICIO ESPECIALIZADO',
-    capRight: 'RECEPCIÓN PROGRAMADA',
-    img: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1400&q=75',
-    imgAlt: 'Taller técnico ordenado',
+    sec: 'Ver servicios',
     hours: 'Lun a vie 8:30 a 18:30 · Sáb 9:00 a 14:00',
-    facts: [
-      ['Presupuesto', 'Antes de intervenir'],
-      ['Facturación', 'Disponible CFDI'],
-      ['Seguimiento', 'Directo por WhatsApp'],
-    ],
+    img: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1200&q=75',
+    bullets: ['Presupuesto claro antes de realizar cualquier trabajo', 'Recepción con horario acordado', 'Facturación disponible para empresas'],
+    srvH2: 'Servicios disponibles',
+    bookH2: 'Solicita diagnóstico o cotización',
     services: [
-      { name: 'Diagnóstico y presupuesto', desc: 'Revisión técnica detallada antes de autorizar el servicio', meta: '45 min' },
-      { name: 'Mantenimiento preventivo', desc: 'Servicio programado con entrega puntual', meta: 'Cita previa' },
-      { name: 'Servicio correctivo', desc: 'Atención a falla específica con garantía por escrito', meta: 'Evaluar' },
-      { name: 'Atención a empresas y flotillas', desc: 'Cotización por volumen y condiciones corporativas', meta: 'B2B' },
+      { name: 'Diagnóstico y presupuesto', desc: 'Revisión técnica completa antes de autorizar cualquier intervención.', meta: '45 min', tag: 'Evaluación' },
+      { name: 'Mantenimiento preventivo', desc: 'Servicio programado con fecha y hora de entrega acordada.', meta: 'Cita previa', tag: 'Preventivo' },
+      { name: 'Servicio correctivo', desc: 'Atención a falla específica con garantía de servicio.', meta: 'Evaluar', tag: 'Taller' },
+      { name: 'Atención a empresas y flotillas', desc: 'Cotización por volumen, seguimiento y facturación CFDI.', meta: 'Empresas', tag: 'Corporativo' },
     ],
     slots: ['08:30','09:30','11:00','12:30','15:00','16:30'],
     busyIdx: [0, 4],
-    noteLbl: 'Modelo, equipo o folio',
-    notePh: 'Ej. Vehículo, año o requerimiento',
+    noteLbl: 'Vehículo, equipo o detalle',
+    notePh: 'Ej. Modelo, año o falla',
     faqs: [
-      ['¿Se realiza algún trabajo sin autorización previa?', 'Nunca. Primero entregamos diagnóstico y costo por escrito; solo procedemos cuando lo apruebas.'],
-      ['¿Emiten factura?', 'Sí, contamos con facturación electrónica para personas físicas y empresas.'],
-      ['¿Cómo sé cuándo está listo?', 'Te notificamos directamente en el mismo WhatsApp con el detalle de entrega.'],
+      ['¿Hacen trabajos sin autorización previa?', 'No. Primero entregamos diagnóstico y cotización; solo procedemos cuando lo apruebas.'],
+      ['¿Emiten factura?', 'Sí, emitimos factura CFDI para personas físicas y empresas.'],
     ],
   },
 };
@@ -786,53 +699,55 @@ const qs = new URLSearchParams(location.search);
 const bizName = qs.get('negocio') || 'Sleepadent';
 const rawGiro = (qs.get('giro') || 'dentist').toLowerCase();
 const tel10 = (qs.get('tel') || '8125579107').replace(/\D/g, '').slice(-10);
-const zone = qs.get('zona') || 'San Pedro Garza García';
+const zone = qs.get('zona') || 'San Pedro Garza García, N.L.';
 const isLive = qs.get('live') === '1';
 
 const cfg = CATALOG[GIRO_MAP[rawGiro] || 'dental'];
 document.documentElement.setAttribute('data-theme', cfg.theme);
 if (isLive) {
-  document.getElementById('cbar').style.display = 'none';
-  document.getElementById('footCredit').innerHTML = 'Sitio desarrollado por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol</a>';
+  document.getElementById('previewTag').style.display = 'none';
+  document.getElementById('footRight').innerHTML = 'Desarrollado por <a href="https://crusol.com.mx" target="_blank" rel="noopener">crusol.com.mx</a>';
 }
 
 const fmtTel = tel10.replace(/(\d{2})(\d{4})(\d{4})/, '$1 $2 $3');
-const initials = bizName.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || 'CR';
-const folioSeed = (bizName.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % 890) + 110;
+const initials = bizName.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || 'MT';
+const shortZone = zone.split(',')[0].trim();
 
-document.title = `${bizName} · ${zone}`;
-document.getElementById('barName').textContent = bizName;
-document.getElementById('navName').textContent = bizName;
-document.getElementById('navZone').textContent = zone;
-document.getElementById('navCta').textContent = cfg.theme === 'b2b' ? 'Cotizar' : 'Reservar';
-document.getElementById('heroKick').textContent = cfg.kick;
+document.title = `${bizName} · ${shortZone}`;
+document.getElementById('topTel').textContent = `Tel. ${fmtTel}`;
+document.getElementById('topTel').href = `tel:+52${tel10}`;
+document.getElementById('topHours').textContent = cfg.hours;
+document.getElementById('brandSq').textContent = initials;
+document.getElementById('brandName').textContent = bizName;
+document.getElementById('navSrv').textContent = cfg.navSrv;
+document.getElementById('navBtn').textContent = cfg.navBtn;
 document.getElementById('heroLoc').textContent = zone;
-document.getElementById('heroTitle').innerHTML = cfg.titleHtml;
-document.getElementById('heroLead').textContent = cfg.lead;
-document.getElementById('heroBtn').textContent = cfg.cta;
+document.getElementById('heroH1').textContent = cfg.h1(bizName, shortZone);
+document.getElementById('heroSub').textContent = cfg.sub;
+document.getElementById('heroCta').textContent = cfg.cta;
+document.getElementById('heroSec').textContent = cfg.sec;
 document.getElementById('heroImg').src = cfg.img;
-document.getElementById('heroImg').alt = cfg.imgAlt;
-document.getElementById('capLeft').textContent = cfg.capLeft;
-document.getElementById('capRight').textContent = cfg.capRight;
+document.getElementById('heroImg').alt = `${bizName} - instalaciones`;
+document.getElementById('heroList').innerHTML = cfg.bullets.map(b => `<li>${b}</li>`).join('');
+document.getElementById('srvH2').textContent = cfg.srvH2;
+document.getElementById('bookH2').textContent = cfg.bookH2;
 document.getElementById('noteLbl').textContent = cfg.noteLbl;
 document.getElementById('inNote').placeholder = cfg.notePh;
-document.getElementById('tBiz').textContent = bizName;
-document.getElementById('tFolio').textContent = `${initials}-${folioSeed}`;
-document.getElementById('locName').textContent = bizName;
+document.getElementById('sBiz').textContent = bizName;
 document.getElementById('locAddr').textContent = zone;
+document.getElementById('locTel').textContent = fmtTel;
+document.getElementById('locTel').href = `tel:+52${tel10}`;
 document.getElementById('locHours').textContent = cfg.hours;
-document.getElementById('telLink').textContent = fmtTel;
-document.getElementById('telLink').href = `tel:+52${tel10}`;
-document.getElementById('footBrand').textContent = `${bizName} · ${zone}`;
-document.getElementById('mapsBtn').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bizName + ' ' + zone)}`;
+document.getElementById('footLeft').textContent = `${bizName} · ${zone}`;
 
-document.getElementById('heroFacts').innerHTML = cfg.facts
-  .map(([k, v]) => `<div class="fact-row"><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+const mapQuery = encodeURIComponent(`${bizName} ${zone} Monterrey Nuevo Leon`);
+document.getElementById('mapsLink').href = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+document.getElementById('mapFrame').src = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 document.getElementById('faqList').innerHTML = cfg.faqs
-  .map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${q}</summary><p>${a}</p></details>`).join('');
+  .map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('');
 
-// Próximos 6 días hábiles reales desde hoy
+// Próximos 6 días
 const DAY_NAMES = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 const MONTH_NAMES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 const days = [];
@@ -844,7 +759,6 @@ for (let i = 0; days.length < 6 && i < 10; i++) {
     short: i === 0 ? 'Hoy' : DAY_NAMES[d.getDay()],
     num: d.getDate(),
     label: `${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MONTH_NAMES[d.getMonth()]}`,
-    free: cfg.slots.length - cfg.busyIdx.length,
   });
 }
 
@@ -856,11 +770,20 @@ const state = {
   note: '',
 };
 
+const selSrv = document.getElementById('selSrv');
+cfg.services.forEach((s, i) => {
+  const opt = document.createElement('option');
+  opt.value = String(i);
+  opt.textContent = `${s.name} (${s.meta})`;
+  selSrv.appendChild(opt);
+});
+selSrv.addEventListener('change', (e) => { state.srvIdx = Number(e.target.value); renderAll(); });
+
 function buildWaText() {
   const srv = cfg.services[state.srvIdx];
   const day = days[state.dayIdx];
   return [
-    `Hola ${bizName}, quisiera confirmar esta solicitud:`,
+    `Hola ${bizName}, me gustaría confirmar esta solicitud:`,
     `Servicio: ${srv.name}`,
     `Fecha y hora: ${day.label} a las ${state.slot}`,
     state.name ? `Nombre: ${state.name}` : '',
@@ -871,28 +794,30 @@ function buildWaText() {
 function renderAll() {
   const srv = cfg.services[state.srvIdx];
   const day = days[state.dayIdx];
+  selSrv.value = String(state.srvIdx);
 
-  // Índice de servicios sin cajas
-  const ul = document.getElementById('srvIdx');
-  ul.innerHTML = '';
+  // Rejilla de servicios
+  const grid = document.getElementById('srvGrid');
+  grid.innerHTML = '';
   cfg.services.forEach((s, i) => {
-    const li = document.createElement('li');
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-pressed', String(i === state.srvIdx));
-    b.innerHTML = `
-      <span class="n">0${i + 1}</span>
-      <span class="t">${s.name}</span>
-      <span class="d">${s.desc}</span>
-      <span class="m">${s.meta}</span>
+    const div = document.createElement('div');
+    div.className = 'srv-item' + (i === state.srvIdx ? ' active' : '');
+    div.innerHTML = `
+      <div>
+        <div class="srv-top"><h3>${s.name}</h3><span class="srv-dur">${s.meta}</span></div>
+        <p>${s.desc}</p>
+      </div>
+      <div class="srv-foot">
+        <span class="srv-tag">${s.tag}</span>
+        <button type="button" class="srv-pick">${i === state.srvIdx ? 'Seleccionado' : 'Elegir este servicio'}</button>
+      </div>
     `;
-    b.onclick = () => {
+    div.querySelector('.srv-pick').onclick = () => {
       state.srvIdx = i;
       renderAll();
-      document.getElementById('agenda').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
     };
-    li.appendChild(b);
-    ul.appendChild(li);
+    grid.appendChild(div);
   });
 
   // Días
@@ -903,7 +828,7 @@ function renderAll() {
     b.type = 'button';
     b.className = 'day';
     b.setAttribute('aria-pressed', String(i === state.dayIdx));
-    b.innerHTML = `<small>${d.short}</small><b>${d.num}</b><em>${d.free} libres</em>`;
+    b.innerHTML = `<small>${d.short}</small><b class="num">${d.num}</b>`;
     b.onclick = () => {
       state.dayIdx = i;
       const busy = cfg.busyIdx.map(x => (x + i) % cfg.slots.length);
@@ -922,7 +847,7 @@ function renderAll() {
   cfg.slots.forEach((sl, i) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'slot';
+    b.className = 'slot num';
     const isBusy = busyForDay.includes(i);
     b.disabled = isBusy;
     b.setAttribute('aria-pressed', String(!isBusy && sl === state.slot));
@@ -930,15 +855,13 @@ function renderAll() {
     b.onclick = () => { state.slot = sl; renderAll(); };
     slotsGrid.appendChild(b);
   });
-  document.getElementById('freeLabel').textContent = `${cfg.slots.length - busyForDay.length} horarios disponibles`;
 
-  // Hoja de pase + WhatsApp + barra móvil
-  document.getElementById('tSrv').textContent = srv.name;
-  document.getElementById('tDay').textContent = day.label;
-  document.getElementById('tTime').textContent = state.slot;
-  document.getElementById('tDur').textContent = srv.meta;
-  document.getElementById('tCli').textContent = state.name || 'Pendiente';
-  document.getElementById('waPreviewText').textContent = buildWaText();
+  // Resumen y barra móvil
+  document.getElementById('sSrv').textContent = srv.name;
+  document.getElementById('sDay').textContent = day.label;
+  document.getElementById('sTime').textContent = state.slot;
+  document.getElementById('sDur').textContent = srv.meta;
+  document.getElementById('sCli').textContent = state.name || 'Por capturar';
   document.getElementById('mSrv').textContent = srv.name;
   document.getElementById('mWhen').textContent = `${day.label} · ${state.slot}`;
 }
