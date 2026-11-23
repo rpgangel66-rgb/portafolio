@@ -212,42 +212,37 @@ a{color:inherit}
   font-size:14.5px;color:var(--mut);max-width:46ch;
 }
 
-/* Tabla / rejilla limpia de servicios (escanear en 3 segundos, sin carditis ni números 01) */
+/* Lista práctica de servicios (sin tags de relleno ni links repetidos) */
 .srv-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px 32px;
   border-top:1px solid var(--line);
-  border-left:1px solid var(--line);
 }
 .srv-item{
-  border-right:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  padding:20px 22px;
-  background:var(--white);
-  display:flex;flex-direction:column;justify-content:space-between;gap:14px;
-  transition:background .15s;
+  padding:18px 12px;
+  background:transparent;
+  text-align:left;
+  width:100%;
+  border-left:0;border-right:0;border-top:0;
+  display:grid;gap:5px;
+  transition:background .15s,padding-left .15s;
+}
+.srv-item:hover{
+  background:var(--tint);
 }
 .srv-item.active{
   background:var(--brand-soft);
   box-shadow:inset 3px 0 0 var(--brand);
+  padding-left:16px;
 }
 .srv-top{
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:4px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
 }
-.srv-item h3{font-size:16px;font-weight:700;color:var(--ink)}
+.srv-item h3{font-size:15.5px;font-weight:700;color:var(--ink)}
 .srv-dur{font-size:12.5px;color:var(--mut);white-space:nowrap;font-weight:500}
-.srv-item p{font-size:14px;color:var(--ink2)}
-.srv-foot{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding-top:10px;border-top:1px solid var(--line);
-}
-.srv-tag{font-size:12.5px;color:var(--mut)}
-.srv-pick{
-  background:none;border:0;padding:0;
-  color:var(--brand);font-size:13.5px;font-weight:600;
-  text-decoration:underline;text-underline-offset:3px;
-}
-.srv-item.active .srv-pick{text-decoration:none}
+.srv-item p{font-size:14px;color:var(--ink2);line-height:1.5}
 
 /* 5. Sección Agendar (fondo tintado — separación clara con panel práctico de 2 columnas) */
 .book-grid{
@@ -490,16 +485,15 @@ footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3p
         </div>
 
         <aside class="summary">
-          <h3>Resumen de tu solicitud</h3>
+          <h3>Tu cita</h3>
           <dl class="sum-dl">
-            <div><dt>Negocio</dt><dd id="sBiz">Sleepadent</dd></div>
             <div><dt>Servicio</dt><dd id="sSrv"></dd></div>
             <div><dt>Fecha</dt><dd id="sDay"></dd></div>
             <div><dt>Horario</dt><dd class="num" id="sTime"></dd></div>
-            <div><dt>Duración aprox.</dt><dd id="sDur"></dd></div>
-            <div><dt>Nombre</dt><dd id="sCli">Por capturar</dd></div>
+            <div><dt>Duración</dt><dd id="sDur"></dd></div>
+            <div><dt>Nombre</dt><dd id="sCli">—</dd></div>
           </dl>
-          <p class="sum-note">No requiere tarjeta ni registro. La disponibilidad se confirma directamente por WhatsApp con el equipo.</p>
+          <p class="sum-note">La disponibilidad se confirma directamente por WhatsApp.</p>
           <button type="button" class="btn btn-pri" id="sendBtn" style="width:100%">Confirmar por WhatsApp</button>
         </aside>
       </div>
@@ -722,6 +716,15 @@ const fmtTel = tel10.replace(/(\d{2})(\d{4})(\d{4})/, '$1 $2 $3');
 const initials = bizName.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || 'MT';
 const shortZone = zone.split(',')[0].trim();
 
+const customServices = qs.get('servicios');
+const servicesList = customServices
+  ? customServices.split(',').map(s => s.trim()).filter(Boolean).map(name => ({
+      name,
+      desc: 'Consulta disponibilidad y detalles directamente por WhatsApp.',
+      meta: 'Cita previa',
+    }))
+  : cfg.services;
+
 document.title = `${bizName} · ${shortZone}`;
 document.getElementById('topTel').textContent = `Tel. ${fmtTel}`;
 document.getElementById('topTel').href = `tel:+52${tel10}`;
@@ -740,7 +743,6 @@ document.getElementById('srvH2').textContent = cfg.srvH2;
 document.getElementById('bookH2').textContent = cfg.bookH2;
 document.getElementById('noteLbl').textContent = cfg.noteLbl;
 document.getElementById('inNote').placeholder = cfg.notePh;
-document.getElementById('sBiz').textContent = bizName;
 document.getElementById('locAddr').textContent = zone;
 document.getElementById('locTel').textContent = fmtTel;
 document.getElementById('locTel').href = `tel:+52${tel10}`;
@@ -778,7 +780,7 @@ const state = {
 };
 
 const selSrv = document.getElementById('selSrv');
-cfg.services.forEach((s, i) => {
+servicesList.forEach((s, i) => {
   const opt = document.createElement('option');
   opt.value = String(i);
   opt.textContent = `${s.name} (${s.meta})`;
@@ -787,7 +789,7 @@ cfg.services.forEach((s, i) => {
 selSrv.addEventListener('change', (e) => { state.srvIdx = Number(e.target.value); renderAll(); });
 
 function buildWaText() {
-  const srv = cfg.services[state.srvIdx];
+  const srv = servicesList[state.srvIdx];
   const day = days[state.dayIdx];
   return [
     `Hola ${bizName}, me gustaría confirmar esta solicitud:`,
@@ -799,32 +801,27 @@ function buildWaText() {
 }
 
 function renderAll() {
-  const srv = cfg.services[state.srvIdx];
+  const srv = servicesList[state.srvIdx];
   const day = days[state.dayIdx];
   selSrv.value = String(state.srvIdx);
 
-  // Rejilla de servicios
+  // Lista limpia de servicios (toda la fila es clickeable, sin botones ni tags repetidos)
   const grid = document.getElementById('srvGrid');
   grid.innerHTML = '';
-  cfg.services.forEach((s, i) => {
-    const div = document.createElement('div');
-    div.className = 'srv-item' + (i === state.srvIdx ? ' active' : '');
-    div.innerHTML = `
-      <div>
-        <div class="srv-top"><h3>${s.name}</h3><span class="srv-dur">${s.meta}</span></div>
-        <p>${s.desc}</p>
-      </div>
-      <div class="srv-foot">
-        <span class="srv-tag">${s.tag}</span>
-        <button type="button" class="srv-pick">${i === state.srvIdx ? 'Seleccionado' : 'Elegir este servicio'}</button>
-      </div>
+  servicesList.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'srv-item' + (i === state.srvIdx ? ' active' : '');
+    btn.innerHTML = `
+      <div class="srv-top"><h3>${s.name}</h3><span class="srv-dur">${s.meta}</span></div>
+      <p>${s.desc}</p>
     `;
-    div.querySelector('.srv-pick').onclick = () => {
+    btn.onclick = () => {
       state.srvIdx = i;
       renderAll();
       document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
     };
-    grid.appendChild(div);
+    grid.appendChild(btn);
   });
 
   // Días
@@ -868,7 +865,7 @@ function renderAll() {
   document.getElementById('sDay').textContent = day.label;
   document.getElementById('sTime').textContent = state.slot;
   document.getElementById('sDur').textContent = srv.meta;
-  document.getElementById('sCli').textContent = state.name || 'Por capturar';
+  document.getElementById('sCli').textContent = state.name || '—';
   document.getElementById('mSrv').textContent = srv.name;
   document.getElementById('mWhen').textContent = `${day.label} · ${state.slot}`;
 }
