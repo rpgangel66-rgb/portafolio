@@ -84,7 +84,7 @@ a{color:inherit}
 .topbar a:hover{text-decoration:underline;opacity:1}
 .topbar-note{opacity:.72;font-size:12px}
 
-/* 2. Header sobrio y real */
+/* 2. Header sobrio y real (sin cuadrado genérico con inicial, sin botón duplicado) */
 .hd{
   position:sticky;top:0;z-index:30;
   background:var(--white);
@@ -92,35 +92,33 @@ a{color:inherit}
 }
 .hd-in{
   display:flex;align-items:center;justify-content:space-between;gap:20px;
-  height:66px;
+  height:70px;
 }
 .brand{
-  display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;
-}
-.brand-sq{
-  width:34px;height:34px;border-radius:var(--radius);
-  background:var(--brand);color:var(--brand-ink);
-  display:grid;place-items:center;font-weight:700;font-size:13px;flex:none;
+  display:flex;flex-direction:column;text-decoration:none;min-width:0;line-height:1.15;
 }
 .brand-name{
-  font-weight:700;font-size:17px;letter-spacing:-.015em;
+  font-weight:700;font-size:19px;letter-spacing:-.02em;color:var(--ink);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.nav{display:flex;align-items:center;gap:24px}
+.brand-sub{
+  font-size:11.5px;font-weight:500;color:var(--mut);margin-top:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.nav{display:flex;align-items:center;gap:26px}
 .nav a{
   text-decoration:none;font-size:14px;font-weight:500;color:var(--ink2);
 }
 .nav a:hover{color:var(--ink)}
-.nav-btn{
-  background:var(--brand);color:var(--brand-ink)!important;
-  padding:9px 16px;border-radius:var(--radius);font-weight:600!important;
+.nav-tel{
+  font-weight:600!important;color:var(--brand)!important;
+  padding-left:20px;border-left:1px solid var(--line);
 }
-.nav-btn:hover{background:var(--brand-h)}
 
 /* Botones sobrios (escala real, sin trucos) */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:11px 20px;border-radius:var(--radius);
+  padding:12px 22px;border-radius:var(--radius);
   font-size:14.5px;font-weight:600;text-decoration:none;
   border:1px solid var(--line-strong);background:var(--white);color:var(--ink);
   transition:background .15s,border-color .15s;
@@ -131,55 +129,63 @@ a{color:inherit}
 }
 .btn-pri:hover{background:var(--brand-h);border-color:var(--brand-h)}
 
-/* 3. Portada proporcionada (escala real 38px, NUNCA 90px gigante; todo útil arriba del pliegue) */
+/* 3. Portada fotográfica a sangre real (cero split 50/50 con caja redondeada, cero bullets, cero botones gemelos) */
 .hero{
-  background:var(--tint);
-  border-bottom:1px solid var(--line);
-  padding:42px 0;
-}
-.hero-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:40px;
+  position:relative;
+  min-height:460px;
+  display:flex;
   align-items:center;
+  background-color:var(--bar);
+  background-position:center;
+  background-size:cover;
+  overflow:hidden;
 }
-.hero-loc{
-  font-size:13px;font-weight:600;color:var(--brand);margin-bottom:8px;
+.hero::before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(95deg,rgba(12,22,34,.84) 0%,rgba(12,22,34,.64) 48%,rgba(12,22,34,.18) 100%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  width:100%;
+  padding-block:64px;
+}
+.hero-box{
+  max-width:560px;
+  color:#FFFFFF;
 }
 .hero h1{
-  font-size:clamp(28px,3.2vw,38px);
+  font-size:clamp(28px,3.4vw,40px);
   line-height:1.18;
   letter-spacing:-.02em;
   font-weight:700;
-  color:var(--ink);
+  color:#FFFFFF;
   margin-bottom:14px;
 }
 .hero p{
-  font-size:15.5px;
-  color:var(--ink2);
-  max-width:48ch;
-  margin-bottom:22px;
+  font-size:16px;
+  line-height:1.58;
+  color:rgba(255,255,255,.88);
+  max-width:46ch;
+  margin-bottom:26px;
 }
-.hero-btns{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-.hero-list{
-  list-style:none;
-  display:grid;gap:6px;
-  padding-top:16px;
-  border-top:1px solid var(--line);
-  font-size:13.5px;color:var(--ink2);
+.hero-act{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
 }
-.hero-list li{display:flex;align-items:center;gap:8px}
-.hero-list li::before{
-  content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);flex:none;
+.hero-btn{
+  background:#FFFFFF;color:var(--ink);
+  border:1px solid #FFFFFF;
+  padding:13px 24px;border-radius:var(--radius);
+  font-size:14.5px;font-weight:700;text-decoration:none;
+  transition:background .15s,color .15s;
 }
-.hero-img{
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid var(--line);
-  aspect-ratio:16/11;
-  background:#E2E8F0;
+.hero-btn:hover{background:var(--tint)}
+.hero-link{
+  color:#FFFFFF;font-size:14px;font-weight:500;
+  text-decoration:underline;text-underline-offset:4px;
+  opacity:.92;
 }
-.hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-link:hover{opacity:1}
 
 /* 4. Sección Servicios (fondo blanco puro — contraste limpio respecto a portada tintada) */
 .sec-white{
@@ -374,15 +380,18 @@ footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3p
 .mbar-txt small{display:block;font-size:12px;color:var(--mut)}
 
 @media (max-width:860px){
-  .hero-grid,.srv-grid,.book-grid,.loc-grid{grid-template-columns:1fr}
+  .srv-grid,.book-grid,.loc-grid{grid-template-columns:1fr}
   .summary{position:static}
-  .nav a:not(.nav-btn){display:none}
+  .nav a:not(.nav-tel){display:none}
+  .nav-tel{border-left:0;padding-left:0}
   .mbar{display:flex}
   body{padding-bottom:68px}
 }
 @media (max-width:540px){
   .wrap{padding:0 16px}
-  .hero{padding:28px 0}
+  .hero{min-height:380px}
+  .hero::before{background:linear-gradient(180deg,rgba(12,22,34,.55) 0%,rgba(12,22,34,.82) 100%)}
+  .hero-inner{padding-block:42px}
   .sec-white,.sec-tint{padding:36px 0}
   .f-row{grid-template-columns:1fr}
   .days{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -406,33 +415,28 @@ footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3p
   <header class="hd">
     <div class="wrap hd-in">
       <a class="brand" href="#">
-        <span class="brand-sq" id="brandSq">SL</span>
         <span class="brand-name" id="brandName">Sleepadent</span>
+        <span class="brand-sub" id="brandSub">Clínica dental · San Pedro Garza García</span>
       </a>
       <nav class="nav" aria-label="Navegación principal">
         <a href="#servicios" id="navSrv">Tratamientos</a>
         <a href="#agendar">Agendar</a>
         <a href="#ubicacion">Ubicación</a>
-        <a class="nav-btn" href="#agendar" id="navBtn">Agendar cita</a>
+        <a class="nav-tel num" id="navTel" href="#">81 2557 9107</a>
       </nav>
     </div>
   </header>
 
-  <!-- Portada proporcionada (tamaño humano real, sin exageraciones) -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="hero-loc" id="heroLoc">San Pedro Garza García, N.L.</div>
-        <h1 id="heroH1">Clínica dental en San Pedro con citas directas por WhatsApp</h1>
-        <p id="heroSub">Odontología general, limpiezas y tratamientos estéticos con atención puntual. Consulta horarios disponibles y confirma tu cita sin llamadas.</p>
-        <div class="hero-btns">
-          <a class="btn btn-pri" href="#agendar" id="heroCta">Agendar cita</a>
-          <a class="btn" href="#servicios" id="heroSec">Ver tratamientos</a>
+  <!-- Portada fotográfica a sangre real -->
+  <section class="hero" id="heroBg">
+    <div class="wrap hero-inner">
+      <div class="hero-box">
+        <h1 id="heroH1">Odontología general y estética en San Pedro Garza García</h1>
+        <p id="heroSub">Valoración, limpiezas ultrasónicas y tratamientos con cita programada en Av. José Vasconcelos.</p>
+        <div class="hero-act">
+          <a class="hero-btn" href="#agendar" id="heroCta">Agendar cita</a>
+          <a class="hero-link" href="#servicios" id="heroSec">Ver tratamientos disponibles</a>
         </div>
-        <ul class="hero-list" id="heroList"></ul>
-      </div>
-      <div class="hero-img">
-        <img id="heroImg" src="" alt="Instalaciones">
       </div>
     </div>
   </section>
@@ -547,6 +551,7 @@ footer a{color:var(--bar-ink);text-decoration:underline;text-underline-offset:3p
 const CATALOG = {
   dental: {
     theme: 'dental',
+    label: 'Clínica dental',
     navSrv: 'Tratamientos',
     navBtn: 'Agendar cita',
     h1: (name, zone) => `${name}: clínica dental en ${zone}`,
@@ -575,6 +580,7 @@ const CATALOG = {
   },
   salon: {
     theme: 'salon',
+    label: 'Salón y barbería',
     navSrv: 'Servicios',
     navBtn: 'Reservar',
     h1: (name, zone) => `${name} en ${zone}`,
@@ -603,6 +609,7 @@ const CATALOG = {
   },
   food: {
     theme: 'food',
+    label: 'Restaurante',
     navSrv: 'Opciones',
     navBtn: 'Ordenar / Reservar',
     h1: (name, zone) => `${name} · Pedidos directos y mesas en ${zone}`,
@@ -631,6 +638,7 @@ const CATALOG = {
   },
   vet: {
     theme: 'vet',
+    label: 'Clínica veterinaria',
     navSrv: 'Servicios',
     navBtn: 'Agendar cita',
     h1: (name, zone) => `${name} · Veterinaria en ${zone}`,
@@ -659,6 +667,7 @@ const CATALOG = {
   },
   b2b: {
     theme: 'b2b',
+    label: 'Servicio especializado',
     navSrv: 'Servicios',
     navBtn: 'Cotizar',
     h1: (name, zone) => `${name} · Servicio especializado en ${zone}`,
@@ -717,18 +726,16 @@ document.title = `${bizName} · ${shortZone}`;
 document.getElementById('topTel').textContent = `Tel. ${fmtTel}`;
 document.getElementById('topTel').href = `tel:+52${tel10}`;
 document.getElementById('topHours').textContent = cfg.hours;
-document.getElementById('brandSq').textContent = initials;
 document.getElementById('brandName').textContent = bizName;
+document.getElementById('brandSub').textContent = `${cfg.label} · ${shortZone}`;
 document.getElementById('navSrv').textContent = cfg.navSrv;
-document.getElementById('navBtn').textContent = cfg.navBtn;
-document.getElementById('heroLoc').textContent = zone;
+document.getElementById('navTel').textContent = fmtTel;
+document.getElementById('navTel').href = `tel:+52${tel10}`;
 document.getElementById('heroH1').textContent = cfg.h1(bizName, shortZone);
 document.getElementById('heroSub').textContent = cfg.sub;
 document.getElementById('heroCta').textContent = cfg.cta;
 document.getElementById('heroSec').textContent = cfg.sec;
-document.getElementById('heroImg').src = cfg.img;
-document.getElementById('heroImg').alt = `${bizName} - instalaciones`;
-document.getElementById('heroList').innerHTML = cfg.bullets.map(b => `<li>${b}</li>`).join('');
+document.getElementById('heroBg').style.backgroundImage = `url("${cfg.img}")`;
 document.getElementById('srvH2').textContent = cfg.srvH2;
 document.getElementById('bookH2').textContent = cfg.bookH2;
 document.getElementById('noteLbl').textContent = cfg.noteLbl;
