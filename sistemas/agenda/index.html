@@ -747,6 +747,8 @@ html[data-g="salon"] .rsid .facts{justify-content:flex-start}
 }
 @media (max-width:340px){.sg{grid-template-columns:repeat(2,minmax(0,1fr))}.app h1{font-size:14px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+/* sin etiquetas sobre los títulos */
+.hero .kick,.rsid .kick,.rsh .kick{display:none!important}
 </style>
 </head>
 <body data-demo="Agenda de citas">
@@ -757,7 +759,7 @@ try{var r=document.referrer?new URL(document.referrer):null;if(window.top!==wind
 function go(){if(go.d)return;go.d=1;setTimeout(function(){c.style.transform="translateY(-101%)";setTimeout(off,800)},120)}
 if(document.readyState!=="loading")go();else document.addEventListener("DOMContentLoaded",go);setTimeout(go,1800);
 addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})();</script>
-<div class="cbar"><span><b>Demo</b> · Empresas ficticias</span><div class="g" id="giro" role="group" aria-label="Giro de ejemplo"></div><span class="r"><button type="button" id="reset">Reiniciar demo</button> · Hecho por <a href="../../" target="_top">crusol</a></span></div>
+<div class="cbar"><span><b>Demo</b> con empresas ficticias</span><div class="g" id="giro" role="group" aria-label="Giro de ejemplo"></div><span class="r"><button type="button" id="reset">Reiniciar demo</button> Hecho por <a href="../../" target="_top">crusol</a></span></div>
 <header class="app">
   <div class="mark" id="mark"></div>
   <h1><span id="bizn">Clínica Dental Alameda</span><small id="bizs">Agenda de citas en línea</small></h1>
@@ -788,7 +790,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
   var B={
     dental:{k:"dental",n:"Clínica Dental Alameda",m:"DA",g:"Dental",fp:"DA",n0:2381,c:["#2FB597"],
       place:"consultorio",Cli:"Paciente",pro:"especialista",ic:"tooth",sub:"Odontología general y estética",
-      hr:{img:"https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1400&q=70",alt:"Consultorio dental luminoso con sillón y equipo",kick:"Odontología general, ortodoncia y estética",t:"Tu cita con el dentista, en dos minutos.",s:"Elige el tratamiento, tu especialista y el horario que te acomode. Recibes la confirmación al momento.",facts:["Lun a vie · 9:00 a 19:00","Sáb · 9:00 a 14:00","3 especialistas"]},
+      hr:{img:"https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1400&q=70",alt:"Consultorio dental luminoso con sillón y equipo",kick:"Odontología general, ortodoncia y estética",t:"Aparta tu cita con el dentista",s:"Elige el tratamiento, tu especialista y el horario que te acomode. Recibes la confirmación al momento.",facts:["Lun a vie, 9:00 a 19:00","Sáb, 9:00 a 14:00","3 especialistas"]},
       ask:"¿Qué tratamiento necesitas?",hero:"Elige el tratamiento, tu especialista y el horario que te acomode.",
       h:wk([1,2,3,4,5],[hm(9,14),hm(15,19)],{6:[hm(9,14)]}),
       svcs:[
@@ -806,7 +808,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
       tip:function(a,s){return s.id==="ext"?"Come algo ligero antes de tu cita y llega 10 minutos antes.":"Llega 10 minutos antes. Si tienes radiografías o estudios recientes, tráelos."}},
     salon:{k:"salon",n:"Estudio Nara",m:"EN",g:"Salón",fp:"EN",n0:5120,c:["#D9A58F"],
       place:"salón",Cli:"Cliente",pro:"estilista",ic:null,sub:"Color · Corte · Uñas",
-      hr:{img:"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1400&q=70",alt:"Interior de salón con sillas negras frente a espejos redondos",kick:"Color · Corte · Uñas",t:"Tu tiempo, reservado.",s:"Elige servicio, estilista y horario. Cuando llegues, todo estará listo para ti.",facts:["Mar a sáb · 10:00 a 20:00","Dom · 10:00 a 16:00","Lunes cerrado"]},
+      hr:{img:"https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1400&q=70",alt:"Interior de salón con sillas negras frente a espejos redondos",kick:"Color · Corte · Uñas",t:"Aparta tu lugar en el salón",s:"Elige servicio, estilista y horario. Cuando llegues, todo estará listo para ti.",facts:["Mar a sáb, 10:00 a 20:00","Dom, 10:00 a 16:00","Lunes cerrado"]},
       ask:"¿Qué servicio quieres?",hero:"Reserva tu servicio en minutos y elige con quién.",
       h:wk([2,3,4,5,6],[hm(10,20)],{0:[hm(10,16)]}),
       svcs:[
@@ -824,7 +826,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
       tip:function(a,s){return s.id==="tin"||s.id==="bal"?"Llega con el cabello sin lavar del día; así el color se fija mejor.":"Te esperamos 5 minutos antes para empezar a tiempo."}},
     vet:{k:"vet",n:"Veterinaria Huellas del Bosque",m:"HB",g:"Veterinaria",fp:"HB",n0:3307,c:["#F3C969"],
       place:"clínica",Cli:"Cliente",pro:"médico",pet:true,ic:"paw",sub:"Clínica veterinaria y estética",
-      hr:{img:"https://images.unsplash.com/photo-1630438994394-3deff7a591bf?auto=format&fit=crop&w=1400&q=70",alt:"Perro en consulta veterinaria",kick:"Medicina, cirugía y estética",t:"Consultas, vacunas y baños para tu mejor amigo.",s:"Agenda en minutos y te mandamos un recordatorio un día antes.",facts:["Abrimos los 7 días","Urgencias sin cita","Estética canina"]},
+      hr:{img:"https://images.unsplash.com/photo-1630438994394-3deff7a591bf?auto=format&fit=crop&w=1400&q=70",alt:"Perro en consulta veterinaria",kick:"Medicina, cirugía y estética",t:"Consultas, vacunas y baños",s:"Agenda aquí y te mandamos un recordatorio un día antes.",facts:["Abrimos los 7 días","Urgencias sin cita","Estética canina"]},
       ask:"¿Qué necesita tu mascota?",hero:"Agenda la consulta, vacuna o estética de tu mascota.",
       h:wk([1,2,3,4,5],[hm(9,14),hm(16,20)],{6:[hm(9,15)],0:[hm(10,14)]}),
       svcs:[
