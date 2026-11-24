@@ -1,0 +1,79 @@
+/* Mesa de trabajo de ARCE: la cotización es una hoja sobre un tapete de corte,
+   con las notas del cliente a un lado y los productos cotizados encima.
+   Este archivo se carga después de los estilos del cotizador y solo los ajusta. */
+:root{--tapete:#3E4B51}
+body{background:var(--tapete)}
+.app{background:
+  radial-gradient(1100px 760px at 24% 6%,rgba(255,255,255,.13),rgba(255,255,255,0) 62%),
+  radial-gradient(900px 700px at 96% 100%,rgba(0,0,0,.28),rgba(0,0,0,0) 60%),
+  linear-gradient(rgba(255,255,255,.10) 1px,transparent 1px) 0 0/100px 100px,
+  linear-gradient(90deg,rgba(255,255,255,.10) 1px,transparent 1px) 0 0/100px 100px,
+  linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/20px 20px,
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px) 0 0/20px 20px,
+  var(--tapete)}
+.app{overflow-x:clip}
+.desk{background-image:none}
+.dtop{color:rgba(255,255,255,.7)}
+.dtop .crumb b{color:#fff}
+.saved{color:rgba(255,255,255,.8)}
+
+/* La hoja: papel con grano, canto y una copia debajo */
+/* La copia de abajo necesita un contexto propio para quedar detrás de la hoja y no encima */
+#vNew{position:relative;z-index:0}
+.sheet{
+  box-shadow:0 0 0 1px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.4),10px 16px 22px -12px rgba(0,0,0,.5),36px 54px 70px -36px rgba(0,0,0,.6)}
+.sheet::after{content:"";position:absolute;inset:0;z-index:-1;background:#EFECE3;transform:rotate(1.15deg) translate(8px,10px);
+  box-shadow:0 1px 2px rgba(0,0,0,.4),12px 18px 26px -12px rgba(0,0,0,.5)}
+
+/* Papel blanco con los dos dobleces de una hoja que viajó en sobre */
+.sheet{background-color:#FEFDFB;background-image:
+  linear-gradient(to bottom,transparent calc(33.3% - 5px),rgba(60,50,40,.035) calc(33.3% - 1px),rgba(60,50,40,.10) 33.3%,rgba(255,255,255,.9) calc(33.3% + 1px),transparent calc(33.3% + 7px)),
+  linear-gradient(to bottom,transparent calc(66.6% - 5px),rgba(60,50,40,.035) calc(66.6% - 1px),rgba(60,50,40,.10) 66.6%,rgba(255,255,255,.9) calc(66.6% + 1px),transparent calc(66.6% + 7px))}
+
+/* La hoja como documento impreso: una sola tipografía, cifras alineadas sin disfraz de máquina de escribir */
+.dtop .crumb,.saved{font-family:var(--sans)}
+.brand small,.meta h4,.lines th,.notes h4{font:600 11.5px var(--sans);text-transform:none;letter-spacing:0;color:var(--gray)}
+.brand small{font-weight:500;font-size:12.5px;margin-top:5px}
+.doc .f,.doc .d,.lines .no,.lines .cd,.lines .pu,.lines .pu small,.lines .im,.qin,.sum div span:last-child,.sum .gt span:last-child,.av{font-family:var(--sans);font-variant-numeric:tabular-nums;letter-spacing:0}
+.doc .f{font-weight:700}
+.doc .d{font-size:13px}
+.lines .cd{font-weight:600;font-size:12.5px}
+.lines th{border-bottom:1.5px solid var(--ink);padding-bottom:7px}
+.av{font-size:12px}
+.qin{background:transparent;border:0;border-bottom:1.5px solid var(--line-2);height:30px;font-size:15px;font-weight:600}
+.qin:hover,.qin:focus{border-color:var(--red);background:transparent}
+.sum .gt{background:none;color:var(--ink);margin-top:10px;padding:12px 0 0;border-top:3px double var(--ink);font-size:17px}
+.sum .gt span:last-child{color:var(--ink);font-size:25px;font-weight:800;letter-spacing:-.02em}
+
+/* Sello de goma: tinta dispareja y un poco corrida */
+.stamp{border-width:3px;border-radius:3px;font:800 14px var(--sans);letter-spacing:.14em;opacity:.86;mix-blend-mode:multiply;filter:blur(.25px);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.45'/%3E%3C/filter%3E%3Crect width='160' height='90' filter='url(%23t)'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3.2 2.45'/%3E%3C/filter%3E%3Crect width='160' height='90' filter='url(%23t)'/%3E%3C/svg%3E");
+  -webkit-mask-size:160px 90px;mask-size:160px 90px}
+.stamp small{font-size:11px;letter-spacing:.1em}
+
+/* Las notas del resumen también en la tipografía de la casa */
+.insp .card,.insp .card *{font-family:var(--sans);font-variant-numeric:tabular-nums;letter-spacing:0}
+
+/* Las tarjetas del resumen son notas sueltas sobre la mesa */
+.insp{background:none;border:0}
+.insp h3,.top5 h3{font:600 13px var(--sans)!important;text-transform:none!important;letter-spacing:0!important;color:rgba(255,255,255,.8)!important}
+.card{border:0;background:#FBFAF6;box-shadow:0 1px 2px rgba(0,0,0,.4),8px 14px 20px -10px rgba(0,0,0,.55)}
+.insp>div:nth-child(1) .card{transform:rotate(-1.2deg)}
+.insp>div:nth-child(2) .card{transform:rotate(.9deg);background:#F5ECC0}
+.insp>div:nth-child(3) .card{transform:rotate(-.5deg)}
+.insp>.tip2{color:rgba(255,255,255,.72)}
+.insp .bt:not(.pri){background:#FBFAF6;box-shadow:0 1px 2px rgba(0,0,0,.4),6px 10px 14px -8px rgba(0,0,0,.5)}
+.insp .bt.pri{box-shadow:0 1px 2px rgba(0,0,0,.4),8px 12px 18px -8px rgba(0,0,0,.55)}
+
+#mesa3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;display:none}
+
+@media (min-width:1181px){
+  .app{grid-template-columns:68px 292px minmax(0,1fr)}
+  .insp{grid-column:2;grid-row:1;padding:84px 4px 40px 26px;gap:26px}
+  .desk{grid-column:3;grid-row:1;padding:28px clamp(200px,19vw,380px) 70px 30px}
+  .sheet,.dtop{margin-left:0;margin-right:0}
+  #mesa3d{display:block}
+}
+@media (max-width:1180px){.insp{border-top:0}}
+@media print{.app{background:none}#mesa3d{display:none!important}.sheet::after{display:none}.sheet{background-image:none}}

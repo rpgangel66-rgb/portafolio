@@ -246,6 +246,7 @@ html.fr .app{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="mesa.css?v=4">
 </head>
 <body data-demo="Cotizador">
 <!-- crusol: la cortina verde termina de subir al llegar desde el portafolio -->
@@ -264,7 +265,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
     <button type="button" id="tNueva" aria-label="Nueva cotización"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="tip">Nueva</span></button>
     <button type="button" id="tHist" aria-pressed="false" aria-label="Historial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 7h18v13H3z"/><path d="M3 7l2-3h14l2 3M9 11h6"/></svg><span class="tip">Archivo</span></button>
     <span class="sp"></span>
-    <span class="who" title="Laura Garza · Ventas">LG</span>
+    <span class="who" title="Laura Garza, Ventas">LG</span>
   </nav>
 
   <main class="desk" id="desk">
@@ -272,7 +273,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
       <div class="dtop"><span class="crumb">Cotizaciones / <b id="crFolio">COT-0000</b></span><span class="sp"></span><span class="saved" id="saved"><i></i><span>Sin guardar</span></span></div>
       <article class="sheet" id="sheet" aria-label="Cotización">
         <header class="lh">
-          <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg><div><b>ARCE</b><small>Suministros industriales</small><address>ventas@suministrosarce.mx · 800 000 0000</address></div></div>
+          <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg><div><b>ARCE</b><small>Suministros industriales</small><address>ventas@suministrosarce.mx</address></div></div>
           <div class="doc"><div class="t">Cotización</div><div class="f" id="pFolio">COT-0000</div><div class="d" id="pFecha"></div></div>
         </header>
         <button type="button" class="stamp" id="stamp" title="Cambiar vigencia">Vigente<small id="stampD">15 días</small></button>
@@ -290,7 +291,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
           <div class="notes"><h4>Notas</h4><p id="pNotes"></p></div>
           <div class="sum" id="tots"></div>
         </div>
-        <div class="sig"><span>Precios en pesos mexicanos (MXN). Existencias sujetas a confirmación al momento del pedido.</span><div class="ln2"><i>Laura Garza</i><span>Laura Garza · Ventas</span></div></div>
+        <div class="sig"><span>Precios en pesos mexicanos (MXN). Existencias sujetas a confirmación al momento del pedido.</span><div class="ln2"><i>Laura Garza</i><span>Laura Garza, Ventas</span></div></div>
       </article>
     </section>
 
@@ -394,24 +395,24 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
   function render(flash){var c=cliOf(cur.cli),l=c.l,t=calc(cur);
     $("cli").value=cur.cli;$("pFolio").textContent=cur.folio;$("crFolio").textContent=cur.folio;$("pFecha").textContent=fmtDate(cur.fecha);
     $("pCli").innerHTML="Atención: "+esc(c.ct);
-    $("pList").innerHTML=esc(LISTS[l].n)+(LISTS[l].d?" · "+Math.round(LISTS[l].d*100)+" % sobre lista":"")+"<br>Escalas: 10+ (4 %), 50+ (8 %)";
+    $("pList").innerHTML=esc(LISTS[l].n)+(LISTS[l].d?", "+Math.round(LISTS[l].d*100)+" % sobre lista":"")+"<br>Escalas: 10+ (4 %), 50+ (8 %)";
     $("pCond").innerHTML="Vigencia: "+cur.vig+" días<br>Entrega: "+(t.lead===0?"inmediata":t.lead===1?"1 día hábil":t.lead+" días hábiles");
     var st=$("stamp");st.className="stamp"+(cur.estado==="a"?" ac":cur.estado==="x"?" rx":"");st.firstChild.textContent=cur.estado==="a"?"Aceptada":cur.estado==="x"?"Rechazada":"Vigente";$("stampD").textContent=cur.vig+" días";
     var rows=$("rows");
     if(!cur.items.length)rows.innerHTML='<tr class="empty"><td colspan="7">La hoja está en blanco. Escribe abajo el primer producto.</td></tr>';
     else rows.innerHTML=cur.items.map(function(i,ix){var x=BY[i.c],u=unit(i.c,i.q,l),a=avail(i.c,i.q),tr=tierOf(i.q);
-      return '<tr class="'+(flash===ix?"ln":"")+'"><td class="no hc">'+String(ix+1).padStart(2,"0")+'</td><td class="cd hc">'+esc(x.c)+'</td><td class="ds"><b>'+esc(x.n)+'</b><small>'+esc(x.m)+(x.nm?" · "+esc(x.nm):"")+" · "+esc(x.u)+'</small><span class="av '+a.k+'">'+esc(a.t)+'</span></td>'+
+      return '<tr class="'+(flash===ix?"ln":"")+'"><td class="no hc">'+String(ix+1).padStart(2,"0")+'</td><td class="cd hc">'+esc(x.c)+'</td><td class="ds"><b>'+esc(x.n)+'</b><small>'+esc(x.m)+(x.nm?", "+esc(x.nm):"")+", "+esc(x.u)+'</small><span class="av '+a.k+'">'+esc(a.t)+'</span></td>'+
         '<td class="r"><input class="qin" type="number" min="1" step="1" inputmode="numeric" value="'+i.q+'" data-i="'+ix+'" aria-label="Cantidad de '+esc(x.n)+'"></td>'+
         '<td class="r pu hc">'+money.format(u)+(tr.n?'<small>'+tr.n+'</small>':"")+'</td><td class="r im">'+money.format(u*i.q)+'</td><td><button class="del" type="button" data-del="'+ix+'" aria-label="Quitar '+esc(x.n)+'">×</button></td></tr>'}).join("");
     $("tots").innerHTML='<div><span>Subtotal</span><span>'+money.format(t.sub)+'</span></div>'+(t.sub?(t.fl?'<div><span>Flete</span><span>'+money.format(t.fl)+'</span></div>':'<div class="fr"><span>Flete</span><span>Sin costo</span></div>'):"")+'<div><span>IVA 16 %</span><span>'+money.format(t.iva)+'</span></div><div class="gt"><span>Total</span><span>'+money.format(t.tot)+'</span></div>';
     $("pNotes").innerHTML="Entrega en planta del cliente. Flete sin costo en pedidos desde "+money.format(FREE)+" antes de IVA. Factura CFDI 4.0 al confirmar el pedido.";
     insp(c,t);
-    var txt="Cotización "+cur.folio+" · Suministros Arce\nPara: "+c.n+"\n\n"+cur.items.map(function(i){return "• "+i.q+" × "+BY[i.c].n+" = "+money.format(unit(i.c,i.q,l)*i.q)}).join("\n")+"\n\nTotal: "+money.format(t.tot)+" con IVA\nVigencia: "+cur.vig+" días";
-    $("mail").href="mailto:?subject="+encodeURIComponent("Cotización "+cur.folio+" · Suministros Arce")+"&body="+encodeURIComponent(txt)}
+    var txt="Cotización "+cur.folio+", Suministros Arce\nPara: "+c.n+"\n\n"+cur.items.map(function(i){return "• "+i.q+" × "+BY[i.c].n+" = "+money.format(unit(i.c,i.q,l)*i.q)}).join("\n")+"\n\nTotal: "+money.format(t.tot)+" con IVA\nVigencia: "+cur.vig+" días";
+    $("mail").href="mailto:?subject="+encodeURIComponent("Cotización "+cur.folio+", Suministros Arce")+"&body="+encodeURIComponent(txt)}
 
   /* panel lateral */
   function insp(c,t){var disp=c.cr-c.us,after=disp-t.tot,pct=Math.min(100,Math.round((c.us+t.tot)/c.cr*100));
-    $("iCli").innerHTML='<b>'+esc(c.n)+'</b><span>'+esc(c.ct)+' · Compras</span><span class="ls">'+esc(LISTS[c.l].n)+'</span><div class="cr"><div class="fx"><span>Crédito usado con esta cotización</span><span>'+pct+' %</span></div><div class="meter '+(after<0?"red":"")+'"><i style="width:'+pct+'%"></i></div><div class="fx"><span>Disponible después</span><span>'+money.format(after)+'</span></div></div>';
+    $("iCli").innerHTML='<b>'+esc(c.n)+'</b><span>'+esc(c.ct)+', Compras</span><span class="ls">'+esc(LISTS[c.l].n)+'</span><div class="cr"><div class="fx"><span>Crédito usado con esta cotización</span><span>'+pct+' %</span></div><div class="meter '+(after<0?"red":"")+'"><i style="width:'+pct+'%"></i></div><div class="fx"><span>Disponible después</span><span>'+money.format(after)+'</span></div></div>';
     var fp=t.sub?Math.min(100,Math.round(t.sub/FREE*100)):0;$("iFlM").firstChild.style.width=fp+"%";
     $("iFlT").textContent=t.sub>=FREE?"Sin costo":t.sub?money.format(FLETE):"";
     $("iFl").innerHTML=!t.sub?"Agrega productos para calcular el flete.":t.sub>=FREE?"<b>El flete va sin costo.</b> El pedido supera "+money.format(FREE)+" antes de IVA.":"Faltan <b>"+money.format(FREE-t.sub)+"</b> para que el flete sea sin costo.";
@@ -428,7 +429,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
   function search(){var t=norm(q.value.trim()),l=cliOf(cur.cli).l;res=P.filter(function(x){return !t||norm(x.n+" "+x.c+" "+x.nm+" "+x.m+" "+CATS[x.k]).indexOf(t)>=0});sel=0;
     if(!res.length){ac.innerHTML='<div class="none">Sin coincidencias. Prueba con el código, la norma o la marca.</div>'}
     else{var g="",html="";res.forEach(function(x,i){if(x.k!==g){g=x.k;html+='<div class="gh">'+CATS[g]+'</div>'}var st=x.s[0]+x.s[1],inQ=cur.items.some(function(it){return it.c===x.c});
-      html+='<a role="option" data-c="'+x.c+'" class="'+(i===0?"sel":"")+'"><span class="th"'+(x.img?' style="background-image:url('+U(x.img)+')"':'')+'>'+(x.img?"":ICO[x.k])+'</span><span><b>'+hl(x.n,t)+'</b><span>'+hl(x.c,t)+(x.nm?" · "+hl(x.nm,t):"")+" · "+(st?st.toLocaleString("es-MX")+" en existencia":"sobre pedido")+'</span></span><em>'+money.format(unit(x.c,1,l))+'<small>'+(inQ?"ya en la hoja":esc(x.u))+'</small></em></a>'});ac.innerHTML=html}
+      html+='<a role="option" data-c="'+x.c+'" class="'+(i===0?"sel":"")+'"><span class="th"'+(x.img?' style="background-image:url('+U(x.img)+')"':'')+'>'+(x.img?"":ICO[x.k])+'</span><span><b>'+hl(x.n,t)+'</b><span>'+hl(x.c,t)+(x.nm?", "+hl(x.nm,t):"")+", "+(st?st.toLocaleString("es-MX")+" en existencia":"sobre pedido")+'</span></span><em>'+money.format(unit(x.c,1,l))+'<small>'+(inQ?"ya en la hoja":esc(x.u))+'</small></em></a>'});ac.innerHTML=html}
     ac.classList.add("on");q.setAttribute("aria-expanded","true")}
   function closeAc(){ac.classList.remove("on");q.setAttribute("aria-expanded","false")}
   function pick(c){var ix=-1;cur.items.forEach(function(it,i){if(it.c===c)ix=i});if(ix>-1){cur.items[ix].q+=1}else{cur.items.push({c:c,q:1});ix=cur.items.length-1}
@@ -444,7 +445,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
     var copy=JSON.parse(JSON.stringify(cur)),idx=-1;DB.list.forEach(function(x,i){if(x.folio===cur.folio)idx=i});
     if(idx>-1){copy.estado=DB.list[idx].estado;DB.list[idx]=copy}else{DB.list.push(copy);DB.next++}persist();dirty=false;setSaved("ok");return true}
   $("save").addEventListener("click",function(){if(saveCur())toast("Guardada en el archivo: "+cur.folio)});
-  $("pdf").addEventListener("click",function(){if(!saveCur())return;var t=document.title;document.title=cur.folio+" · Suministros Arce";window.print();setTimeout(function(){document.title=t},800)});
+  $("pdf").addEventListener("click",function(){if(!saveCur())return;var t=document.title;document.title=cur.folio+", Suministros Arce";window.print();setTimeout(function(){document.title=t},800)});
   function nueva(){cur=blank(cur?cur.cli:"pv");dirty=false;setSaved("");show("new");toast("Hoja nueva: "+cur.folio);setTimeout(function(){q.focus()},300)}
   $("tNueva").addEventListener("click",nueva);
 
@@ -454,7 +455,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
     DB.list.forEach(function(x){var t=calc(x).tot,d=new Date(x.fecha);if(d.getMonth()===m&&d.getFullYear()===y)mes+=t;if(x.estado==="a"){ven+=t;acc++}if(x.estado!=="p")dec++;x.items.forEach(function(i){cnt[i.c]=(cnt[i.c]||0)+i.q})});
     $("kMes").textContent=money.format(mes);$("kNum").textContent=DB.list.length;$("kVen").textContent=money.format(ven);$("kTasa").textContent=(dec?Math.round(acc/dec*100):0)+" %";
     $("hist").innerHTML=DB.list.slice().sort(function(a,b){return b.fecha-a.fecha}).map(function(x){var c=cliOf(x.cli);
-      return '<div class="file" data-open="'+esc(x.folio)+'" tabindex="0" role="button" aria-label="Abrir '+esc(x.folio)+'"><span class="f">'+esc(x.folio)+'</span><b>'+esc(c.n)+'</b><span class="d">'+fmtDate(x.fecha)+' · '+x.items.length+' partidas</span><span class="stp '+x.estado+'">'+EST[x.estado]+'</span>'+
+      return '<div class="file" data-open="'+esc(x.folio)+'" tabindex="0" role="button" aria-label="Abrir '+esc(x.folio)+'"><span class="f">'+esc(x.folio)+'</span><b>'+esc(c.n)+'</b><span class="d">'+fmtDate(x.fecha)+', '+x.items.length+' partidas</span><span class="stp '+x.estado+'">'+EST[x.estado]+'</span>'+
         '<div class="mini">'+x.items.slice(0,4).map(function(i,k){return '<i style="width:'+(90-k*14)+'%"></i>'}).join("")+'</div><span class="t">'+money.format(calc(x).tot)+'</span>'+
         '<div class="ft"><select data-est="'+esc(x.folio)+'" aria-label="Estado">'+Object.keys(EST).map(function(k){return '<option value="'+k+'"'+(k===x.estado?" selected":"")+'>'+EST[k]+'</option>'}).join("")+'</select><button type="button" data-dup="'+esc(x.folio)+'">Duplicar</button></div></div>'}).join("");
     var top=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]}).slice(0,5),mx=top.length?cnt[top[0]]:1;
@@ -517,6 +518,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
   document.getElementById("crx").addEventListener("click",function(){el.classList.remove("on");setTimeout(function(){el.hidden=true;document.body.style.paddingBottom=""},500);try{sessionStorage.setItem("crusol_cta_x","1")}catch(e){}});
 })();
 </script>
+<script src="mesa.js?v=4" defer></script>
 </body>
 </html>
 
