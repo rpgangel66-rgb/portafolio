@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
 <!--
@@ -170,6 +170,10 @@
 
   <section id="s-maze" class="scene">
     <canvas id="maze" aria-label="pasillos"></canvas>
+    <div id="minimap-wrap" class="minimap-wrap" hidden>
+      <button id="minimap-btn" class="minimap-btn" type="button" aria-label="Ocultar o mostrar mapa">MAPA · B1</button>
+      <canvas id="minimap" class="minimap" width="125" height="125" aria-label="mapa de pasillos"></canvas>
+    </div>
     <p id="maze-title" class="maze-title rgb" aria-hidden="true">LOSTMEDIA</p>
     <video id="clip" class="clip" muted playsinline preload="auto" hidden></video>
     <img id="susto" class="susto" alt="" hidden>
@@ -227,6 +231,6 @@
 <div class="scan" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 <noscript><p style="color:#fff;font:20px monospace;padding:24px">la cinta necesita JavaScript.</p></noscript>
-<script src="main.js?v=18"></script>
+<script src="main.js?v=19"></script>
 </body>
 </html>

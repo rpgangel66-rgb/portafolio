@@ -8,8 +8,9 @@ const CONFIG = {
   ambiente: 'audio/pasillo.mp3',     // la misma rola, lenta y al revés
   sample: 'audio/sample.mp3',         // el sample de estonotesale: de fondo, limpio en los puntos tranquilos
   // PNG pegados en las paredes de los pasillos (agrega los que mande kiddwero)
-  // fotos pegadas en las paredes (los 3 primeros salen en los puntos tranquilos). Los dibujos de los monitos ya solo salen al final.
+  // fotos pegadas en las paredes; los monitos del colectivo salen en ciertos puntos clave
   posters: ['img/s-ninos.jpg', 'img/screamer-cara.jpg', 'img/s-ojo.jpg', 'img/manq-2.png', 'img/s-nino.jpg', 'img/s-maniqui.jpg', 'img/s-mascara.jpg'],
+  monitos: ['img/kiddwero.png', 'img/bruno.png', 'img/prodtrash.png'],
   // los que aparecen parados al fondo del pasillo y se esfuman
   apariciones: ['img/manq-1.png', 'img/cara-mascara.png', 'img/manq-4.png', 'img/cara-mascara.png'],
   // texturas de Bruno: pared de hospital, pared con sangre, piso y techo
@@ -60,7 +61,7 @@ function loadImg(src) {
 }
 const IMGS = {};
 const imgsReady = Promise.all(
-  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz, CONFIG.caraFinal, CONFIG.acosador, ...Object.values(CONFIG.texturas)])]
+  [...new Set([...CONFIG.posters, ...CONFIG.monitos, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz, CONFIG.caraFinal, CONFIG.acosador, ...Object.values(CONFIG.texturas)])]
     .map((s) => loadImg(s).then((i) => { IMGS[s] = i; }))
 );
 
@@ -150,15 +151,75 @@ const A = {
     o.start(t);
     o.stop(t + 0.5);
   },
-  step(v = 0.55, f = 260) {
-    const c = this.ctx, t = this.now(), s = c.createBufferSource(), lp = c.createBiquadFilter(), g = c.createGain();
-    s.buffer = this.nbuf;
-    lp.type = 'lowpass';
-    lp.frequency.value = f + Math.random() * 140;
-    g.gain.setValueAtTime(v, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
-    s.connect(lp).connect(g).connect(this.master);
-    s.start(t, Math.random() * 1.5, 0.16);
+  // pisada sobre piso de hospital: golpe de tacón + golpe seco en azulejo + eco corto de pasillo
+  step(v = 0.78, pitch = 1, isStalker = false) {
+    const c = this.ctx, t = this.now();
+    this._foot = !this._foot;
+    const p = pitch * (this._foot ? 0.94 : 1.06) * (0.96 + Math.random() * 0.08);
+    // 1. peso del tacón (golpe grave corto)
+    const o = c.createOscillator(), og = c.createGain();
+    o.type = 'triangle';
+    o.frequency.setValueAtTime((isStalker ? 115 : 155) * p, t);
+    o.frequency.exponentialRampToValueAtTime((isStalker ? 38 : 48) * p, t + 0.055);
+    og.gain.setValueAtTime(v * (isStalker ? 0.56 : 0.44), t);
+    og.gain.exponentialRampToValueAtTime(0.001, t + 0.075);
+    o.connect(og).connect(this.master);
+    o.start(t);
+    o.stop(t + 0.08);
+    // ayudante para transientes de ruido filtrado (suela, roce y eco de pasillo)
+    const hit = (delay, freq, q, dur, amp) => {
+      const s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+      s.buffer = this.nbuf;
+      f.type = 'bandpass';
+      f.frequency.value = freq;
+      f.Q.value = q;
+      const t0 = t + delay;
+      g.gain.setValueAtTime(0.001, t0);
+      g.gain.linearRampToValueAtTime(amp, t0 + 0.003);
+      g.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+      s.connect(f).connect(g).connect(this.master);
+      s.start(t0, Math.random() * 1.4, dur + 0.02);
+    };
+    // 2. golpe seco en loseta (se escucha bien tanto en audífonos como en bocina de cel)
+    hit(0, (isStalker ? 760 : 1260) * p, 1.5, 0.062, v * 0.96);
+    // 3. chasquido agudo de suela dura
+    hit(0.002, (isStalker ? 1750 : 2600) * p, 2.2, 0.032, v * 0.52);
+    // 4. apoyo de la punta / polvo del piso
+    hit(0.034, (isStalker ? 980 : 1620) * p, 1.8, 0.044, v * 0.26);
+    // 5. eco suave del pasillo vacío
+    hit(isStalker ? 0.115 : 0.095, (isStalker ? 660 : 1040) * p, 1.2, 0.085, v * (isStalker ? 0.34 : 0.24));
+  },
+  // sonido de embestida cuando la cara se lanza hacia ti al final
+  lunge(d = 0.3) {
+    const c = this.ctx, t = this.now(), out = c.createGain();
+    out.gain.setValueAtTime(0.15, t);
+    out.gain.exponentialRampToValueAtTime(1.15, t + d);
+    out.gain.exponentialRampToValueAtTime(0.001, t + d + 0.05);
+    const sh = c.createWaveShaper();
+    sh.curve = distCurve(280);
+    sh.connect(out).connect(this.master);
+    [135, 203, 311].forEach((f0, j) => {
+      const o = c.createOscillator(), g = c.createGain();
+      o.type = j % 2 ? 'sawtooth' : 'square';
+      o.frequency.setValueAtTime(f0, t);
+      o.frequency.exponentialRampToValueAtTime(f0 * 8.5, t + d);
+      g.gain.value = 0.22;
+      o.connect(g).connect(sh);
+      o.start(t);
+      o.stop(t + d + 0.05);
+    });
+    const ns = c.createBufferSource(), bp = c.createBiquadFilter(), ng = c.createGain();
+    ns.buffer = this.nbuf;
+    ns.loop = true;
+    bp.type = 'bandpass';
+    bp.Q.value = 0.9;
+    bp.frequency.setValueAtTime(320, t);
+    bp.frequency.exponentialRampToValueAtTime(3600, t + d);
+    ng.gain.value = 0.9;
+    ns.connect(bp).connect(ng).connect(sh);
+    ns.start(t);
+    ns.stop(t + d + 0.05);
+    this.thump(42, 1);
   },
   blip() {
     const c = this.ctx, t = this.now(), o = c.createOscillator(), g = c.createGain();
@@ -205,27 +266,28 @@ const A = {
   scream(d = 1.6) {
     const c = this.ctx, t = this.now(), out = c.createGain();
     out.gain.setValueAtTime(0, t);
-    out.gain.linearRampToValueAtTime(1, t + 0.012);
-    out.gain.setValueAtTime(1, t + d - 0.3);
+    out.gain.linearRampToValueAtTime(1.15, t + 0.006);
+    out.gain.setValueAtTime(1.1, t + d - 0.28);
     out.gain.exponentialRampToValueAtTime(0.001, t + d);
     const sh = c.createWaveShaper();
-    sh.curve = distCurve(300);
+    sh.curve = distCurve(420);
     sh.connect(out).connect(this.master);
-    [310, 447, 623, 880, 1240, 1710].forEach((f, j) => {
+    [290, 433, 617, 912, 1340, 1890, 2480].forEach((f, j) => {
       const o = c.createOscillator(), g = c.createGain();
       o.type = j % 2 ? 'sawtooth' : 'square';
-      for (let k = 0; k < d; k += 0.03) o.frequency.setValueAtTime(f * (0.78 + Math.random() * 0.5) * (1 + k * 0.35), t + k);
-      g.gain.value = 0.12;
+      for (let k = 0; k < d; k += 0.025) o.frequency.setValueAtTime(f * (0.76 + Math.random() * 0.55) * (1 + k * 0.42), t + k);
+      g.gain.value = 0.14;
       o.connect(g).connect(sh);
       o.start(t);
       o.stop(t + d);
     });
     const ns = this.noise(), bp = c.createBiquadFilter(), ng = c.createGain();
-    bp.type = 'bandpass'; bp.frequency.value = 2600; bp.Q.value = 0.6;
-    ng.gain.value = 0.7;
+    bp.type = 'bandpass'; bp.frequency.value = 2300; bp.Q.value = 0.55;
+    ng.gain.value = 0.95;
     ns.connect(bp).connect(ng).connect(sh);
     setTimeout(() => ns.stop(), d * 1000 + 50);
-    this.thump(48, 1);
+    this.thump(42, 1);
+    setTimeout(() => { if (this.ctx) this.thump(52, 0.85); }, 130);
   },
   connectSong(el) {
     if (this.songSrc || !isHttp) return;
@@ -270,7 +332,7 @@ const Amb = {
           this.sLp = c.createBiquadFilter();
           this.sLp.type = 'lowpass';
           this.sG = c.createGain();
-          this.sG.gain.value = 1.1;
+          this.sG.gain.value = 0.85;
           s2.connect(this.sLp).connect(this.sG).connect(A.master);
         }
         this.routed = true;
@@ -284,17 +346,17 @@ const Amb = {
     if (!this.el) return;
     const t = A.now();
     if (this.routed) {
-      this.songG.gain.setTargetAtTime((this.smp ? 0.28 : 1) * vol, t, 0.5);
+      this.songG.gain.setTargetAtTime((this.smp ? 0.25 : 0.9) * vol, t, 0.5);
       this.dry.gain.setTargetAtTime(1 - noise * 0.55, t, 0.2);
       this.wet.gain.setTargetAtTime(noise * 0.45, t, 0.2);
       this.lp.frequency.setTargetAtTime(700 + (1 - noise) * 7000, t, 0.3);
       if (this.sG) {
-        this.sG.gain.setTargetAtTime((1.1 + 0.5 * calm) * vol, t, 0.3);
+        this.sG.gain.setTargetAtTime((0.85 + 0.4 * calm) * vol, t, 0.3);
         this.sLp.frequency.setTargetAtTime(1800 + (1 - noise) * 12000, t, 0.3);
       }
     } else {
-      this.el.volume = (this.smp ? 0.35 : 0.9) * (0.5 + 0.5 * (1 - noise)) * vol;
-      if (this.smp) this.smp.volume = Math.min(1, 0.6 + 0.4 * calm) * vol;
+      this.el.volume = (this.smp ? 0.3 : 0.8) * (0.5 + 0.5 * (1 - noise)) * vol;
+      if (this.smp) this.smp.volume = Math.min(1, 0.5 + 0.35 * calm) * vol;
     }
     this.el.playbackRate = Math.max(0.6, 1 - noise * 0.14 + Math.sin(performance.now() / 650) * noise * 0.05);
   },
@@ -502,8 +564,9 @@ const Maze = (() => {
   const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
   const CALM_LINES = ['aquí está tranquilo.', 'sigue.', 'no te detengas.', 'ya casi.'];
   let cv, ctx, W, H, img, buf32, zbuf, spot, planeLen, noiseFrames = [];
+  let mmWrap, mmCv, mmCtx, mmBtn, mmBound = false, seen;
   let grid, path, offDist, calmSet, calmIdx, room, exit, pathIdx, clipQ = [], bloodMap, stalker;
-  let tex = {}, faceTex = new Map(), sprites = [], mannequins = [];
+  let tex = {}, faceTex = new Map(), sprites = [], mannequins = [], arrowFaces = [], monitoFaces = [];
   let raf = 0, last = 0, done, drone, ampT = 0;
   const keys = {}, joy = { fwd: 0, turn: 0, look: 0 };
   const coarse = matchMedia('(pointer: coarse)').matches;
@@ -633,6 +696,93 @@ const Maze = (() => {
       return { n, c: new Uint32Array(x.getImageData(0, 0, n, n).data.slice().buffer) };
     } catch { return base; } // abierto como archivo: el navegador no deja leer la imagen
   }
+  // flecha pintada a mano en rojo oscuro/sangre sobre la pared del hospital (dir: 1 derecha, -1 izquierda)
+  function arrowTex(base, dir, R) {
+    const n = base.n, c = document.createElement('canvas');
+    c.width = c.height = n;
+    const x = c.getContext('2d'), id = x.createImageData(n, n);
+    new Uint32Array(id.data.buffer).set(base.c);
+    x.putImageData(id, 0, 0);
+    const cy = n * (0.37 + (R() - 0.5) * 0.05);
+    const x0 = dir > 0 ? n * 0.18 : n * 0.82;
+    const x1 = dir > 0 ? n * 0.80 : n * 0.20;
+    const head = n * 0.18 * dir;
+    const strokeArrow = (color, lw, jx, jy) => {
+      x.strokeStyle = color;
+      x.lineWidth = lw;
+      x.lineCap = 'round';
+      x.lineJoin = 'round';
+      x.beginPath();
+      x.moveTo(x0 + jx, cy + jy + (R() - 0.5) * 5);
+      x.quadraticCurveTo(n * 0.5 + jx, cy + jy + (R() - 0.5) * 8, x1 + jx, cy + jy);
+      x.stroke();
+      x.beginPath();
+      x.moveTo(x1 - head + jx, cy - n * 0.13 + jy);
+      x.lineTo(x1 + jx, cy + jy);
+      x.lineTo(x1 - head + jx, cy + n * 0.13 + jy);
+      x.stroke();
+    };
+    x.save();
+    x.globalAlpha = 0.88;
+    strokeArrow('#360404', n * 0.075, 2, 2);
+    strokeArrow('#7c0d0d', n * 0.05, 0, 0);
+    strokeArrow('#a61717', n * 0.024, -1, -1);
+    // escurrimientos de pintura/sangre desde la flecha
+    x.fillStyle = 'rgba(110, 12, 12, .72)';
+    for (let k = 0; k < 5; k++) {
+      const dx = x0 + (x1 - x0) * (0.15 + R() * 0.78);
+      const dh = n * (0.06 + R() * 0.14);
+      const dw = 2 + R() * 3;
+      x.fillRect(dx, cy + n * 0.02, dw, dh);
+    }
+    x.restore();
+    try {
+      return { n, c: new Uint32Array(x.getImageData(0, 0, n, n).data.slice().buffer) };
+    } catch { return base; }
+  }
+  // monitos del colectivo (kiddwero, Bruno, Trash) pintados como gis/marcador en paredes específicas
+  function monitoTex(base, imgs, R) {
+    const valid = imgs.filter(Boolean);
+    if (!valid.length) return base;
+    const n = base.n, c = document.createElement('canvas');
+    c.width = c.height = n;
+    const x = c.getContext('2d'), id = x.createImageData(n, n);
+    new Uint32Array(id.data.buffer).set(base.c);
+    x.putImageData(id, 0, 0);
+    x.save();
+    x.globalAlpha = 0.92;
+    x.shadowColor = 'rgba(0, 0, 0, .82)';
+    x.shadowBlur = 4;
+    x.shadowOffsetX = 2;
+    x.shadowOffsetY = 2;
+    if (valid.length === 1) {
+      const im = valid[0], box = n * 0.68, s = Math.min(box / im.naturalWidth, box / im.naturalHeight);
+      const w = im.naturalWidth * s, h = im.naturalHeight * s;
+      x.translate(n / 2 + (R() - 0.5) * 6, n * 0.44);
+      x.rotate((R() - 0.5) * 0.09);
+      x.drawImage(im, -w / 2, -h / 2, w, h);
+    } else {
+      // los tres juntos antes del cuarto final (bruno, kiddwero al centro, trash)
+      const slots = [
+        { cx: n * 0.21, cy: n * 0.48, box: n * 0.44, rot: -0.05 },
+        { cx: n * 0.50, cy: n * 0.42, box: n * 0.56, rot: 0.02 },
+        { cx: n * 0.79, cy: n * 0.48, box: n * 0.44, rot: 0.05 },
+      ];
+      valid.slice(0, 3).forEach((im, idx) => {
+        const sl = slots[idx], s = Math.min(sl.box / im.naturalWidth, sl.box / im.naturalHeight);
+        const w = im.naturalWidth * s, h = im.naturalHeight * s;
+        x.save();
+        x.translate(sl.cx, sl.cy);
+        x.rotate(sl.rot);
+        x.drawImage(im, -w / 2, -h / 2, w, h);
+        x.restore();
+      });
+    }
+    x.restore();
+    try {
+      return { n, c: new Uint32Array(x.getImageData(0, 0, n, n).data.slice().buffer) };
+    } catch { return base; }
+  }
   function prelight(image, maxH = 170, color = false) {
     if (!image) return null;
     const s = Math.min(1, maxH / image.naturalHeight);
@@ -728,7 +878,80 @@ const Maze = (() => {
     for (let i = 0; i < bloodMap.length; i++) bloodMap[i] = R() < 0.24 ? 1 : 0;
     tex.rWall = colorTex(IMGS[CONFIG.tapiz], 64) || genRoomWall(R);
     faceTex = new Map();
+    arrowFaces = [];
+    monitoFaces = [];
+    seen = new Uint8Array(GW * GH);
     const faceKey = (wx, wy, dx, dy) => `${wx},${wy},${dx ? 0 : 1},${(dx || dy) > 0 ? 1 : 0}`;
+    const setArrow = (px, py, dx, dy, dir) => {
+      const wx = px + dx, wy = py + dy, k = faceKey(wx, wy, dx, dy);
+      if (!isWall(wx, wy) || faceTex.has(k)) return false;
+      faceTex.set(k, arrowTex(tex.wall, dir, R));
+      arrowFaces.push({ wx, wy, dx, dy, dir });
+      return true;
+    };
+    // 1) flechas pintadas en pared en cruces y vueltas del camino correcto (para no perderse)
+    let lastArrow = -10;
+    // flecha inicial al arrancar el primer pasillo para marcar la guía desde el principio
+    if (outside.length > 2) {
+      const p1 = outside[1], dx1 = outside[2].x - p1.x, dy1 = outside[2].y - p1.y;
+      if (!setArrow(p1.x, p1.y, dy1, -dx1, 1)) setArrow(p1.x, p1.y, -dy1, dx1, -1);
+    }
+    for (let i = 1; i < outside.length - 1; i++) {
+      const a = outside[i - 1], b = outside[i], c = outside[i + 1];
+      const dx0 = b.x - a.x, dy0 = b.y - a.y, dx1 = c.x - b.x, dy1 = c.y - b.y;
+      const isTurn = dx0 !== dx1 || dy0 !== dy1;
+      const deg = DIRS.filter(([dx, dy]) => !isWall(b.x + dx, b.y + dy)).length;
+      const isJunction = deg >= 3;
+      if (isTurn && isWall(b.x + dx0, b.y + dy0) && (isJunction || i - lastArrow >= 5)) {
+        const cross = dx0 * dy1 - dy0 * dx1;
+        if (setArrow(b.x, b.y, dx0, dy0, cross > 0 ? 1 : -1)) lastArrow = i;
+      } else if (isJunction) {
+        // cruce abierto de frente: pintamos flecha lateral en la entrada de la rama correcta
+        const placed = (!isTurn && (setArrow(b.x, b.y, dy1, -dx1, 1) || setArrow(b.x, b.y, -dy1, dx1, -1)))
+          || setArrow(c.x, c.y, dy1, -dx1, 1)
+          || setArrow(c.x, c.y, -dy1, dx1, -1);
+        if (placed) lastArrow = i;
+      } else if (!isTurn && i - lastArrow >= 11) {
+        if (setArrow(b.x, b.y, dy1, -dx1, 1) || setArrow(b.x, b.y, -dy1, dx1, -1)) lastArrow = i;
+      }
+    }
+
+    // 2) monitos del colectivo (kiddwero, Bruno, Trash) pintados en puntos específicos del hospital
+    const addMonito = (p, srcs, tag) => {
+      const opts = DIRS.filter(([dx, dy]) => isWall(p.x + dx, p.y + dy) && !faceTex.has(faceKey(p.x + dx, p.y + dy, dx, dy)));
+      if (!opts.length) return false;
+      const [dx, dy] = opts[(R() * opts.length) | 0];
+      const wx = p.x + dx, wy = p.y + dy;
+      faceTex.set(faceKey(wx, wy, dx, dy), monitoTex(tex.wall, srcs.map((s) => IMGS[s]), R));
+      monitoFaces.push({ x: p.x, y: p.y, wx, wy, tag });
+      return true;
+    };
+    const calmMonitos = [
+      ['img/kiddwero.png'],
+      ['img/bruno.png'],
+      ['img/prodtrash.png'],
+      ['img/bruno.png', 'img/kiddwero.png', 'img/prodtrash.png'], // los 3 juntos antes del cuarto final
+    ];
+    [0.2, 0.42, 0.62, 0.82].forEach((f, k) => {
+      const idx = Math.floor(outside.length * f);
+      for (const off of [0, -1, 1, -2, 2]) {
+        const p = outside[idx + off];
+        if (p && addMonito(p, calmMonitos[k], `calm-${k}`)) break;
+      }
+    });
+    // y 3 escondidos en callejones secundarios (uno de cada integrante)
+    const sideSpots = [];
+    for (let y = 1; y < GH; y += 2) for (let x = 1; x < GW; x += 2) {
+      if (!isWall(x, y) && !inRoom(x, y) && offDist[y * GW + x] >= 3) sideSpots.push({ x, y });
+    }
+    CONFIG.monitos.forEach((src, k) => {
+      while (sideSpots.length) {
+        const p = sideSpots.splice((R() * sideSpots.length) | 0, 1)[0];
+        if (addMonito(p, [src], `side-${k}`)) break;
+      }
+    });
+
+    // 3) fotos perturbadoras en paredes restantes
     const addPoster = (p, src) => {
       const opts = DIRS.filter(([dx, dy]) => isWall(p.x + dx, p.y + dy) && !faceTex.has(faceKey(p.x + dx, p.y + dy, dx, dy)));
       if (!opts.length) return;
@@ -736,14 +959,11 @@ const Maze = (() => {
       faceTex.set(faceKey(p.x + dx, p.y + dy, dx, dy), posterTex(tex.wall, IMGS[src], R));
     };
     let pi = 0;
-    const calmDone = new Set();
     outside.forEach((p, i) => {
-      const k = calmIdx.get(p.y * GW + p.x);
-      if (k !== undefined && !calmDone.has(k)) { calmDone.add(k); addPoster(p, CONFIG.posters[k % 3]); }
-      else if (i > 2 && i % 4 === 0) addPoster(p, CONFIG.posters[pi++ % CONFIG.posters.length]);
+      if (i > 2 && i % 5 === 0) addPoster(p, CONFIG.posters[pi++ % CONFIG.posters.length]);
     });
     for (let y = 1; y < GH; y += 2) for (let x = 1; x < GW; x += 2) { // premio por perderse
-      if (inRoom(x, y) || offDist[y * GW + x] < 3 || R() > 0.35) continue;
+      if (inRoom(x, y) || offDist[y * GW + x] < 3 || R() > 0.32) continue;
       addPoster({ x, y }, CONFIG.posters[pi++ % CONFIG.posters.length]);
     }
 
@@ -921,11 +1141,36 @@ const Maze = (() => {
       ctx.drawImage(p.levels[p.levels.length - 1], (W - p.w * s) / 2, (H - p.h * s) / 2, p.w * s, p.h * s);
       ctx.globalAlpha = 1;
     }
-    // te alcanzó: el maniquí pegado a tu cara
-    if (st.caughtImg) { // de lejos a tu cara (st.rush de 0 a 1)
-      const p = st.caughtImg, k = st.rush, s = Math.max(W / p.w, H / p.h) * (0.08 + 1.27 * k * k);
-      if (k >= 1) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
-      ctx.drawImage(p.levels[p.levels.length - 1], (W - p.w * s) / 2 + (Math.random() - 0.5) * 6 * k, (H - p.h * s) / 2.3, p.w * s, p.h * s);
+    // te alcanzó o se abalanza hacia ti al final
+    if (st.caughtImg) {
+      const p = st.caughtImg, k = st.rush;
+      if (st.rushLunge) {
+        // embestida bien recia: arranca lejos en lo oscuro y explota directo a tu cara
+        const ease = k * k * k;
+        const s = Math.max(W / p.w, H / p.h) * (0.14 + 3.45 * ease);
+        const lvIdx = Math.min(p.levels.length - 1, Math.floor((0.25 + k * 1.1) * p.levels.length));
+        const face = p.levels[lvIdx];
+        if (k > 0.85) { ctx.fillStyle = k > 0.93 ? '#1a0000' : '#000'; ctx.fillRect(0, 0, W, H); }
+        const jx = (Math.random() - 0.5) * 30 * k;
+        const jy = (Math.random() - 0.5) * 22 * k;
+        const rot = (Math.random() - 0.5) * 0.22 * k;
+        const dw = p.w * s, dh = p.h * s;
+        ctx.save();
+        ctx.translate(W / 2 + jx, H * (0.48 - 0.05 * ease) + jy);
+        ctx.rotate(rot);
+        if (k > 0.35) {
+          ctx.globalAlpha = 0.45 * k;
+          ctx.drawImage(face, -dw / 2 - 6 * k, -dh / 2, dw, dh);
+          ctx.drawImage(face, -dw / 2 + 6 * k, -dh / 2, dw, dh);
+          ctx.globalAlpha = 1;
+        }
+        ctx.drawImage(face, -dw / 2, -dh / 2, dw, dh);
+        ctx.restore();
+      } else {
+        const s = Math.max(W / p.w, H / p.h) * (0.08 + 1.27 * k * k);
+        if (k >= 1) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
+        ctx.drawImage(p.levels[p.levels.length - 1], (W - p.w * s) / 2 + (Math.random() - 0.5) * 6 * k, (H - p.h * s) / 2.3, p.w * s, p.h * s);
+      }
     }
     // ruido: grano y cortes horizontales
     const nz = st.noise;
@@ -952,6 +1197,69 @@ const Maze = (() => {
       ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 1;
     }
+    drawMinimap();
+  }
+
+  // ---------- minimapa (plano del hospital con niebla de exploración) ----------
+  function revealSeen(px, py) {
+    if (!seen) return;
+    const sx = px | 0, sy = py | 0;
+    if (isWall(sx, sy)) return;
+    const q = [[sx, sy, 0]], vis = new Set([sy * GW + sx]);
+    seen[sy * GW + sx] = 1;
+    for (let h = 0; h < q.length; h++) {
+      const [x, y, d] = q[h];
+      if (d >= 3) continue;
+      for (const [dx, dy] of DIRS) {
+        const nx = x + dx, ny = y + dy, ni = ny * GW + nx;
+        if (!isWall(nx, ny) && !vis.has(ni)) {
+          vis.add(ni);
+          seen[ni] = 1;
+          q.push([nx, ny, d + 1]);
+        }
+      }
+    }
+  }
+  function drawMinimap() {
+    if (!mmCtx || !mmWrap || mmWrap.hidden || mmWrap.classList.contains('collapsed') || st.mode !== 'play') return;
+    const cell = 5, mw = GW * cell, mh = GH * cell;
+    if (mmCv.width !== mw || mmCv.height !== mh) { mmCv.width = mw; mmCv.height = mh; }
+    mmCtx.fillStyle = '#060907';
+    mmCtx.fillRect(0, 0, mw, mh);
+    for (let y = 0; y < GH; y++) {
+      for (let x = 0; x < GW; x++) {
+        if (grid[y][x]) continue;
+        const explored = seen[y * GW + x];
+        if (explored) mmCtx.fillStyle = inRoom(x, y) ? 'rgba(92, 160, 235, .82)' : 'rgba(196, 212, 186, .76)';
+        else mmCtx.fillStyle = inRoom(x, y) ? 'rgba(70, 110, 165, .24)' : 'rgba(115, 134, 110, .17)';
+        mmCtx.fillRect(x * cell, y * cell, cell, cell);
+      }
+    }
+    // marca del inicio
+    mmCtx.fillStyle = 'rgba(255, 255, 255, .35)';
+    mmCtx.fillRect(cell + 1, cell + 1, cell - 2, cell - 2);
+    // señal roja pulsante en la salida del cuarto final
+    const pulse = 0.45 + 0.55 * Math.abs(Math.sin(performance.now() / 360));
+    mmCtx.fillStyle = `rgba(255, 38, 38, ${pulse.toFixed(2)})`;
+    mmCtx.fillRect(exit.x * cell - 1, exit.y * cell - 1, cell + 2, cell + 2);
+    // cono de visión y posición del jugador
+    const px = st.x * cell, py = st.y * cell;
+    mmCtx.fillStyle = 'rgba(168, 255, 190, .28)';
+    mmCtx.beginPath();
+    mmCtx.moveTo(px, py);
+    mmCtx.arc(px, py, 14, st.a - 0.58, st.a + 0.58);
+    mmCtx.closePath();
+    mmCtx.fill();
+    mmCtx.fillStyle = '#a8ffbe';
+    mmCtx.beginPath();
+    mmCtx.arc(px, py, 2.6, 0, Math.PI * 2);
+    mmCtx.fill();
+    mmCtx.strokeStyle = '#fff';
+    mmCtx.lineWidth = 1.4;
+    mmCtx.beginPath();
+    mmCtx.moveTo(px, py);
+    mmCtx.lineTo(px + Math.cos(st.a) * 6, py + Math.sin(st.a) * 6);
+    mmCtx.stroke();
   }
 
   // ---------- lógica ----------
@@ -968,7 +1276,10 @@ const Maze = (() => {
       st.a += Math.max(-1.4, Math.min(1.4, tn)) * 2.3 * dt + joy.look;
       joy.look = 0;
       st.noise += (0.05 - st.noise) * Math.min(1, dt * 2);
-      if (st.caughtImg && st.rush < 1) st.rush = Math.min(1, st.rush + dt * 2.4);
+      if (st.caughtImg && st.rush < 1) {
+        if (st.rushHold > 0) st.rushHold -= dt;
+        else st.rush = Math.min(1, st.rush + dt * 3.85);
+      }
       return;
     }
     if (st.mode !== 'play') return;
@@ -987,15 +1298,21 @@ const Maze = (() => {
     }
     if ((Math.abs(fwd) > 0.1 || Math.abs(turn) > 0.1 || Math.abs(look) > 0.01) && !st.moved) { st.moved = true; setTimeout(() => $('#maze-hint').classList.add('off'), 2500); }
     const sp = 2.3 * fwd * dt, r = 0.22;
+    const ox = st.x, oy = st.y;
     const nx = st.x + Math.cos(st.a) * sp, ny = st.y + Math.sin(st.a) * sp;
     if (!isWall((nx + Math.sign(nx - st.x) * r) | 0, st.y | 0)) st.x = nx;
     if (!isWall(st.x | 0, (ny + Math.sign(ny - st.y) * r) | 0)) st.y = ny;
-    if (Math.abs(fwd) > 0.1) {
-      const before = Math.sin(st.walk);
-      st.walk += dt * Math.abs(fwd) * 9;
-      if (before > 0 && Math.sin(st.walk) <= 0) A.step();
+    const movedDist = Math.hypot(st.x - ox, st.y - oy);
+    if (movedDist > 0.001) {
+      st.walk += movedDist * 4.4;
+      st.stepDist = (st.stepDist || 0) + movedDist;
+      if (st.stepDist >= 1.02) {
+        st.stepDist -= 1.02;
+        A.step(st.inRoom ? 0.64 : 0.82, st.inRoom ? 1.15 : 1.0, false);
+      }
     }
     st.bob = Math.sin(st.walk) * 1.6;
+    revealSeen(st.x, st.y);
 
     const cx = st.x | 0, cy = st.y | 0, ci = cy * GW + cx;
     const calm = calmSet.has(ci), here = inRoom(cx, cy);
@@ -1019,7 +1336,12 @@ const Maze = (() => {
         stalker.x += ((tg.x - stalker.x) / d) * mv;
         stalker.y += ((tg.y - stalker.y) / d) * mv;
         st.stalkStep += mv;
-        if (st.stalkStep > 0.8) { st.stalkStep = 0; A.step(0.16, 180); }
+        if (st.stalkStep > 0.92) {
+          st.stalkStep = 0;
+          const sd = Math.hypot(stalker.x - st.x, stalker.y - st.y);
+          const sv = Math.max(0.18, Math.min(0.68, 1.4 / (sd + 0.8)));
+          A.step(sv, 0.72, true);
+        }
       }
     }
     if (pi >= 0 && clipQ.length && pi >= clipQ[0].at && !inRoom(cx, cy)) {
@@ -1096,6 +1418,7 @@ const Maze = (() => {
 
   async function playClip(src) {
     st.mode = 'clip';
+    if (mmWrap) mmWrap.hidden = true;
     joy.fwd = joy.turn = 0;
     const v = $('#clip');
     A.thump(45, 0.7);
@@ -1115,12 +1438,13 @@ const Maze = (() => {
     A.setBase(0);
     A.burst(200, 0.6);
     tear();
-    if (st.mode === 'clip') st.mode = 'play';
+    if (st.mode === 'clip') { st.mode = 'play'; if (mmWrap) mmWrap.hidden = false; }
   }
 
   async function stinger() {
     st.sustos++;
     st.sinceSusto = 0;
+    if (mmWrap) mmWrap.hidden = true;
     const img = $('#susto');
     img.src = CONFIG.sustos[(Math.random() * CONFIG.sustos.length) | 0];
     img.hidden = false;
@@ -1128,26 +1452,29 @@ const Maze = (() => {
     if (navigator.vibrate) navigator.vibrate(150);
     await sleep(340);
     img.hidden = true;
+    if (st.mode === 'play' && mmWrap) mmWrap.hidden = false;
     tear();
   }
 
   const angDiff = (a, b) => Math.abs(Math.atan2(Math.sin(a - b), Math.cos(a - b)));
   const until = (fn, ms) => new Promise((r) => {
     const t0 = performance.now();
-    (function chk() { if (fn() || performance.now() - t0 > ms) return r(); setTimeout(chk, 50); })();
+    (function chk() { if (fn() || performance.now() - t0 > ms) return r(); setTimeout(chk, 16); })();
   });
 
   async function end(kind, m) {
     if (st.mode !== 'play') return;
+    if (mmWrap) mmWrap.hidden = true;
     if (drone) { drone.stop(); drone = null; }
     cap().textContent = '';
-    $('#s-maze').classList.remove('shake');
+    $('#s-maze').classList.remove('shake', 'rush-shake');
     Amb.stop();
     Chat.stop();
     A.silence();
     if (kind === 'caught') { // te alcanzó: el maniquí en tu cara
       st.mode = 'caught';
       st.caughtImg = m.p;
+      st.rushLunge = false;
       st.rush = 1;
       A.thump(38, 1);
       A.burst(240, 0.7);
@@ -1155,6 +1482,8 @@ const Maze = (() => {
       await sleep(320);
       st.caughtImg = null;
     }
+    // preparamos la cara en alta resolución antes del "voltea atrás" para que no trabe ni un frame
+    const finalFace = prelight(IMGS[CONFIG.caraFinal], 520, true);
     // pantalla en negro y la voz de adentro
     st.mode = 'final';
     st.light = 0;
@@ -1189,16 +1518,18 @@ const Maze = (() => {
     mono.textContent = 'no hay nada.';
     await sleep(1800);
     mono.textContent = '';
-    // cuando regresas la vista a donde estabas viendo... ahí está
+    // cuando regresas la vista a donde estabas viendo... se lanza directo a tu cara bien recio
     await until(() => angDiff(st.a, a0) < 0.65, 14000);
     clearInterval(beat);
-    st.caughtImg = prelight(IMGS[CONFIG.caraFinal], 340, true); // viene hacia ti, rápido
+    st.caughtImg = finalFace;
+    st.rushLunge = true;
     st.rush = 0;
-    A.burst(500, 0.55);
-    A.thump(30, 0.8);
-    await until(() => st.rush >= 1, 1200);
-    A.thump(34, 1);
-    await sleep(140);
+    st.rushHold = 0.06;
+    $('#s-maze').classList.add('rush-shake');
+    A.lunge(0.32);
+    if (navigator.vibrate) navigator.vibrate([70, 20, 180]);
+    await until(() => st.rush >= 1, 700);
+    $('#s-maze').classList.remove('rush-shake');
     stopLoop();
     done();
   }
@@ -1208,8 +1539,8 @@ const Maze = (() => {
     last = t;
     update(dt);
     if (!raf) return;
-    // se dibuja a ~15 cuadros por segundo y, con mucho ruido, a veces se traba
-    if (t >= nextDraw) {
+    // durante la embestida final corre a 60fps para sentirse violento; normal corre a ~20fps
+    if (st.caughtImg || t >= nextDraw) {
       render();
       nextDraw = t + 1000 / FPS + (st.noise > 0.6 && Math.random() < 0.08 ? 120 + Math.random() * 180 : 0);
     }
@@ -1218,7 +1549,15 @@ const Maze = (() => {
   function stopLoop() { cancelAnimationFrame(raf); raf = 0; }
 
   const KEYMAP = { ArrowUp: 'u', KeyW: 'u', ArrowDown: 'd', KeyS: 'd', ArrowLeft: 'l', KeyA: 'l', ArrowRight: 'r', KeyD: 'r' };
-  addEventListener('keydown', (e) => { const k = KEYMAP[e.code]; if (k) { keys[k] = true; if (raf) e.preventDefault(); } });
+  addEventListener('keydown', (e) => {
+    if (e.code === 'KeyM' && raf && st.mode === 'play' && mmWrap) {
+      mmWrap.classList.toggle('collapsed');
+      e.preventDefault();
+      return;
+    }
+    const k = KEYMAP[e.code];
+    if (k) { keys[k] = true; if (raf) e.preventDefault(); }
+  });
   addEventListener('keyup', (e) => { const k = KEYMAP[e.code]; if (k) keys[k] = false; });
   addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
 
@@ -1277,18 +1616,29 @@ const Maze = (() => {
       await imgsReady;
       cv = $('#maze');
       ctx = cv.getContext('2d');
+      mmWrap = $('#minimap-wrap');
+      mmCv = $('#minimap');
+      mmCtx = mmCv ? mmCv.getContext('2d') : null;
+      mmBtn = $('#minimap-btn');
+      if (mmWrap && !mmBound) {
+        mmBound = true;
+        mmWrap.addEventListener('pointerdown', (e) => e.stopPropagation());
+        if (mmBtn) mmBtn.addEventListener('click', (e) => { e.stopPropagation(); mmWrap.classList.toggle('collapsed'); });
+      }
       fit();
       addEventListener('resize', () => { if (raf) fit(); });
       build();
       bindJoy();
       const first = path[1] || { x: 2, y: 1 };
       Object.assign(st, {
-        x: 1.5, y: 1.5, a: Math.atan2(first.y - 1, first.x - 1), walk: 0, bob: 0, noise: 0.25, calm: 0, flick: 1, light: 1,
-        mode: 'play', moved: false, inRoom: false, lastCalm: -1, saidLost: false, flash: 0, flashImg: null, sinceFlash: 0, band: 0, caughtImg: null, rush: 1, sustos: 0, sinceSusto: 0, lostClip: false, maxPi: 0, trail: [], stalkStep: 0,
+        x: 1.5, y: 1.5, a: Math.atan2(first.y - 1, first.x - 1), walk: 0, stepDist: 0, bob: 0, noise: 0.25, calm: 0, flick: 1, light: 1,
+        mode: 'play', moved: false, inRoom: false, lastCalm: -1, saidLost: false, flash: 0, flashImg: null, sinceFlash: 0, band: 0, caughtImg: null, rush: 1, rushLunge: false, rushHold: 0, sustos: 0, sinceSusto: 0, lostClip: false, maxPi: 0, trail: [], stalkStep: 0,
       });
+      revealSeen(st.x, st.y);
+      if (mmWrap) { mmWrap.classList.remove('collapsed'); mmWrap.hidden = false; }
       $('#maze-hint').textContent = coarse
         ? 'dedo izquierdo: caminar · dedo derecho: mirar'
-        : 'W/↑ caminar · A/D o ←/→ voltear · o arrastra con el mouse';
+        : 'W/↑ caminar · A/D o ←/→ voltear · M mapa · o arrastra con el mouse';
       CONFIG.clips.concat(CONFIG.clipPerdido).forEach((src) => { // que ya estén cargados cuando salgan
         const v = document.createElement('video');
         v.preload = 'auto';
@@ -1309,7 +1659,7 @@ const Maze = (() => {
       });
     },
     _st: st,
-    _info: () => ({ path, exit, room, GW, grid, faces: [...faceTex.keys()], mannequins, stalker }),
+    _info: () => ({ path, exit, room, GW, grid, faces: [...faceTex.keys()], arrows: arrowFaces, monitos: monitoFaces, seen, mannequins, stalker }),
   };
 })();
 
@@ -1318,25 +1668,60 @@ const Maze = (() => {
    ========================================================= */
 async function screamer() {
   const cv = $('#scream'), x = cv.getContext('2d');
-  cv.width = Math.min(innerWidth, 900);
+  cv.width = Math.min(innerWidth, 960);
   cv.height = Math.round((cv.width * innerHeight) / innerWidth);
   setOsd(false);
-  const imgs = CONFIG.screamer.map((s) => IMGS[s]).filter(Boolean);
-  A.scream(1.0);
-  if (navigator.vibrate) navigator.vibrate([80, 30, 300, 30, 500]);
-  await sleep(30); // el grito entra un pelito antes que la imagen
+  const baseImgs = CONFIG.screamer.map((s) => IMGS[s]).filter(Boolean);
+  const faceImg = IMGS[CONFIG.caraFinal] || baseImgs[0];
+  const mainImg = baseImgs[0] || faceImg;
+  if (!mainImg) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  A.scream(1.25);
+  if (navigator.vibrate) navigator.vibrate([120, 20, 350, 20, 500]);
   cv.classList.add('on');
-  for (const img of imgs) { // cortes secos de una foto a otra, sin efectos
-    const w = cv.width, h = cv.height, s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
-    x.fillStyle = '#000';
-    x.fillRect(0, 0, w, h);
-    x.drawImage(img, (w - img.naturalWidth * s) / 2, (h - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
-    x.globalAlpha = 0.18;
-    x.drawImage(grain, 0, 0, w, h);
-    x.globalAlpha = 1;
-    await sleep(900 / imgs.length);
-  }
-  cv.classList.remove('on');
+  const dur = 1150, t0 = performance.now();
+  await new Promise((res) => {
+    let f = 0;
+    function tick(now) {
+      const elapsed = now - t0;
+      if (elapsed >= dur) return res();
+      f++;
+      const p = elapsed / dur;
+      const w = cv.width, h = cv.height;
+      // alterna la foto principal y acercamientos violentos de la cara hacia la pantalla
+      const useFace = !reduced && ((f % 7 === 0) || (p > 0.35 && p < 0.55 && f % 3 === 0) || (p > 0.72 && f % 4 < 2));
+      const img = (useFace ? faceImg : mainImg) || mainImg;
+      // se acerca cada vez más recio con embestidas bruscas hacia adelante
+      const surge = reduced ? 1.05 + p * 0.35 : 1.08 + p * 1.25 + (Math.sin(p * Math.PI * 11) ** 2) * 0.28 + (useFace ? 0.32 : 0);
+      const s = Math.max(w / img.naturalWidth, h / img.naturalHeight) * surge;
+      const dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+      const jAmp = reduced ? 6 : 16 + p * 26;
+      const jx = (Math.random() - 0.5) * jAmp * 2;
+      const jy = (Math.random() - 0.5) * jAmp * 1.5;
+      const rot = reduced ? 0 : (Math.random() - 0.5) * (0.08 + p * 0.14);
+      x.fillStyle = '#000';
+      x.fillRect(0, 0, w, h);
+      x.save();
+      x.translate(w / 2 + jx, h * 0.46 + jy);
+      x.rotate(rot);
+      if (!reduced && f % 2 === 0) {
+        x.globalAlpha = 0.45;
+        x.drawImage(img, -dw / 2 - 12, -dh / 2, dw, dh);
+        x.drawImage(img, -dw / 2 + 12, -dh / 2, dw, dh);
+        x.globalAlpha = 1;
+      }
+      x.drawImage(img, -dw / 2, -dh / 2, dw, dh);
+      x.restore();
+      x.globalAlpha = 0.24 + (f % 3 === 0 ? 0.14 : 0);
+      x.drawImage(grain, 0, 0, w, h);
+      x.globalAlpha = 1;
+      cv.classList.toggle('inv', !reduced && (f % 6 === 0));
+      cv.classList.toggle('red', !reduced && (f % 9 === 3));
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+  cv.classList.remove('on', 'inv', 'red');
   x.clearRect(0, 0, cv.width, cv.height);
 }
 
