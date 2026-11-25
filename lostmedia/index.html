@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LOSTMEDIA</title>
+<meta name="description" content="encontramos esta cinta en una caja.">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex, nofollow">
+<!-- vista previa al compartir el link (WhatsApp, Instagram, X) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LOSTMEDIA">
+<meta property="og:title" content="LOSTMEDIA">
+<meta property="og:description" content="encontramos esta cinta en una caja. ponte audífonos.">
+<meta property="og:url" content="https://crusol.com.mx/lostmedia/">
+<meta property="og:image" content="https://crusol.com.mx/lostmedia/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://crusol.com.mx/lostmedia/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Ccircle cx='5' cy='7' r='1.5' fill='%23fff'/%3E%3Ccircle cx='11' cy='7' r='1.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11">
+</head>
+<body>
+<!--
+  si estás leyendo esto, ya lo viste.
+-->
+<div id="tv">
+
+  <section id="s-warn" class="scene on">
+    <div class="warn">
+      <p class="warn-k">OJO</p>
+      <p>esto tiene sustos, parpadeos y <strong>sonidos fuertes</strong>.</p>
+      <p>ponte audífonos y apaga la luz.</p>
+      <button id="b-start" class="btn">[ ▶ PLAY ]</button>
+      <button id="b-skip" class="btn btn-ghost" hidden>ya la vi · ir a la rola ▶▶</button>
+    </div>
+  </section>
+
+  <section id="s-bars" class="scene">
+    <div class="bars">
+      <div class="bars-top"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bars-mid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bars-low"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section id="s-card" class="scene">
+    <div class="card"><div id="card-text" class="card-text" aria-live="polite"></div></div>
+  </section>
+
+  <!-- metraje de dominio público (Prelinger Archives) -->
+  <section id="s-tape" class="scene">
+    <video id="tape" class="tape-video" src="video/cinta.mp4" muted playsinline preload="auto"></video>
+  </section>
+  <p id="presenta" class="presenta" aria-live="polite">KIDDWERO<br>PRESENTA</p>
+
+  <section id="s-boot" class="scene">
+    <div class="boot">
+      <p class="boot-t">LOSTMEDIA.EXE</p>
+      <p class="boot-s" id="boot-s">cargando...</p>
+      <div class="boot-bar"><i id="boot-fill"></i></div>
+      <p class="boot-c">© 1998 · versión de prueba · no copiar</p>
+    </div>
+  </section>
+
+  <section id="s-maze" class="scene">
+    <canvas id="maze" aria-label="pasillos"></canvas>
+    <p id="maze-title" class="maze-title rgb" aria-hidden="true">LOSTMEDIA</p>
+    <p id="maze-cc" class="cc" aria-live="polite"></p>
+    <p id="maze-hint" class="hint">arrastra para caminar y voltear · en compu, flechas o WASD</p>
+    <div id="chat" class="chat" hidden>
+      <div class="chat-t">sala_0 · 3 conectados</div>
+      <div id="chat-log" class="chat-log" aria-live="polite"></div>
+    </div>
+    <div id="joy" class="joy"><i id="knob"></i></div>
+  </section>
+
+  <section id="s-reveal" class="scene">
+    <div class="reveal">
+      <p class="rv-k">señal recuperada</p>
+      <div class="rv-crew">
+        <img src="img/bruno.png" alt="dibujo de bruno4vr_">
+        <img class="main" src="img/kiddwero.png" alt="dibujo de kiddwero">
+        <img src="img/prodtrash.png" alt="dibujo de prodtrash07">
+      </div>
+      <h2 class="rv-song rgb" id="rv-song">GRo0</h2>
+      <p class="rv-artist" id="rv-artist">KIDDWERO</p>
+      <p class="rv-prod" id="rv-prod"></p>
+      <p class="rv-prev">avance · 0:45</p>
+      <canvas id="scope" class="scope"></canvas>
+      <div class="tape-bar"><i id="tape-fill"></i></div>
+      <p id="rv-err" class="rv-err" hidden>la cinta está dañada (falta el audio)</p>
+      <p id="rv-end" class="rv-end" hidden>eso es todo por ahora.<br>la rola completa sale muy pronto.</p>
+      <div class="rv-ctrl">
+        <button id="b-pp" class="btn">❚❚ PAUSA</button>
+        <button id="b-rew" class="btn btn-ghost">◀◀ otra vez</button>
+      </div>
+      <p class="rv-date" id="rv-date"></p>
+      <nav class="rv-links" id="rv-links"></nav>
+    </div>
+    <a class="credit" href="https://instagram.com/cruzsoi" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      <span>visuals made by: <b>@cruzsoi</b></span>
+    </a>
+  </section>
+
+  <canvas id="scream" class="scream" aria-hidden="true"></canvas>
+
+  <div id="osd" class="osd" aria-hidden="true">
+    <span id="osd-play" class="osd-tl">PLAY ▶</span>
+    <span id="osd-tc" class="osd-br">SP 0:00:00</span>
+  </div>
+</div>
+
+<audio id="song" preload="auto"></audio>
+<canvas id="grain" class="grain" aria-hidden="true"></canvas>
+<div class="scan" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<noscript><p style="color:#fff;font:20px monospace;padding:24px">la cinta necesita JavaScript.</p></noscript>
+<script src="main.js?v=11"></script>
+</body>
+</html>
