@@ -16,23 +16,25 @@ const CONFIG = {
   chat: [
     ['kiddwero', '¿hay alguien?'],
     ['bruno4vr_', 'aquí'],
-    ['prodtrash07', 'no te muevas'],
+    ['trash', 'no te muevas'],
     ['kiddwero', 'no les des la espalda'],
     ['???', 'ya te vimos'],
   ],
   maniquies: ['img/manq-1.png', 'img/manq-2.png', 'img/manq-3.png', 'img/manq-4.png'],
   // el screamer va pasando por estas imágenes en orden (la foto de kiddwero se queda más tiempo)
-  screamer: ['img/s-capucha.jpg', 'img/s-ojo.jpg', 'img/kiddwero-foto.jpg'],
+  // niños con máscaras de carnaval, Dinamarca, años 30 (Biblioteca Real Danesa, dominio público, vía Wikimedia Commons)
+  screamer: ['img/s-mascara.jpg'],
+  caraFinal: 'img/cara-mascara.png',  // la cara que aparece frente a ti al voltear de regreso
   // sustos rápidos si te metes muy hondo en un callejón sin salida (máx. 2 por partida)
-  sustos: ['img/s-nino.jpg', 'img/s-maniqui.jpg', 'img/s-capucha.jpg'],
+  sustos: ['img/s-ninos.jpg', 'img/s-maniqui.jpg', 'img/s-nino.jpg'],
   // clips raros que cortan el juego conforme avanzas por el camino (en orden) y uno si te pierdes mucho
-  clips: ['video/clip-ojo.mp4', 'video/clip-cuerpo.mp4', 'video/clip-aguja.mp4', 'video/clip-dormido.mp4', 'video/clip-mesa.mp4', 'video/clip-capucha.mp4'],
+  clips: ['video/clip-ojo.mp4', 'video/clip-cuerpo.mp4', 'video/clip-aguja.mp4', 'video/clip-dormido.mp4', 'video/clip-mesa.mp4', 'video/clip-mirada.mp4'],
   clipPerdido: 'video/clip-cabeza.mp4',
   fecha: 'LOSTMEDIA · EP · muy pronto',
   links: [
     { label: '@kiddwero', url: 'https://instagram.com/kiddwero' },
     { label: '@bruno4vr_', url: 'https://instagram.com/bruno4vr_' },
-    { label: '@prodtrash07', url: 'https://instagram.com/prodtrash07' },
+    { label: 'Trash (@prodtrash07)', url: 'https://instagram.com/prodtrash07' },
     { label: 'PRE-SAVE', url: '#' },
   ],
 };
@@ -55,7 +57,7 @@ function loadImg(src) {
 }
 const IMGS = {};
 const imgsReady = Promise.all(
-  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz])]
+  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz, CONFIG.caraFinal])]
     .map((s) => loadImg(s).then((i) => { IMGS[s] = i; }))
 );
 
@@ -898,7 +900,7 @@ const Maze = (() => {
       ctx.globalAlpha = 1;
     }
     // te alcanzó: el maniquí pegado a tu cara
-    if (st.mode === 'caught' && st.caughtImg) {
+    if (st.caughtImg) {
       const p = st.caughtImg, s = Math.max(W / p.w, H / p.h) * 1.35;
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, W, H);
@@ -940,7 +942,13 @@ const Maze = (() => {
   }
 
   function update(dt) {
-    if (st.mode === 'calm') { st.light = Math.max(0, st.light - dt * 0.75); st.noise += (0 - st.noise) * Math.min(1, dt * 3); return; }
+    if (st.mode === 'turn') { // final: no puedes caminar, solo voltear
+      const tn = (keys.r ? 1 : 0) - (keys.l ? 1 : 0) + joy.turn;
+      st.a += Math.max(-1.4, Math.min(1.4, tn)) * 2.3 * dt + joy.look;
+      joy.look = 0;
+      st.noise += (0.05 - st.noise) * Math.min(1, dt * 2);
+      return;
+    }
     if (st.mode !== 'play') return;
     let fwd = (keys.u ? 1 : 0) - (keys.d ? 1 : 0) + joy.fwd;
     const turn = (keys.r ? 1 : 0) - (keys.l ? 1 : 0) + joy.turn;
@@ -973,7 +981,11 @@ const Maze = (() => {
 
     // clips raros conforme avanzas, uno si te pierdes mucho, y sustos en callejones hondos
     const pi = pathIdx[ci];
-    if (pi >= 0 && clipQ.length && pi >= clipQ[0].at) { playClip(clipQ.shift().src); return; }
+    if (pi >= 0 && clipQ.length && pi >= clipQ[0].at && !inRoom(cx, cy)) {
+      while (clipQ.length > 1 && clipQ[1].at <= pi) clipQ.shift(); // si te saltaste alguno por un atajo, solo sale uno
+      playClip(clipQ.shift().src);
+      return;
+    }
     if (offDist[ci] >= 4 && !st.lostClip) { st.lostClip = true; playClip(CONFIG.clipPerdido); return; }
     st.sinceSusto += dt;
     if (offDist[ci] >= 3 && st.sustos < 2 && st.sinceSusto > 15 && cx % 2 && cy % 2
@@ -1078,33 +1090,70 @@ const Maze = (() => {
     tear();
   }
 
+  const angDiff = (a, b) => Math.abs(Math.atan2(Math.sin(a - b), Math.cos(a - b)));
+  const until = (fn, ms) => new Promise((r) => {
+    const t0 = performance.now();
+    (function chk() { if (fn() || performance.now() - t0 > ms) return r(); setTimeout(chk, 50); })();
+  });
+
   async function end(kind, m) {
     if (st.mode !== 'play') return;
     if (drone) { drone.stop(); drone = null; }
     cap().textContent = '';
     $('#s-maze').classList.remove('shake');
-    if (kind === 'caught') {
-      // te dio la espalda: el maniquí ya está en tu cara
+    Amb.stop();
+    Chat.stop();
+    A.silence();
+    if (kind === 'caught') { // te alcanzó: el maniquí en tu cara
       st.mode = 'caught';
       st.caughtImg = m.p;
-      Amb.stop();
-      Chat.stop();
-      A.silence();
       A.thump(38, 1);
       A.burst(240, 0.7);
       if (navigator.vibrate) navigator.vibrate(140);
-      await sleep(280);
-    } else {
-      // calma falsa: parece que ya se acabó
-      st.mode = 'calm';
-      A.silence();
-      Amb.fade();
-      Chat.add('kiddwero', 'ya te puedes ir');
-      await sleep(1700);
-      Chat.stop();
-      Amb.stop();
-      await sleep(1400); // negro y silencio
+      await sleep(320);
+      st.caughtImg = null;
     }
+    // pantalla en negro y la voz de adentro
+    st.mode = 'final';
+    st.light = 0;
+    st.noise = 0;
+    mannequins.forEach((mq) => { mq.alive = false; });
+    sprites.forEach((s) => { if (s.kind === 'ap') s.alive = false; });
+    const mono = $('#maze-mono'), hint = $('#maze-hint');
+    const beat = setInterval(() => A.thump(36, 0.35), 900); // latido
+    const lines = kind === 'caught'
+      ? ['...', '¿qué fue eso?', 'ya no están.', 'no se escucha nada.', 'siento que alguien me está viendo.']
+      : ['¿ya se acabó?', 'no se escucha nada.', 'siento que alguien me está viendo.'];
+    await sleep(900);
+    for (const ln of lines) {
+      mono.textContent = ln;
+      await sleep(2300);
+      mono.textContent = '';
+      await sleep(450);
+    }
+    // vuelve un poco de luz: el cuarto vacío
+    st.light = 0.55;
+    const a0 = st.a;
+    st.mode = 'turn';
+    mono.classList.add('rojo');
+    mono.textContent = 'voltea atrás.';
+    hint.textContent = coarse ? 'desliza el dedo para voltear' : 'usa ← → para voltear';
+    hint.classList.remove('off');
+    await until(() => angDiff(st.a, a0 + Math.PI) < 0.7, 16000);
+    mono.classList.remove('rojo');
+    mono.textContent = '';
+    hint.classList.add('off');
+    await sleep(1100);
+    mono.textContent = 'no hay nada.';
+    await sleep(1800);
+    mono.textContent = '';
+    // cuando regresas la vista a donde estabas viendo... ahí está
+    await until(() => angDiff(st.a, a0) < 0.65, 14000);
+    clearInterval(beat);
+    st.caughtImg = prelight(IMGS[CONFIG.caraFinal], 340);
+    st.light = 0.9;
+    A.thump(34, 1);
+    await sleep(260);
     stopLoop();
     done();
   }
@@ -1239,7 +1288,7 @@ async function screamer() {
     x.globalAlpha = 0.18;
     x.drawImage(grain, 0, 0, w, h);
     x.globalAlpha = 1;
-    await sleep(300);
+    await sleep(900 / imgs.length);
   }
   cv.classList.remove('on');
   x.clearRect(0, 0, cv.width, cv.height);
@@ -1378,38 +1427,38 @@ const Wiki = (() => {
     const wk = $('.wk'), sc = $('#s-wiki'), foto = $('#wk-foto'), marq = $('.wk-marq');
     const wait = (s) => sleep(s * 1000 * k);
     collect();
-    await wait(10); // 0-10 s: todo normal
-    for (let i = 0; i < 4; i++) { // 10-14 s: letras que cambian y la foto parpadea
-      mangle(2 + i);
-      if (i === 2) { foto.src = 'img/s-ojo.jpg'; setTimeout(() => { foto.src = 'img/kiddwero-foto.jpg'; }, 140); }
+    await wait(30); // 0-30 s: todo normal
+    for (let i = 0; i < 10; i++) { // 30-40 s: letras que cambian y la foto parpadea
+      mangle(1 + (i >> 1));
+      if (i === 4 || i === 8) { foto.src = i === 4 ? 'img/s-ojo.jpg' : 'img/s-mascara.jpg'; setTimeout(() => { foto.src = 'img/kiddwero-foto.jpg'; }, 150); }
       await wait(1);
     }
-    // 14 s: ya se nota
+    // 40 s: ya se nota
     wk.classList.add('c1');
     marq.textContent = '★ no debiste entrar ★ no debiste entrar ★ no debiste entrar ★ no debiste entrar ★';
     document.title = 'KIDDWERO - L░stWiki';
-    for (let i = 0; i < 6; i++) { // 14-17 s
-      mangle(5 + i * 2);
-      if (i === 2 || i === 5) { foto.src = 'img/s-capucha.jpg'; setTimeout(() => { foto.src = 'img/kiddwero-foto.jpg'; }, 200); }
+    for (let i = 0; i < 10; i++) { // 40-45 s
+      mangle(4 + i * 2);
+      if (i === 3 || i === 7) { foto.src = 'img/s-mascara.jpg'; setTimeout(() => { foto.src = 'img/kiddwero-foto.jpg'; }, 220); }
       if (loud() && i % 2 === 0) A.burst(60, 0.2);
       await wait(0.5);
     }
-    // 17 s: el texto se reescribe solo
+    // 45 s: el texto se reescribe solo
     wk.classList.add('c2');
     sc.classList.add('c2');
     document.body.classList.add('c2');
     document.title = 'no debiste entrar';
     $('#wk-h1').textContent = 'K̷I̷D̷D̷W̷E̷R̷O̷';
     [...$('#wk-main').querySelectorAll('p')].forEach((p, i) => { if (i % 2) p.textContent = 'no debiste entrar. no debiste entrar. no debiste entrar.'; });
-    foto.src = 'img/s-capucha.jpg';
+    foto.src = 'img/s-mascara.jpg';
     collect();
     if (loud()) { A.thump(45, 0.6); A.setBase(0.06); }
-    for (let i = 0; i < 8; i++) { // 17-18.5 s
+    for (let i = 0; i < 16; i++) { // 45-48 s
       mangle(25);
       if (i % 3 === 0) tear();
-      await sleep(170);
+      await wait(0.19);
     }
-    // 18.5 s: se cae a pedazos y a los ~20 s sale la ventana que abre el juego
+    // 48 s: se cae a pedazos y a los ~50 s sale la ventana que abre el juego
     wk.classList.add('c3');
     wk.querySelectorAll('p, h2, h3, table, .wk-toc, .wk-thumb, li, .wk-tabs').forEach((el) => {
       el.style.transform = `translate(${(Math.random() - 0.5) * 70}px, ${Math.random() * 60}px) rotate(${(Math.random() - 0.5) * 10}deg)`;
@@ -1420,7 +1469,6 @@ const Wiki = (() => {
     document.body.classList.remove('wk-mode', 'c2');
     if (loud()) A.setBase(0);
     show('s-warn');
-    if (store.get('lm_visto')) $('#b-skip').hidden = false;
     $('#b-start').focus({ preventScroll: true });
   }
 
@@ -1437,16 +1485,31 @@ const Wiki = (() => {
         A.init();
         A.ctx.resume();
       });
-      decay(store.get('lm_visto') ? 0.35 : 1); // si ya la viste, se rompe en ~10 s
+      decay(store.get('lm_visto') ? 0.4 : 1); // si ya la viste, se rompe más rápido (~20 s)
     },
   };
 })();
 
 Wiki.start();
-$('#b-start').addEventListener('click', run, { once: true });
+// no hay forma de saltarse el juego: "morir" también te mete, con un susto de bienvenida
+let launched = false;
+$('#b-start').addEventListener('click', () => { if (launched) return; launched = true; run(); });
 $('#b-skip').addEventListener('click', async () => {
+  if (launched) return;
+  launched = true;
   A.init();
   await A.ctx.resume();
-  await snow(500, 0.4);
-  reveal();
-}, { once: true });
+  const img = $('#susto');
+  show('s-maze');
+  $('#maze').style.visibility = 'hidden';
+  img.src = 'img/s-mascara.jpg';
+  img.hidden = false;
+  A.scream(0.6);
+  if (navigator.vibrate) navigator.vibrate(150);
+  await sleep(450);
+  img.hidden = true;
+  $('#maze').style.visibility = '';
+  show('none');
+  await sleep(700);
+  run();
+});

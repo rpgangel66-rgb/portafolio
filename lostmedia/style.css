@@ -200,6 +200,9 @@ body.wk-mode.c2 .scan, body.wk-mode.c2 .vignette { opacity: 1; }
 .clip, .susto { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; background: #000; }
 .clip { object-fit: contain; filter: contrast(1.1); }
 .susto { object-fit: cover; filter: contrast(1.3); animation: shake .05s steps(2) infinite; }
+.mono { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(90vw, 640px); text-align: center; z-index: 5; pointer-events: none;
+  font-family: var(--px); font-size: clamp(12px, 2.4vw, 20px); line-height: 1.8; color: #ddd; text-shadow: 0 0 8px rgba(255,255,255,.35); }
+.mono.rojo { color: #ff1a1a; font-size: clamp(18px, 4.4vw, 38px); text-shadow: 0 0 16px rgba(255,0,0,.7); animation: flick .9s steps(1) infinite; }
 .maze-title { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; pointer-events: none;
   font-family: var(--px); font-size: clamp(26px, 8vw, 92px); letter-spacing: .08em; color: #fff; opacity: 0; }
 .maze-title.show { animation: titleFade 3.4s ease-in forwards; }
