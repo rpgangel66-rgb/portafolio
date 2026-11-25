@@ -7,6 +7,7 @@
   --osd: 'VT323', 'Courier New', monospace;
   --type: 'VT323', 'Courier New', monospace;
   --px: 'Press Start 2P', 'VT323', monospace; /* letra de videojuego de 8 bits */
+  --web: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color-scheme: dark;
 }
 
@@ -194,24 +195,24 @@ body.wk-mode.c2 .scan, body.wk-mode.c2 .vignette { opacity: 1; }
 
 /* pasillos */
 #s-maze { padding: 0; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
-#maze { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; image-rendering: crisp-edges; filter: contrast(1.15) blur(.4px); }
+#maze { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: auto; filter: contrast(1.12) saturate(1.05); }
 #s-maze.shake #maze { animation: jit .08s steps(2) infinite; }
 @keyframes jit { 50% { transform: translate(2px, -1px); } }
 .clip, .susto { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; background: #000; }
 .clip { object-fit: contain; filter: contrast(1.1); }
 .susto { object-fit: cover; filter: contrast(1.3); animation: shake .05s steps(2) infinite; }
 .mono { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(90vw, 640px); text-align: center; z-index: 5; pointer-events: none;
-  font-family: var(--px); font-size: clamp(12px, 2.4vw, 20px); line-height: 1.8; color: #ddd; text-shadow: 0 0 8px rgba(255,255,255,.35); }
-.mono.rojo { color: #ff1a1a; font-size: clamp(18px, 4.4vw, 38px); text-shadow: 0 0 16px rgba(255,0,0,.7); animation: flick .9s steps(1) infinite; }
+  font-family: var(--web); font-size: clamp(17px, 2.8vw, 26px); line-height: 1.5; letter-spacing: .02em; color: #ddd; text-shadow: 0 0 8px rgba(255,255,255,.3); }
+.mono.rojo { color: #ff1a1a; font-weight: 700; font-size: clamp(26px, 5.4vw, 48px); text-shadow: 0 0 16px rgba(255,0,0,.7); animation: flick .9s steps(1) infinite; }
 .maze-title { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; pointer-events: none;
   font-family: var(--px); font-size: clamp(26px, 8vw, 92px); letter-spacing: .08em; color: #fff; opacity: 0; }
 .maze-title.show { animation: titleFade 3.4s ease-in forwards; }
 @keyframes titleFade { 0% { opacity: 0; } 8% { opacity: 1; } 45% { opacity: 1; filter: blur(0); } 100% { opacity: 0; filter: blur(6px); letter-spacing: .3em; } }
 .cc { position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%); max-width: min(92vw, 720px); width: max-content;
-  font-family: var(--px); font-size: clamp(11px, 1.8vw, 16px); line-height: 1.6; text-align: center; color: #fff; background: #000; padding: 6px 12px 4px; z-index: 2; }
+  font-family: var(--web); font-size: clamp(15px, 2vw, 19px); line-height: 1.4; text-align: center; color: #fff; background: rgba(0,0,0,.78); padding: 6px 14px; z-index: 2; }
 .cc:empty { display: none; }
 .hint { position: absolute; left: 0; right: 0; bottom: max(56px, calc(env(safe-area-inset-bottom) + 48px)); text-align: center; padding: 0 16px;
-  font-family: var(--osd); font-size: 20px; color: var(--dim); pointer-events: none; transition: opacity .6s; z-index: 2; }
+  font-family: var(--web); font-size: 14px; color: var(--dim); pointer-events: none; transition: opacity .6s; z-index: 2; }
 .hint.off { opacity: 0; }
 .chat { position: absolute; left: 16px; bottom: 16px; width: min(320px, calc(100vw - 32px)); z-index: 3; color: #000;
   background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; font-family: var(--osd); }

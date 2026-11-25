@@ -8,10 +8,13 @@ const CONFIG = {
   ambiente: 'audio/pasillo.mp3',     // la misma rola, lenta y al revés
   sample: 'audio/sample.mp3',         // el sample de estonotesale: de fondo, limpio en los puntos tranquilos
   // PNG pegados en las paredes de los pasillos (agrega los que mande kiddwero)
-  // (los 3 primeros salen en los puntos tranquilos)
-  posters: ['img/kiddwero.png', 'img/bruno.png', 'img/prodtrash.png', 'img/kiddwero-foto.jpg', 'img/kiddwero.png', 'img/manq-2.png', 'img/bruno.png', 'img/prodtrash.png', 'img/screamer-cara.jpg', 'img/kiddwero-foto.jpg'],
+  // fotos pegadas en las paredes (los 3 primeros salen en los puntos tranquilos). Los dibujos de los monitos ya solo salen al final.
+  posters: ['img/s-ninos.jpg', 'img/screamer-cara.jpg', 'img/s-ojo.jpg', 'img/manq-2.png', 'img/s-nino.jpg', 'img/s-maniqui.jpg', 'img/s-mascara.jpg'],
   // los que aparecen parados al fondo del pasillo y se esfuman
-  apariciones: ['img/kiddwero.png', 'img/bruno.png', 'img/prodtrash.png'],
+  apariciones: ['img/manq-1.png', 'img/cara-mascara.png', 'img/manq-4.png', 'img/cara-mascara.png'],
+  // texturas de Bruno: pared de hospital, pared con sangre, piso y techo
+  texturas: { pared: 'img/tex-pared.jpg', sangre: 'img/tex-sangre.jpg', piso: 'img/tex-piso.jpg', techo: 'img/tex-techo.jpg' },
+  acosador: 'img/manq-3.png',         // el que te sigue lento a unos pasos, sin alcanzarte
   tapiz: 'img/tapiz.png',             // paredes del cuarto de maniquíes (estilo mundo 3D de chat de los 90)
   chat: [
     ['kiddwero', '¿hay alguien?'],
@@ -57,7 +60,7 @@ function loadImg(src) {
 }
 const IMGS = {};
 const imgsReady = Promise.all(
-  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz, CONFIG.caraFinal])]
+  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz, CONFIG.caraFinal, CONFIG.acosador, ...Object.values(CONFIG.texturas)])]
     .map((s) => loadImg(s).then((i) => { IMGS[s] = i; }))
 );
 
@@ -147,12 +150,12 @@ const A = {
     o.start(t);
     o.stop(t + 0.5);
   },
-  step() {
+  step(v = 0.55, f = 260) {
     const c = this.ctx, t = this.now(), s = c.createBufferSource(), lp = c.createBiquadFilter(), g = c.createGain();
     s.buffer = this.nbuf;
     lp.type = 'lowpass';
-    lp.frequency.value = 260 + Math.random() * 140;
-    g.gain.setValueAtTime(0.55, t);
+    lp.frequency.value = f + Math.random() * 140;
+    g.gain.setValueAtTime(v, t);
     g.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
     s.connect(lp).connect(g).connect(this.master);
     s.start(t, Math.random() * 1.5, 0.16);
@@ -277,20 +280,21 @@ const Amb = {
     el.play().catch(() => {});
     if (this.smp) this.smp.play().catch(() => {});
   },
-  set(noise, calm) {
+  set(noise, calm, vol = 1) {
     if (!this.el) return;
     const t = A.now();
     if (this.routed) {
+      this.songG.gain.setTargetAtTime((this.smp ? 0.28 : 1) * vol, t, 0.5);
       this.dry.gain.setTargetAtTime(1 - noise * 0.55, t, 0.2);
       this.wet.gain.setTargetAtTime(noise * 0.45, t, 0.2);
       this.lp.frequency.setTargetAtTime(700 + (1 - noise) * 7000, t, 0.3);
       if (this.sG) {
-        this.sG.gain.setTargetAtTime(1.1 + 0.5 * calm, t, 0.3);
+        this.sG.gain.setTargetAtTime((1.1 + 0.5 * calm) * vol, t, 0.3);
         this.sLp.frequency.setTargetAtTime(1800 + (1 - noise) * 12000, t, 0.3);
       }
     } else {
-      this.el.volume = (this.smp ? 0.35 : 0.9) * (0.5 + 0.5 * (1 - noise));
-      if (this.smp) this.smp.volume = Math.min(1, 0.6 + 0.4 * calm);
+      this.el.volume = (this.smp ? 0.35 : 0.9) * (0.5 + 0.5 * (1 - noise)) * vol;
+      if (this.smp) this.smp.volume = Math.min(1, 0.6 + 0.4 * calm) * vol;
     }
     this.el.playbackRate = Math.max(0.6, 1 - noise * 0.14 + Math.sin(performance.now() / 650) * noise * 0.05);
   },
@@ -498,7 +502,7 @@ const Maze = (() => {
   const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
   const CALM_LINES = ['aquí está tranquilo.', 'sigue.', 'no te detengas.', 'ya casi.'];
   let cv, ctx, W, H, img, buf32, zbuf, spot, planeLen, noiseFrames = [];
-  let grid, path, offDist, calmSet, calmIdx, room, exit, pathIdx, clipQ = [];
+  let grid, path, offDist, calmSet, calmIdx, room, exit, pathIdx, clipQ = [], bloodMap, stalker;
   let tex = {}, faceTex = new Map(), sprites = [], mannequins = [];
   let raf = 0, last = 0, done, drone, ampT = 0;
   const keys = {}, joy = { fwd: 0, turn: 0, look: 0 };
@@ -603,15 +607,17 @@ const Maze = (() => {
     return { n, c };
   }
 
+  // pasa una textura gris generada a color (respaldo si no cargan las fotos)
+  function g2c(t) {
+    const c = new Uint32Array(t.n * t.n);
+    for (let i = 0; i < c.length; i++) { const v = (t.d[i] * 255) | 0; c[i] = rgb(v * 0.95, v, v * 0.9); }
+    return { n: t.n, c };
+  }
   function posterTex(base, image, R) {
-    const n = 128, c = document.createElement('canvas');
+    const n = base.n, c = document.createElement('canvas');
     c.width = c.height = n;
     const x = c.getContext('2d'), id = x.createImageData(n, n);
-    for (let i = 0; i < n * n; i++) {
-      const sx = (i % n) >> 1, sy = ((i / n) | 0) >> 1, v = base.d[sy * base.n + sx] * 255;
-      id.data[i * 4] = id.data[i * 4 + 1] = id.data[i * 4 + 2] = v;
-      id.data[i * 4 + 3] = 255;
-    }
+    new Uint32Array(id.data.buffer).set(base.c);
     x.putImageData(id, 0, 0);
     if (image) {
       const box = n * 0.66, s = Math.min(box / image.naturalWidth, box / image.naturalHeight);
@@ -624,9 +630,7 @@ const Maze = (() => {
       x.restore();
     }
     try {
-      const px = x.getImageData(0, 0, n, n).data, d = new Float32Array(n * n);
-      for (let i = 0; i < n * n; i++) d[i] = (px[i * 4] * 0.3 + px[i * 4 + 1] * 0.59 + px[i * 4 + 2] * 0.11) / 255;
-      return { n, d };
+      return { n, c: new Uint32Array(x.getImageData(0, 0, n, n).data.slice().buffer) };
     } catch { return base; } // abierto como archivo: el navegador no deja leer la imagen
   }
   function prelight(image, maxH = 170, color = false) {
@@ -712,8 +716,16 @@ const Maze = (() => {
     });
 
     // texturas y PNG en las paredes
-    const wall = genWall(R);
-    tex = { wall, floor: genFloor(R), ceil: genCeil(R), rFloor: genRoomFloor(R), rCeil: genRoomSky(R) };
+    const ct = (k, n) => colorTex(IMGS[CONFIG.texturas[k]], n);
+    tex = {
+      wall: ct('pared', 256) || g2c(genWall(R)),
+      blood: ct('sangre', 256) || g2c(genWall(R)),
+      floor: ct('piso', 128) || g2c(genFloor(R)),
+      ceil: ct('techo', 128) || g2c(genCeil(R)),
+      rFloor: genRoomFloor(R), rCeil: genRoomSky(R),
+    };
+    bloodMap = new Uint8Array(GW * GH);
+    for (let i = 0; i < bloodMap.length; i++) bloodMap[i] = R() < 0.24 ? 1 : 0;
     tex.rWall = colorTex(IMGS[CONFIG.tapiz], 64) || genRoomWall(R);
     faceTex = new Map();
     const faceKey = (wx, wy, dx, dy) => `${wx},${wy},${dx ? 0 : 1},${(dx || dy) > 0 ? 1 : 0}`;
@@ -721,7 +733,7 @@ const Maze = (() => {
       const opts = DIRS.filter(([dx, dy]) => isWall(p.x + dx, p.y + dy) && !faceTex.has(faceKey(p.x + dx, p.y + dy, dx, dy)));
       if (!opts.length) return;
       const [dx, dy] = opts[(R() * opts.length) | 0];
-      faceTex.set(faceKey(p.x + dx, p.y + dy, dx, dy), posterTex(wall, IMGS[src], R));
+      faceTex.set(faceKey(p.x + dx, p.y + dy, dx, dy), posterTex(tex.wall, IMGS[src], R));
     };
     let pi = 0;
     const calmDone = new Set();
@@ -741,9 +753,9 @@ const Maze = (() => {
     [0.3, 0.52, 0.72, 0.88].forEach((f, k) => {
       const p = outside[Math.floor(outside.length * f)];
       const src = CONFIG.apariciones[k % CONFIG.apariciones.length];
-      const pl = prelight(IMGS[src]);
-      const mq = src.includes('manq');
-      if (p && pl) sprites.push({ kind: 'ap', x: p.x + 0.5, y: p.y + 0.5, p: pl, h: mq ? 0.7 : 0.95, lift: mq ? 0.3 : 0, alive: true });
+      const pl = prelight(IMGS[src], 200, true);
+      const cara = src.includes('cara');
+      if (p && pl) sprites.push({ kind: 'ap', x: p.x + 0.5, y: p.y + 0.5, p: pl, h: cara ? 0.42 : 0.72, lift: cara ? 0.42 : 0.28, alive: true });
     });
     mannequins = [];
     const spots = [];
@@ -759,16 +771,30 @@ const Maze = (() => {
       mannequins.push(m);
       sprites.push(m);
     }
+    // maniquíes quietos regados por los pasillos
+    const halls = [];
+    for (let y = 1; y < GH; y += 2) for (let x = 1; x < GW; x += 2) {
+      if (!isWall(x, y) && !inRoom(x, y) && !calmSet.has(y * GW + x) && x + y > 6) halls.push([x, y]);
+    }
+    for (let k = 0; k < 16 && halls.length; k++) {
+      const [x, y] = halls.splice((R() * halls.length) | 0, 1)[0];
+      const pl = prelight(IMGS[CONFIG.maniquies[(k + 1) % CONFIG.maniquies.length]], 200, true);
+      if (pl) sprites.push({ kind: 'cm', x: x + 0.3 + R() * 0.4, y: y + 0.3 + R() * 0.4, p: pl, h: 0.7, lift: 0.28, alive: true });
+    }
+    // el que te sigue
+    const sp = prelight(IMGS[CONFIG.acosador], 220, true);
+    stalker = { kind: 'st', x: 1.5, y: 1.5, p: sp, h: 0.74, lift: 0.26, alive: false };
+    if (sp) sprites.push(stalker);
   }
 
   // ---------- pantalla ----------
   const B4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
-  const FPS = 15; // como los juegos de antes
+  const FPS = 20;
   let dith, nextDraw = 0;
   function fit() {
     const ar = innerWidth / innerHeight;
-    H = ar >= 1 ? 120 : 170;
-    W = Math.max(80, Math.min(240, Math.round(H * ar)));
+    H = ar >= 1 ? 220 : 300;
+    W = Math.max(120, Math.min(440, Math.round(H * ar)));
     planeLen = Math.max(0.42, (0.66 * (W / H)) / (4 / 3));
     cv.width = W; cv.height = H;
     img = ctx.createImageData(W, H);
@@ -800,14 +826,10 @@ const Maze = (() => {
     buf32[i] = 0xff000000 | (((c * 0.9) | 0) << 16) | (c << 8) | ((c * 0.86) | 0);
   }
 
+  // color de la textura por la luz, con un tono enfermo de hospital
   function pixC(i, col, l) {
-    l *= 1.25 / 255 * 10;
-    const d = dith[i];
-    let r = ((((col & 255) * l + d) | 0) * 25.5) | 0, g = (((((col >> 8) & 255) * l + d) | 0) * 25.5) | 0, b = (((((col >> 16) & 255) * l + d) | 0) * 25.5) | 0;
-    if (r > 255) r = 255;
-    if (g > 255) g = 255;
-    if (b > 255) b = 255;
-    buf32[i] = 0xff000000 | (b << 16) | (g << 8) | r;
+    const r = (col & 255) * l, g = ((col >> 8) & 255) * l * 0.96, b = ((col >> 16) & 255) * l * 0.86;
+    buf32[i] = 0xff000000 | ((b > 255 ? 255 : b | 0) << 16) | ((g > 255 ? 255 : g | 0) << 8) | (r > 255 ? 255 : r | 0);
   }
   const roomLit = (d) => Math.max(0.18, 1 - d / 14) * st.flick * st.light;
 
@@ -821,14 +843,14 @@ const Maze = (() => {
       const floor = y > half, p = floor ? y - half : half - y, row = y * W;
       if (p < 1) { for (let x = 0; x < W; x++) buf32[row + x] = 0xff000000; continue; }
       const rd = (H * 0.5) / p, fog = Math.max(0, 1 - rd / FOG), f2 = fog * fog * fl * (floor ? 1 : 0.6);
-      const T = floor ? tex.floor : tex.ceil, tn = T.n, td = T.d, m = tn - 1;
+      const T = floor ? tex.floor : tex.ceil, tn = T.n, tc = T.c, m = tn - 1;
       let fx = px + rd * rx0, fy = py + rd * ry0;
       const sx = (rd * (rx1 - rx0)) / W, sy = (rd * (ry1 - ry0)) / W;
       const RT = floor ? tex.rFloor : tex.rCeil, rn = RT.n, rm = rn - 1, rl = roomLit(rd);
       for (let x = 0; x < W; x++) {
         const cx = fx | 0, cy = fy | 0;
-        if (cx >= room.x0 && cx <= room.x1 && cy >= room.y0 && cy <= room.y1) pixC(row + x, RT.c[(((fy * rn) | 0) & rm) * rn + (((fx * rn) | 0) & rm)], rl);
-        else pix(row + x, td[(((fy * tn) | 0) & m) * tn + (((fx * tn) | 0) & m)] * f2 * spot[row + x]);
+        if (cx >= room.x0 && cx <= room.x1 && cy >= room.y0 && cy <= room.y1) pixC(row + x, RT.c[(((fy * rn) | 0) & rm) * rn + (((fx * rn) | 0) & rm)], rl * 1.2);
+        else pixC(row + x, tc[(((fy * tn) | 0) & m) * tn + (((fx * tn) | 0) & m)], f2 * spot[row + x] * 1.8);
         fx += sx; fy += sy;
       }
     }
@@ -854,10 +876,10 @@ const Maze = (() => {
         wx -= Math.floor(wx);
         const tx = (wx * rn) | 0, lit = roomLit(perp) * (side ? 0.82 : 1);
         const y0 = Math.max(0, Math.ceil(top)), y1 = Math.min(H, Math.floor(top + lh));
-        for (let y = y0; y < y1; y++) pixC(y * W + x, RW.c[Math.min(rn - 1, (((y - top) / lh) * rn) | 0) * rn + tx], lit);
+        for (let y = y0; y < y1; y++) pixC(y * W + x, RW.c[Math.min(rn - 1, (((y - top) / lh) * rn) | 0) * rn + tx], lit * 1.2);
         continue;
       }
-      const T = faceTex.get(`${mx},${my},${side},${(side ? sty : stx) > 0 ? 1 : 0}`) || tex.wall, tn = T.n, td = T.d;
+      const T = faceTex.get(`${mx},${my},${side},${(side ? sty : stx) > 0 ? 1 : 0}`) || (bloodMap[my * GW + mx] ? tex.blood : tex.wall), tn = T.n, tc = T.c;
       let wx = side === 0 ? py + perp * rdy : px + perp * rdx;
       wx -= Math.floor(wx);
       let tx = (wx * tn) | 0;
@@ -866,7 +888,7 @@ const Maze = (() => {
       const y0 = Math.max(0, Math.ceil(top)), y1 = Math.min(H, Math.floor(top + lh));
       for (let y = y0; y < y1; y++) {
         const ty = Math.min(tn - 1, (((y - top) / lh) * tn) | 0);
-        pix(y * W + x, td[ty * tn + tx] * lit * spot[y * W + x]);
+        pixC(y * W + x, tc[ty * tn + tx], lit * spot[y * W + x] * 1.8);
       }
     }
     ctx.putImageData(img, 0, 0);
@@ -900,11 +922,10 @@ const Maze = (() => {
       ctx.globalAlpha = 1;
     }
     // te alcanzó: el maniquí pegado a tu cara
-    if (st.caughtImg) {
-      const p = st.caughtImg, s = Math.max(W / p.w, H / p.h) * 1.35;
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, W, H);
-      ctx.drawImage(p.levels[p.levels.length - 1], (W - p.w * s) / 2 + (Math.random() - 0.5) * 6, (H - p.h * s) / 2.4, p.w * s, p.h * s);
+    if (st.caughtImg) { // de lejos a tu cara (st.rush de 0 a 1)
+      const p = st.caughtImg, k = st.rush, s = Math.max(W / p.w, H / p.h) * (0.08 + 1.27 * k * k);
+      if (k >= 1) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
+      ctx.drawImage(p.levels[p.levels.length - 1], (W - p.w * s) / 2 + (Math.random() - 0.5) * 6 * k, (H - p.h * s) / 2.3, p.w * s, p.h * s);
     }
     // ruido: grano y cortes horizontales
     const nz = st.noise;
@@ -947,6 +968,7 @@ const Maze = (() => {
       st.a += Math.max(-1.4, Math.min(1.4, tn)) * 2.3 * dt + joy.look;
       joy.look = 0;
       st.noise += (0.05 - st.noise) * Math.min(1, dt * 2);
+      if (st.caughtImg && st.rush < 1) st.rush = Math.min(1, st.rush + dt * 2.4);
       return;
     }
     if (st.mode !== 'play') return;
@@ -981,6 +1003,25 @@ const Maze = (() => {
 
     // clips raros conforme avanzas, uno si te pierdes mucho, y sustos en callejones hondos
     const pi = pathIdx[ci];
+    if (pi > st.maxPi) st.maxPi = pi;
+    // el que te sigue: camina sobre tu rastro a unos pasos, lento, y nunca te alcanza
+    const lt = st.trail[st.trail.length - 1];
+    if (!lt || Math.hypot(st.x - lt.x, st.y - lt.y) > 0.25) { st.trail.push({ x: st.x, y: st.y }); if (st.trail.length > 400) st.trail.shift(); }
+    if (stalker && !stalker.alive && !here && st.maxPi > path.length * 0.15 && st.trail.length > 24) {
+      const t0 = st.trail[st.trail.length - 24];
+      stalker.x = t0.x; stalker.y = t0.y; stalker.alive = true;
+    }
+    if (stalker && stalker.alive) {
+      if (here) stalker.alive = false;
+      const tg = st.trail[Math.max(0, st.trail.length - 15)], d = Math.hypot(tg.x - stalker.x, tg.y - stalker.y);
+      if (d > 0.05) {
+        const mv = Math.min(d, 1.5 * dt);
+        stalker.x += ((tg.x - stalker.x) / d) * mv;
+        stalker.y += ((tg.y - stalker.y) / d) * mv;
+        st.stalkStep += mv;
+        if (st.stalkStep > 0.8) { st.stalkStep = 0; A.step(0.16, 180); }
+      }
+    }
     if (pi >= 0 && clipQ.length && pi >= clipQ[0].at && !inRoom(cx, cy)) {
       while (clipQ.length > 1 && clipQ[1].at <= pi) clipQ.shift(); // si te saltaste alguno por un atajo, solo sale uno
       playClip(clipQ.shift().src);
@@ -1049,7 +1090,7 @@ const Maze = (() => {
     st.flick = st.noise > 0.45 && Math.random() < st.noise * 0.07 ? 0.45 : 0.93 + Math.random() * 0.07;
     A.setStatic(st.noise * st.noise * 0.22, 0.1);
     ampT -= dt;
-    if (ampT <= 0) { ampT = 0.25; Amb.set(st.noise, st.calm); }
+    if (ampT <= 0) { ampT = 0.25; Amb.set(st.noise, st.calm, 1 - 0.85 * Math.min(1, st.maxPi / path.length)); }
     $('#s-maze').classList.toggle('shake', st.noise > 0.75 || near > 0.6);
   }
 
@@ -1107,6 +1148,7 @@ const Maze = (() => {
     if (kind === 'caught') { // te alcanzó: el maniquí en tu cara
       st.mode = 'caught';
       st.caughtImg = m.p;
+      st.rush = 1;
       A.thump(38, 1);
       A.burst(240, 0.7);
       if (navigator.vibrate) navigator.vibrate(140);
@@ -1150,10 +1192,13 @@ const Maze = (() => {
     // cuando regresas la vista a donde estabas viendo... ahí está
     await until(() => angDiff(st.a, a0) < 0.65, 14000);
     clearInterval(beat);
-    st.caughtImg = prelight(IMGS[CONFIG.caraFinal], 340);
-    st.light = 0.9;
+    st.caughtImg = prelight(IMGS[CONFIG.caraFinal], 340, true); // viene hacia ti, rápido
+    st.rush = 0;
+    A.burst(500, 0.55);
+    A.thump(30, 0.8);
+    await until(() => st.rush >= 1, 1200);
     A.thump(34, 1);
-    await sleep(260);
+    await sleep(140);
     stopLoop();
     done();
   }
@@ -1239,7 +1284,7 @@ const Maze = (() => {
       const first = path[1] || { x: 2, y: 1 };
       Object.assign(st, {
         x: 1.5, y: 1.5, a: Math.atan2(first.y - 1, first.x - 1), walk: 0, bob: 0, noise: 0.25, calm: 0, flick: 1, light: 1,
-        mode: 'play', moved: false, inRoom: false, lastCalm: -1, saidLost: false, flash: 0, flashImg: null, sinceFlash: 0, band: 0, caughtImg: null, sustos: 0, sinceSusto: 0, lostClip: false,
+        mode: 'play', moved: false, inRoom: false, lastCalm: -1, saidLost: false, flash: 0, flashImg: null, sinceFlash: 0, band: 0, caughtImg: null, rush: 1, sustos: 0, sinceSusto: 0, lostClip: false, maxPi: 0, trail: [], stalkStep: 0,
       });
       $('#maze-hint').textContent = coarse
         ? 'dedo izquierdo: caminar · dedo derecho: mirar'
@@ -1255,6 +1300,7 @@ const Maze = (() => {
       title.classList.remove('show');
       void title.offsetWidth;
       title.classList.add('show');
+      setTimeout(() => title.classList.remove('show'), 3500); // que no vuelva a salir si la pantalla se redibuja
       setTimeout(() => say('encuentra la salida.', 2200), 2600);
       return new Promise((r) => {
         done = r;
@@ -1263,7 +1309,7 @@ const Maze = (() => {
       });
     },
     _st: st,
-    _info: () => ({ path, exit, room, GW, grid, faces: [...faceTex.keys()], mannequins }),
+    _info: () => ({ path, exit, room, GW, grid, faces: [...faceTex.keys()], mannequins, stalker }),
   };
 })();
 
