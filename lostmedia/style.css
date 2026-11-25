@@ -52,6 +52,97 @@ body.snow .grain { opacity: .96; }
 .btn-ghost { border-color: transparent; color: var(--dim); font-size: 11px; margin-top: 10px; text-transform: none; }
 .btn-ghost:hover, .btn-ghost:focus-visible { background: transparent; color: var(--fg); text-decoration: underline; }
 
+/* ---------- LostWiki: internet de 1999 ---------- */
+body.wk-mode .grain, body.wk-mode .scan, body.wk-mode .vignette { opacity: 0; }
+body.wk-mode.c2 .grain { opacity: .25; }
+body.wk-mode.c2 .scan, body.wk-mode.c2 .vignette { opacity: 1; }
+#s-wiki { padding: 0; overflow-y: auto; background: #fff; }
+#s-wiki.on { display: block; }
+.wk { min-height: 100%; background: #fff; color: #000; font: 16px/1.45 'Times New Roman', Times, serif;
+  cursor: url(img/cursor.png) 0 0, default; cursor: image-set(url(img/cursor.png) 1x, url(img/cursor@2x.png) 2x) 0 0, default; }
+.wk a, .wk button { cursor: url(img/cursor-mano.png) 5 0, pointer; cursor: image-set(url(img/cursor-mano.png) 1x, url(img/cursor-mano@2x.png) 2x) 5 0, pointer; }
+.wk a { color: #0000ee; text-decoration: underline; }
+.wk a.wk-red { color: #cc0000; }
+.wk-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; background: #f0f0f0; border-bottom: 1px solid #aaa; flex-wrap: wrap; }
+.wk-logo { display: flex; gap: 8px; align-items: center; text-decoration: none !important; color: #000 !important; line-height: 1.1; }
+.wk-logo b { font: bold 26px Georgia, 'Times New Roman', serif; letter-spacing: -.5px; }
+.wk-logo small { font: italic 13px Georgia, serif; color: #444; }
+.wk-search input { font: 13px Arial, sans-serif; border: 2px inset #ccc; padding: 2px 4px; width: 150px; }
+.wk-search button { font: 13px Arial, sans-serif; border: 2px outset #ddd; background: #ddd; padding: 1px 8px; margin-left: 2px; color: #000; }
+.wk-marq { display: block; background: #000080; color: #ffff00; font: bold 13px Verdana, Arial, sans-serif; padding: 3px 0; }
+.wk-body { display: flex; }
+.wk-side { width: 160px; flex: none; background: #f8f8f8; border-right: 1px solid #aaa; padding: 8px 10px 20px; font: 12px Verdana, Arial, sans-serif; }
+.wk-st { font-weight: bold; border-bottom: 1px solid #aaa; margin: 10px 0 4px; color: #333; }
+.wk-side ul { list-style: square; padding-left: 16px; }
+.wk-side li { margin: 2px 0; }
+.wk-count { display: inline-block; margin-top: 14px; background: #000; color: #0f0; font: 12px 'Courier New', monospace; padding: 3px 6px; border: 2px inset #888; }
+.wk-const { margin-top: 10px; background: repeating-linear-gradient(45deg, #ffd800 0 8px, #111 8px 16px); color: #fff; font: bold 11px Verdana, sans-serif;
+  padding: 6px 4px; text-align: center; text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; }
+.wk-best { font-size: 10px; color: #555; margin-top: 10px; }
+.wk-main { flex: 1; min-width: 0; padding: 10px 20px 30px; }
+.wk-main p { margin: 0 0 10px; }
+.wk-tabs { display: flex; gap: 3px; border-bottom: 1px solid #aaa; margin-bottom: 8px; font: 12px Verdana, sans-serif; }
+.wk-tabs a { padding: 2px 10px; border: 1px solid #aaa; border-bottom: none; background: #eef; text-decoration: none; }
+.wk-tabs a.on { background: #fff; color: #000; font-weight: bold; }
+.wk-h1 { font: normal 32px 'Times New Roman', Times, serif; border-bottom: 1px solid #aaa; margin: 6px 0 2px; }
+.wk-from { font-size: 13px; color: #555; }
+.wk-dab { padding-left: 2em; font-size: 14px; }
+.wk-note { border: 1px solid #aaa; border-left: 8px solid #f28500; background: #fbfbfb; padding: 6px 10px; font: 13px Arial, sans-serif; }
+.wk-box { float: right; width: 270px; margin: 0 0 12px 16px; border: 1px solid #aaa; background: #f9f9f9; font: 12px Arial, sans-serif; border-collapse: collapse; }
+.wk-box th, .wk-box td { padding: 4px 6px; text-align: left; vertical-align: top; border-top: 1px solid #ddd; }
+.wk-box .wk-box-t { background: #b0c4de; text-align: center; font-size: 15px; }
+.wk-box .wk-box-s { background: #dde5ee; text-align: center; }
+.wk-box-img img { width: 100%; display: block; image-rendering: pixelated; }
+.wk-box-img span { display: block; font-size: 11px; color: #444; padding-top: 3px; text-align: center; }
+.wk-cite, .wk-need { font-size: 11px; color: #0000ee; }
+.wk-need { font-style: italic; }
+.wk-toc { display: inline-block; border: 1px solid #aaa; background: #f9f9f9; padding: 8px 16px 8px 12px; font: 13px Arial, sans-serif; margin: 4px 0 12px; }
+.wk-toc p { text-align: center; margin: 0 0 4px !important; }
+.wk-toc ol { padding-left: 20px; }
+.wk-main h2 { font: normal 23px 'Times New Roman', Times, serif; border-bottom: 1px solid #aaa; margin: 20px 0 8px; }
+.wk-main h3 { font: bold 16px Arial, sans-serif; margin: 12px 0 6px; }
+.wk-main ul, .wk-main ol.wk-refs { padding-left: 24px; margin-bottom: 10px; }
+.wk-tbl { border-collapse: collapse; font: 13px Arial, sans-serif; margin-bottom: 12px; }
+.wk-tbl th, .wk-tbl td { border: 1px solid #aaa; padding: 3px 10px; }
+.wk-tbl th { background: #ddd; }
+.wk-redact { background: #000; color: #000; padding: 0 4px; }
+.wk-thumbs { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+.wk-thumb { width: 140px; border: 1px solid #ccc; background: #f9f9f9; padding: 4px; font: 11px Arial, sans-serif; text-align: center; }
+.wk-thumb img { display: block; width: 100%; height: 150px; object-fit: contain; background: #222; margin-bottom: 3px; }
+.wk-foot { border-top: 1px solid #aaa; padding: 10px 16px 18px; font: 11px Verdana, sans-serif; color: #555; background: #f0f0f0; clear: both; }
+.wk-spark { position: fixed; z-index: 99; pointer-events: none; font-size: 14px; transform: translate(-50%, -50%); animation: spark .7s linear forwards; }
+@keyframes spark { to { opacity: 0; transform: translate(-50%, 30px) scale(.4); } }
+/* cuando se corrompe */
+.wk.c1 .wk-box-img img { filter: contrast(1.4); }
+.wk.c2 { filter: contrast(1.35) saturate(.5) sepia(.25); background: #f2e6e6; }
+.wk.c2 .wk-h1 { color: #b00000; letter-spacing: .1em; }
+.wk.c2 .wk-marq { background: #600; color: #fff; }
+.wk.c3 { filter: invert(1) contrast(1.6) grayscale(.4); }
+.wk.c3 * { transition: transform .6s ease-in; }
+#s-wiki.c2 { cursor: wait; }
+@media (max-width: 680px) {
+  .wk-body { flex-direction: column; }
+  .wk-side { width: auto; border-right: none; border-bottom: 1px solid #aaa; columns: 2; }
+  .wk-box { float: none; width: 100%; margin: 0 0 12px; }
+  .wk-main { padding: 10px 14px 24px; }
+  .wk-search input { width: 110px; }
+}
+
+/* ventana de error que abre el juego (es también el aviso de sustos) */
+.dlg { width: min(440px, 100%); background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #404040 #404040 #fff;
+  box-shadow: 1px 1px 0 #000; font: 13px 'MS Sans Serif', Tahoma, Arial, sans-serif; }
+.dlg-t { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(90deg, #000080, #1084d0); color: #fff;
+  font-weight: bold; padding: 3px 6px; }
+.dlg-t span { background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #404040 #404040 #fff; width: 18px; height: 16px; display: grid; place-items: center; font-size: 12px; line-height: 1; }
+.dlg-b { display: flex; gap: 14px; padding: 16px 16px 8px; align-items: flex-start; }
+.dlg-b p + p { margin-top: 8px; }
+.dlg-ico { flex: none; width: 34px; height: 34px; border-radius: 50%; background: #ffd800; border: 2px solid #000; display: grid; place-items: center; font: bold 22px Arial, sans-serif; }
+.dlg-btns { display: flex; gap: 8px; justify-content: center; padding: 10px 16px 16px; flex-wrap: wrap; }
+.w95 { min-width: 96px; padding: 5px 14px; background: #c0c0c0; color: #000; border: 2px solid; border-color: #fff #404040 #404040 #fff;
+  box-shadow: inset -1px -1px 0 #808080; font: 13px 'MS Sans Serif', Tahoma, Arial, sans-serif; cursor: pointer; }
+.w95:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+.w95:active { border-color: #404040 #fff #fff #404040; }
+
 /* aviso */
 .warn { max-width: 520px; font-size: 24px; line-height: 1.3; display: flex; flex-direction: column; align-items: flex-start; }
 .warn p + p { margin-top: 10px; }
@@ -106,6 +197,9 @@ body.snow .grain { opacity: .96; }
 #maze { position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated; image-rendering: crisp-edges; filter: contrast(1.15) blur(.4px); }
 #s-maze.shake #maze { animation: jit .08s steps(2) infinite; }
 @keyframes jit { 50% { transform: translate(2px, -1px); } }
+.clip, .susto { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; background: #000; }
+.clip { object-fit: contain; filter: contrast(1.1); }
+.susto { object-fit: cover; filter: contrast(1.3); animation: shake .05s steps(2) infinite; }
 .maze-title { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; pointer-events: none;
   font-family: var(--px); font-size: clamp(26px, 8vw, 92px); letter-spacing: .08em; color: #fff; opacity: 0; }
 .maze-title.show { animation: titleFade 3.4s ease-in forwards; }

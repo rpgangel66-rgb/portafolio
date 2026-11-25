@@ -22,7 +22,12 @@ const CONFIG = {
   ],
   maniquies: ['img/manq-1.png', 'img/manq-2.png', 'img/manq-3.png', 'img/manq-4.png'],
   // el screamer va pasando por estas imágenes en orden (la foto de kiddwero se queda más tiempo)
-  screamer: ['img/manq-3.png', 'img/kiddwero-foto.jpg', 'img/kiddwero-foto.jpg', 'img/kiddwero-foto.jpg'],
+  screamer: ['img/s-capucha.jpg', 'img/s-ojo.jpg', 'img/kiddwero-foto.jpg'],
+  // sustos rápidos si te metes muy hondo en un callejón sin salida (máx. 2 por partida)
+  sustos: ['img/s-nino.jpg', 'img/s-maniqui.jpg', 'img/s-capucha.jpg'],
+  // clips raros que cortan el juego conforme avanzas por el camino (en orden) y uno si te pierdes mucho
+  clips: ['video/clip-ojo.mp4', 'video/clip-cuerpo.mp4', 'video/clip-aguja.mp4', 'video/clip-dormido.mp4', 'video/clip-mesa.mp4', 'video/clip-capucha.mp4'],
+  clipPerdido: 'video/clip-cabeza.mp4',
   fecha: 'LOSTMEDIA · EP · muy pronto',
   links: [
     { label: '@kiddwero', url: 'https://instagram.com/kiddwero' },
@@ -50,7 +55,7 @@ function loadImg(src) {
 }
 const IMGS = {};
 const imgsReady = Promise.all(
-  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, CONFIG.tapiz])]
+  [...new Set([...CONFIG.posters, ...CONFIG.apariciones, ...CONFIG.maniquies, ...CONFIG.screamer, ...CONFIG.sustos, CONFIG.tapiz])]
     .map((s) => loadImg(s).then((i) => { IMGS[s] = i; }))
 );
 
@@ -486,12 +491,12 @@ const Chat = {
    PASILLOS · primera persona, blanco y negro, con ruido
    ========================================================= */
 const Maze = (() => {
-  const CW = 8, CH = 8, GW = CW * 2 + 1, GH = CH * 2 + 1;
+  const CW = 12, CH = 12, GW = CW * 2 + 1, GH = CH * 2 + 1;
   const FOG = 6.5;
   const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-  const CALM_LINES = ['aquí está tranquilo.', 'sigue.', 'ya casi.'];
+  const CALM_LINES = ['aquí está tranquilo.', 'sigue.', 'no te detengas.', 'ya casi.'];
   let cv, ctx, W, H, img, buf32, zbuf, spot, planeLen, noiseFrames = [];
-  let grid, path, offDist, calmSet, calmIdx, room, exit;
+  let grid, path, offDist, calmSet, calmIdx, room, exit, pathIdx, clipQ = [];
   let tex = {}, faceTex = new Map(), sprites = [], mannequins = [];
   let raf = 0, last = 0, done, drone, ampT = 0;
   const keys = {}, joy = { fwd: 0, turn: 0, look: 0 };
@@ -655,7 +660,7 @@ const Maze = (() => {
 
   // ---------- mapa ----------
   function build() {
-    const R = rng(4427);
+    const R = rng(1140); // semilla elegida: camino de 153 casillas y 19 callejones sin salida
     grid = Array.from({ length: GH }, () => new Uint8Array(GW).fill(1));
     const vis = new Uint8Array(CW * CH), stack = [[0, 0]];
     vis[0] = 1;
@@ -674,7 +679,7 @@ const Maze = (() => {
       stack.push([nx, ny]);
     }
     // unas vueltas extra para que no sea puro callejón sin salida
-    for (let k = 0, opened = 0; k < 300 && opened < 8; k++) {
+    for (let k = 0, opened = 0; k < 300 && opened < 4; k++) {
       const x = 1 + ((R() * (GW - 2)) | 0), y = 1 + ((R() * (GH - 2)) | 0);
       if (grid[y][x] !== 1) continue;
       if ((x % 2 === 0 && y % 2 === 1 && !grid[y][x - 1] && !grid[y][x + 1]) || (x % 2 === 1 && y % 2 === 0 && !grid[y - 1][x] && !grid[y + 1][x])) {
@@ -682,19 +687,21 @@ const Maze = (() => {
         opened++;
       }
     }
-    room = { x0: 11, y0: 11, x1: 15, y1: 15 };
+    room = { x0: GW - 6, y0: GH - 6, x1: GW - 2, y1: GH - 2 };
     for (let y = room.y0; y <= room.y1; y++) for (let x = room.x0; x <= room.x1; x++) grid[y][x] = 0;
-    exit = { x: 15, y: 15 };
+    exit = { x: GW - 2, y: GH - 2 };
 
     const { prev } = bfs([[1, 1]]);
     path = [];
     for (let i = exit.y * GW + exit.x; i >= 0; i = prev[i]) path.unshift({ x: i % GW, y: (i / GW) | 0 });
     offDist = bfs(path.map((p) => [p.x, p.y])).dist;
+    pathIdx = new Int16Array(GW * GH).fill(-1);
+    path.forEach((p, i) => { pathIdx[p.y * GW + p.x] = i; });
 
     calmSet = new Set();
     calmIdx = new Map();
     const outside = path.filter((p) => !inRoom(p.x, p.y));
-    [0.22, 0.48, 0.74].forEach((f, k) => {
+    [0.2, 0.42, 0.62, 0.82].forEach((f, k) => {
       const i = Math.floor(outside.length * f);
       for (let j = i - 1; j <= i + 1; j++) {
         const p = outside[j];
@@ -728,7 +735,8 @@ const Maze = (() => {
 
     // apariciones y maniquíes
     sprites = [];
-    [0.34, 0.6, 0.86].forEach((f, k) => {
+    clipQ = [0.1, 0.27, 0.47, 0.66, 0.78, 0.92].map((f, k) => ({ at: pathIdx[(outside[Math.floor(outside.length * f)].y) * GW + outside[Math.floor(outside.length * f)].x], src: CONFIG.clips[k % CONFIG.clips.length] }));
+    [0.3, 0.52, 0.72, 0.88].forEach((f, k) => {
       const p = outside[Math.floor(outside.length * f)];
       const src = CONFIG.apariciones[k % CONFIG.apariciones.length];
       const pl = prelight(IMGS[src]);
@@ -963,6 +971,13 @@ const Maze = (() => {
     const calm = calmSet.has(ci), here = inRoom(cx, cy);
     let target = calm ? 0.02 : here ? 0.08 : Math.min(0.8, 0.18 + Math.max(0, offDist[ci]) * 0.16);
 
+    // clips raros conforme avanzas, uno si te pierdes mucho, y sustos en callejones hondos
+    const pi = pathIdx[ci];
+    if (pi >= 0 && clipQ.length && pi >= clipQ[0].at) { playClip(clipQ.shift().src); return; }
+    if (offDist[ci] >= 4 && !st.lostClip) { st.lostClip = true; playClip(CONFIG.clipPerdido); return; }
+    st.sinceSusto += dt;
+    if (offDist[ci] >= 3 && st.sustos < 2 && st.sinceSusto > 15 && cx % 2 && cy % 2
+      && DIRS.filter(([dx, dy]) => !isWall(cx + dx, cy + dy)).length === 1) stinger();
     if (calm && st.lastCalm !== calmIdx.get(ci)) { st.lastCalm = calmIdx.get(ci); say(CALM_LINES[st.lastCalm] || '', 2200); }
     if (!calm && offDist[ci] >= 3 && !st.saidLost) { st.saidLost = true; say('por aquí no.', 1600); }
 
@@ -1024,6 +1039,43 @@ const Maze = (() => {
     ampT -= dt;
     if (ampT <= 0) { ampT = 0.25; Amb.set(st.noise, st.calm); }
     $('#s-maze').classList.toggle('shake', st.noise > 0.75 || near > 0.6);
+  }
+
+  async function playClip(src) {
+    st.mode = 'clip';
+    joy.fwd = joy.turn = 0;
+    const v = $('#clip');
+    A.thump(45, 0.7);
+    A.burst(260, 0.7);
+    tear();
+    A.setBase(0.08);
+    v.src = src;
+    v.hidden = false;
+    await new Promise((r) => {
+      v.onended = r;
+      v.onerror = r;
+      setTimeout(r, 4500);
+      v.play().catch(r);
+    });
+    v.hidden = true;
+    v.removeAttribute('src');
+    A.setBase(0);
+    A.burst(200, 0.6);
+    tear();
+    if (st.mode === 'clip') st.mode = 'play';
+  }
+
+  async function stinger() {
+    st.sustos++;
+    st.sinceSusto = 0;
+    const img = $('#susto');
+    img.src = CONFIG.sustos[(Math.random() * CONFIG.sustos.length) | 0];
+    img.hidden = false;
+    A.scream(0.55);
+    if (navigator.vibrate) navigator.vibrate(150);
+    await sleep(340);
+    img.hidden = true;
+    tear();
   }
 
   async function end(kind, m) {
@@ -1138,11 +1190,17 @@ const Maze = (() => {
       const first = path[1] || { x: 2, y: 1 };
       Object.assign(st, {
         x: 1.5, y: 1.5, a: Math.atan2(first.y - 1, first.x - 1), walk: 0, bob: 0, noise: 0.25, calm: 0, flick: 1, light: 1,
-        mode: 'play', moved: false, inRoom: false, lastCalm: -1, saidLost: false, flash: 0, flashImg: null, sinceFlash: 0, band: 0, caughtImg: null,
+        mode: 'play', moved: false, inRoom: false, lastCalm: -1, saidLost: false, flash: 0, flashImg: null, sinceFlash: 0, band: 0, caughtImg: null, sustos: 0, sinceSusto: 0, lostClip: false,
       });
       $('#maze-hint').textContent = coarse
         ? 'dedo izquierdo: caminar · dedo derecho: mirar'
         : 'W/↑ caminar · A/D o ←/→ voltear · o arrastra con el mouse';
+      CONFIG.clips.concat(CONFIG.clipPerdido).forEach((src) => { // que ya estén cargados cuando salgan
+        const v = document.createElement('video');
+        v.preload = 'auto';
+        v.muted = true;
+        v.src = src;
+      });
       Amb.start();
       const title = $('#maze-title');
       title.classList.remove('show');
@@ -1168,43 +1226,21 @@ async function screamer() {
   cv.width = Math.min(innerWidth, 900);
   cv.height = Math.round((cv.width * innerHeight) / innerWidth);
   setOsd(false);
-  A.scream(1.05);
-  if (navigator.vibrate) navigator.vibrate([80, 30, 300, 30, 500]);
-  await sleep(40); // el sonido llega un pelito antes que la imagen
-  cv.classList.add('on', 'inv');
-  const t0 = performance.now(), D = 880;
   const imgs = CONFIG.screamer.map((s) => IMGS[s]).filter(Boolean);
-  setTimeout(() => cv.classList.remove('inv'), 70);
-  let lastDraw = 0;
-  await new Promise((res) => {
-    (function f(t) {
-      const k = (t - t0) / D;
-      if (k >= 1) return res();
-      if (t - lastDraw < 66) return requestAnimationFrame(f); // entrecortado, ~15 cuadros
-      lastDraw = t;
-      const w = cv.width, h = cv.height;
-      x.fillStyle = '#000';
-      x.fillRect(0, 0, w, h);
-      if (imgs.length) {
-        const img = imgs[Math.min(imgs.length - 1, Math.floor(k * imgs.length))];
-        const s = Math.max(w / img.naturalWidth, h / img.naturalHeight) * (1 + k * 0.7 + (Math.random() - 0.5) * 0.05);
-        const iw = img.naturalWidth * s, ih = img.naturalHeight * s;
-        x.drawImage(img, (w - iw) / 2 + (Math.random() - 0.5) * 30, (h - ih) / 2 + (Math.random() - 0.5) * 30, iw, ih);
-      }
-      for (let i = 0; i < 6; i++) {
-        const sy = Math.random() * h, sh = 4 + Math.random() * 28;
-        x.drawImage(cv, 0, sy, w, sh, (Math.random() - 0.5) * 60, sy, w, sh);
-      }
-      x.globalCompositeOperation = 'multiply';
-      x.fillStyle = Math.random() < 0.6 ? `rgb(255,${110 + Math.random() * 60},${100 + Math.random() * 40})` : '#c8d0d8';
-      x.fillRect(0, 0, w, h);
-      x.globalCompositeOperation = 'source-over';
-      x.globalAlpha = 0.28;
-      x.drawImage(grain, 0, 0, w, h);
-      x.globalAlpha = 1;
-      requestAnimationFrame(f);
-    })(t0);
-  });
+  A.scream(1.0);
+  if (navigator.vibrate) navigator.vibrate([80, 30, 300, 30, 500]);
+  await sleep(30); // el grito entra un pelito antes que la imagen
+  cv.classList.add('on');
+  for (const img of imgs) { // cortes secos de una foto a otra, sin efectos
+    const w = cv.width, h = cv.height, s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    x.fillStyle = '#000';
+    x.fillRect(0, 0, w, h);
+    x.drawImage(img, (w - img.naturalWidth * s) / 2, (h - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
+    x.globalAlpha = 0.18;
+    x.drawImage(grain, 0, 0, w, h);
+    x.globalAlpha = 1;
+    await sleep(300);
+  }
   cv.classList.remove('on');
   x.clearRect(0, 0, cv.width, cv.height);
 }
@@ -1306,7 +1342,107 @@ async function run() {
   reveal();
 }
 
-if (store.get('lm_visto')) $('#b-skip').hidden = false;
+/* =========================================================
+   LOSTWIKI · la página de internet viejo que se corrompe
+   ========================================================= */
+const Wiki = (() => {
+  const GL = '▓█░▒#%&@$¿?¡ÆØ§¤';
+  let nodes = [], trailOn = false;
+  function collect() {
+    const w = document.createTreeWalker($('#wk-main'), NodeFilter.SHOW_TEXT);
+    nodes = [];
+    for (let n; (n = w.nextNode());) if (n.nodeValue.trim().length > 2) nodes.push(n);
+  }
+  function mangle(k) {
+    for (let i = 0; i < k && nodes.length; i++) {
+      const n = nodes[(Math.random() * nodes.length) | 0], s = n.nodeValue, p = (Math.random() * s.length) | 0;
+      if (s[p] !== ' ') n.nodeValue = s.slice(0, p) + GL[(Math.random() * GL.length) | 0] + s.slice(p + 1);
+    }
+  }
+  // estela de destellos detrás del cursor, como en las páginas de los 2000
+  function onMove(e) {
+    if (!trailOn || Math.random() > 0.45) return;
+    const s = document.createElement('span');
+    s.className = 'wk-spark';
+    s.textContent = '✦';
+    s.style.left = e.clientX + 'px';
+    s.style.top = e.clientY + 'px';
+    s.style.color = ['#ff0', '#f0f', '#0cf', '#f60'][(Math.random() * 4) | 0];
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 700);
+  }
+  const loud = () => A.ctx && A.ctx.state === 'running';
+
+  // se corrompe sola con el tiempo: limpia al principio, cada vez peor, y al final abre el juego
+  async function decay(k) {
+    const wk = $('.wk'), sc = $('#s-wiki'), foto = $('#wk-foto'), marq = $('.wk-marq');
+    const wait = (s) => sleep(s * 1000 * k);
+    collect();
+    await wait(10); // 0-10 s: todo normal
+    for (let i = 0; i < 4; i++) { // 10-14 s: letras que cambian y la foto parpadea
+      mangle(2 + i);
+      if (i === 2) { foto.src = 'img/s-ojo.jpg'; setTimeout(() => { foto.src = 'img/kiddwero-foto.jpg'; }, 140); }
+      await wait(1);
+    }
+    // 14 s: ya se nota
+    wk.classList.add('c1');
+    marq.textContent = '★ no debiste entrar ★ no debiste entrar ★ no debiste entrar ★ no debiste entrar ★';
+    document.title = 'KIDDWERO - L░stWiki';
+    for (let i = 0; i < 6; i++) { // 14-17 s
+      mangle(5 + i * 2);
+      if (i === 2 || i === 5) { foto.src = 'img/s-capucha.jpg'; setTimeout(() => { foto.src = 'img/kiddwero-foto.jpg'; }, 200); }
+      if (loud() && i % 2 === 0) A.burst(60, 0.2);
+      await wait(0.5);
+    }
+    // 17 s: el texto se reescribe solo
+    wk.classList.add('c2');
+    sc.classList.add('c2');
+    document.body.classList.add('c2');
+    document.title = 'no debiste entrar';
+    $('#wk-h1').textContent = 'K̷I̷D̷D̷W̷E̷R̷O̷';
+    [...$('#wk-main').querySelectorAll('p')].forEach((p, i) => { if (i % 2) p.textContent = 'no debiste entrar. no debiste entrar. no debiste entrar.'; });
+    foto.src = 'img/s-capucha.jpg';
+    collect();
+    if (loud()) { A.thump(45, 0.6); A.setBase(0.06); }
+    for (let i = 0; i < 8; i++) { // 17-18.5 s
+      mangle(25);
+      if (i % 3 === 0) tear();
+      await sleep(170);
+    }
+    // 18.5 s: se cae a pedazos y a los ~20 s sale la ventana que abre el juego
+    wk.classList.add('c3');
+    wk.querySelectorAll('p, h2, h3, table, .wk-toc, .wk-thumb, li, .wk-tabs').forEach((el) => {
+      el.style.transform = `translate(${(Math.random() - 0.5) * 70}px, ${Math.random() * 60}px) rotate(${(Math.random() - 0.5) * 10}deg)`;
+    });
+    if (loud()) A.burst(900, 0.5);
+    await sleep(1200);
+    trailOn = false;
+    document.body.classList.remove('wk-mode', 'c2');
+    if (loud()) A.setBase(0);
+    show('s-warn');
+    if (store.get('lm_visto')) $('#b-skip').hidden = false;
+    $('#b-start').focus({ preventScroll: true });
+  }
+
+  return {
+    start() {
+      document.body.classList.add('wk-mode');
+      document.title = 'KIDDWERO - LostWiki, la enciclopedia perdida';
+      show('s-wiki');
+      trailOn = matchMedia('(pointer: fine)').matches;
+      addEventListener('pointermove', onMove);
+      // los links no llevan a ningún lado; si alguien les da clic, solo se habilita el sonido para la corrupción
+      $('#s-wiki').addEventListener('click', (e) => {
+        if (e.target.closest('a, button')) e.preventDefault();
+        A.init();
+        A.ctx.resume();
+      });
+      decay(store.get('lm_visto') ? 0.35 : 1); // si ya la viste, se rompe en ~10 s
+    },
+  };
+})();
+
+Wiki.start();
 $('#b-start').addEventListener('click', run, { once: true });
 $('#b-skip').addEventListener('click', async () => {
   A.init();

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
 <!--
@@ -30,13 +30,114 @@
 -->
 <div id="tv">
 
-  <section id="s-warn" class="scene on">
-    <div class="warn">
-      <p class="warn-k">OJO</p>
-      <p>esto tiene sustos, parpadeos y <strong>sonidos fuertes</strong>.</p>
-      <p>ponte audífonos y apaga la luz.</p>
-      <button id="b-start" class="btn">[ ▶ PLAY ]</button>
-      <button id="b-skip" class="btn btn-ghost" hidden>ya la vi · ir a la rola ▶▶</button>
+  <!-- LostWiki: la wiki de internet viejo que se corrompe y abre el juego -->
+  <section id="s-wiki" class="scene on">
+    <div class="wk">
+      <div class="wk-top">
+        <a class="wk-logo" href="#">
+          <svg viewBox="0 0 40 26" width="46" height="30" aria-hidden="true"><rect x="1" y="1" width="38" height="24" rx="2" fill="#333" stroke="#000"/><rect x="5" y="4" width="30" height="9" fill="#e8e0c8"/><circle cx="13" cy="17" r="4" fill="#fff" stroke="#000"/><circle cx="27" cy="17" r="4" fill="#fff" stroke="#000"/><rect x="16" y="15" width="8" height="4" fill="#111"/></svg>
+          <span><b>LostWiki</b><br><small>La enciclopedia perdida</small></span>
+        </a>
+        <form class="wk-search" onsubmit="return false"><input type="text" value="kiddwero" aria-label="Buscar en LostWiki"><button type="button">Ir</button></form>
+      </div>
+      <marquee class="wk-marq" scrollamount="4">★ ¡Bienvenido a LostWiki! ★ Esta página se ve mejor con Netscape Navigator 4.0 a 800x600 ★ Firma nuestro libro de visitas ★ Ya somos 427 artículos ★</marquee>
+      <div class="wk-body">
+        <nav class="wk-side">
+          <p class="wk-st">navegación</p>
+          <ul><li><a href="#">Portada</a></li><li><a href="#">Página aleatoria</a></li><li><a href="#">Cambios recientes</a></li><li><a href="#">Ayuda</a></li><li><a href="#">Libro de visitas</a></li></ul>
+          <p class="wk-st">herramientas</p>
+          <ul><li><a href="#">Lo que enlaza aquí</a></li><li><a href="#">Versión para imprimir</a></li><li><a href="#">Enlace permanente</a></li></ul>
+          <p class="wk-count">visitas: <span>000427</span></p>
+          <p class="wk-const">⚠ EN CONSTRUCCIÓN ⚠</p>
+          <p class="wk-best">Mejor visto con<br>Netscape Navigator 4<br>a 800x600</p>
+        </nav>
+        <main class="wk-main" id="wk-main">
+          <div class="wk-tabs"><a class="on" href="#">artículo</a><a href="#">discusión</a><a href="#">editar</a><a href="#">historial</a></div>
+          <h1 class="wk-h1" id="wk-h1">KIDDWERO</h1>
+          <p class="wk-from">De LostWiki, la enciclopedia perdida.</p>
+          <p class="wk-dab"><i>Este artículo trata sobre el artista de Monterrey. No confundir con <a href="#" class="wk-red">KIDD WERO</a>, un proyecto homónimo distinto, con canciones como «DUELES TANTO» o «PASE DE BATALLA».</i></p>
+          <p class="wk-note">Este artículo no cita fuentes suficientes. Puedes ayudar a LostWiki <a href="#">ampliándolo</a>.</p>
+
+          <table class="wk-box">
+            <tr><th colspan="2" class="wk-box-t">KIDDWERO</th></tr>
+            <tr><td colspan="2" class="wk-box-img"><img id="wk-foto" src="img/kiddwero-foto.jpg" alt="Fotografía de KIDDWERO"><span>KIDDWERO en una fotografía sin fecha.</span></td></tr>
+            <tr><th colspan="2" class="wk-box-s">Información personal</th></tr>
+            <tr><th>Nombre real</th><td>Martín Abdiel Oropeza Salazar<sup class="wk-cite">[1]</sup></td></tr>
+            <tr><th>Origen</th><td><a href="#">Monterrey</a>, <a href="#">Nuevo León</a></td></tr>
+            <tr><th colspan="2" class="wk-box-s">Información artística</th></tr>
+            <tr><th>Géneros</th><td><a href="#">Urbano experimental</a>, <a href="#">neoperreo</a></td></tr>
+            <tr><th>Sello</th><td><a href="#" class="wk-red">Draikotune Music</a> (independiente)</td></tr>
+            <tr><th>Artistas relacionados</th><td><a href="#">Bruno4vr</a>, <a href="#" class="wk-red">Cod3x</a>, <a href="#" class="wk-red">prodtrash07</a></td></tr>
+          </table>
+
+          <p><b>KIDDWERO</b> es un proyecto musical independiente de la escena <a href="#">urbana</a> y <a href="#">electrónica</a> emergente, con vínculos con la escena musical de <a href="#">Monterrey</a>, <a href="#">Nuevo León</a>. Su propuesta se mueve dentro del <a href="#">urbano experimental</a> y el <a href="#">neoperreo</a>.<sup class="wk-cite">[2]</sup></p>
+          <p>Sus lanzamientos se distribuyen bajo el sello independiente <a href="#" class="wk-red">Draikotune Music</a>. Su información biográfica y discográfica se encuentra dispersa en redes sociales y plataformas de <a href="#">streaming</a>.</p>
+
+          <div class="wk-toc">
+            <p><b>Contenido</b> <small>[<a href="#">ocultar</a>]</small></p>
+            <ol><li><a href="#">Biografía</a></li><li><a href="#">Discografía</a><ol><li><a href="#">LOSTMEDIA</a></li></ol></li><li><a href="#">Colaboradores</a></li><li><a href="#">Curiosidades</a></li><li><a href="#">Véase también</a></li><li><a href="#">Referencias</a></li><li><a href="#">Enlaces externos</a></li></ol>
+          </div>
+
+          <h2>Biografía</h2>
+          <p>En los créditos de composición de sus temas figura el nombre de Martín Abdiel Oropeza Salazar.<sup class="wk-cite">[1]</sup> Sus publicaciones en redes muestran vínculos con la escena musical de <a href="#">Monterrey</a>.<sup class="wk-need">[cita requerida]</sup></p>
+
+          <h2>Discografía</h2>
+          <table class="wk-tbl">
+            <tr><th>Año</th><th>Título</th><th>Tipo</th></tr>
+            <tr><td>2026</td><td><i><a href="#">Werologia</a></i></td><td>EP</td></tr>
+            <tr><td>—</td><td>«<a href="#">nAkOyMakUarRo</a>»</td><td>Sencillo</td></tr>
+            <tr><td>—</td><td>«<a href="#">LaNEtAdElPlaneTa</a>»</td><td>Sencillo</td></tr>
+            <tr><td>—</td><td>«<a href="#">KeTeAzoTeE</a>»</td><td>Sencillo</td></tr>
+            <tr><td>—</td><td>«<a href="#">JeKeEe</a>»</td><td>Sencillo</td></tr>
+            <tr><td>—</td><td>«<a href="#">BAnDi</a>»</td><td>Sencillo</td></tr>
+            <tr><td>próx.</td><td><i><a href="#" class="wk-red">LOSTMEDIA</a></i></td><td>EP</td></tr>
+          </table>
+          <h3>LOSTMEDIA</h3>
+          <p><i>LOSTMEDIA</i> es el próximo EP de KIDDWERO. Su primer sencillo, «<span class="wk-redact">GRo0</span>», fue producido por <a href="#">Bruno4vr</a>.<sup class="wk-need">[cita requerida]</sup></p>
+          <p>Antes de su anuncio circuló una cinta VHS sin etiqueta con un supuesto videojuego relacionado con el EP. Su existencia nunca fue confirmada.<sup class="wk-need">[cita requerida]</sup></p>
+
+          <h2>Colaboradores</h2>
+          <p>Suele trabajar de manera recurrente con productores y artistas como <a href="#">Bruno4vr</a> (también escrito Brun$4vr&lt;3), <a href="#" class="wk-red">Cod3x</a> y <a href="#" class="wk-red">prodtrash07</a>.</p>
+          <div class="wk-thumbs">
+            <div class="wk-thumb"><img src="img/kiddwero.png" alt="Dibujo de KIDDWERO"><span>KIDDWERO</span></div>
+            <div class="wk-thumb"><img src="img/bruno.png" alt="Dibujo de Bruno4vr"><span>Bruno4vr</span></div>
+            <div class="wk-thumb"><img src="img/prodtrash.png" alt="Dibujo de prodtrash07"><span>prodtrash07</span></div>
+          </div>
+
+          <h2>Curiosidades</h2>
+          <ul>
+            <li>Los títulos de sus canciones suelen alternar mayúsculas y minúsculas, como «nAkOyMakUarRo» o «LaNEtAdElPlaneTa».</li>
+            <li>En plataformas digitales existe un proyecto homónimo, escrito por separado como KIDD WERO, que corresponde a un artista distinto.</li>
+          </ul>
+
+          <h2>Véase también</h2>
+          <ul><li><a href="#">Neoperreo</a></li><li><a href="#" class="wk-red">Escena urbana de Monterrey</a></li><li><a href="#">Lost media</a></li></ul>
+
+          <h2>Referencias</h2>
+          <ol class="wk-refs"><li>↑ Créditos de composición en plataformas de streaming.</li><li>↑ Perfil oficial de KIDDWERO en Instagram.</li></ol>
+
+          <h2>Enlaces externos</h2>
+          <ul><li><a href="#">KIDDWERO en Instagram</a></li><li><a href="#">KIDDWERO en SoundCloud</a></li><li><a href="#">KIDDWERO en Spotify</a></li><li><a href="#">KIDDWERO en Last.fm</a></li></ul>
+        </main>
+      </div>
+      <p class="wk-foot">Esta página fue modificada por última vez el 24 nov 1999 a las 03:13. · El contenido está disponible bajo licencia libre. · <a href="#">Acerca de LostWiki</a> · <a href="#">Aviso legal</a></p>
+    </div>
+  </section>
+
+  <section id="s-warn" class="scene">
+    <div class="dlg" role="alertdialog" aria-labelledby="dlg-t" aria-describedby="dlg-d">
+      <p class="dlg-t" id="dlg-t">LOSTMEDIA.EXE <span aria-hidden="true">×</span></p>
+      <div class="dlg-b">
+        <p class="dlg-ico" aria-hidden="true">!</p>
+        <div id="dlg-d">
+          <p><b>esta página quiere abrir un archivo.</b></p>
+          <p>tiene sustos, parpadeos y <strong>sonidos fuertes</strong>. ponte audífonos y apaga la luz.</p>
+        </div>
+      </div>
+      <div class="dlg-btns">
+        <button id="b-start" class="w95">▶ Abrir</button>
+        <button id="b-skip" class="w95" hidden>ir a la rola</button>
+      </div>
     </div>
   </section>
 
@@ -70,6 +171,8 @@
   <section id="s-maze" class="scene">
     <canvas id="maze" aria-label="pasillos"></canvas>
     <p id="maze-title" class="maze-title rgb" aria-hidden="true">LOSTMEDIA</p>
+    <video id="clip" class="clip" muted playsinline preload="auto" hidden></video>
+    <img id="susto" class="susto" alt="" hidden>
     <p id="maze-cc" class="cc" aria-live="polite"></p>
     <p id="maze-hint" class="hint">arrastra para caminar y voltear · en compu, flechas o WASD</p>
     <div id="chat" class="chat" hidden>
@@ -123,6 +226,6 @@
 <div class="scan" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 <noscript><p style="color:#fff;font:20px monospace;padding:24px">la cinta necesita JavaScript.</p></noscript>
-<script src="main.js?v=11"></script>
+<script src="main.js?v=15"></script>
 </body>
 </html>
