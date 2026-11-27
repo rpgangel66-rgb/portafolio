@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <title>Cotizador · Suministros Arce</title>
 <link rel="canonical" href="https://crusol.com.mx/sistemas/cotizador/">
 <meta property="og:type" content="website">
@@ -246,7 +247,12 @@ html.fr .app{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-<link rel="stylesheet" href="mesa.css?v=4">
+<link rel="stylesheet" href="mesa.css?v=5">
+<style id="aud-cbar">.cbar a,.cbar button{display:inline-block;padding:6px 0;min-height:24px}</style>
+<style id="aud-marca">@font-face{font-family:"Saira Stencil One";src:url("../../fonts/demos/saira-stencil-one-400.woff2") format("woff2");font-weight:400;font-display:swap}
+.brand b.estencil{font-family:"Saira Stencil One","Schibsted Grotesk",sans-serif;font-weight:400;font-size:38px;letter-spacing:.02em;line-height:.9;color:#C4241D}
+.rail .mk.estencil{display:grid;place-items:center;font-family:"Saira Stencil One",sans-serif;font-size:30px;line-height:1;color:#E0362C}
+@media (max-width:900px){.rail .mk.estencil{display:none}}</style>
 </head>
 <body data-demo="Cotizador">
 <!-- crusol: la cortina verde termina de subir al llegar desde el portafolio -->
@@ -260,7 +266,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
 
 <div class="app">
   <nav class="rail" aria-label="Secciones">
-    <svg class="mk" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg>
+    <span class="mk estencil" aria-hidden="true">A</span>
     <button type="button" id="tNew" aria-pressed="true" aria-label="Cotización"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 15.5h7M9 19h4"/></svg><span class="tip">Cotización</span></button>
     <button type="button" id="tNueva" aria-label="Nueva cotización"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="tip">Nueva</span></button>
     <button type="button" id="tHist" aria-pressed="false" aria-label="Historial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 7h18v13H3z"/><path d="M3 7l2-3h14l2 3M9 11h6"/></svg><span class="tip">Archivo</span></button>
@@ -273,7 +279,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
       <div class="dtop"><span class="crumb">Cotizaciones / <b id="crFolio">COT-0000</b></span><span class="sp"></span><span class="saved" id="saved"><i></i><span>Sin guardar</span></span></div>
       <article class="sheet" id="sheet" aria-label="Cotización">
         <header class="lh">
-          <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#D7261E"/><path fill="#fff" d="M7 27V15a9 9 0 0 1 18 0v12h-6V15a3 3 0 0 0-6 0v12z"/></svg><div><b>ARCE</b><small>Suministros industriales</small><address>ventas@suministrosarce.mx</address></div></div>
+          <div class="brand"><div><b class="estencil">ARCE</b><small>Suministros industriales</small><address>ventas@suministrosarce.mx</address></div></div>
           <div class="doc"><div class="t">Cotización</div><div class="f" id="pFolio">COT-0000</div><div class="d" id="pFecha"></div></div>
         </header>
         <button type="button" class="stamp" id="stamp" title="Cambiar vigencia">Vigente<small id="stampD">15 días</small></button>
@@ -518,7 +524,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
   document.getElementById("crx").addEventListener("click",function(){el.classList.remove("on");setTimeout(function(){el.hidden=true;document.body.style.paddingBottom=""},500);try{sessionStorage.setItem("crusol_cta_x","1")}catch(e){}});
 })();
 </script>
-<script src="mesa.js?v=4" defer></script>
+<script src="mesa.js?v=5" defer></script>
 </body>
 </html>
 

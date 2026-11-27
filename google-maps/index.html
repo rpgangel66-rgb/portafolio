@@ -98,7 +98,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;text-wrap:balance}
 /* Páginas en vivo dentro de una ventana */
 .ventana{position:relative;background:#141414;border-radius:12px;padding:30px 0 0;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
 .ventana::before{content:"";position:absolute;left:16px;top:11px;width:9px;height:9px;border-radius:50%;background:#F4F2EC;box-shadow:16px 0 0 rgba(244,242,236,.55),32px 0 0 rgba(244,242,236,.3)}
-.marco{position:relative;overflow:hidden;background:#222}
+.marco{position:relative;overflow:hidden;background:#2A2A28}
 .marco img{width:100%;height:100%;object-fit:cover;object-position:top}
 .marco iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0}
 .ventana .marco{aspect-ratio:1280/800}
@@ -134,6 +134,10 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
 .pie a{display:block;text-decoration:none;padding:3px 0;color:var(--suave)}
 .pie a:hover,.pie a[aria-current]{color:var(--tinta);text-decoration:underline;text-underline-offset:5px}
 .firma{margin-top:2rem;font-size:13.5px;color:var(--suave)}
+/* En las subpáginas el cierre ya pregunta lo suyo: el pie no repite el "Escríbeme" gigante, solo deja el correo */
+.contacto.corto{padding-top:clamp(2.5rem,5vw,4rem)}
+.contacto.corto .correo{margin-top:0}
+.contacto.corto .pie{padding-top:clamp(2.5rem,5vw,3.5rem)}
 
 /* Cortina al abrir un demo (cada demo la termina de subir al cargar) */
 #cortina{position:fixed;inset:0;z-index:50;background:var(--hondo);display:grid;place-items:center;transform:translateY(101%);transition:transform .6s cubic-bezier(.7,0,.2,1);pointer-events:none}
@@ -149,7 +153,12 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
 
 @media (max-width:819px){
   body{font-size:16px}
-  .nav a:not(.fijo){display:none}
+  /* En la portada las cuatro entradas son los mosaicos; en las subpáginas el menú completo baja a un segundo renglón */
+  .nav a{display:inline-flex;align-items:center;min-height:44px}
+  .hero .nav a:not(.fijo){display:none}
+  .sub-top{position:relative;flex-wrap:wrap;row-gap:0;padding-bottom:4px}
+  .sub-top .nav{width:100%;justify-content:space-between;gap:10px;font-size:14.5px}
+  .sub-top .nav .fijo{position:absolute;right:var(--pad);top:10px}
   .pie{grid-template-columns:1fr 1fr}
   .pie>div:first-child{grid-column:1/-1}
 }
@@ -228,7 +237,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
   <ol class="pasos">
     <li><b>Me mandas la liga de tu ficha</b><p>La reviso y te digo qué está mal en cada sucursal antes de cobrarte nada.</p></li>
     <li><b>La reclamas con la cuenta de tu empresa</b><p>No hacen falta las claves viejas. Si ya la administra alguien más, se pide el acceso desde la misma ficha; eso tarda más.</p></li>
-    <li><b>Google pide una verificación desde tu local</b><p>Casi siempre es un video corto del negocio. Te guío paso a paso.</p></li>
+    <li><b>Google pide una verificación desde tu local</b><p>Casi siempre es un video corto de tu local. Te guío paso a paso.</p></li>
     <li><b>Me agregas como administrador y corrijo</b><p>Sitio, teléfono, WhatsApp, horario por día, categoría, fotos propias y productos con precio, en todas tus sucursales.</p></li>
   </ol>
 </section>
@@ -246,7 +255,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
   </div>
 </section>
 
-<section class="parada cierre-sub" data-paleta="#154A39,#F4F2EC">
+<section class="parada cierre-sub" id="contacto" data-paleta="#154A39,#F4F2EC">
   <span class="punto" aria-hidden="true"></span>
   <h2>Mándame la liga de tu ficha</h2>
   <p class="texto">Te respondo con lo que encuentro en cada sucursal.</p>
@@ -254,9 +263,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
 </section>
 </main>
 
-<footer class="contacto" id="contacto" data-paleta="#0B2A20,#F4F2EC">
-  <a class="grande sobre" data-correo href="mailto:crusolmx@gmail.com" data-goatcounter-click="sub-correo">Escríbeme</a>
-  <p class="con-copy sobre">Cuéntame qué necesita tu empresa. Si ya tienes página o ficha de Google, mándame la liga y te respondo con lo que encuentro.</p>
+<footer class="contacto corto" data-paleta="#0B2A20,#F4F2EC">
   <p class="correo sobre"><span id="correo-txt">crusolmx@gmail.com</span><button type="button" id="copiar">Copiar</button></p>
   <div class="pie sobre">
     <div>
@@ -292,7 +299,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
 
 </footer>
 <div id="cortina" aria-hidden="true"><svg viewBox="0 0 100 100"><path fill="#F4F2EC" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#A9C4B6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg></div>
-<script>(()=>{var l=e=>document.querySelector(e),S=(e,t=0,o=1)=>Math.min(o,Math.max(t,e)),q=(e,t,o)=>{let n=S((o-e)/(t-e));return n*n*(3-2*n)},u=matchMedia("(prefers-reduced-motion: reduce)").matches,p=document.documentElement,R="crusolmx@gmail.com",m=(e,t)=>"mailto:"+R+"?subject="+encodeURIComponent(e)+"&body="+encodeURIComponent(t),y={general:m("Solicitud de propuesta",`Hola Angel:
+<script>(()=>{var l=e=>document.querySelector(e),C=(e,t=0,o=1)=>Math.min(o,Math.max(t,e)),q=(e,t,o)=>{let n=C((o-e)/(t-e));return n*n*(3-2*n)},p=matchMedia("(prefers-reduced-motion: reduce)").matches,u=document.documentElement,L="crusolmx@gmail.com",m=(e,t)=>"mailto:"+L+"?subject="+encodeURIComponent(e)+"&body="+encodeURIComponent(t),y={general:m("Solicitud de propuesta",`Hola Angel:
 
 Me interesa una propuesta para mi empresa.
 
@@ -326,7 +333,7 @@ Me interesa un sistema para nuestra operaci\xF3n.
 Empresa: 
 Qu\xE9 hacemos hoy en hojas de c\xE1lculo o mensajes: 
 Cu\xE1ntas personas lo usar\xEDan: 
-`)};document.querySelectorAll("[data-correo]").forEach(e=>{e.href=y[e.dataset.correo]||y.general});var v=l("#copiar");v&&v.addEventListener("click",e=>{let t=()=>{e.target.textContent="Copiado",setTimeout(()=>{e.target.textContent="Copiar"},1800)},o=()=>{let n=getSelection(),a=document.createRange();a.selectNodeContents(l("#correo-txt")),n.removeAllRanges(),n.addRange(a),e.target.textContent="Selecci\xF3nalo y c\xF3pialo"};navigator.clipboard?navigator.clipboard.writeText(R).then(t,o):o()});try{let e=new Intl.DateTimeFormat("en-US",{timeZone:"America/Mexico_City",weekday:"short",hour:"numeric",hour12:!1}).formatToParts(new Date),t=a=>e.find(i=>i.type===a).value,o=parseInt(t("hour"),10)%24,n=l("#atiendo");n&&!["Sat","Sun"].includes(t("weekday"))&&o>=9&&o<19&&(n.textContent="Estoy atendiendo ahora: lunes a viernes, de 9 a 19 h (hora del centro de M\xE9xico).")}catch{}var b=e=>[1,3,5].map(t=>parseInt(e.slice(t,t+2),16)),c=[...document.querySelectorAll("[data-paleta]")].map(e=>{let[t,o]=e.dataset.paleta.split(",");return{el:e,b:b(t),t:b(o)}}),I=(e,t,o)=>e.map((n,a)=>Math.round(n+(t[a]-n)*o)),w=e=>{let[t,o,n]=e.map(a=>(a/=255,a<=.03928?a/12.92:Math.pow((a+.055)/1.055,2.4)));return .2126*t+.7152*o+.0722*n},x=(e,t)=>{let o=w(e),n=w(t);return(Math.max(o,n)+.05)/(Math.min(o,n)+.05)},E=l(".ruta"),M=l(".trazo"),z=[...document.querySelectorAll(".parada")],C=document.querySelector('meta[name="theme-color"]'),h=0;function A(){if(h=0,!c.length)return;let e=innerHeight,t=0;for(let s=0;s<c.length;s++)c[s].el.getBoundingClientRect().top<=e*.5&&(t=s);let o=c[t],n=c[Math.min(t+1,c.length-1)],a=n===o?0:q(e*.95,e*.5,n.el.getBoundingClientRect().top),i=I(o.b,n.b,a),r=x(o.t,i)>=x(n.t,i)?o.t:n.t;if(p.style.setProperty("--bg",`rgb(${i})`),p.style.setProperty("--tinta",`rgb(${r})`),p.style.setProperty("--suave",`rgba(${r},.74)`),p.style.setProperty("--raya",`rgba(${r},.22)`),C&&(C.content=`rgb(${i})`),E&&M){let s=E.getBoundingClientRect();M.style.setProperty("--avance",u?1:S((e*.55-s.top)/s.height).toFixed(4));for(let d of z){let f=d.querySelector(".punto");f&&d.classList.toggle("paso",u||f.getBoundingClientRect().top<e*.55)}}}var L=()=>{h||(h=requestAnimationFrame(A))};addEventListener("scroll",L,{passive:!0});addEventListener("resize",L);A();if("IntersectionObserver"in window&&!u){let e=new IntersectionObserver(t=>{for(let o of t)o.isIntersecting&&(o.target.classList.add("visto"),e.unobserve(o.target))},{rootMargin:"0px 0px -12% 0px"});document.querySelectorAll(".revela").forEach(t=>e.observe(t))}else document.querySelectorAll(".revela").forEach(e=>e.classList.add("visto"));if(matchMedia("(min-width:820px) and (hover:hover)").matches&&"IntersectionObserver"in window){let e=new IntersectionObserver(t=>{for(let o of t){if(!o.isIntersecting)continue;let n=o.target;e.unobserve(n);let a=+n.dataset.w,i=+n.dataset.h,r=document.createElement("iframe");r.src=n.dataset.vivo,r.width=a,r.height=i,r.title=n.dataset.titulo||"P\xE1gina de muestra en vivo",r.loading="lazy";let s=()=>{r.style.transform=`scale(${n.clientWidth/a})`};r.addEventListener("load",()=>{let d=n.querySelector("img");d&&(d.style.visibility="hidden")}),n.appendChild(r),s(),new ResizeObserver(s).observe(n)}},{rootMargin:"500px"});document.querySelectorAll(".marco[data-vivo]").forEach(t=>e.observe(t))}var g=l("#cortina"),O=e=>{try{let t=new URL(e.href,location.href);return/\/(sitios|sistemas)\/[^/]+\//.test(t.pathname)}catch{return!1}};document.addEventListener("click",e=>{let t=e.target.closest("a[href]");!t||!g||u||!O(t)||e.metaKey||e.ctrlKey||e.shiftKey||e.button||t.target==="_blank"||(e.preventDefault(),g.classList.add("baja"),setTimeout(()=>{location.href=t.href},620))});addEventListener("pageshow",()=>{g&&g.classList.remove("baja")});})();
+`)};document.querySelectorAll("[data-correo]").forEach(e=>{e.href=y[e.dataset.correo]||y.general});var v=l("#copiar");v&&v.addEventListener("click",e=>{let t=()=>{e.target.textContent="Copiado",setTimeout(()=>{e.target.textContent="Copiar"},1800)},o=()=>{let n=getSelection(),a=document.createRange();a.selectNodeContents(l("#correo-txt")),n.removeAllRanges(),n.addRange(a),e.target.textContent="Selecci\xF3nalo y c\xF3pialo"};navigator.clipboard?navigator.clipboard.writeText(L).then(t,o):o()});try{let e=new Intl.DateTimeFormat("en-US",{timeZone:"America/Mexico_City",weekday:"short",hour:"numeric",hour12:!1}).formatToParts(new Date),t=a=>e.find(i=>i.type===a).value,o=parseInt(t("hour"),10)%24,n=l("#atiendo");n&&!["Sat","Sun"].includes(t("weekday"))&&o>=9&&o<19&&(n.textContent="Estoy atendiendo ahora: lunes a viernes, de 9 a 19 h (hora del centro de M\xE9xico).")}catch{}var b=e=>[1,3,5].map(t=>parseInt(e.slice(t,t+2),16)),c=[...document.querySelectorAll("[data-paleta]")].map(e=>{let[t,o]=e.dataset.paleta.split(",");return{el:e,b:b(t),t:b(o)}}),I=(e,t,o)=>e.map((n,a)=>Math.round(n+(t[a]-n)*o)),x=e=>{let[t,o,n]=e.map(a=>(a/=255,a<=.03928?a/12.92:Math.pow((a+.055)/1.055,2.4)));return .2126*t+.7152*o+.0722*n},w=(e,t)=>{let o=x(e),n=x(t);return(Math.max(o,n)+.05)/(Math.min(o,n)+.05)},E=l(".ruta"),M=l(".trazo"),z=[...document.querySelectorAll(".parada")],S=document.querySelector('meta[name="theme-color"]'),h=0;function R(){if(h=0,!c.length)return;let e=innerHeight,t=0;for(let s=0;s<c.length;s++)c[s].el.getBoundingClientRect().top<=e*.5&&(t=s);let o=c[t],n=c[Math.min(t+1,c.length-1)],a=n===o?0:q(e*.95,e*.5,n.el.getBoundingClientRect().top),i=I(o.b,n.b,a),r=w(o.t,i)>=w(n.t,i)?o.t:n.t;if(u.style.setProperty("--bg",`rgb(${i})`),u.style.setProperty("--tinta",`rgb(${r})`),u.style.setProperty("--suave",`rgba(${r},.74)`),u.style.setProperty("--raya",`rgba(${r},.22)`),S&&(S.content=`rgb(${i})`),E&&M){let s=E.getBoundingClientRect();M.style.setProperty("--avance",p?1:C((e*.55-s.top)/s.height).toFixed(4));for(let d of z){let f=d.querySelector(".punto");f&&d.classList.toggle("paso",p||f.getBoundingClientRect().top<e*.55)}}}var A=()=>{h||(h=requestAnimationFrame(R))};addEventListener("scroll",A,{passive:!0});addEventListener("resize",A);R();var O=e=>{let t=e.tagName==="IMG"?e:e.querySelector("img"),o=()=>e.classList.add("visto");if(!t||t.complete&&t.naturalWidth)return o();t.loading="eager",t.addEventListener("load",o,{once:!0}),t.addEventListener("error",o,{once:!0}),setTimeout(o,4e3)};if("IntersectionObserver"in window&&!p){let e=new IntersectionObserver(o=>{for(let n of o)n.isIntersecting&&(O(n.target),e.unobserve(n.target))},{rootMargin:"0px 0px -12% 0px"});document.querySelectorAll(".revela").forEach(o=>e.observe(o));let t=new IntersectionObserver(o=>{for(let n of o)n.isIntersecting&&(n.target.loading="eager",t.unobserve(n.target))},{rootMargin:"900px 0px"});document.querySelectorAll('img[loading="lazy"]').forEach(o=>t.observe(o))}else document.querySelectorAll(".revela").forEach(e=>e.classList.add("visto"));if(matchMedia("(min-width:820px) and (hover:hover)").matches&&"IntersectionObserver"in window){let e=new IntersectionObserver(t=>{for(let o of t){if(!o.isIntersecting)continue;let n=o.target;e.unobserve(n);let a=+n.dataset.w,i=+n.dataset.h,r=document.createElement("iframe");r.src=n.dataset.vivo,r.width=a,r.height=i,r.title=n.dataset.titulo||"P\xE1gina de muestra en vivo",r.loading="lazy";let s=()=>{r.style.transform=`scale(${n.clientWidth/a})`};r.addEventListener("load",()=>{let d=n.querySelector("img");d&&(d.style.visibility="hidden")}),n.appendChild(r),s(),new ResizeObserver(s).observe(n)}},{rootMargin:"500px"});document.querySelectorAll(".marco[data-vivo]").forEach(t=>e.observe(t))}var g=l("#cortina"),P=e=>{try{let t=new URL(e.href,location.href);return/\/(sitios|sistemas)\/[^/]+\//.test(t.pathname)}catch{return!1}};document.addEventListener("click",e=>{let t=e.target.closest("a[href]");!t||!g||p||!P(t)||e.metaKey||e.ctrlKey||e.shiftKey||e.button||t.target==="_blank"||(e.preventDefault(),g.classList.add("baja"),setTimeout(()=>{location.href=t.href},620))});addEventListener("pageshow",()=>{g&&g.classList.remove("baja")});})();
 </script>
 <script data-goatcounter="https://angelweb.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

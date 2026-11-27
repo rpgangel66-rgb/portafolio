@@ -38,7 +38,8 @@ input,textarea{caret-color:var(--cereza)}
 .marca{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:15px}
 .marca svg{width:22px;height:22px;flex:none;align-self:center}
 .marca small{font-stretch:100%;font-weight:400;text-transform:none;letter-spacing:0;font-size:15px}
-.ficticio{opacity:.82}
+.demo-barra{background:#0b2a20;color:#f6f5f0;font-size:13px;line-height:1.4;text-align:center;padding:7px 12px}
+.demo-barra a{color:inherit;font-weight:600}
 .hoy{font-weight:600;text-align:right}
 .hero h1{font-size:clamp(5.2rem,16.4vw,19rem);margin-top:auto;padding-top:7svh}
 .l{display:block;overflow:hidden;padding-top:.06em}
@@ -99,7 +100,7 @@ input,textarea{caret-color:var(--cereza)}
 /* ---------- Celular ---------- */
 @media (max-width:719px){
   body{font-size:16px}
-  .top .ficticio{display:none}
+  .pedir{padding:10px 0;margin-top:0}
   .hero{padding-bottom:calc(8vw + 30px)}
   .hero h1{font-size:22.4vw;margin-top:26px;padding-top:0}
   .hero .stage{position:relative;right:auto;top:auto;align-self:flex-end;height:68vw;margin:-3vw 4vw 0 0}
@@ -135,13 +136,13 @@ input,textarea{caret-color:var(--cereza)}
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
 
+<p class="demo-barra sobre">Sitio de demostración con una empresa ficticia. Hecho por <a href="https://crusol.com.mx/">crusol</a>.</p>
 <header class="hero">
   <div class="top">
     <a class="marca ancha sobre" href="#" aria-label="Nogal Tostadores, inicio">
       <svg viewBox="0 0 64 64" aria-hidden="true"><g transform="rotate(-28 32 32)"><ellipse cx="32" cy="32" rx="20" ry="28" fill="currentColor"/><path d="M32 9c12 14-12 32 0 46" fill="none" stroke="#CF3F2A" stroke-width="5" stroke-linecap="round"/></g></svg>
       Nogal <small>tostadores</small>
     </a>
-    <p class="ficticio sobre">Negocio ficticio, sitio de prueba</p>
     <p class="hoy sobre" id="hoy">Lunes a viernes desde las 7:30</p>
   </div>
 
