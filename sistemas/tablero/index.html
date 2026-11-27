@@ -458,7 +458,7 @@ addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})()
   var el=document.getElementById("crcta");if(!el)return;
   try{if(sessionStorage.getItem("crusol_cta_x"))return}catch(e){}
   var demo=document.body.getAttribute("data-demo")||document.title;
-  document.getElementById("crgo").href="mailto:angel@crusol.com.mx?subject="+encodeURIComponent("Me interesa: "+demo)+"&body="+encodeURIComponent("Hola Angel:\n\nVi el demo de "+demo+" y me gustaría algo así para mi empresa.\n\nEmpresa:\nGiro:\nQué me gustaría resolver:\n\nSaludos.");
+  document.getElementById("crgo").href="mailto:crusolmx@gmail.com?subject="+encodeURIComponent("Me interesa: "+demo)+"&body="+encodeURIComponent("Hola Angel:\n\nVi el demo de "+demo+" y me gustaría algo así para mi empresa.\n\nEmpresa:\nGiro:\nQué me gustaría resolver:\n\nSaludos.");
   function show(){if(el.dataset.s)return;el.dataset.s=1;el.hidden=false;if(innerWidth<=640)document.body.style.paddingBottom="76px";requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add("on")})})}
   var t=setTimeout(show,9000);
   ["click","keydown"].forEach(function(ev){document.addEventListener(ev,function f(e){if(el.contains(e.target))return;document.removeEventListener(ev,f,true);clearTimeout(t);t=setTimeout(show,4000)},true)});

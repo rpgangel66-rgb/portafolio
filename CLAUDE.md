@@ -15,6 +15,9 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
   - Transición entre páginas: `@view-transition{navigation:auto}`; la vista previa de cada puerta y la imagen principal de su subpágina comparten `view-transition-name` (vt-maps, vt-sitios, vt-pedidos, vt-sistemas), así crece de una a otra.
   - Una línea de ruta punteada baja por la izquierda y se dibuja al hacer scroll (.trazo, --avance); cada parada tiene su punto que se llena al pasarlo.
   - La paleta cambia poco a poco al bajar: cada bloque trae data-paleta="fondo,tinta"; comun.js mezcla el fondo y el texto toma la tinta que más contraste tenga (si se mezclara, a la mitad no se lee).
+  - Revisión (#revision, 26 de noviembre de 2026): seis preguntas sobre el camino del cliente (ficha, sitio, pedidos, sistemas) con opciones como radios; al contestar se escribe "Lo que arreglaría primero" en una hoja a la derecha (en celular abajo), con liga a la subpágina de cada arreglo. El botón arma un mailto a crusolmx@gmail.com con preguntas, respuestas, nombre opcional de la empresa y la lista. No se guarda nada. Código al final de `src/main.js`.
+  - Cómo trabajo (#trato): el proceso en 5 pasos numerados y 8 dudas en `<details>` (precio, muestra, dominio, cambios, a distancia).
+  - Vistas previas: `og/og-crusol.jpg` (portada) y `og/og-<subpágina>.jpg`, capturas reales de cada página a 1200x630.
   - Pantalla de carga (#carga) solo en la portada: la hélice en SVG se arma mientras cargan la letra y el primer cuadro del 3D (máximo 2.6 s; una vez por sesión, sessionStorage crusol_carga). Después entra el título palabra por palabra.
   - Las capturas (.revela) se destapan con clip-path al aparecer; el texto no se anima. Con movimiento reducido no hay carga, ni transiciones, ni animaciones.
   - Cortina (#cortina) al abrir un demo: baja en el portafolio y cada demo la termina de subir con su bloque #crin (acepta venir de la portada o de las subpáginas).
@@ -72,7 +75,7 @@ Sitio de **crusol**, estudio de Angel Cruz: software a la medida, automatizació
 ## Reglas de contenido
 
 - Tono profesional para empresarios: decir "empresas", no "negocios".
-- Contacto solo por correo (angel@crusol.com.mx). Sin WhatsApp en el sitio.
+- Contacto solo por correo (crusolmx@gmail.com). Sin WhatsApp en el sitio.
 - No poner precios en el sitio.
 - No mencionar la ubicación exacta (municipio) en las páginas.
 - No usar flechas (→) en los textos.
