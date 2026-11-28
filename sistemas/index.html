@@ -27,7 +27,7 @@
 :root{
   --hueso:#F4F2EC; --salvia:#A9C4B6; --verde:#154A39; --hondo:#0B2A20; --luz:#3FD39A;
   --bg:var(--hueso); --tinta:var(--hondo); --suave:rgba(11,42,32,.72); --raya:rgba(11,42,32,.2);
-  --pad:clamp(18px,4vw,64px); --canal:clamp(30px,5vw,76px);
+  --pad:clamp(18px,4vw,64px); --canal:0px;
 }
 /* Transición entre páginas de crusol: el navegador funde una en otra y la pieza con el mismo nombre
    (la captura de cada puerta) crece hasta su lugar en la subpágina */
@@ -67,11 +67,16 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;text-wrap:balance}
 .nav{display:flex;gap:clamp(14px,2.2vw,30px);font-size:15px;font-weight:500}
 .nav a{text-decoration:none}
 .nav a:hover,.nav a[aria-current]{text-decoration:underline;text-underline-offset:6px}
+/* el único pendiente de la barra: pedir la muestra (lleva marco para que se vea que es el botón) */
+.nav .fijo{padding:7px 12px;border:1.5px solid currentColor;border-radius:4px;white-space:nowrap}
+.nav .fijo:hover{text-decoration:none;background:var(--tinta);color:var(--bg)}
 
 /* La ruta: línea punteada que baja por la izquierda y se dibuja al bajar */
 .ruta{position:relative;padding:0 var(--pad) 0 calc(var(--pad) + var(--canal));overflow-x:clip}
 .ruta::before,.trazo{content:"";position:absolute;left:calc(var(--pad) + var(--canal)/2 - 1px);top:0;bottom:0;width:2px}
 .ruta::before{background:repeating-linear-gradient(var(--raya) 0 7px,transparent 7px 14px)}
+/* 28 nov 2026: la línea de ruta y sus puntos se quitaron (adorno que no decía nada) */
+.ruta::before,.trazo,.punto{display:none}
 .trazo{background:var(--tinta);transform-origin:top;transform:scaleY(var(--avance,0))}
 .parada{position:relative;padding:clamp(4.5rem,9vw,8rem) 0 clamp(2rem,4vw,3rem)}
 .parada:first-of-type{padding-top:clamp(2.5rem,5vw,4rem)}
@@ -155,10 +160,9 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
   body{font-size:16px}
   /* En la portada las cuatro entradas son los mosaicos; en las subpáginas el menú completo baja a un segundo renglón */
   .nav a{display:inline-flex;align-items:center;min-height:44px}
-  .hero .nav a:not(.fijo){display:none}
   .sub-top{position:relative;flex-wrap:wrap;row-gap:0;padding-bottom:4px}
   .sub-top .nav{width:100%;justify-content:space-between;gap:10px;font-size:14.5px}
-  .sub-top .nav .fijo{position:absolute;right:var(--pad);top:10px}
+  .sub-top .nav .fijo{position:absolute;right:var(--pad);top:12px;min-height:40px}
   .pie{grid-template-columns:1fr 1fr}
   .pie>div:first-child{grid-column:1/-1}
 }
@@ -187,7 +191,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
 <a class="salto" href="#tablero">Saltar al contenido</a>
 <div class="sub-top top" data-paleta="#F4F2EC,#0B2A20">
   <a class="marca" href="../" aria-label="crusol, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#A9C4B6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>crusol</a>
-  <nav class="nav" aria-label="Secciones"><a href="../google-maps/">Google Maps</a><a href="../sitios/">Sitios web</a><a href="../pedidos/">Pedidos</a><a href="./" aria-current="page">Sistemas</a><a class="fijo" href="#contacto">Contacto</a></nav>
+  <nav class="nav" aria-label="Secciones"><a href="../sitios/">Sitios de ejemplo</a><a href="../google-maps/">Google Maps</a><a href="../pedidos/">Pedidos</a><a href="./" aria-current="page">Sistemas</a><a class="fijo" href="../#muestra">Pedir muestra</a></nav>
 </div>
 <header class="sub-cab">
   <h1>Sistemas para lo que hoy vive en hojas de cálculo</h1>
@@ -275,7 +279,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
   <div class="pie sobre">
     <div>
       <b>crusol</b>
-      <p>Fichas de Google Maps, sitios web hechos a mano, pedidos en línea y sistemas internos para empresas. De lunes a viernes, de 9 a 19 h (hora del centro de México).</p>
+      <p>Páginas web hechas con el material de tu empresa, fichas de Google Maps, pedidos en línea y sistemas. Contesto en crusolmx@gmail.com de lunes a viernes, de 9 a 19 h (hora del centro de México).</p>
     </div>
     <nav aria-label="Servicios">
       <b>Servicios</b>
@@ -286,6 +290,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
     </nav>
     <nav aria-label="Demos">
       <b>Demos en vivo</b>
+      <a href="../sitios/turno/">Sitio de un bar</a>
       <a href="../sitios/nogal/">Sitio de un café</a>
       <a href="../sitios/hornos/">Sitio de una panadería</a>
       <a href="../sitios/mitra/">Sitio de una marca de sodas</a>
@@ -299,6 +304,7 @@ details p{padding:0 0 15px;color:var(--suave);font-size:15.5px}
     <nav aria-label="Información">
       <b>Información</b>
       <a href="../">Inicio</a>
+      <a href="../#muestra">Pedir una muestra</a>
       <a href="../privacidad.html">Aviso de privacidad</a>
     </nav>
   </div>

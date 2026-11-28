@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Segundo Turno, coctelería y comedor de noche (demo de crusol)</title>
+<meta name="description" content="Sitio de demostración de un bar ficticio, hecho por crusol: el horario en su tarjeta de checador, el menú por turno y la reservación por WhatsApp.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#22344A">
+<meta property="og:title" content="Segundo Turno, coctelería y comedor de noche">
+<meta property="og:description" content="Demo de crusol: se checa entrada a las seis.">
+<meta property="og:image" content="https://crusol.com.mx/img/turno-escritorio.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='3' width='20' height='26' rx='1.5' fill='%23EEDFB5'/%3E%3Crect x='6' y='3' width='20' height='6' fill='%23C3362B'/%3E%3Cpath d='M10 14h12M10 18h12M10 22h8' stroke='%231E1B16' stroke-width='1.6'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Sofia Sans Extra Condensed";src:url("../../fonts/demos/sofia-sans-extra-condensed-800.woff2") format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Sofia Sans Extra Condensed";src:url("../../fonts/demos/sofia-sans-extra-condensed-900.woff2") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Sofia Sans";src:url("../../fonts/demos/sofia-sans-400.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Sofia Sans";src:url("../../fonts/demos/sofia-sans-600.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Sofia Sans";src:url("../../fonts/demos/sofia-sans-800.woff2") format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Doto";src:url("../../fonts/demos/doto-800.woff2") format("woff2");font-weight:800;font-display:swap}
+/* Segundo Turno es un bar ficticio. Todo sale de su pieza impresa: la tarjeta de checador que te dan en la puerta.
+   Sofia Sans Extra Condensed es lo preimpreso de la tarjeta; Doto, lo que imprime el reloj checador. */
+:root{
+  --manila:#EEDFB5;     /* cartulina de la tarjeta de checador */
+  --manila-2:#E3D19E;   /* canto y sombra de la cartulina */
+  --tinta:#1E1B16;      /* tinta negra de lo preimpreso */
+  --rojo:#C3362B;       /* tinta roja del reloj checador y del encabezado de la tarjeta */
+  --overol:#22344A;     /* azul del overol de planta (la barra, el uniforme) */
+  --overol-2:#1A293B;
+  --lampara:#F3E9CF;    /* texto sobre el azul: el hueso de las lámparas de la nave */
+  --pad:clamp(18px,4.5vw,72px);
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--overol)}
+body{font-family:"Sofia Sans",system-ui,sans-serif;font-size:17px;line-height:1.5;color:var(--lampara);background:var(--overol);overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+::selection{background:var(--rojo);color:var(--manila)}
+:focus-visible{outline:3px solid var(--manila);outline-offset:3px}
+.claro :focus-visible,.tarjeta :focus-visible{outline-color:var(--rojo)}
+.num{font-variant-numeric:tabular-nums}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.pre{font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:.95}
+.reloj{font-family:"Doto",ui-monospace,monospace;font-weight:800;letter-spacing:.02em}
+.demo-barra{background:#0b2a20;color:#f6f5f0;font-size:13px;text-align:center;padding:7px 12px}
+.demo-barra a{font-weight:600}
+.salto{position:absolute;left:-999px}.salto:focus{left:12px;top:12px;z-index:30;background:var(--manila);color:var(--tinta);padding:10px 14px}
+
+/* ---------- Barra de arriba: el nombre y lo que se usa ---------- */
+.arriba{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px var(--pad)}
+.nombre{font-size:1.45rem;text-decoration:none;color:var(--manila)}
+.menu{display:flex;align-items:center;gap:clamp(14px,2.4vw,30px);font-weight:600;font-size:15.5px}
+.menu a{text-decoration:none}
+@media (hover:hover){.menu a:not(.boton):hover{text-decoration:underline;text-underline-offset:5px}}
+
+/* Botón: una tira de tarjeta con su perforación */
+.boton{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 18px;border:0;border-radius:2px;background:var(--rojo);color:var(--manila);font-weight:800;font-size:16px;text-decoration:none;transition:transform .16s ease-out,background-color .2s}
+.boton:active{transform:scale(.97)}
+@media (hover:hover){.boton:hover{background:#A92B21}}
+.boton.chico{min-height:40px;padding:0 14px;font-size:15px}
+.boton svg{width:18px;height:18px;flex:none}
+.boton[aria-disabled="true"]{opacity:.75}
+
+/* ---------- Portada ---------- */
+.portada{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:2.5rem 5vw;align-items:center;padding:clamp(2rem,6vh,4.5rem) var(--pad) clamp(3rem,8vh,6rem)}
+.portada h1{font-weight:800;font-size:clamp(2.6rem,5.4vw,5.1rem);line-height:.98;letter-spacing:-.025em;color:var(--manila);max-width:9em}
+.portada .bajada{margin-top:1.3rem;font-size:1.12rem;max-width:31rem;color:rgba(243,233,207,.86)}
+.acciones{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:1.8rem}
+.lnk{font-weight:600;text-underline-offset:5px;text-decoration-thickness:1.5px}
+
+/* La tarjeta de checador: lo preimpreso en negro y rojo, lo que marca el reloj en Doto */
+.tarjeta{position:relative;background:var(--manila);color:var(--tinta);border-radius:3px;padding:16px 18px 20px;box-shadow:0 1px 0 var(--manila-2) inset,0 2px 0 rgba(0,0,0,.08),0 40px 70px -40px rgba(0,0,0,.75)}
+/* la muesca de arriba, por donde entra al reloj */
+.tarjeta::before{content:"";position:absolute;left:50%;top:-1px;width:44px;height:9px;margin-left:-22px;background:var(--overol);border-radius:0 0 22px 22px}
+.portada .tarjeta{transform:rotate(1.6deg);max-width:27rem;justify-self:center;width:100%}
+.t-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:6px 10px 7px;background:var(--rojo);color:var(--manila);margin:4px -6px 0}
+.t-cab .pre{font-size:1.65rem}
+.t-cab small{font:800 13px "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.t-datos{display:grid;grid-template-columns:auto 1fr;gap:0 10px;margin-top:10px;font-size:14px;line-height:1.35}
+.t-datos dt{font:800 13.5px "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.05em;padding:5px 0;border-bottom:1px solid rgba(30,27,22,.35)}
+.t-datos dd{margin:0;padding:5px 0;border-bottom:1px solid rgba(30,27,22,.35)}
+.t-dias{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px}
+.t-dias th{font:800 13.5px "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:4px 6px;border-bottom:2px solid var(--tinta)}
+.t-dias th:nth-child(2){color:var(--rojo)}
+.t-dias td{padding:6px 6px;border-bottom:1px solid rgba(30,27,22,.3)}
+.t-dias td:first-child{font:900 16px "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.04em;width:3.4em}
+.t-dias td.reloj{font-size:17px}
+.t-dias td.entra{color:var(--rojo)}
+.t-dias td.descanso{color:rgba(30,27,22,.5);font:600 14px "Sofia Sans",sans-serif}
+.t-dias tr.hoy td{background:rgba(195,54,43,.13)}
+.t-dias tr.hoy td:first-child{box-shadow:inset 4px 0 0 var(--rojo)}
+.sello{display:inline-block;margin-top:14px;padding:6px 9px 5px;border:2px solid var(--rojo);border-radius:3px;color:var(--rojo);font-size:16px;line-height:1.2;transform:rotate(-2deg)}
+
+/* ---------- La tarjeta del menú: un tarjetero con una tarjeta por sección ---------- */
+.carta-s{padding:clamp(2.5rem,5vw,4rem) var(--pad) clamp(4rem,8vw,6rem)}
+.carta-cab{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.2rem 3rem}
+.carta-cab h2{font-size:clamp(1.9rem,3.4vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--manila)}
+.carta-cab p{max-width:33rem;color:rgba(243,233,207,.84);margin-top:.6rem}
+.turnos{display:inline-grid;grid-template-columns:1fr 1fr;border:2px solid var(--manila);border-radius:3px;overflow:hidden}
+.turnos button{min-height:52px;padding:6px 16px;border:0;background:transparent;color:var(--manila);text-align:left;line-height:1.15;transition:background-color .2s,color .2s}
+.turnos button b{display:block;font:900 1.2rem "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.turnos button span{font-size:13.5px;opacity:.85}
+.turnos button[aria-pressed="true"]{background:var(--manila);color:var(--tinta)}
+.aviso-turno{margin-top:1rem;min-height:1.5em;font-size:15px;color:var(--manila)}
+.aviso-turno .reloj{color:#F0A094;font-size:16px}
+.tarjetero{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(1.6rem,3vw,2.4rem);align-items:start}
+.tarjetero .tarjeta{padding:12px 16px 16px}
+.tarjetero .tarjeta:nth-child(1){transform:rotate(-.5deg)}
+.tarjetero .tarjeta:nth-child(2){transform:rotate(.4deg);margin-top:18px}
+.tarjetero .tarjeta:nth-child(3){transform:rotate(-.3deg);margin-top:6px}
+.tarjetero .t-cab .pre{font-size:1.45rem}
+.renglones{list-style:none;padding:0;margin-top:6px}
+.renglon{display:grid;grid-template-columns:1fr auto;gap:0 12px;padding:9px 0 8px;border-bottom:1px solid rgba(30,27,22,.3)}
+.renglon b{font-weight:800;font-size:16.5px;letter-spacing:-.005em}
+.renglon b small{font-weight:600;font-size:13px;color:rgba(30,27,22,.62);margin-left:6px}
+.renglon p{grid-column:1/-1;font-size:14.5px;line-height:1.4;color:rgba(30,27,22,.78);margin-top:1px}
+.precio{font-weight:800;font-size:16.5px;text-align:right;white-space:nowrap}
+.precio s{display:block;font-weight:600;font-size:12.5px;color:rgba(30,27,22,.5)}
+.renglon.baja .precio{color:var(--rojo)}
+.cambia .precio{animation:tinta .35s ease-out}
+@keyframes tinta{from{opacity:.25}}
+.pie-tarjeta{margin-top:10px;font-size:13px;color:rgba(30,27,22,.66)}
+
+/* ---------- Rol de la semana: la hoja que se pega junto al reloj ---------- */
+.claro{background:var(--manila);color:var(--tinta)}
+.rol-s{padding:clamp(4rem,8vw,6.5rem) var(--pad)}
+.rol-g{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:2rem 5vw;align-items:start}
+.rol-s h2,.llegar h2{font-size:clamp(1.9rem,3.4vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+.rol-s .intro{margin-top:.8rem;max-width:26rem;color:rgba(30,27,22,.8)}
+.rol{list-style:none;padding:0;border-top:3px solid var(--tinta)}
+.rol li{display:grid;grid-template-columns:4.2rem minmax(0,1fr) auto;gap:4px 18px;align-items:baseline;padding:14px 0 13px;border-bottom:1px solid rgba(30,27,22,.3)}
+.rol .dia{font-size:1.9rem}
+.rol b{font-weight:800;font-size:1.08rem}
+.rol p{grid-column:2/3;font-size:15.5px;color:rgba(30,27,22,.78);max-width:40ch}
+.rol .horas{grid-row:1;grid-column:3;font-size:16px;white-space:nowrap}
+.rol li.hoy{background:linear-gradient(90deg,rgba(195,54,43,.14),rgba(195,54,43,0))}
+.rol li.hoy .dia{color:var(--rojo)}
+.rol li.descanso{color:rgba(30,27,22,.55)}
+.hoy-marca{display:inline-block;margin-left:8px;padding:1px 6px;border-radius:2px;background:var(--rojo);color:var(--manila);font:800 12.5px "Sofia Sans Extra Condensed",sans-serif;letter-spacing:.06em;text-transform:uppercase;vertical-align:3px}
+
+/* ---------- Checa tu entrada (reservar): en rojo, con tu tarjeta ---------- */
+.checa{background:var(--rojo);color:var(--manila);padding:clamp(4rem,8vw,6.5rem) var(--pad)}
+.checa-g{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:2.5rem 5vw;align-items:start}
+.checa h2{font-size:clamp(1.9rem,3.4vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+.checa .intro{margin-top:.8rem;max-width:31rem}
+.campo{display:block;margin-top:1.5rem}
+.campo>span,.campo legend{display:block;font:800 15px "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.55rem;padding:0}
+fieldset.campo{border:0;padding:0}
+.noches{display:flex;flex-wrap:wrap;gap:8px}
+.noches label{position:relative;display:grid;min-width:5.6rem;padding:8px 12px 7px;border:2px solid rgba(238,223,181,.6);border-radius:2px;cursor:pointer;line-height:1.1;transition:background-color .15s,border-color .15s,color .15s}
+.noches label b{font:900 1.2rem "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.noches label span{font-size:13.5px}
+.noches input{position:absolute;opacity:0;pointer-events:none}
+@media (hover:hover){.noches label:hover{border-color:var(--manila)}}
+.noches label:has(input:checked){background:var(--manila);border-color:var(--manila);color:var(--tinta)}
+.noches label:has(input:focus-visible){outline:3px solid var(--manila);outline-offset:2px}
+.fila2{display:flex;flex-wrap:wrap;gap:1rem 2rem}
+select,input[type=text]{font:inherit;font-size:17px;color:var(--tinta);background:var(--manila);border:0;border-radius:2px;min-height:46px;padding:0 12px}
+select{padding-right:34px;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--tinta) 50%),linear-gradient(135deg,var(--tinta) 50%,transparent 50%);background-position:calc(100% - 17px) 20px,calc(100% - 12px) 20px;background-size:5px 5px;background-repeat:no-repeat}
+input[type=text]{width:100%;max-width:24rem;caret-color:var(--rojo)}
+select:focus-visible,input[type=text]:focus-visible{outline:3px solid var(--tinta);outline-offset:2px}
+.contador{display:inline-flex;align-items:center;background:var(--manila);color:var(--tinta);border-radius:2px;min-height:46px}
+.contador button{width:46px;height:46px;border:0;background:transparent;font-size:22px;font-weight:800;color:var(--tinta)}
+.contador button:disabled{opacity:.3;cursor:default}
+.contador output{min-width:2.4ch;text-align:center;font-weight:800;font-size:18px}
+.nota-checa{margin-top:1.4rem;font-size:14.5px;max-width:31rem;color:rgba(238,223,181,.9)}
+.aviso{min-height:1.4em;margin-top:.6rem;font-weight:800}
+/* tu tarjeta: el reloj marca el día, la hora y cuántos */
+.tu-tarjeta{max-width:25rem;justify-self:center;width:100%;transform:rotate(-1.2deg)}
+.tu-tarjeta .t-cab{background:var(--tinta)}
+.marca-reloj{margin-top:14px;padding:14px 10px 12px;border:1.5px dashed rgba(30,27,22,.45);min-height:7.2rem}
+.marca-reloj small{display:block;font:800 12.5px "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.07em;color:rgba(30,27,22,.6)}
+.marca-reloj .reloj{display:block;margin-top:6px;color:var(--rojo);font-size:clamp(1.5rem,3vw,1.95rem);line-height:1.15;transform:rotate(-.6deg)}
+.tu-tarjeta .boton{width:100%;justify-content:center;margin-top:16px}
+.golpe{animation:golpe .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes golpe{40%{transform:rotate(-1.2deg) translateY(5px)}}
+.golpe .marca-reloj .reloj{animation:imprime .26s steps(3,end)}
+@keyframes imprime{from{opacity:0}}
+
+/* ---------- Cómo llegar ---------- */
+.llegar{padding:clamp(4rem,8vw,6rem) var(--pad)}
+.llegar-g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);gap:2rem 4vw;margin-top:1.6rem;align-items:start}
+.llegar address{font-style:normal;font-size:1.3rem;font-weight:800;line-height:1.25}
+.llegar p{margin-top:.6rem;color:rgba(30,27,22,.8);max-width:36ch}
+.llegar h3{font:900 1.15rem "Sofia Sans Extra Condensed",sans-serif;text-transform:uppercase;letter-spacing:.05em}
+.datos-l{list-style:none;padding:0;margin-top:.5rem;font-size:15.5px}
+.datos-l li{padding:6px 0;border-bottom:1px solid rgba(30,27,22,.25)}
+
+.pie{padding:2rem var(--pad) 2.4rem;font-size:14px;color:rgba(243,233,207,.8);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 3rem}
+.pie p{max-width:52ch}
+
+/* entrada: la tarjeta de la portada entra al reloj (una sola vez) */
+.js .portada .tarjeta{animation:entra .8s cubic-bezier(.2,.8,.2,1) .1s both}
+@keyframes entra{from{opacity:0;transform:rotate(1.6deg) translateY(36px)}}
+
+@media (max-width:980px){
+  .tarjetero{grid-template-columns:1fr 1fr}
+  .tarjetero .tarjeta:nth-child(2){margin-top:0}
+}
+@media (max-width:760px){
+  .menu a:not(.boton){display:none}
+  .portada,.rol-g,.checa-g,.llegar-g{grid-template-columns:1fr}
+  .portada .tarjeta{max-width:24rem}
+  .tarjetero{grid-template-columns:1fr}
+  .tarjetero .tarjeta{transform:none!important;margin-top:0!important}
+  .turnos{width:100%}
+  .rol li{grid-template-columns:3.4rem minmax(0,1fr)}
+  .rol .horas{grid-row:auto;grid-column:2}
+  .tu-tarjeta{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .portada .tarjeta,.golpe,.golpe .marca-reloj .reloj,.cambia .precio{animation:none}
+  .boton:active{transform:none}
+}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body data-demo="Sitio de un bar">
+<!-- crusol: la cortina verde termina de subir al llegar desde el portafolio -->
+<div id="crin" aria-hidden="true" style="position:fixed;inset:0;z-index:2147483600;background:#0b2a20;display:grid;place-items:center;transition:transform .75s cubic-bezier(.7,0,.2,1);will-change:transform"><svg viewBox="0 0 100 100" style="width:56px;height:56px;animation:crin-g 1.6s cubic-bezier(.7,0,.2,1) infinite"><path fill="#f6f5f0" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#a9c4b6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg><style>@keyframes crin-g{0%{transform:rotate(0)}25%{transform:rotate(90deg)}50%{transform:rotate(180deg)}75%{transform:rotate(270deg)}to{transform:rotate(360deg)}}</style></div>
+<script>(function(){var c=document.getElementById("crin");function off(){c.remove()}
+try{var r=document.referrer?new URL(document.referrer):null;if(window.top!==window.self||!r||r.host!==location.host||!/^\/((google-maps|sitios|pedidos|sistemas)\/)?(index\.html)?$/.test(r.pathname)||matchMedia("(prefers-reduced-motion: reduce)").matches){off();return}}catch(e){off();return}
+function go(){if(go.d)return;go.d=1;setTimeout(function(){c.style.transform="translateY(-101%)";setTimeout(off,800)},120)}
+if(document.readyState!=="loading")go();else document.addEventListener("DOMContentLoaded",go);setTimeout(go,1800);
+addEventListener("pageshow",function(e){if(e.persisted&&c.parentNode)off()})})();</script>
+<p class="demo-barra">Sitio de demostración con una empresa ficticia. Hecho por <a href="https://crusol.com.mx/">crusol</a>.</p>
+<a class="salto" href="#carta">Saltar al menú</a>
+
+<header class="arriba">
+  <a class="nombre pre" href="#">Segundo Turno</a>
+  <nav class="menu" aria-label="Secciones">
+    <a href="#carta">Menú</a>
+    <a href="#rol">Esta semana</a>
+    <a href="#llegar">Cómo llegar</a>
+    <a class="boton chico" href="#checa">Checar entrada</a>
+  </nav>
+</header>
+
+<main>
+<section class="portada" aria-labelledby="tit">
+  <div>
+    <h1 id="tit">Se checa entrada a las seis.</h1>
+    <p class="bajada">Coctelería y comedor de noche en la nave donde de 1946 a 1998 se hacían troqueles. De 6 a 9 es el primer turno y sale más barato; los viernes y sábados hay tiempo extra hasta las 2.</p>
+    <div class="acciones">
+      <a class="boton" href="#checa">Checar entrada <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></a>
+      <a class="lnk" href="#carta">Ver el menú y los precios</a>
+    </div>
+  </div>
+  <div class="tarjeta" role="group" aria-label="Tarjeta con el horario de la semana">
+    <div class="t-cab"><span class="pre">Segundo Turno</span><small>Tarjeta <span class="num">No. 0612</span></small></div>
+    <dl class="t-datos">
+      <dt>Semana</dt><dd id="semana">esta semana</dd>
+      <dt>Lugar</dt><dd>Washington 1015 Ote., Centro, Monterrey</dd>
+    </dl>
+    <table class="t-dias">
+      <thead><tr><th scope="col">Día</th><th scope="col">Entrada</th><th scope="col">Salida</th></tr></thead>
+      <tbody id="dias"></tbody>
+    </table>
+    <p class="sello reloj" id="estado" aria-live="polite">Consultando la hora...</p>
+  </div>
+</section>
+
+<section class="carta-s" id="carta" aria-labelledby="carta-t">
+  <div class="carta-cab">
+    <div>
+      <h2 id="carta-t">El menú</h2>
+      <p>Los cócteles llevan nombre de lo que se hacía en el taller. Los precios cambian con el turno: elige a qué hora vienes.</p>
+    </div>
+    <div class="turnos" role="group" aria-label="Precios por turno">
+      <button type="button" data-turno="primero" aria-pressed="false"><b>Primer turno</b><span id="t1-horas">6 a 9 pm</span></button>
+      <button type="button" data-turno="segundo" aria-pressed="true"><b>Segundo turno</b><span id="t2-horas">9 pm al cierre</span></button>
+    </div>
+  </div>
+  <p class="aviso-turno" id="avisoTurno" aria-live="polite"></p>
+  <div class="tarjetero" id="tarjetero"></div>
+</section>
+
+<section class="rol-s claro" id="rol" aria-labelledby="rol-t">
+  <div class="rol-g">
+    <div>
+      <h2 id="rol-t">Esta semana</h2>
+      <p class="intro">El rol que se pega junto al reloj. Lunes y martes descansa la barra.</p>
+    </div>
+    <ul class="rol" id="rolLista"></ul>
+  </div>
+</section>
+
+<section class="checa" id="checa" aria-labelledby="checa-t">
+  <div class="checa-g">
+    <form id="forma" novalidate>
+      <h2 id="checa-t">Checa tu entrada</h2>
+      <p class="intro">Aparta mesa para la noche que vienes. Te contestamos por WhatsApp con tu mesa.</p>
+      <fieldset class="campo">
+        <legend>Noche</legend>
+        <div class="noches" id="noches"></div>
+      </fieldset>
+      <div class="fila2">
+        <label class="campo"><span>Hora</span><select id="hora"></select></label>
+        <div class="campo"><span id="pers-t">Personas</span>
+          <div class="contador" role="group" aria-labelledby="pers-t">
+            <button type="button" id="menos" aria-label="Una persona menos">−</button>
+            <output id="personas" aria-live="polite">2</output>
+            <button type="button" id="mas" aria-label="Una persona más">+</button>
+          </div>
+        </div>
+      </div>
+      <label class="campo"><span>A nombre de</span><input type="text" id="quien" autocomplete="name" placeholder="Tu nombre"></label>
+      <p class="nota-checa">Mesas de 2 a 12. Para grupos más grandes o una cena de empresa, escríbenos y armamos la nave.</p>
+    </form>
+    <div class="tarjeta tu-tarjeta" id="tuTarjeta" role="group" aria-label="Tu tarjeta de entrada">
+      <div class="t-cab"><span class="pre">Segundo Turno</span><small>Entrada <span class="num">No. 0613</span></small></div>
+      <dl class="t-datos">
+        <dt>Nombre</dt><dd id="tNombre">&nbsp;</dd>
+        <dt>Personas</dt><dd id="tPersonas" class="num">2</dd>
+      </dl>
+      <div class="marca-reloj"><small>Marca del reloj</small><span class="reloj" id="tMarca" aria-live="polite"></span></div>
+      <a class="boton" id="mandar" href="https://wa.me/" target="_blank" rel="noopener">Mandar por WhatsApp <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2A9.7 9.7 0 0 0 3.6 16.8L2.3 21.7l5-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.1-.2-.2-.5-.3z"/></svg></a>
+      <p class="aviso" id="aviso" role="status" style="color:var(--rojo)"></p>
+    </div>
+  </div>
+</section>
+
+<section class="llegar claro" id="llegar" aria-labelledby="llegar-t">
+  <h2 id="llegar-t">Cómo llegar</h2>
+  <div class="llegar-g">
+    <div>
+      <address>Washington 1015 Ote.<br>Centro, Monterrey</address>
+      <p>La puerta de lámina verde junto al taller de rótulos. Si ves la chimenea de ladrillo, ya llegaste.</p>
+    </div>
+    <div>
+      <h3>Para la noche</h3>
+      <ul class="datos-l">
+        <li>Estacionamiento en la esquina con Zaragoza, $40 la noche.</li>
+        <li>Efectivo y tarjeta. La propina no va incluida.</li>
+        <li>Mayores de 18. Se pide identificación en la puerta.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Horario</h3>
+      <ul class="datos-l num">
+        <li>Mié y jue: 6 pm a 12 am</li>
+        <li>Vie y sáb: 6 pm a 2 am</li>
+        <li>Dom: 5 a 11 pm</li>
+        <li>Lun y mar: descanso</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <p>Segundo Turno es una empresa ficticia: el lugar, el menú, los precios y el horario son de ejemplo. Sitio de demostración hecho por <a href="https://crusol.com.mx/">crusol</a>.</p>
+  <p>Al reservar se abre WhatsApp con tu mensaje escrito; no se manda nada solo.</p>
+</footer>
+<script>(()=>{var t=(e,a=document)=>a.querySelector(e),Y=matchMedia("(prefers-reduced-motion: reduce)").matches,S=e=>"$"+e.toLocaleString("es-MX"),m=e=>String(e).replace(/&/g,"&amp;").replace(/</g,"&lt;"),z=0;document.addEventListener("pointerdown",()=>{z=performance.now()},!0);var O=()=>!Y&&performance.now()-z<800,i={0:[17,23],3:[18,24],4:[18,24],5:[18,26],6:[18,26]},h=3,I=["domingo","lunes","martes","mi\xE9rcoles","jueves","viernes","s\xE1bado"],C=["dom","lun","mar","mi\xE9","jue","vie","s\xE1b"],M=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],F=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],f=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:"America/Monterrey",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",hourCycle:"h23"}).formatToParts(new Date).map(e=>[e.type,e.value])),N=new Date(Date.UTC(+f.year,+f.month-1,+f.day)),u=+f.hour+ +f.minute/60,D=e=>new Date(N.getTime()+e*864e5),r=e=>{let a=Math.floor(e)%24,o=Math.round(e%1*60);return`${a===0?12:a>12?a-12:a}${o?":"+String(o).padStart(2,"0"):""} ${a<12?"am":"pm"}`},q=e=>`${String(Math.floor(e)%24).padStart(2,"0")}:${String(Math.round(e%1*60)).padStart(2,"0")}`,d=N.getUTCDay(),j=i[(d+6)%7],c=i[d],k=!1,x="segundo",p;if(j&&j[1]>24&&u<j[1]-24)k=!0,p=`Tiempo extra hasta las ${r(j[1])}`;else if(c&&u>=c[0]&&u<c[1])k=!0,u<c[0]+h?(x="primero",p=`Primer turno hasta las ${r(c[0]+h)}`):p=`Abierto hasta las ${r(c[1])}`;else if(c&&u<c[0])p=`Hoy, entrada a las ${r(c[0])}`;else{let e=1;for(;!i[D(e).getUTCDay()];)e++;let a=D(e).getUTCDay();p=`${c?"Ya cerramos.":"Hoy descansamos."} Entrada el ${e===1?"ma\xF1ana":I[a]} a las ${r(i[a][0])}`}t("#estado").textContent=p;var b=D(-((d+6)%7)),g=new Date(b.getTime()+6*864e5);t("#semana").textContent=b.getUTCMonth()===g.getUTCMonth()?`del ${b.getUTCDate()} al ${g.getUTCDate()} de ${M[g.getUTCMonth()]}`:`del ${b.getUTCDate()} de ${M[b.getUTCMonth()]} al ${g.getUTCDate()} de ${M[g.getUTCMonth()]}`;t("#dias").innerHTML=[1,2,3,4,5,6,0].map(e=>{let a=i[e],o=a?`<td class="reloj entra">${q(a[0])}</td><td class="reloj">${q(a[1])}</td>`:'<td class="descanso" colspan="2">Descanso</td>';return`<tr${e===d?' class="hoy"':""}><td>${C[e]}${e===d?'<span class="visually-hidden"> (hoy)</span>':""}</td>${o}</tr>`}).join("");var P=i[d]||i[3];t("#t1-horas").textContent=`${r(P[0]).replace(" pm","")} a ${r(P[0]+h)}`;var Z=[{t:"De la casa",pie:"C\xF3cteles de 180 ml.",p:[["Horno 3","mezcal espad\xEDn, naranja quemada, piloncillo, sal de gusano",178,148],["Overol","ginebra, pepino, t\xF3nica de toronja, pimienta rosa",164,134],["Lingote","tequila reposado, miel de agave tostada, bitter de cacao",186,156],["Paro t\xE9cnico","mezcal, Campari, vermut rojo, chile morita",188,158],["Rebaba","whisky, jarabe de nuez, c\xE1scara de naranja",192,162],["Checador","ron a\xF1ejo, caf\xE9 de olla en fr\xEDo, canela",172,142],["Soldadura fr\xEDa","tequila blanco, lim\xF3n, jarabe de serrano, soda",158,128]]},{t:"Comedor",pie:"Del comal y la plancha, hasta media hora antes de cerrar.",p:[["Machacado con huevo","en tortilla de harina, 2 piezas",112],["Lonche de barbacoa","bolillo dorado, salsa de molcajete",118],["Taquitos de trompo","4 piezas, pi\xF1a asada y cebolla",109],["Papas del comedor","gajo, chile piqu\xEDn, queso fundido",96],["Frijoles charros","en jarrito, con chicharr\xF3n",64],["Chicharr\xF3n de rib eye","250 g, guacamole y tortillas",189]]},{t:"Tarros y sin turno",pie:'Los "sin turno" no llevan alcohol.',p:[["Tarro de la casa","lager clara, 400 ml",72,49],["Tarro oscuro","dunkel, 400 ml",78,55],["La rayita","tarro de la casa y un caballito de mezcal",129,99],["Michelada de comedor","clamato, chiltep\xEDn, 500 ml",96],["Agua de la jarra","jamaica con jengibre, 500 ml",58],["Paro t\xE9cnico sin turno","Campari sin alcohol, toronja, morita",96],["Topo Chico","355 ml",45]]}],L=x;function V(e){let a=L==="primero";t("#tarjetero").innerHTML=Z.map(n=>`<article class="tarjeta${e?" cambia":""}" aria-label="${m(n.t)}">
+    <div class="t-cab"><h3 class="pre">${m(n.t)}</h3><small>Importe</small></div>
+    <ul class="renglones">${n.p.map(([s,y,A,w])=>{let R=a&&w;return`<li class="renglon${R?" baja":""}"><b>${m(s)}</b><span class="precio num">${R?`<s><span class="visually-hidden">antes </span>${S(A)}</s><span class="visually-hidden">ahora </span>${S(w)}`:S(A)}</span>${y?`<p>${m(y)}</p>`:""}</li>`}).join("")}</ul>
+    <p class="pie-tarjeta">${m(n.pie)}</p>
+  </article>`).join("");let o=i[d]||i[3];t("#avisoTurno").innerHTML=a?`En primer turno, de ${r(o[0])} a ${r(o[0]+h)}: <span class="reloj">\u2212$30</span> en los de la casa y el tarro a <span class="reloj">$49</span>.`:x==="primero"?"Ahorita es primer turno: vale el precio de la otra tarjeta.":"Precios de las 9 pm al cierre.",document.querySelectorAll("[data-turno]").forEach(n=>n.setAttribute("aria-pressed",String(n.dataset.turno===L)))}document.querySelectorAll("[data-turno]").forEach(e=>e.addEventListener("click",()=>{L!==e.dataset.turno&&(L=e.dataset.turno,V(O()))}));V(!1);var B=[[3,"Rockola abierta","La m\xFAsica la pones t\xFA, con las fichas que se piden en la barra."],[4,"Trova del taller","En vivo desde las 9, sin cover."],[5,"Tiempo extra","Vinilo norte\xF1o y cumbia desde las 10, hasta las 2."],[6,"Tiempo extra","Selector invitado desde las 10, hasta las 2."],[0,"Comedor de domingo","Lonches de barbacoa al 2x1 hasta que se acaben."],[1,"Descanso",""],[2,"Descanso",""]];t("#rolLista").innerHTML=B.map(([e,a,o])=>{let n=i[e];return`<li class="${e===d?"hoy":""}${n?"":" descanso"}"><span class="dia pre">${C[e]}</span><div><b>${m(a)}</b>${e===d?'<span class="hoy-marca">Hoy</span>':""}${o?`<p>${m(o)}</p>`:""}</div><span class="horas num">${n?`${r(n[0])} a ${r(n[1])}`:""}</span></li>`}).join("");var T=[];for(let e=0;T.length<5&&e<12;e++){let a=D(e),o=i[a.getUTCDay()];!o||e===0&&u>=o[1]-1.5||T.push({n:e,f:a,h:o,k:a.getUTCDay()})}t("#noches").innerHTML=T.map((e,a)=>{let o=e.n===0?"Hoy":e.n===1?"Ma\xF1ana":C[e.k];return`<label><input type="radio" name="noche" value="${a}"${a===0?" checked":""}><b>${o}</b><span class="num">${C[e.k]} ${e.f.getUTCDate()} ${F[e.f.getUTCMonth()]}</span></label>`}).join("");var v=t("#hora"),l=2;function W(){let e=T[+t("input[name=noche]:checked").value],a=+v.value||21,o=e.n===0?Math.max(e.h[0],Math.ceil((u+.5)*2)/2):e.h[0],n=[];for(let s=o;s<=e.h[1]-1.5;s+=.5)n.push(s);v.innerHTML=n.map(s=>`<option value="${s}">${r(s)}${s<e.h[0]+h?" (primer turno)":""}</option>`).join(""),v.value=String(n.includes(a)?a:n.includes(21)?21:n[0])}var E=t("#tuTarjeta"),H=t("#mandar"),X=t("#aviso"),U=t("#quien");function $(e){let a=T[+t("input[name=noche]:checked").value],o=+v.value,n=U.value.trim();t("#tMarca").textContent=`${C[a.k].toUpperCase()} ${String(a.f.getUTCDate()).padStart(2,"0")} ${F[a.f.getUTCMonth()].toUpperCase()}  ${q(o)}`,t("#tPersonas").textContent=`${l}`,t("#tNombre").textContent=n||"\xA0",t("#personas").textContent=l,t("#menos").disabled=l<=2,t("#mas").disabled=l>=12;let s=`${a.n===0?"hoy ":a.n===1?"ma\xF1ana ":""}${I[a.k]} ${a.f.getUTCDate()} de ${M[a.f.getUTCMonth()]}`,y=`Hola, quiero checar entrada en Segundo Turno:
+${s[0].toUpperCase()+s.slice(1)}, ${r(o)}${o<a.h[0]+h?" (primer turno)":""}
+${l} personas
+A nombre de: ${n||""}
+\xBFTienen mesa?`;H.href=`https://wa.me/?text=${encodeURIComponent(y)}`,H.setAttribute("aria-disabled",n?"false":"true"),n&&(X.textContent=""),e&&O()&&(E.classList.remove("golpe"),E.offsetWidth,E.classList.add("golpe"))}t("#noches").addEventListener("change",()=>{W(),$(!0)});v.addEventListener("change",()=>$(!0));U.addEventListener("input",()=>$(!1));t("#menos").addEventListener("click",()=>{l>2&&(l--,$(!0))});t("#mas").addEventListener("click",()=>{l<12&&(l++,$(!0))});t("#forma").addEventListener("submit",e=>e.preventDefault());H.addEventListener("click",e=>{U.value.trim()||(e.preventDefault(),X.textContent="Escribe a nombre de qui\xE9n va la mesa.",U.focus())});W();$(!1);})();
+</script>
+<!-- crusol: invitación a contacto (solo cuando el demo se abre fuera del portafolio) -->
+<div id="crcta" hidden role="complementary" aria-label="Contacto con crusol">
+  <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="#f6f5f0" d="M46 4L4 4A42 42 0 0 0 46 46ZM54 96L96 96A42 42 0 0 0 54 54ZM4 54L46 54A42 42 0 0 1 4 96Z"/><path fill="#a9c4b6" d="M96 46L54 46A42 42 0 0 1 96 4Z"/></svg>
+  <p><b><em class="lg">¿Te gustaría uno así para tu empresa?</em><em class="sm">¿Quieres uno así?</em></b><span>Lo adapto a tus servicios, horarios y marca.</span></p>
+  <a class="go" id="crgo" href="#">Platiquemos</a>
+  <a class="mas" href="/#sistemas" target="_top">Más ejemplos</a>
+  <button type="button" id="crx" aria-label="Cerrar">&times;</button>
+</div>
+<style>
+#crcta{position:fixed;z-index:2147483000;right:16px;bottom:16px;max-width:680px;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 14px;background:#0b2a20;color:#f6f5f0;border:1px solid rgba(169,196,182,.25);border-radius:14px;box-shadow:0 18px 50px -12px rgba(0,0,0,.45);font:14px/1.3 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transform:translateY(140%);opacity:0;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s}
+#crcta.on{transform:none;opacity:1}
+#crcta[hidden]{display:none}
+#crcta svg{width:26px;height:26px;flex:none}
+#crcta p{margin:0;display:flex;flex-direction:column;gap:2px;min-width:0}
+#crcta p b{font-weight:600;white-space:nowrap}#crcta em{font-style:normal}#crcta .sm{display:none}
+#crcta p span{color:#b9cbc1;font-size:13px}
+#crcta a{text-decoration:none;white-space:nowrap}
+#crcta .go{background:#f6f5f0;color:#0b2a20;font-weight:600;padding:9px 14px;border-radius:9px}
+#crcta .go:hover{background:#a9c4b6}
+#crcta .mas{color:#a9c4b6;font:12px "Geist Mono",ui-monospace,monospace;text-decoration:underline;text-underline-offset:3px}
+#crcta button{background:transparent;border:0;color:#b9cbc1;font-size:20px;line-height:1;width:28px;height:28px;border-radius:7px;cursor:pointer;flex:none}
+#crcta button:hover{background:rgba(255,255,255,.08);color:#fff}
+#crcta a:focus-visible,#crcta button:focus-visible{outline:2px solid #a9c4b6;outline-offset:2px}
+@media (max-width:640px){#crcta{left:10px;right:10px;bottom:10px;bottom:max(10px,env(safe-area-inset-bottom));max-width:none;flex-wrap:wrap;gap:8px 10px}
+  #crcta p{flex:1 1 0}#crcta p span{display:none}#crcta .lg{display:none}#crcta .sm{display:inline}#crcta .mas{display:none}#crcta .go{padding:8px 12px}}
+@media (prefers-reduced-motion:reduce){#crcta{transition:none}}
+@media print{#crcta{display:none!important}}
+</style>
+<script>
+(function(){try{if(window.self!==window.top)return}catch(e){return}
+  var el=document.getElementById("crcta");if(!el)return;
+  try{if(sessionStorage.getItem("crusol_cta_x"))return}catch(e){}
+  var demo=document.body.getAttribute("data-demo")||document.title;
+  document.getElementById("crgo").href="mailto:crusolmx@gmail.com?subject="+encodeURIComponent("Me interesa: "+demo)+"&body="+encodeURIComponent("Hola Angel:\n\nVi el demo de "+demo+" y me gustaría algo así para mi empresa.\n\nEmpresa:\nGiro:\nQué me gustaría resolver:\n\nSaludos.");
+  function show(){if(el.dataset.s)return;el.dataset.s=1;el.hidden=false;if(innerWidth<=640)document.body.style.paddingBottom="76px";requestAnimationFrame(function(){requestAnimationFrame(function(){el.classList.add("on")})})}
+  var t=setTimeout(show,9000);
+  ["click","keydown"].forEach(function(ev){document.addEventListener(ev,function f(e){if(el.contains(e.target))return;document.removeEventListener(ev,f,true);clearTimeout(t);t=setTimeout(show,4000)},true)});
+  document.getElementById("crx").addEventListener("click",function(){el.classList.remove("on");setTimeout(function(){el.hidden=true;document.body.style.paddingBottom=""},500);try{sessionStorage.setItem("crusol_cta_x","1")}catch(e){}});
+})();
+</script>
+
+</body>
+</html>
